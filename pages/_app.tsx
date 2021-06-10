@@ -1,12 +1,16 @@
-import { AppProps } from "next/dist/next-server/lib/router/router";
-import { ChakraProvider } from "@chakra-ui/react";
+import { AppProps } from 'next/dist/next-server/lib/router/router';
+import { ChakraProvider } from '@chakra-ui/react';
+import { FunctionComponent } from 'react';
 
-import theme from "../styles/theme";
+import theme from '../styles/theme';
+import Layout from '../components/Layout';
 
-const MyApp = ({ Component, pageProps }: AppProps): JSX.Element => {
+const MyApp: FunctionComponent<AppProps> = ({ Component, pageProps }) => {
   return (
     <ChakraProvider theme={theme}>
-      <Component {...pageProps} />
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
     </ChakraProvider>
   );
 };

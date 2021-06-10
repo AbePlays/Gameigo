@@ -1,6 +1,7 @@
 import { Button } from '@chakra-ui/button';
 import { ChevronRightIcon } from '@chakra-ui/icons';
 import { Box, Heading, Stack, Text } from '@chakra-ui/layout';
+import { FunctionComponent } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 
@@ -9,7 +10,7 @@ import { Routes } from '../routes';
 const width = 610;
 const height = 610;
 
-const Home = (): JSX.Element => {
+const Home: FunctionComponent = () => {
   const router = useRouter();
 
   const redirectToAuthScreen = () => {

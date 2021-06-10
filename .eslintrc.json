@@ -1,5 +1,11 @@
 {
   "settings": {
+    "import/resolver": {
+      "alias": [
+        ["@/components", "./components"],
+        ["@/containers", "./containers"]
+      ]
+    },
     "react": {
       "version": "detect"
     }
