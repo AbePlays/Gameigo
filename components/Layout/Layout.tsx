@@ -1,5 +1,5 @@
-import { Box } from '@chakra-ui/layout';
 import { FunctionComponent } from 'react';
+import { Box } from '@chakra-ui/layout';
 
 const Layout: FunctionComponent = ({ children }) => {
   return (

@@ -1,9 +1,9 @@
+import { FunctionComponent } from 'react';
+import Image from 'next/image';
+import { useRouter } from 'next/router';
 import { Button } from '@chakra-ui/button';
 import { ChevronRightIcon } from '@chakra-ui/icons';
 import { Box, Heading, Stack, Text } from '@chakra-ui/layout';
-import { FunctionComponent } from 'react';
-import { useRouter } from 'next/router';
-import Image from 'next/image';
 
 import { Routes } from '../routes';
 
