@@ -8,3 +8,10 @@ export type SignupForm = {
   email: string;
   password: string;
 };
+
+export type SocialAuthProvider = {
+  id: number;
+  imgSrc: string;
+  title: string;
+  providerId: string;
+};
