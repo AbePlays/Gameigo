@@ -15,3 +15,11 @@ export const checkPassword = (value: string): string => {
   }
   return error;
 };
+
+export const checkName = (value: string): string => {
+  let error: string;
+  if (value.trim().length < 2) {
+    error = 'Name should have atleast 2 characters';
+  }
+  return error;
+};
