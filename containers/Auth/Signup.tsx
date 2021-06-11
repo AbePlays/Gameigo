@@ -1,16 +1,31 @@
 import { FunctionComponent } from 'react';
-import { Form, Formik } from 'formik';
-import { BrandButton } from '@/components/Buttons';
-import { CustomInput } from '@/components/Input';
-import { ChevronRightIcon } from '@chakra-ui/icons';
+import { Form, Formik, FormikHelpers } from 'formik';
 import { Box } from '@chakra-ui/layout';
+import { ChevronRightIcon } from '@chakra-ui/icons';
 import { Button, Heading, Stack, Text } from '@chakra-ui/react';
 
+import { CustomInput } from '@/components/Input';
+import { useAuth } from '../../lib/auth';
 import { checkEmail, checkName, checkPassword } from './helper';
 import { SignupForm } from './types';
+import SocialAuthProviders from './SocialAuthProviders';
 
 const Signup: FunctionComponent = () => {
   const initialValues: SignupForm = { email: '', password: '', name: '' };
+  const { signupWithEmailAndPassword } = useAuth();
+
+  const submitHandler = async (
+    values: SignupForm,
+    actions: FormikHelpers<SignupForm>
+  ) => {
+    try {
+      const { email, name, password } = values;
+      await signupWithEmailAndPassword(email, password, name);
+      actions.resetForm();
+    } catch (e) {
+      console.log(`Error while signing up ${e}`);
+    }
+  };
 
   return (
     <Box textAlign="center">
@@ -31,15 +46,7 @@ const Signup: FunctionComponent = () => {
         style={{ gap: '5rem' }}
       >
         <Box flex="1">
-          <Formik
-            initialValues={initialValues}
-            onSubmit={(values, actions) => {
-              setTimeout(() => {
-                alert(JSON.stringify(values, null, 2));
-                actions.setSubmitting(false);
-              }, 1000);
-            }}
-          >
+          <Formik initialValues={initialValues} onSubmit={submitHandler}>
             {(props) => (
               <Form>
                 <Stack spacing="4">
@@ -83,8 +90,7 @@ const Signup: FunctionComponent = () => {
           </Formik>
         </Box>
         <Stack spacing="4" flex="1">
-          <BrandButton imgSrc="/icons/google.svg" title="Sign in with Google" />
-          <BrandButton imgSrc="/icons/github.svg" title="Sign in with Github" />
+          <SocialAuthProviders />
         </Stack>
       </Box>
     </Box>

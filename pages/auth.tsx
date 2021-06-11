@@ -2,7 +2,7 @@ import { FunctionComponent, useState } from 'react';
 import { Button } from '@chakra-ui/button';
 import { Box, Text } from '@chakra-ui/layout';
 
-import { Login, Signup } from '../containers/Auth';
+import { Login, Signup } from '@/containers/Auth';
 
 const Auth: FunctionComponent = () => {
   const [isLogin, setIsLogin] = useState<boolean>(true);
