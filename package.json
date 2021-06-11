@@ -1,5 +1,5 @@
 {
-  "name": "nextjs",
+  "name": "gameigo",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -15,6 +15,7 @@
     "@chakra-ui/react": "^1.6.3",
     "@emotion/react": "^11.4.0",
     "@emotion/styled": "^11.3.0",
+    "firebase": "^8.6.7",
     "formik": "^2.2.9",
     "framer-motion": "^4.1.17",
     "next": "10.x",
