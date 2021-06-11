@@ -1,5 +1,5 @@
 module.exports = {
-  collectCoverageFrom: ['(components|pages)/**/*.{js,jsx,tsx}'],
+  collectCoverageFrom: ['(components|pages|containers)/**/*.{js,jsx,tsx}'],
   roots: ['<rootDir>'],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'json', 'jsx'],
   testPathIgnorePatterns: ['<rootDir>[/\\\\](node_modules|.next)[/\\\\]'],
