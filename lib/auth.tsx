@@ -5,8 +5,10 @@ import {
   createContext,
   FunctionComponent,
 } from 'react';
+import { useRouter } from 'next/router';
 
 import firebase from './firebase';
+import { Routes } from '../routes';
 import { formatUser } from './helper';
 import { AuthContextType, User } from './types';
 
@@ -21,9 +23,13 @@ export const useAuth = (): AuthContextType => useContext(AuthContext);
 
 const useProvideAuth = () => {
   const [user, setUser] = useState<User>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const router = useRouter();
 
   const handleFirebaseUser = (firebaseUser: firebase.User) => {
     setUser(formatUser(firebaseUser));
+    setLoading(false);
+    router.replace(Routes.HOME_SCREEN);
     return firebaseUser;
   };
 
@@ -32,12 +38,14 @@ const useProvideAuth = () => {
     password: string,
     name: string
   ) => {
+    setLoading(true);
     await firebase.auth().createUserWithEmailAndPassword(email, password);
     await firebase.auth().currentUser.updateProfile({ displayName: name });
     return handleFirebaseUser(firebase.auth().currentUser);
   };
 
   const signinWithGoogle = async () => {
+    setLoading(true);
     const res = await firebase
       .auth()
       .signInWithPopup(new firebase.auth.GoogleAuthProvider());
@@ -45,6 +53,7 @@ const useProvideAuth = () => {
   };
 
   const signinWithGithub = async () => {
+    setLoading(true);
     const res = await firebase
       .auth()
       .signInWithPopup(new firebase.auth.GithubAuthProvider());
@@ -52,6 +61,7 @@ const useProvideAuth = () => {
   };
 
   const loginWithEmailAndPassword = async (email: string, password: string) => {
+    setLoading(true);
     const res = await firebase
       .auth()
       .signInWithEmailAndPassword(email, password);
@@ -78,6 +88,7 @@ const useProvideAuth = () => {
 
   return {
     user,
+    loading,
     signupWithEmailAndPassword,
     loginWithEmailAndPassword,
     signinWithGoogle,

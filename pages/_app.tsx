@@ -2,8 +2,8 @@ import { FunctionComponent } from 'react';
 import { AppProps } from 'next/dist/next-server/lib/router/router';
 import { ChakraProvider } from '@chakra-ui/react';
 
-import theme from '../styles/theme';
 import Layout from '@/components/Layout';
+import theme from '../styles/theme';
 import { AuthProvider } from '../lib/auth';
 
 const MyApp: FunctionComponent<AppProps> = ({ Component, pageProps }) => {
