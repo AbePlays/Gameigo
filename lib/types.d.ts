@@ -10,6 +10,7 @@ export type User = {
 
 export type AuthContextType = {
   user: User;
+  loading: boolean;
   signupWithEmailAndPassword: (
     email: string,
     password: string,
