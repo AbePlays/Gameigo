@@ -15,6 +15,6 @@ export type Game = {
   name: string;
   released: string;
   background_image: string;
-  parent_platforms: Platform[];
+  parent_platforms: { platform: Platform }[];
   genres: Genre[];
 };
