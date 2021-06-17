@@ -1,27 +1,9 @@
 import { FunctionComponent } from 'react';
 import NextLink from 'next/link';
-import {
-  Box,
-  Heading,
-  Flex,
-  Menu,
-  Button,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  MenuDivider,
-  Avatar,
-  Link,
-  Text,
-} from '@chakra-ui/react';
-import {
-  MoonIcon,
-  SearchIcon,
-  StarIcon,
-  SettingsIcon,
-  InfoIcon,
-  WarningTwoIcon,
-} from '@chakra-ui/icons';
+import { Flex, Box, Avatar, Link, Stack, Icon } from '@chakra-ui/react';
+import { HamburgerIcon } from '@chakra-ui/icons';
+
+const iconSize = 5;
 
 const Navbar: FunctionComponent = () => {
   return (
@@ -35,45 +17,30 @@ const Navbar: FunctionComponent = () => {
       top="0"
       zIndex="999"
     >
+      <Box as="button" display={['block', 'none']}>
+        <Icon as={HamburgerIcon} w={iconSize} h={iconSize} />
+      </Box>
       <NextLink href="/" passHref>
-        <Link letterSpacing="widest">GAMEIGO</Link>
+        <Link letterSpacing="widest" textDecoration="none">
+          GAMEIGO
+        </Link>
       </NextLink>
-      <Flex alignItems="center">
-        <Button mr="2">
-          <SearchIcon />
-        </Button>
-        <Button mr="3">
-          <MoonIcon />
-        </Button>
-        <Menu placement="bottom-end">
-          <MenuButton>
-            <Avatar size="sm" />
-          </MenuButton>
-          <MenuList>
-            <MenuItem>
-              <Avatar size="sm" />
-              <Box ml="4">
-                <Heading as="h3" fontSize="md">
-                  User Name
-                </Heading>
-                <Text fontSize="sm" color="gray.500">
-                  User Email
-                </Text>
-              </Box>
-            </MenuItem>
-            <MenuDivider />
-            <MenuItem icon={<StarIcon />} alignItems="center">
-              Favorites
-            </MenuItem>
-            <MenuItem icon={<SettingsIcon />}>Settings</MenuItem>
-            <MenuItem icon={<InfoIcon />}>About</MenuItem>
-            <MenuDivider />
-            <MenuItem icon={<WarningTwoIcon />} color="red">
-              Log Out
-            </MenuItem>
-          </MenuList>
-        </Menu>
-      </Flex>
+      <Stack isInline spacing={['8', '8', '12']} display={['none', 'block']}>
+        <NextLink href="/search" passHref>
+          <Link>Search</Link>
+        </NextLink>
+        <NextLink href="/favorites" passHref>
+          <Link>Favorites</Link>
+        </NextLink>
+        <NextLink href="/about" passHref>
+          <Link>About</Link>
+        </NextLink>
+      </Stack>
+      <NextLink href="/profile" passHref>
+        <Link>
+          <Avatar size="sm" />
+        </Link>
+      </NextLink>
     </Flex>
   );
 };
