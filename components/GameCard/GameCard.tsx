@@ -1,5 +1,6 @@
 import { FunctionComponent, useState } from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import { Box, Divider, Flex, Heading, Stack, Text } from '@chakra-ui/layout';
 import { Skeleton } from '@chakra-ui/skeleton';
 
@@ -12,6 +13,7 @@ interface Props {
 }
 
 const GameCard: FunctionComponent<Props> = ({ game }) => {
+  const router = useRouter();
   const [showImage, setShowImage] = useState<boolean>(false);
   const toggleImage = () => setShowImage((prev) => !prev);
 
@@ -56,12 +58,15 @@ const GameCard: FunctionComponent<Props> = ({ game }) => {
     );
   };
 
+  const clickHandler = () => router.push(`/game/${game.slug}`);
+
   return (
     <Box
       shadow="lg"
       rounded="lg"
       overflow="hidden"
       cursor="pointer"
+      onClick={clickHandler}
       _hover={{
         transform: 'scale(1.01)',
         transition: 'all 150ms ease-in',
