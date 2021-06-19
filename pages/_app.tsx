@@ -11,8 +11,8 @@ const MyApp: FunctionComponent<AppProps> = ({ Component, pageProps }) => {
   return (
     <ChakraProvider theme={theme}>
       <AuthProvider>
-        <Navbar />
         <Layout>
+          <Navbar />
           <Component {...pageProps} />
         </Layout>
       </AuthProvider>

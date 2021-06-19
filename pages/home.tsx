@@ -1,7 +1,8 @@
 import { FunctionComponent } from 'react';
 import { GetStaticProps } from 'next';
-import { Box, Text, Heading, SimpleGrid } from '@chakra-ui/layout';
+import { Heading, SimpleGrid, Text } from '@chakra-ui/layout';
 
+import Page from '@/containers/Page';
 import GameCard from '@/components/GameCard';
 import { Game } from '../types';
 import { Endpoints } from '../endpoints';
@@ -12,7 +13,7 @@ interface Props {
 
 const Home: FunctionComponent<Props> = ({ games }) => {
   return (
-    <Box>
+    <Page title="Home">
       <Heading as="h1" fontSize={['4xl', '5xl', '6xl']}>
         New and trending
       </Heading>
@@ -29,7 +30,7 @@ const Home: FunctionComponent<Props> = ({ games }) => {
           games.length > 0 &&
           games.map((game) => <GameCard game={game} key={game.id} />)}
       </SimpleGrid>
-    </Box>
+    </Page>
   );
 };
 

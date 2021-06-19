@@ -5,6 +5,7 @@ import { Button } from '@chakra-ui/button';
 import { ChevronRightIcon } from '@chakra-ui/icons';
 import { Box, Flex, Heading, Stack, Text } from '@chakra-ui/layout';
 
+import Page from '@/containers/Page';
 import { Routes } from '../routes';
 
 const width = 500;
@@ -18,7 +19,7 @@ const Home: FunctionComponent = () => {
   };
 
   return (
-    <Box>
+    <Page title="Welcome">
       <Box
         display="flex"
         flexDirection={['column-reverse', 'column-reverse', 'row']}
@@ -74,7 +75,7 @@ const Home: FunctionComponent = () => {
           />
         </Flex>
       </Box>
-    </Box>
+    </Page>
   );
 };
 
