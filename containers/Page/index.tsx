@@ -8,14 +8,7 @@ interface Props {
 
 const Page: FunctionComponent<Props> = ({ children, title }) => {
   return (
-    <Box
-      maxW="1120px"
-      mx="auto"
-      minH="calc(100vh - 64px)"
-      px="4"
-      py="12"
-      bg="royalblue"
-    >
+    <Box maxW="1120px" mx="auto" minH="calc(100vh - 64px)" px="4" py="12">
       <Head>
         <title>Gameigo | {title}</title>
       </Head>
