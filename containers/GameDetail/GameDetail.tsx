@@ -1,5 +1,6 @@
 import { FunctionComponent } from 'react';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
 import { Box, Heading, Stack, Text, Wrap, WrapItem } from '@chakra-ui/react';
 
 import Store from '@/components/Store';
@@ -8,6 +9,7 @@ import GameContent from '@/components/GameContent';
 import BoxWithDivider from '@/components/BoxWithDivider';
 import { GameInfo } from 'types';
 import { formatDate } from 'utils/date';
+import Page from '../Page';
 
 interface Props {
   game: GameInfo;
@@ -37,7 +39,7 @@ const CustomDivider = () => {
       alignSelf="center"
       flexShrink={0}
       display={['none', 'none', 'block']}
-      bg="black"
+      bg="white"
       mx="2"
       rounded="lg"
     />
@@ -51,7 +53,7 @@ const GameDetail: FunctionComponent<Props> = ({ game }) => {
   const renderReleasedandPlaytime = () => {
     return (
       <Wrap spacing={[2, 4]}>
-        <WrapItem bg="white" border="1px solid black" px="2" borderRadius="lg">
+        <WrapItem bg="white" color="black" px="2" borderRadius="lg">
           {formatDate(game.released)}
         </WrapItem>
         <WrapItem textTransform="uppercase" letterSpacing="widest">
@@ -109,34 +111,54 @@ const GameDetail: FunctionComponent<Props> = ({ game }) => {
   };
 
   return (
-    <Box>
-      <Box w="8" cursor="pointer" onClick={clickHandler}>
-        <BackArrow />
+    <Box bg="black" color="white" position="relative">
+      <Box pos="absolute" inset="0">
+        <Box
+          w="100%"
+          h="calc(100vh - 64px)"
+          position="relative"
+          filter="brightness(30%)"
+        >
+          <Image
+            src={game.background_image}
+            layout="fill"
+            objectFit="contain"
+            objectPosition="top"
+            alt="game background"
+          />
+        </Box>
       </Box>
-      <Stack spacing="4" mt="4">
-        <Heading as="h1" fontSize={['4xl', '5xl']}>
-          {game.name}
-        </Heading>
-        {renderReleasedandPlaytime()}
-        {renderTriContentBox()}
-        <GameContent heading="About">
-          <Box dangerouslySetInnerHTML={{ __html: game.description }}></Box>
-        </GameContent>
-        <GameContent heading="Website">
-          <CustomLink link={game.website} title={game.website} />
-        </GameContent>
-        <GameContent heading="Where to buy">
-          <Wrap>
-            {game.stores.map((item) => {
-              return (
-                <WrapItem key={item.id}>
-                  <Store name={item.store.name} url={item.store.domain} />
-                </WrapItem>
-              );
-            })}
-          </Wrap>
-        </GameContent>
-      </Stack>
+      <Box position="relative" zIndex="10">
+        <Page title={game.name}>
+          <Box w="8" cursor="pointer" onClick={clickHandler}>
+            <BackArrow />
+          </Box>
+          <Stack spacing="4" mt="4">
+            <Heading as="h1" fontSize={['4xl', '5xl']}>
+              {game.name}
+            </Heading>
+            {renderReleasedandPlaytime()}
+            {renderTriContentBox()}
+            <GameContent heading="About">
+              <Box dangerouslySetInnerHTML={{ __html: game.description }}></Box>
+            </GameContent>
+            <GameContent heading="Website">
+              <CustomLink link={game.website} title={game.website} />
+            </GameContent>
+            <GameContent heading="Where to buy">
+              <Wrap>
+                {game.stores.map((item) => {
+                  return (
+                    <WrapItem key={item.id}>
+                      <Store name={item.store.name} url={item.store.domain} />
+                    </WrapItem>
+                  );
+                })}
+              </Wrap>
+            </GameContent>
+          </Stack>
+        </Page>
+      </Box>
     </Box>
   );
 };
