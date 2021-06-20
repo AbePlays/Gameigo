@@ -13,6 +13,7 @@ const MyApp: FunctionComponent<AppProps> = ({ Component, pageProps }) => {
       <AuthProvider>
         <Navbar />
         <Layout>
+          <Navbar />
           <Component {...pageProps} />
         </Layout>
       </AuthProvider>

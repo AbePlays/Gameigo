@@ -1,10 +1,13 @@
 import { FunctionComponent } from 'react';
 import { GetStaticProps } from 'next';
-import { Box, Text, Heading, SimpleGrid } from '@chakra-ui/layout';
+import { Heading, SimpleGrid, Text } from '@chakra-ui/layout';
 
+import Page from '@/containers/Page';
 import GameCard from '@/components/GameCard';
+import ProtectedRoute from '@/containers/Protected';
 import { Game } from '../types';
 import { Endpoints } from '../endpoints';
+import { Routes } from 'routes';
 
 interface Props {
   games: Game[];
@@ -12,24 +15,26 @@ interface Props {
 
 const Home: FunctionComponent<Props> = ({ games }) => {
   return (
-    <Box>
-      <Heading as="h1" fontSize={['4xl', '5xl', '6xl']}>
-        New and trending
-      </Heading>
-      <Text fontSize={['lg', 'xl']}>
-        Based on player counts and release date
-      </Text>
-      <SimpleGrid
-        minChildWidth="320px"
-        spacingX={[4, 4, 6]}
-        spacingY="6"
-        mt="8"
-      >
-        {Array.isArray(games) &&
-          games.length > 0 &&
-          games.map((game) => <GameCard game={game} key={game.id} />)}
-      </SimpleGrid>
-    </Box>
+    <ProtectedRoute redirectUrl={Routes.AUTH_SCREEN}>
+      <Page title="Home">
+        <Heading as="h1" fontSize={['4xl', '5xl', '6xl']}>
+          New and trending
+        </Heading>
+        <Text fontSize={['lg', 'xl']}>
+          Based on player counts and release date
+        </Text>
+        <SimpleGrid
+          minChildWidth="320px"
+          spacingX={[4, 4, 6]}
+          spacingY="6"
+          mt="8"
+        >
+          {Array.isArray(games) &&
+            games.length > 0 &&
+            games.map((game) => <GameCard game={game} key={game.id} />)}
+        </SimpleGrid>
+      </Page>
+    </ProtectedRoute>
   );
 };
 

@@ -23,7 +23,7 @@ export const useAuth = (): AuthContextType => useContext(AuthContext);
 
 const useProvideAuth = () => {
   const [user, setUser] = useState<User>(null);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(false);
   const router = useRouter();
 
   const handleFirebaseUser = (firebaseUser: firebase.User) => {
@@ -80,7 +80,6 @@ const useProvideAuth = () => {
       } else {
         setUser(null);
       }
-      console.log(user);
     });
 
     return () => unsubscribe();

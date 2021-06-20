@@ -14,8 +14,7 @@ export type Game = {
 
 export type Store = {
   id: number;
-  url: string;
-  store: { id: number; name: string };
+  store: { id: number; name: string; domain: string };
 };
 
 export type GameInfo = {
