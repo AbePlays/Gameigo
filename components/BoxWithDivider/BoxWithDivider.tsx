@@ -9,7 +9,7 @@ interface Props {
 const BoxWithDivider: FunctionComponent<Props> = ({ id, title }) => {
   return (
     <Flex alignItems="center">
-      {id !== 0 && <Box w="0.5" h="4" mx="2" bg="black" rounded="lg" />}
+      {id !== 0 && <Box w="0.5" h="4" mx="2" bg="white" rounded="lg" />}
       <Text>{title}</Text>
     </Flex>
   );

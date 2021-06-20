@@ -1,7 +1,6 @@
 import { FunctionComponent } from 'react';
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next';
 
-import Page from '@/containers/Page';
 import GameDetail from '@/containers/GameDetail';
 import { Endpoints } from 'endpoints';
 import { GameInfo } from 'types';
@@ -30,11 +29,7 @@ export const getStaticProps: GetStaticProps = async (
 };
 
 const GameDetailContainer: FunctionComponent<Props> = ({ game }) => {
-  return (
-    <Page title={game.name}>
-      <GameDetail game={game} />
-    </Page>
-  );
+  return <GameDetail game={game} />;
 };
 
 export default GameDetailContainer;
