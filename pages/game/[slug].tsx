@@ -2,8 +2,10 @@ import { FunctionComponent } from 'react';
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next';
 
 import GameDetail from '@/containers/GameDetail';
+import ProtectedRoute from '@/containers/Protected';
 import { Endpoints } from 'endpoints';
 import { GameInfo } from 'types';
+import { Routes } from 'routes';
 
 interface Props {
   game: GameInfo;
@@ -29,7 +31,11 @@ export const getStaticProps: GetStaticProps = async (
 };
 
 const GameDetailContainer: FunctionComponent<Props> = ({ game }) => {
-  return <GameDetail game={game} />;
+  return (
+    <ProtectedRoute redirectUrl={Routes.AUTH_SCREEN}>
+      <GameDetail game={game} />
+    </ProtectedRoute>
+  );
 };
 
 export default GameDetailContainer;
