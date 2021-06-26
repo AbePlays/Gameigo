@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 import NextLink from 'next/link';
-import { Flex, Box, Avatar, Link, Stack, Icon, Button } from '@chakra-ui/react';
+import { Flex, Box, Avatar, Link, Stack, Icon } from '@chakra-ui/react';
 import { HamburgerIcon } from '@chakra-ui/icons';
 
 import { useAuth } from 'lib/auth';
@@ -8,7 +8,7 @@ import { useAuth } from 'lib/auth';
 const iconSize = 5;
 
 const Navbar: FunctionComponent = () => {
-  const { user, signout } = useAuth();
+  const { user } = useAuth();
 
   return (
     <Flex
@@ -44,7 +44,6 @@ const Navbar: FunctionComponent = () => {
           </NextLink>
         </Stack>
       )}
-      {user && <Button onClick={signout}>Logout</Button>}
       {user && (
         <NextLink href="/profile" passHref>
           <Link>
