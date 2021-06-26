@@ -3,12 +3,13 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { Button } from '@chakra-ui/button';
 import { ChevronRightIcon } from '@chakra-ui/icons';
-import { Box, Heading, Stack, Text } from '@chakra-ui/layout';
+import { Box, Flex, Heading, Stack, Text } from '@chakra-ui/layout';
 
+import Page from '@/containers/Page';
 import { Routes } from '../routes';
 
-const width = 610;
-const height = 610;
+const width = 500;
+const height = 500;
 
 const Home: FunctionComponent = () => {
   const router = useRouter();
@@ -18,7 +19,7 @@ const Home: FunctionComponent = () => {
   };
 
   return (
-    <Box>
+    <Page title="Welcome">
       <Box
         display="flex"
         flexDirection={['column-reverse', 'column-reverse', 'row']}
@@ -33,8 +34,8 @@ const Home: FunctionComponent = () => {
           >
             <Heading
               as="h1"
-              fontWeight={['extrabold', 'extrabold', 'black']}
-              fontSize={['4xl', '6xl']}
+              fontWeight={['extrabold', 'black']}
+              fontSize={['5xl', '6xl']}
             >
               The database platform for{' '}
               <Text
@@ -65,16 +66,16 @@ const Home: FunctionComponent = () => {
             </Box>
           </Stack>
         </Box>
-        <Box flex="1">
+        <Flex flex="1" justifyContent="flex-end">
           <Image
             src="/images/hero.svg"
             height={height}
             width={width}
             alt="man playing on his laptop"
           />
-        </Box>
+        </Flex>
       </Box>
-    </Box>
+    </Page>
   );
 };
 
