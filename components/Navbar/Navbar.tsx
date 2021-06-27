@@ -1,7 +1,16 @@
 import { FunctionComponent } from 'react';
 import NextLink from 'next/link';
-import { Flex, Box, Avatar, Link, Stack, Icon } from '@chakra-ui/react';
-import { HamburgerIcon } from '@chakra-ui/icons';
+import {
+  Flex,
+  Box,
+  Avatar,
+  Button,
+  Link,
+  Stack,
+  Icon,
+  useColorMode,
+} from '@chakra-ui/react';
+import { HamburgerIcon, MoonIcon, SunIcon } from '@chakra-ui/icons';
 
 import { useAuth } from 'lib/auth';
 
@@ -9,6 +18,8 @@ const iconSize = 5;
 
 const Navbar: FunctionComponent = () => {
   const { user } = useAuth();
+  const { colorMode, toggleColorMode } = useColorMode();
+  const isDarkMode = colorMode === 'dark';
 
   return (
     <Flex
@@ -45,11 +56,16 @@ const Navbar: FunctionComponent = () => {
         </Stack>
       )}
       {user && (
-        <NextLink href="/profile" passHref>
-          <Link>
-            <Avatar size="sm" src={user.photoUrl} />
-          </Link>
-        </NextLink>
+        <Stack isInline spacing="3">
+          <Button w="4" h="8" onClick={toggleColorMode} variant="outline">
+            <Icon as={isDarkMode ? SunIcon : MoonIcon} />
+          </Button>
+          <NextLink href="/profile" passHref>
+            <Link>
+              <Avatar size="sm" src={user.photoUrl} />
+            </Link>
+          </NextLink>
+        </Stack>
       )}
     </Flex>
   );
