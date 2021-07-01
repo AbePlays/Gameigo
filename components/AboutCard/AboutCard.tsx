@@ -1,23 +1,26 @@
 import { FunctionComponent } from 'react';
-import { Box, Text } from '@chakra-ui/react';
+import { useColorMode, Box, Text } from '@chakra-ui/react';
 
 interface Props {
   heading: string;
 }
 
 const AboutCard: FunctionComponent<Props> = ({ children, heading }) => {
+  const { colorMode } = useColorMode();
+  const isDarkMode = colorMode === 'dark';
+
   return (
     <Box>
       <Text textTransform="uppercase" letterSpacing="widest" fontWeight="bold">
         {heading}
       </Text>
       <Box
-        w="7"
+        bg={isDarkMode ? 'light-bg-primary' : 'dark-bg-primary'}
         h="2"
-        my="4"
         mx="auto"
-        bg="black"
+        my="4"
         transform="rotate(-15deg) skewX(-15deg)"
+        w="7"
       />
       {children}
     </Box>

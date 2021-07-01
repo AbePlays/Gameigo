@@ -1,7 +1,8 @@
 import { FunctionComponent, useState } from 'react';
-import { Box, Input, SimpleGrid, Text } from '@chakra-ui/react';
+import { Box, SimpleGrid, Text } from '@chakra-ui/react';
 
 import GameCard from '@/components/GameCard';
+import Input from '@/components/Input';
 import Page from '@/containers/Page';
 import ProtectedRoute from '@/containers/Protected';
 import { Endpoints } from 'endpoints';
@@ -46,7 +47,6 @@ const Search: FunctionComponent = () => {
             value={query}
             onChange={changeHandler}
             onKeyDown={keyDownHandler}
-            focusBorderColor="black"
           />
         </Box>
         {loading ? (

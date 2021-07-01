@@ -1,17 +1,19 @@
 import { FunctionComponent } from 'react';
 import { useRouter } from 'next/router';
 import {
+  useColorMode,
   Avatar,
   Box,
   Button,
   Center,
   Flex,
   Heading,
-  Input,
   Stack,
   Text,
 } from '@chakra-ui/react';
 
+import { ButtonWithIcon } from '@/components/Buttons';
+import Input from '@/components/Input';
 import Page from '@/containers/Page';
 import ProtectedRoute from '@/containers/Protected';
 import { useAuth } from 'lib/auth';
@@ -35,7 +37,10 @@ const BackArrow = () => (
 
 const Profile: FunctionComponent = () => {
   const { user, signout } = useAuth();
+  const { colorMode } = useColorMode();
   const router = useRouter();
+
+  const isDarkMode = colorMode === 'dark';
 
   return (
     <ProtectedRoute redirectUrl={Routes.AUTH_SCREEN}>
@@ -56,7 +61,7 @@ const Profile: FunctionComponent = () => {
             </Heading>
           </Flex>
           <Stack
-            bg="gray.100"
+            bg={isDarkMode ? '#1f1f1f' : 'gray.100'}
             px={['4', '6']}
             py={['4', '8']}
             rounded="md"
@@ -67,22 +72,17 @@ const Profile: FunctionComponent = () => {
               <Text fontWeight="bold" color="gray.500">
                 Display Name
               </Text>
-              <Input type="text" focusBorderColor="black" mt="2" bg="gray.50" />
+              <Input type="text" mt="2" />
             </Box>
             <Box>
               <Text fontWeight="bold" color="gray.500">
                 Change Password
               </Text>
-              <Input
-                type="password"
-                focusBorderColor="black"
-                mt="2"
-                bg="gray.50"
-              />
+              <Input type="password" mt="2" />
             </Box>
           </Stack>
           <Center mt="8">
-            <Button>Save Changes</Button>
+            <ButtonWithIcon title="Save Changes" icon={null} />
             <Button colorScheme="red" ml="4" onClick={signout}>
               Log Out
             </Button>

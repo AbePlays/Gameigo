@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { Flex, Box, Text } from '@chakra-ui/react';
+import { Box, Flex, Text } from '@chakra-ui/react';
 
 interface Props {
   id: number;
