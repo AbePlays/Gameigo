@@ -17,6 +17,7 @@ const BrandButton: FunctionComponent<BrandButtonProps> = ({
 
   return (
     <Button
+      bg={isDarkMode ? 'dark-bg-primary' : 'light-bg-secondary'}
       borderColor={isDarkMode ? 'light-text' : 'dark-text'}
       color={isDarkMode ? 'light-text' : 'dark-text'}
       h="12"
