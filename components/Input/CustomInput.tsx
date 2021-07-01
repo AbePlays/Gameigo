@@ -1,11 +1,12 @@
 import { FunctionComponent } from 'react';
 import { Field } from 'formik';
 import {
+  useColorMode,
   FormControl,
   FormErrorMessage,
   FormLabel,
-} from '@chakra-ui/form-control';
-import { Input } from '@chakra-ui/input';
+  Input,
+} from '@chakra-ui/react';
 
 interface CustomInputProps {
   name: string;
@@ -16,10 +17,13 @@ interface CustomInputProps {
 
 const CustomInput: FunctionComponent<CustomInputProps> = ({
   name,
-  validate,
   placeholder,
   type,
+  validate,
 }) => {
+  const { colorMode } = useColorMode();
+  const isDarkMode = colorMode === 'dark';
+
   return (
     <Field name={name} validate={validate}>
       {({ field, form }) => (
@@ -29,13 +33,21 @@ const CustomInput: FunctionComponent<CustomInputProps> = ({
           </FormLabel>
           <Input
             {...field}
-            id={name}
-            h="12"
-            type={type}
+            bg={isDarkMode ? 'dark-bg-secondary' : 'light-bg-secondary'}
+            borderColor={isDarkMode ? 'light-text' : 'dark-text'}
+            focusBorderColor={
+              isDarkMode ? 'light-bg-primary' : 'dark-bg-primary'
+            }
             fontWeight="medium"
-            focusBorderColor="black"
-            borderColor="black"
+            h="12"
+            id={name}
             placeholder={placeholder}
+            type={type}
+            _hover={{
+              borderColor: `${
+                isDarkMode ? 'light-bg-primary' : 'dark-bg-primary'
+              }`,
+            }}
           />
           <FormErrorMessage>{form.errors[name]}</FormErrorMessage>
         </FormControl>
