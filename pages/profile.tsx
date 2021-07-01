@@ -41,7 +41,7 @@ const Profile: FunctionComponent = () => {
   const router = useRouter();
 
   const isDarkMode = colorMode === 'dark';
-
+  
   return (
     <ProtectedRoute redirectUrl={Routes.AUTH_SCREEN}>
       <Page title="Profile">
