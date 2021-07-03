@@ -48,6 +48,9 @@ const CustomInput: FunctionComponent<CustomInputProps> = ({
                 isDarkMode ? 'light-bg-primary' : 'dark-bg-primary'
               }`,
             }}
+            _placeholder={{
+              color: 'gray.400',
+            }}
           />
           <FormErrorMessage>{form.errors[name]}</FormErrorMessage>
         </FormControl>

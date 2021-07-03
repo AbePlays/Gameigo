@@ -20,6 +20,7 @@ const Input: FunctionComponent<Props> = ({ placeholder, ...props }) => {
       _hover={{
         borderColor: `${isDarkMode ? 'light-bg-primary' : 'dark-bg-primary'}`,
       }}
+      _placeholder={{ color: 'gray.400' }}
     />
   );
 };
