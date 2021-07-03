@@ -35,7 +35,7 @@ const Home: FunctionComponent = () => {
       >
         <Box flex="1" mt={['8', '8', '0']}>
           <Stack
-            spacing="10"
+            spacing="8"
             w={['100%', '100%', '100%', '30rem']}
             textAlign={['center', 'center', 'left']}
           >
@@ -57,11 +57,13 @@ const Home: FunctionComponent = () => {
             </Heading>
             <Text
               fontSize="lg"
-              color={isDarkMode ? 'gray.300' : 'gray.500'}
+              color={isDarkMode ? 'light-text' : 'dark-text'}
+              opacity="0.7"
               lineHeight="7"
             >
               Gameigo provides users a video game discovery platform where they
-              can explore video games from around the world.
+              can explore and create an exclusive collection of video games from
+              around the world.
             </Text>
             <Box>
               <ButtonWithIcon
