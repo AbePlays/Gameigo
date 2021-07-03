@@ -1,9 +1,10 @@
 import { FunctionComponent, ReactNode } from 'react';
+import { useToast } from '@chakra-ui/react';
 
 import { BrandButton } from '@/components/Buttons';
 import { useAuth } from '../../lib/auth';
-import { SocialAuthProvider } from './types';
 import { SOCIALAUTHPROVIDERS } from './constant';
+import { SocialAuthProvider } from './types';
 
 const Github = () => {
   return (
@@ -45,11 +46,28 @@ const Google = () => {
 
 const SocialAuthProviders: FunctionComponent = () => {
   const { signinWithGoogle, signinWithGithub } = useAuth();
+  const toast = useToast();
 
   const googleSignInHandler = async () => {
     try {
       await signinWithGoogle();
+      toast({
+        title: 'Signin Successful.',
+        description: "You've successfully signed in.",
+        status: 'success',
+        position: 'top',
+        duration: 4000,
+        isClosable: true,
+      });
     } catch (e) {
+      toast({
+        title: 'Signin Failed.',
+        description: 'There was an issue while signing in.',
+        status: 'error',
+        position: 'top',
+        duration: 4000,
+        isClosable: true,
+      });
       console.log(`Error while signing in with Google ${e}`);
     }
   };
@@ -57,7 +75,23 @@ const SocialAuthProviders: FunctionComponent = () => {
   const githubSignInHandler = async () => {
     try {
       await signinWithGithub();
+      toast({
+        title: 'Signin Successful.',
+        description: "You've successfully signed in.",
+        status: 'success',
+        position: 'top',
+        duration: 4000,
+        isClosable: true,
+      });
     } catch (e) {
+      toast({
+        title: 'Signin Failed.',
+        description: 'There was an issue while signing in.',
+        status: 'error',
+        position: 'top',
+        duration: 4000,
+        isClosable: true,
+      });
       console.log(`Error while signing in with Github ${e}`);
     }
   };

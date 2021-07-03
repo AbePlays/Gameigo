@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 import { Form, Formik, FormikHelpers } from 'formik';
 import { ChevronRightIcon } from '@chakra-ui/icons';
-import { Box, Heading, Stack, Text } from '@chakra-ui/react';
+import { useToast, Box, Heading, Stack, Text } from '@chakra-ui/react';
 
 import { ButtonWithIcon } from '@/components/Buttons';
 import { CustomInput } from '@/components/Input';
@@ -14,6 +14,7 @@ import { useColorMode } from '@chakra-ui/react';
 const Login: FunctionComponent = () => {
   const { loginWithEmailAndPassword } = useAuth();
   const { colorMode } = useColorMode();
+  const toast = useToast();
 
   const isDarkMode = colorMode === 'dark';
   const initialValues: LoginForm = { email: '', password: '' };
@@ -25,8 +26,24 @@ const Login: FunctionComponent = () => {
     try {
       const { email, password } = values;
       await loginWithEmailAndPassword(email, password);
+      toast({
+        title: 'Login Successful.',
+        description: "You've successfully logged in.",
+        status: 'success',
+        position: 'top',
+        duration: 4000,
+        isClosable: true,
+      });
       actions.resetForm();
     } catch (e) {
+      toast({
+        title: 'Login Failed.',
+        description: 'There was an issue while logging in.',
+        status: 'error',
+        position: 'top',
+        duration: 4000,
+        isClosable: true,
+      });
       console.log(`Error while logging in ${e}`);
     }
   };

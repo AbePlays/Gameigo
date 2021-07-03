@@ -6,9 +6,10 @@ import {
   FunctionComponent,
 } from 'react';
 import { useRouter } from 'next/router';
+import { useToast } from '@chakra-ui/react';
 
-import firebase from './firebase';
 import { Routes } from '../routes';
+import firebase from './firebase';
 import { formatUser } from './helper';
 import { AuthContextType, User } from './types';
 
@@ -22,9 +23,10 @@ export const AuthProvider: FunctionComponent = ({ children }) => {
 export const useAuth = (): AuthContextType => useContext(AuthContext);
 
 const useProvideAuth = () => {
-  const [user, setUser] = useState<User>(null);
   const [loading, setLoading] = useState<boolean>(false);
+  const [user, setUser] = useState<User>(null);
   const router = useRouter();
+  const toast = useToast();
 
   const handleFirebaseUser = (firebaseUser: firebase.User) => {
     setUser(formatUser(firebaseUser));
@@ -70,6 +72,14 @@ const useProvideAuth = () => {
 
   const signout = async () => {
     await firebase.auth().signOut();
+    toast({
+      title: 'Logout Successful.',
+      description: "You've successfully logged out.",
+      status: 'success',
+      position: 'top',
+      duration: 4000,
+      isClosable: true,
+    });
     setUser(null);
   };
 
