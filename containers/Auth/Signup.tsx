@@ -1,7 +1,14 @@
 import { FunctionComponent } from 'react';
 import { Form, Formik, FormikHelpers } from 'formik';
 import { ChevronRightIcon } from '@chakra-ui/icons';
-import { useColorMode, Box, Heading, Stack, Text } from '@chakra-ui/react';
+import {
+  useColorMode,
+  useToast,
+  Box,
+  Heading,
+  Stack,
+  Text,
+} from '@chakra-ui/react';
 
 import { ButtonWithIcon } from '@/components/Buttons';
 import { CustomInput } from '@/components/Input';
@@ -11,11 +18,12 @@ import { checkEmail, checkName, checkPassword } from './helper';
 import { SignupForm } from './types';
 
 const Signup: FunctionComponent = () => {
-  const { colorMode } = useColorMode();
-  const isDarkMode = colorMode === 'dark';
-
-  const initialValues: SignupForm = { email: '', password: '', name: '' };
   const { signupWithEmailAndPassword } = useAuth();
+  const { colorMode } = useColorMode();
+  const toast = useToast();
+
+  const isDarkMode = colorMode === 'dark';
+  const initialValues: SignupForm = { email: '', password: '', name: '' };
 
   const submitHandler = async (
     values: SignupForm,
@@ -24,8 +32,24 @@ const Signup: FunctionComponent = () => {
     try {
       const { email, name, password } = values;
       await signupWithEmailAndPassword(email, password, name);
+      toast({
+        title: 'Signup Successful.',
+        description: "We've created your account for you.",
+        status: 'success',
+        position: 'top',
+        duration: 4000,
+        isClosable: true,
+      });
       actions.resetForm();
     } catch (e) {
+      toast({
+        title: 'Signup Failed.',
+        description: 'There was an error while creating your account.',
+        status: 'error',
+        position: 'top',
+        duration: 4000,
+        isClosable: true,
+      });
       console.log(`Error while signing up ${e}`);
     }
   };
