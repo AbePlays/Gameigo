@@ -3,12 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
     "build": "next build",
+    "check-format": "npm run prettier -- --list-different",
+    "check-types": "tsc",
+    "dev": "next dev",
+    "format": "npm run prettier -- --write",
+    "lint": "eslint --ignore-path .gitignore --ext .js,.jsx,.ts,.tsx .",
+    "prettier": "prettier --ignore-path .gitignore \"**/*.+(js|json|ts|tsx)\"",
     "start": "next start",
-    "lint": "eslint ./ --ext js,jsx,ts,tsx",
+    "test:watch": "jest --watch",
     "test": "jest --coverage",
-    "test:watch": "jest --watch"
+    "validate": "npm run check-types && npm run check-format && npm run lint && npm run build"
   },
   "dependencies": {
     "@chakra-ui/icons": "^1.0.13",
@@ -34,10 +39,14 @@
     "babel-jest": "^27.0.2",
     "dotenv": "^10.0.0",
     "eslint": "^7.28.0",
+    "eslint-config-prettier": "^8.3.0",
     "eslint-import-resolver-alias": "^1.1.2",
     "eslint-plugin-react": "^7.24.0",
+    "husky": "^7.0.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^27.0.4",
+    "lint-staged": "^11.0.0",
+    "prettier": "^2.3.2",
     "typescript": "^4.3.2"
   }
 }
