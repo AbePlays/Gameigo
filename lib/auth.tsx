@@ -12,6 +12,7 @@ import { Routes } from '../routes';
 import firebase from './firebase';
 import { formatUser } from './helper';
 import { AuthContextType, User } from './types';
+import { createUser } from './db';
 
 const AuthContext = createContext<AuthContextType>(null);
 
@@ -28,7 +29,8 @@ const useProvideAuth = () => {
   const router = useRouter();
   const toast = useToast();
 
-  const handleFirebaseUser = (firebaseUser: firebase.User) => {
+  const handleFirebaseUser = async (firebaseUser: firebase.User) => {
+    await createUser(firebaseUser.uid, formatUser(firebaseUser));
     setUser(formatUser(firebaseUser));
     setLoading(false);
     router.replace(Routes.HOME_SCREEN);

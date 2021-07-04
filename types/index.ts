@@ -18,6 +18,8 @@ export type Store = {
 };
 
 export type GameInfo = {
+  id: number;
+  slug: string;
   name: string;
   description: string;
   released: string;
