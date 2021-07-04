@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { DeleteIcon, StarIcon } from '@chakra-ui/icons';
 import {
+  useToast,
   Box,
   Button,
   Heading,
@@ -62,17 +63,42 @@ const GameDetail: FunctionComponent<Props> = ({ game }) => {
   const { user } = useAuth();
   const router = useRouter();
   const [isFav, setIsFav] = useState<boolean>(false);
+  const toast = useToast();
 
   const onClickHandler = async () => {
     try {
       if (isFav) {
         await deleteGame(user.uid, game.id);
+        toast({
+          description: 'Game was removed from collection successfully.',
+          duration: 4000,
+          isClosable: true,
+          position: 'top',
+          status: 'success',
+          title: 'Collection Updated.',
+        });
         setIsFav(false);
       } else {
         await addGame(user.uid, convertToGame(game));
+        toast({
+          description: 'Game was addded to collection successfully.',
+          duration: 4000,
+          isClosable: true,
+          position: 'top',
+          status: 'success',
+          title: 'Collection Updated.',
+        });
         setIsFav(true);
       }
     } catch (e) {
+      toast({
+        description: 'There was an error while updating your collection.',
+        duration: 4000,
+        isClosable: true,
+        position: 'top',
+        status: 'error',
+        title: 'Update Failed.',
+      });
       console.log(e);
     }
   };
@@ -182,6 +208,7 @@ const GameDetail: FunctionComponent<Props> = ({ game }) => {
               _hover={{
                 bg: 'light-bg-primary',
                 color: 'dark-text',
+                transform: 'scale(0.99)',
               }}
             >
               {isFav ? 'Remove from Favorites' : 'Add to Favorites'}
