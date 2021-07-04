@@ -10,7 +10,7 @@ import {
   Icon,
   useColorMode,
 } from '@chakra-ui/react';
-import { HamburgerIcon, MoonIcon, SunIcon } from '@chakra-ui/icons'
+import { HamburgerIcon, MoonIcon, SunIcon } from '@chakra-ui/icons';
 
 import { useAuth } from 'lib/auth';
 
