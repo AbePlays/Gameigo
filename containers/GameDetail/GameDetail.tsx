@@ -1,15 +1,27 @@
-import { FunctionComponent } from 'react';
-import { useRouter } from 'next/router';
+import { FunctionComponent, useEffect, useState } from 'react';
 import Image from 'next/image';
-import { Box, Heading, Stack, Text, Wrap, WrapItem } from '@chakra-ui/react';
+import { useRouter } from 'next/router';
+import { DeleteIcon, StarIcon } from '@chakra-ui/icons';
+import {
+  Box,
+  Button,
+  Heading,
+  Stack,
+  Text,
+  Wrap,
+  WrapItem,
+} from '@chakra-ui/react';
 
-import Store from '@/components/Store';
+import BoxWithDivider from '@/components/BoxWithDivider';
 import CustomLink from '@/components/CustomLink';
 import GameContent from '@/components/GameContent';
-import BoxWithDivider from '@/components/BoxWithDivider';
+import Store from '@/components/Store';
+import Page from '../Page';
+import { useAuth } from 'lib/auth';
+import { addGame, checkGame, deleteGame } from 'lib/db';
 import { GameInfo } from 'types';
 import { formatDate } from 'utils/date';
-import Page from '../Page';
+import { convertToGame } from 'utils/game';
 
 interface Props {
   game: GameInfo;
@@ -47,7 +59,28 @@ const CustomDivider = () => {
 };
 
 const GameDetail: FunctionComponent<Props> = ({ game }) => {
+  const { user } = useAuth();
   const router = useRouter();
+  const [isFav, setIsFav] = useState<boolean>(false);
+
+  const onClickHandler = async () => {
+    try {
+      if (isFav) {
+        await deleteGame(user.uid, game.id);
+        setIsFav(false);
+      } else {
+        await addGame(user.uid, convertToGame(game));
+        setIsFav(true);
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffect(() => {
+    checkGame(user.uid, game.id).then((res) => setIsFav(res));
+  }, []);
+
   const clickHandler = () => router.back();
 
   const renderReleasedandPlaytime = () => {
@@ -138,6 +171,21 @@ const GameDetail: FunctionComponent<Props> = ({ game }) => {
               {game.name}
             </Heading>
             {renderReleasedandPlaytime()}
+            <Button
+              fontSize="sm"
+              leftIcon={isFav ? <DeleteIcon /> : <StarIcon />}
+              letterSpacing="widest"
+              onClick={onClickHandler}
+              textTransform="uppercase"
+              variant="outline"
+              w="max-content"
+              _hover={{
+                bg: 'light-bg-primary',
+                color: 'dark-text',
+              }}
+            >
+              {isFav ? 'Remove from Favorites' : 'Add to Favorites'}
+            </Button>
             {renderTriContentBox()}
             <GameContent heading="About">
               <Box dangerouslySetInnerHTML={{ __html: game.description }}></Box>
