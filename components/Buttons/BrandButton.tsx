@@ -1,28 +1,34 @@
-import { FunctionComponent } from 'react';
-import Image from 'next/image';
-import { Button } from '@chakra-ui/button';
-import { Text } from '@chakra-ui/layout';
+import { FunctionComponent, ReactNode } from 'react';
+import { useColorMode, Button, Text } from '@chakra-ui/react';
 
 interface BrandButtonProps {
-  imgSrc: string;
-  title: string;
+  icon: ReactNode;
   onClick?: () => void;
+  title: string;
 }
 
 const BrandButton: FunctionComponent<BrandButtonProps> = ({
-  imgSrc,
-  title,
+  icon,
   onClick,
+  title,
 }) => {
+  const { colorMode } = useColorMode();
+  const isDarkMode = colorMode === 'dark';
+
   return (
     <Button
-      variant="outline"
+      bg={isDarkMode ? 'dark-bg-primary' : 'light-bg-secondary'}
+      borderColor={isDarkMode ? 'light-text' : 'dark-text'}
+      color={isDarkMode ? 'light-text' : 'dark-text'}
       h="12"
-      borderColor="black"
       justifyContent="flex-start"
       onClick={onClick}
+      variant="outline"
+      _hover={{
+        transform: 'scale(0.99)',
+      }}
     >
-      <Image src={imgSrc} width="24" height="24" alt="brand logo" />
+      {icon}
       <Text ml="8">{title}</Text>
     </Button>
   );

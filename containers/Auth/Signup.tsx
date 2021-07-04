@@ -1,18 +1,29 @@
 import { FunctionComponent } from 'react';
 import { Form, Formik, FormikHelpers } from 'formik';
-import { Box } from '@chakra-ui/layout';
 import { ChevronRightIcon } from '@chakra-ui/icons';
-import { Button, Heading, Stack, Text } from '@chakra-ui/react';
+import {
+  useColorMode,
+  useToast,
+  Box,
+  Heading,
+  Stack,
+  Text,
+} from '@chakra-ui/react';
 
+import { ButtonWithIcon } from '@/components/Buttons';
 import { CustomInput } from '@/components/Input';
+import SocialAuthProviders from './SocialAuthProviders';
 import { useAuth } from '../../lib/auth';
 import { checkEmail, checkName, checkPassword } from './helper';
 import { SignupForm } from './types';
-import SocialAuthProviders from './SocialAuthProviders';
 
 const Signup: FunctionComponent = () => {
-  const initialValues: SignupForm = { email: '', password: '', name: '' };
   const { signupWithEmailAndPassword } = useAuth();
+  const { colorMode } = useColorMode();
+  const toast = useToast();
+
+  const isDarkMode = colorMode === 'dark';
+  const initialValues: SignupForm = { email: '', password: '', name: '' };
 
   const submitHandler = async (
     values: SignupForm,
@@ -21,8 +32,24 @@ const Signup: FunctionComponent = () => {
     try {
       const { email, name, password } = values;
       await signupWithEmailAndPassword(email, password, name);
+      toast({
+        title: 'Signup Successful.',
+        description: "We've created your account for you.",
+        status: 'success',
+        position: 'top',
+        duration: 4000,
+        isClosable: true,
+      });
       actions.resetForm();
     } catch (e) {
+      toast({
+        title: 'Signup Failed.',
+        description: 'There was an error while creating your account.',
+        status: 'error',
+        position: 'top',
+        duration: 4000,
+        isClosable: true,
+      });
       console.log(`Error while signing up ${e}`);
     }
   };
@@ -32,7 +59,13 @@ const Signup: FunctionComponent = () => {
       <Heading as="h1" fontWeight="extrabold" fontSize={['5xl', '6xl']}>
         Create Your Account
       </Heading>
-      <Text fontSize="xl" maxW="xl" mx="auto" color="gray.700" mt="8">
+      <Text
+        fontSize="xl"
+        maxW="xl"
+        mx="auto"
+        color={isDarkMode ? 'gray.300' : 'gray.700'}
+        mt="8"
+      >
         Choose from 30,000+ games around the world with new addition every few
         weeks
       </Text>
@@ -68,22 +101,16 @@ const Signup: FunctionComponent = () => {
                     placeholder="Password"
                     validate={checkPassword}
                   />
-                  <Button
+                  <ButtonWithIcon
+                    title="Create Your Account"
+                    icon={<ChevronRightIcon h="6" w="6" />}
                     h="12"
-                    bg="black"
-                    color="white"
-                    _hover={{
-                      bg: '#444',
-                    }}
                     isLoading={props.isSubmitting}
                     type="submit"
-                    rightIcon={<ChevronRightIcon h="6" w="6" />}
                     justifyContent={
                       props.isSubmitting ? 'center' : 'space-between'
                     }
-                  >
-                    Create Your Account
-                  </Button>
+                  />
                 </Stack>
               </Form>
             )}

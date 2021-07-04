@@ -1,10 +1,17 @@
 import { FunctionComponent } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { Button } from '@chakra-ui/button';
 import { ChevronRightIcon } from '@chakra-ui/icons';
-import { Box, Flex, Heading, Stack, Text } from '@chakra-ui/layout';
+import {
+  useColorMode,
+  Box,
+  Flex,
+  Heading,
+  Stack,
+  Text,
+} from '@chakra-ui/react';
 
+import { ButtonWithIcon } from '@/components/Buttons';
 import Page from '@/containers/Page';
 import { Routes } from '../routes';
 
@@ -12,11 +19,11 @@ const width = 500;
 const height = 500;
 
 const Home: FunctionComponent = () => {
+  const { colorMode } = useColorMode();
   const router = useRouter();
+  const isDarkMode = colorMode === 'dark';
 
-  const redirectToAuthScreen = () => {
-    router.push(Routes.AUTH_SCREEN);
-  };
+  const redirectToAuthScreen = () => router.push(Routes.AUTH_SCREEN);
 
   return (
     <Page title="Welcome">
@@ -28,7 +35,7 @@ const Home: FunctionComponent = () => {
       >
         <Box flex="1" mt={['8', '8', '0']}>
           <Stack
-            spacing="10"
+            spacing="8"
             w={['100%', '100%', '100%', '30rem']}
             textAlign={['center', 'center', 'left']}
           >
@@ -48,21 +55,22 @@ const Home: FunctionComponent = () => {
                 gamers
               </Text>
             </Heading>
-            <Text fontSize="lg" color="gray.500" lineHeight="7">
+            <Text
+              fontSize="lg"
+              color={isDarkMode ? 'light-text' : 'dark-text'}
+              opacity="0.7"
+              lineHeight="7"
+            >
               Gameigo provides users a video game discovery platform where they
-              can explore video games from around the world.
+              can explore and create an exclusive collection of video games from
+              around the world.
             </Text>
             <Box>
-              <Button
-                fontWeight="bold"
-                bg="black"
-                color="white"
-                _hover={{ bg: '#444' }}
-                rightIcon={<ChevronRightIcon w="6" h="6" />}
+              <ButtonWithIcon
+                title="Get started"
+                icon={<ChevronRightIcon w="6" h="6" />}
                 onClick={redirectToAuthScreen}
-              >
-                Get started
-              </Button>
+              />
             </Box>
           </Stack>
         </Box>

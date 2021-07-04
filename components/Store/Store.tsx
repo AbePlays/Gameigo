@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 import NextLink from 'next/link';
-import { Button, Link } from '@chakra-ui/react';
+import { Link } from '@chakra-ui/react';
 
 interface Props {
   name: string;
@@ -9,11 +9,19 @@ interface Props {
 
 const Store: FunctionComponent<Props> = ({ name, url }) => {
   return (
-    <Button>
-      <NextLink href={`https://${url}`} passHref>
-        <Link target="_blank">{name}</Link>
-      </NextLink>
-    </Button>
+    <NextLink href={`https://${url}`} passHref>
+      <Link
+        bg="dark-bg-secondary"
+        fontWeight="medium"
+        px="4"
+        py="2"
+        rounded="md"
+        target="_blank"
+        _hover={{ transform: 'scale(0.97)' }}
+      >
+        {name}
+      </Link>
+    </NextLink>
   );
 };
 

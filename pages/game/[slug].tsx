@@ -4,8 +4,9 @@ import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next';
 import GameDetail from '@/containers/GameDetail';
 import ProtectedRoute from '@/containers/Protected';
 import { Endpoints } from 'endpoints';
-import { GameInfo } from 'types';
 import { Routes } from 'routes';
+import { GameInfo } from 'types';
+import { convertToGameInfo } from 'utils/game';
 
 interface Props {
   game: GameInfo;
@@ -26,8 +27,8 @@ export const getStaticProps: GetStaticProps = async (
     `${Endpoints.SEARCH_GAME}/${slug}?key=${process.env.NEXT_PUBLIC_RAWG_API_KEY}`
   );
   const data = await result.json();
-
-  return { props: { game: data } };
+  const game = convertToGameInfo(data);
+  return { props: { game } };
 };
 
 const GameDetailContainer: FunctionComponent<Props> = ({ game }) => {

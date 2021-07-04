@@ -1,20 +1,31 @@
-import { FunctionComponent, useState } from 'react';
+import { useState, FunctionComponent } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { Box, Divider, Flex, Heading, Stack, Text } from '@chakra-ui/layout';
-import { Skeleton } from '@chakra-ui/skeleton';
+import {
+  useColorMode,
+  Box,
+  Divider,
+  Flex,
+  Heading,
+  Skeleton,
+  Stack,
+  Text,
+} from '@chakra-ui/react';
 
-import { formatDate } from '../../utils/date';
-import { Game } from '../../types';
 import Label from '../Label';
+import { Game } from '../../types';
+import { formatDate } from '../../utils/date';
 
 interface Props {
   game: Game;
 }
 
 const GameCard: FunctionComponent<Props> = ({ game }) => {
+  const { colorMode } = useColorMode();
   const router = useRouter();
   const [showImage, setShowImage] = useState<boolean>(false);
+
+  const isDarkMode = colorMode === 'dark';
   const toggleImage = () => setShowImage((prev) => !prev);
 
   const renderImage = () => {
@@ -62,14 +73,14 @@ const GameCard: FunctionComponent<Props> = ({ game }) => {
 
   return (
     <Box
-      shadow="lg"
-      rounded="lg"
-      overflow="hidden"
+      bg={isDarkMode ? 'dark-bg-secondary' : 'light-bg-secondary'}
       cursor="pointer"
       onClick={clickHandler}
+      overflow="hidden"
+      rounded="lg"
+      shadow="lg"
       _hover={{
         transform: 'scale(1.01)',
-        transition: 'all 150ms ease-in',
         shadow: 'xl',
       }}
     >
