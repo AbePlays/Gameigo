@@ -24,7 +24,8 @@
     "**/*.ts",
     "**/*.tsx",
     "jest.config.js",
-    "test/__mocks__/fileMock.js"
+    "test/__mocks__/fileMock.js",
+    "jest.setup.js"
   ],
   "exclude": ["node_modules"]
 }
