@@ -3,6 +3,7 @@ import { Box, SimpleGrid, Text } from '@chakra-ui/react';
 
 import GameCard from '@/components/GameCard';
 import Input from '@/components/Input';
+import NoData from '@/components/NoData';
 import Page from '@/containers/Page';
 import ProtectedRoute from '@/containers/Protected';
 import { Endpoints } from 'endpoints';
@@ -11,6 +12,7 @@ import { Game } from 'types';
 
 const Search: FunctionComponent = () => {
   const [games, setGames] = useState<Game[]>([]);
+  const [isPristine, setIsPristine] = useState<boolean>(true);
   const [loading, setLoading] = useState<boolean>(false);
   const [query, setQuery] = useState<string>('');
 
@@ -29,7 +31,7 @@ const Search: FunctionComponent = () => {
         `${Endpoints.SEARCH_GAME}?key=${process.env.NEXT_PUBLIC_RAWG_API_KEY}&search=${query}`
       );
       const data = await res.json();
-      console.log(data);
+      setIsPristine(false);
       setGames(data.results);
     } catch (e) {
       console.log(e);
@@ -43,25 +45,32 @@ const Search: FunctionComponent = () => {
       <Page title="Search">
         <Box maxW="container.sm" mx="auto">
           <Input
-            placeholder="Search Games"
-            value={query}
             onChange={changeHandler}
             onKeyDown={keyDownHandler}
+            placeholder="Search Games"
+            value={query}
           />
         </Box>
         {loading ? (
           <Text>Loading...</Text>
-        ) : (
+        ) : Array.isArray(games) && games.length > 0 ? (
           <SimpleGrid
             minChildWidth="320px"
+            mt="8"
             spacingX={[4, 4, 6]}
             spacingY="6"
-            mt="8"
           >
-            {Array.isArray(games) &&
-              games.length > 0 &&
-              games.map((game) => <GameCard game={game} key={game.id} />)}
+            {games.map((game) => (
+              <GameCard game={game} key={game.id} />
+            ))}
           </SimpleGrid>
+        ) : (
+          !isPristine && (
+            <NoData
+              title="Sorry, couldn't find any results for your query"
+              mt="8"
+            />
+          )
         )}
       </Page>
     </ProtectedRoute>
