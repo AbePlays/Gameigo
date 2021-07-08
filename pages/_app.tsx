@@ -4,6 +4,7 @@ import { Box, ChakraProvider } from '@chakra-ui/react';
 
 import Layout from '@/components/Layout';
 import Navbar from '@/components/Navbar';
+import '../styles/loader.css';
 import theme from '../styles/theme';
 import { AuthProvider } from '../lib/auth';
 

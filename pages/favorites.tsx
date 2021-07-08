@@ -3,6 +3,7 @@ import useSWR from 'swr';
 import { Heading, SimpleGrid } from '@chakra-ui/react';
 
 import GameCard from '@/components/GameCard';
+import Loader from '@/components/Loader';
 import NoData from '@/components/NoData';
 import Page from '@/containers/Page';
 import ProtectedRoute from '@/containers/Protected';
@@ -22,7 +23,7 @@ const Favorites: FunctionComponent = () => {
   }
 
   if (!data) {
-    return <p>Loading...</p>;
+    return <Loader />;
   }
 
   return (

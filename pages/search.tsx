@@ -1,8 +1,9 @@
 import { FunctionComponent, useState } from 'react';
-import { Box, SimpleGrid, Text } from '@chakra-ui/react';
+import { Box, SimpleGrid } from '@chakra-ui/react';
 
 import GameCard from '@/components/GameCard';
 import Input from '@/components/Input';
+import Loader from '@/components/Loader';
 import NoData from '@/components/NoData';
 import Page from '@/containers/Page';
 import ProtectedRoute from '@/containers/Protected';
@@ -52,7 +53,7 @@ const Search: FunctionComponent = () => {
           />
         </Box>
         {loading ? (
-          <Text>Loading...</Text>
+          <Loader />
         ) : Array.isArray(games) && games.length > 0 ? (
           <SimpleGrid
             minChildWidth="320px"
