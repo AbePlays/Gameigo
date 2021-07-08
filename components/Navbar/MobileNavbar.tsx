@@ -43,9 +43,9 @@ const MobileNavbar: FunctionComponent<Props> = ({ onClick }) => {
           <CustomLink
             fontSize="6xl"
             isExt={false}
-            link="/"
+            link="/search"
             onClick={onClick}
-            title="Home"
+            title="Search"
           ></CustomLink>
         </ListItem>
         <ListItem>
