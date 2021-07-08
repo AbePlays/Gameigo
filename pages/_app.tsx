@@ -1,6 +1,6 @@
 import { FunctionComponent, useState } from 'react';
 import { AppProps } from 'next/dist/next-server/lib/router/router';
-import { ChakraProvider } from '@chakra-ui/react';
+import { Box, ChakraProvider } from '@chakra-ui/react';
 
 import Layout from '@/components/Layout';
 import Navbar from '@/components/Navbar';
@@ -14,11 +14,11 @@ const MyApp: FunctionComponent<AppProps> = ({ Component, pageProps }) => {
     <ChakraProvider theme={theme}>
       <AuthProvider>
         <Navbar setShowContent={setShowContent} />
-        {showContent && (
+        <Box display={showContent ? 'block' : 'none'}>
           <Layout>
             <Component {...pageProps} />
           </Layout>
-        )}
+        </Box>
       </AuthProvider>
     </ChakraProvider>
   );
