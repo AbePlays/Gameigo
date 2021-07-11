@@ -17,7 +17,7 @@ interface Props {
 
 const MobileNavbar: FunctionComponent<Props> = ({ onClick }) => {
   return (
-    <Box h="100vh" w="100vw" px="4" py="24">
+    <Box h="100vh" w="100vw" px="4" py="14">
       <Flex justifyContent="flex-end">
         <Button
           alignItems="baseline"
