@@ -24,7 +24,7 @@ export const AuthProvider: FunctionComponent = ({ children }) => {
 export const useAuth = (): AuthContextType => useContext(AuthContext);
 
 const useProvideAuth = () => {
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
   const [user, setUser] = useState<User>(null);
   const router = useRouter();
   const toast = useToast();
@@ -87,11 +87,13 @@ const useProvideAuth = () => {
 
   useEffect(() => {
     const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
+      setLoading(true);
       if (user) {
         setUser(formatUser(user));
       } else {
         setUser(null);
       }
+      setLoading(false);
     });
 
     return () => unsubscribe();

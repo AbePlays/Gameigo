@@ -13,10 +13,12 @@ const Protected: FunctionComponent<Props> = ({ children, redirectUrl }) => {
   const router = useRouter();
 
   useEffect(() => {
-    if (!user) router.push(redirectUrl);
-  }, [user]);
+    if (!(loading || user)) router.push(redirectUrl);
+  }, [loading, user]);
 
-  return <>{loading ? <Loader /> : user && children}</>;
+  if (loading) return <Loader />;
+
+  return <>{children}</>;
 };
 
 export default Protected;
