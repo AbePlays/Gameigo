@@ -29,7 +29,7 @@ const Favorites: FunctionComponent = () => {
   return (
     <ProtectedRoute redirectUrl={Routes.AUTH_SCREEN}>
       <Page title="Favorites">
-        <Heading as="h1" fontSize={['4xl', '5xl']}>
+        <Heading as="h1" fontSize={['4xl', '5xl', '6xl']}>
           Favorites
         </Heading>
         {Array.isArray(data) && data.length > 0 ? (
