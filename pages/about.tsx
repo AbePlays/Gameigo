@@ -13,7 +13,7 @@ const About: FunctionComponent = () => {
     <Page title="About">
       <Stack maxW="container.xl" mx="auto" textAlign="center" spacing="12">
         <AboutCard heading="Small and Crafty">
-          <Text maxW="container.md" mx="auto" fontWeight="medium">
+          <Text maxW="container.md" mx="auto">
             Gameigo is a video game discovery platform where you can keep all
             your games in one unified profile and create your exclusive
             collection. The application is powered by a public API provided by
@@ -22,7 +22,7 @@ const About: FunctionComponent = () => {
           </Text>
         </AboutCard>
         <AboutCard heading="Creator">
-          <Text maxW="container.md" mx="auto" fontWeight="medium">
+          <Text maxW="container.md" mx="auto">
             Hi there, I&apos;m Abhishek - aka Abe 👋 I am a self learner trying
             to get hands on new technologies and producing exciting products
             that are as smart, as they are effective. Wanna talk about Computer
