@@ -1,13 +1,14 @@
 import { FunctionComponent, useState } from 'react';
 import NextLink from 'next/link';
+import { useRouter } from 'next/router';
 import {
-  Flex,
-  Box,
   Avatar,
+  Box,
   Button,
+  Flex,
+  Icon,
   Link,
   Stack,
-  Icon,
   useColorMode,
 } from '@chakra-ui/react';
 import { HamburgerIcon, MoonIcon, SunIcon } from '@chakra-ui/icons';
@@ -25,7 +26,9 @@ const Navbar: FunctionComponent<Props> = ({ setShowContent }) => {
   const [showMobileNav, setShowMobileNav] = useState<boolean>(false);
   const { colorMode, toggleColorMode } = useColorMode();
   const { user } = useAuth();
+  const router = useRouter();
 
+  const currentPath = router.pathname;
   const isDarkMode = colorMode === 'dark';
   const bgColor = isDarkMode ? 'dark-bg-secondary' : 'light-bg-secondary';
 
@@ -72,13 +75,25 @@ const Navbar: FunctionComponent<Props> = ({ setShowContent }) => {
                 display={['none', 'block']}
               >
                 <NextLink href="/search" passHref>
-                  <Link>Search</Link>
+                  <Link
+                    fontWeight={currentPath === '/search' ? 'bold' : 'light'}
+                  >
+                    Search
+                  </Link>
                 </NextLink>
                 <NextLink href="/favorites" passHref>
-                  <Link>Favorites</Link>
+                  <Link
+                    fontWeight={currentPath === '/favorites' ? 'bold' : 'light'}
+                  >
+                    Favorites
+                  </Link>
                 </NextLink>
                 <NextLink href="/about" passHref>
-                  <Link>About</Link>
+                  <Link
+                    fontWeight={currentPath === '/about' ? 'bold' : 'light'}
+                  >
+                    About
+                  </Link>
                 </NextLink>
               </Stack>
             )}
