@@ -1,23 +1,22 @@
 import { BrandButton } from '@/components/Buttons';
-import { render, screen } from '../../test-utils';
+import { fireEvent, render, screen } from '../../test-utils';
 
-const imgSrc = '/';
 const title = 'title';
+const mockOnClick = jest.fn();
 const renderButton = () => {
-  return render(<BrandButton imgSrc={imgSrc} title={title} />);
+  return render(
+    <BrandButton icon={<br />} title={title} onClick={mockOnClick} />
+  );
 };
 
 describe('Testing BrandButton Component', () => {
-  it('should check image src inside the button', () => {
-    renderButton();
-    const imageEl = screen.getByRole('img', { name: /brand logo/i });
-    expect(imageEl).toBeInTheDocument();
-  });
-
-  it('should check title inside the button', () => {
+  it('should check title and onClick event on the button', () => {
     renderButton();
     const buttonEl = screen.getByRole('button');
     expect(buttonEl).toBeInTheDocument();
     expect(buttonEl).toHaveTextContent(title);
+
+    fireEvent.click(buttonEl);
+    expect(mockOnClick).toHaveBeenCalledTimes(1);
   });
 });
