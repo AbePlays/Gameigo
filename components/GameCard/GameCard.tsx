@@ -42,7 +42,7 @@ const GameCard: FunctionComponent<Props> = ({ game }) => {
   };
 
   const renderPlatforms = () => {
-    return game.parent_platforms.map((item) => (
+    return game?.parent_platforms?.map((item) => (
       <Label title={item.platform.name} key={item.platform.id} />
     ));
   };
@@ -63,7 +63,7 @@ const GameCard: FunctionComponent<Props> = ({ game }) => {
       <Text fontWeight="semibold">
         Genres:
         <Text as="span" fontWeight="normal" ml="2">
-          {game.genres.map((genre) => genre.name).join(', ') || 'N/A'}
+          {game?.genres?.map((genre) => genre.name).join(', ') || 'N/A'}
         </Text>
       </Text>
     );
