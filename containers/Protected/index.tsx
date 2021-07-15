@@ -1,7 +1,7 @@
 import { FunctionComponent, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { Text } from '@chakra-ui/react';
 
+import Loader from '@/components/Loader';
 import { useAuth } from 'lib/auth';
 
 interface Props {
@@ -16,7 +16,7 @@ const Protected: FunctionComponent<Props> = ({ children, redirectUrl }) => {
     if (!user) router.push(redirectUrl);
   }, [user]);
 
-  return <>{loading ? <Text>Loading...</Text> : user && children}</>;
+  return <>{loading ? <Loader /> : user && children}</>;
 };
 
 export default Protected;
