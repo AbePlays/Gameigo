@@ -1,5 +1,6 @@
 module.exports = {
   collectCoverageFrom: ['(components|pages|containers)/**/*.{js,jsx,tsx}'],
+  moduleDirectories: ['node_modules', 'components', 'containers'],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'json', 'jsx'],
   moduleNameMapper: {
     '^@/components(.*)$': '<rootDir>/components$1',
