@@ -1,6 +1,7 @@
 import { FunctionComponent } from 'react';
 import Head from 'next/head';
-import { Box } from '@chakra-ui/react';
+
+import { MotionBox } from 'utils/MotionElements';
 
 interface Props {
   title: string;
@@ -8,12 +9,25 @@ interface Props {
 
 const Page: FunctionComponent<Props> = ({ children, title }) => {
   return (
-    <Box maxW="1120px" mx="auto" minH="calc(100vh - 64px)" px="4" py="12">
+    <MotionBox
+      animate={{
+        opacity: 1,
+      }}
+      exit={{ opacity: 0 }}
+      initial={{
+        opacity: 0,
+      }}
+      maxW="1120px"
+      minH="calc(100vh - 64px)"
+      mx="auto"
+      px="4"
+      py="12"
+    >
       <Head>
         <title>Gameigo | {title}</title>
       </Head>
       <main>{children}</main>
-    </Box>
+    </MotionBox>
   );
 };
 

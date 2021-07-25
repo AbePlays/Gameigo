@@ -1,5 +1,6 @@
 import { FunctionComponent, useState } from 'react';
 import { AppProps } from 'next/dist/next-server/lib/router/router';
+import { AnimatePresence } from 'framer-motion';
 import { Box, ChakraProvider } from '@chakra-ui/react';
 
 import Layout from '@/components/Layout';
@@ -8,8 +9,13 @@ import '../styles/loader.css';
 import theme from '../styles/theme';
 import { AuthProvider } from '../lib/auth';
 
-const MyApp: FunctionComponent<AppProps> = ({ Component, pageProps }) => {
+const MyApp: FunctionComponent<AppProps> = ({
+  Component,
+  pageProps,
+  router,
+}) => {
   const [showContent, setShowContent] = useState<boolean>(true);
+  const { route } = router;
 
   return (
     <ChakraProvider theme={theme}>
@@ -17,7 +23,9 @@ const MyApp: FunctionComponent<AppProps> = ({ Component, pageProps }) => {
         <Navbar setShowContent={setShowContent} />
         <Box display={showContent ? 'block' : 'none'}>
           <Layout>
-            <Component {...pageProps} />
+            <AnimatePresence exitBeforeEnter>
+              <Component {...pageProps} key={route} />
+            </AnimatePresence>
           </Layout>
         </Box>
       </AuthProvider>
