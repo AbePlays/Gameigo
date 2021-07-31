@@ -15,6 +15,8 @@ import {
 import Label from '../Label';
 import { Game } from '../../types';
 import { formatDate } from '../../utils/date';
+import { MotionBox } from 'utils/MotionElements';
+import { FadeUpAnimation } from 'utils/animations';
 
 interface Props {
   game: Game;
@@ -72,16 +74,16 @@ const GameCard: FunctionComponent<Props> = ({ game }) => {
   const clickHandler = () => router.push(`/game/${game.slug}`);
 
   return (
-    <Box
+    <MotionBox
       bg={isDarkMode ? 'dark-bg-secondary' : 'light-bg-secondary'}
       cursor="pointer"
       onClick={clickHandler}
       overflow="hidden"
       rounded="lg"
       shadow="lg"
-      _hover={{
-        transform: 'scale(1.01)',
-        shadow: 'xl',
+      variants={FadeUpAnimation.child}
+      whileHover={{
+        scale: 1.01,
       }}
     >
       <Box h="56" position="relative">
@@ -99,7 +101,7 @@ const GameCard: FunctionComponent<Props> = ({ game }) => {
           {renderGenres()}
         </Stack>
       </Box>
-    </Box>
+    </MotionBox>
   );
 };
 

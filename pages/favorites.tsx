@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 import useSWR from 'swr';
-import { Heading, SimpleGrid } from '@chakra-ui/react';
+import { Heading } from '@chakra-ui/react';
 
 import GameCard from '@/components/GameCard';
 import Loader from '@/components/Loader';
@@ -10,6 +10,8 @@ import ProtectedRoute from '@/containers/Protected';
 import { useAuth } from 'lib/auth';
 import { Routes } from 'routes';
 import fetcher from 'utils/fetcher';
+import { MotionSimpleGrid } from 'utils/MotionElements';
+import { FadeUpAnimation } from 'utils/animations';
 
 const Favorites: FunctionComponent = () => {
   const { user } = useAuth();
@@ -33,16 +35,19 @@ const Favorites: FunctionComponent = () => {
           Favorites
         </Heading>
         {Array.isArray(data) && data.length > 0 ? (
-          <SimpleGrid
+          <MotionSimpleGrid
+            animate="show"
             columns={[1, 2, 3]}
+            initial="hidden"
             mt="8"
             spacingX={[4, 4, 6]}
             spacingY="6"
+            variants={FadeUpAnimation.parent}
           >
             {data.map((game) => (
               <GameCard game={game} key={game.id} />
             ))}
-          </SimpleGrid>
+          </MotionSimpleGrid>
         ) : (
           <NoData title="Please add games to your collection." />
         )}
