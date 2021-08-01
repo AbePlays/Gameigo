@@ -1,15 +1,20 @@
 import { FunctionComponent } from 'react';
 import { CloseIcon } from '@chakra-ui/icons';
-import {
-  Box,
-  Button,
-  Flex,
-  Icon,
-  ListItem,
-  UnorderedList,
-} from '@chakra-ui/react';
+import { Button, Icon } from '@chakra-ui/react';
 
 import CustomLink from '../CustomLink';
+import {
+  MotionBox,
+  MotionFlex,
+  MotionListItem,
+  MotionUnorderedList,
+} from 'utils/MotionElements';
+import {
+  CloseButtonAnimation,
+  MoveDownAnimation,
+  NavbarItemAnimation,
+  NavbarListAnimation,
+} from 'utils/animations';
 
 interface Props {
   onClick: () => void;
@@ -17,8 +22,19 @@ interface Props {
 
 const MobileNavbar: FunctionComponent<Props> = ({ onClick }) => {
   return (
-    <Box h="100vh" w="100vw" px="4" py="14">
-      <Flex justifyContent="flex-end">
+    <MotionBox
+      animate="show"
+      bg="dark-bg-secondary"
+      color="light-text"
+      exit="exit"
+      h="100vh"
+      initial="hidden"
+      px="4"
+      py="14"
+      variants={MoveDownAnimation}
+      w="100vw"
+    >
+      <MotionFlex justifyContent="flex-end" variants={CloseButtonAnimation}>
         <Button
           alignItems="baseline"
           display="flex"
@@ -30,16 +46,17 @@ const MobileNavbar: FunctionComponent<Props> = ({ onClick }) => {
         >
           Close <Icon as={CloseIcon} w="3" h="3" ml="2" />
         </Button>
-      </Flex>
-      <UnorderedList
+      </MotionFlex>
+      <MotionUnorderedList
         display="flex"
         flexDirection="column"
         h="full"
         justifyContent="space-evenly"
         styleType="none"
         textAlign="center"
+        variants={NavbarListAnimation}
       >
-        <ListItem>
+        <MotionListItem variants={NavbarItemAnimation}>
           <CustomLink
             fontSize="6xl"
             isExt={false}
@@ -47,8 +64,8 @@ const MobileNavbar: FunctionComponent<Props> = ({ onClick }) => {
             onClick={onClick}
             title="Search"
           ></CustomLink>
-        </ListItem>
-        <ListItem>
+        </MotionListItem>
+        <MotionListItem variants={NavbarItemAnimation}>
           <CustomLink
             fontSize="6xl"
             isExt={false}
@@ -56,8 +73,8 @@ const MobileNavbar: FunctionComponent<Props> = ({ onClick }) => {
             onClick={onClick}
             title="Favorites"
           ></CustomLink>
-        </ListItem>
-        <ListItem>
+        </MotionListItem>
+        <MotionListItem variants={NavbarItemAnimation}>
           <CustomLink
             fontSize="6xl"
             isExt={false}
@@ -65,9 +82,9 @@ const MobileNavbar: FunctionComponent<Props> = ({ onClick }) => {
             onClick={onClick}
             title="About"
           ></CustomLink>
-        </ListItem>
-      </UnorderedList>
-    </Box>
+        </MotionListItem>
+      </MotionUnorderedList>
+    </MotionBox>
   );
 };
 

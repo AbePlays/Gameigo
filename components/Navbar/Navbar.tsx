@@ -15,6 +15,7 @@ import { HamburgerIcon, MoonIcon, SunIcon } from '@chakra-ui/icons';
 
 import MobileNavbar from './MobileNavbar';
 import { useAuth } from 'lib/auth';
+import { AnimatePresence } from 'framer-motion';
 
 const iconSize = 5;
 
@@ -38,9 +39,9 @@ const Navbar: FunctionComponent<Props> = ({ setShowContent }) => {
   };
 
   return (
-    <>
+    <AnimatePresence exitBeforeEnter>
       {showMobileNav ? (
-        <MobileNavbar onClick={toggleNav} />
+        <MobileNavbar onClick={toggleNav} key="someKey" />
       ) : (
         <Box bg={bgColor} shadow="sm">
           <Flex
@@ -112,7 +113,7 @@ const Navbar: FunctionComponent<Props> = ({ setShowContent }) => {
           </Flex>
         </Box>
       )}
-    </>
+    </AnimatePresence>
   );
 };
 
