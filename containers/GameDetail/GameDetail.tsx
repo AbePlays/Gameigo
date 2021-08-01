@@ -115,9 +115,11 @@ const GameDetail: FunctionComponent<Props> = ({ game }) => {
         <WrapItem bg="white" color="black" px="2" borderRadius="lg">
           {formatDate(game.released)}
         </WrapItem>
-        <WrapItem textTransform="uppercase" letterSpacing="widest">
-          Average Playtime: {game.playtime} Hours
-        </WrapItem>
+        {game.playtime > 0 && (
+          <WrapItem textTransform="uppercase" letterSpacing="widest">
+            Average Playtime: {game.playtime} Hours
+          </WrapItem>
+        )}
       </Wrap>
     );
   };
@@ -214,23 +216,31 @@ const GameDetail: FunctionComponent<Props> = ({ game }) => {
               {isFav ? 'Remove from Favorites' : 'Add to Favorites'}
             </Button>
             {renderTriContentBox()}
-            <GameContent heading="About">
-              <Box dangerouslySetInnerHTML={{ __html: game.description }}></Box>
-            </GameContent>
-            <GameContent heading="Website">
-              <CustomLink link={game.website} title={game.website} />
-            </GameContent>
-            <GameContent heading="Where to buy">
-              <Wrap>
-                {game.stores.map((item) => {
-                  return (
-                    <WrapItem key={item.id}>
-                      <Store name={item.store.name} url={item.store.domain} />
-                    </WrapItem>
-                  );
-                })}
-              </Wrap>
-            </GameContent>
+            {game.description && (
+              <GameContent heading="About">
+                <Box
+                  dangerouslySetInnerHTML={{ __html: game.description }}
+                ></Box>
+              </GameContent>
+            )}
+            {game.website && (
+              <GameContent heading="Website">
+                <CustomLink link={game.website} title={game.website} />
+              </GameContent>
+            )}
+            {Array.isArray(game.stores) && game.stores.length > 0 && (
+              <GameContent heading="Where to buy">
+                <Wrap>
+                  {game.stores.map((item) => {
+                    return (
+                      <WrapItem key={item.id}>
+                        <Store name={item.store.name} url={item.store.domain} />
+                      </WrapItem>
+                    );
+                  })}
+                </Wrap>
+              </GameContent>
+            )}
           </Stack>
         </Page>
       </Box>
