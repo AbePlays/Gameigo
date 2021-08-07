@@ -1,42 +1,52 @@
+import {
+  addDoc,
+  arrayUnion,
+  collection,
+  doc,
+  getDoc,
+  updateDoc,
+} from 'firebase/firestore';
+
 import { Game } from 'types';
-import firebase from './firebase';
+import { db } from './firebase';
 import { User } from './types';
 
-const firestore = firebase.firestore();
-
-export const createUser = (uid: string, data: User) => {
-  const docRef = firestore.collection('users').doc(uid);
-  docRef.get().then((doc) => {
-    if (!doc.exists) {
-      return firestore
-        .collection('users')
-        .doc(uid)
-        .set({ uid, ...data, favorites: [] });
-    }
-  });
+export const createUser = async (uid: string, data: User): Promise<any> => {
+  const docRef = doc(db, 'users', uid);
+  const docSnap = await getDoc(docRef);
+  if (docSnap.exists()) {
+    console.log('Document data:', docSnap.data());
+  } else {
+    console.log('No such document!');
+    return addDoc(collection(db, 'users'), {
+      uid,
+      ...data,
+      favorites: [],
+    });
+  }
 };
 
 export const addGame = async (uid: string, data: Game): Promise<void> => {
-  const docRef = firestore.collection('users').doc(uid);
-  const doc = await docRef.get();
-  await docRef.update({
-    favorites: [...doc.data().favorites, data],
+  const docRef = doc(db, 'users', uid);
+  await updateDoc(docRef, {
+    favorites: arrayUnion(data),
   });
 };
 
 export const deleteGame = async (uid: string, id: number): Promise<void> => {
-  const docRef = firestore.collection('users').doc(uid);
-  const doc = await docRef.get();
-  const { favorites = [] } = doc.data();
+  const docRef = doc(db, 'users', uid);
+  const docSnap = await getDoc(docRef);
+  const { favorites = [] } = docSnap.data();
   const newFavorites = favorites.filter((item) => item.id !== id);
-  await docRef.update({
+  await updateDoc(docRef, {
     favorites: newFavorites,
   });
 };
 
 export const checkGame = async (uid: string, id: number): Promise<boolean> => {
-  const doc = await firestore.collection('users').doc(uid).get();
-  const { favorites = [] } = doc.data();
+  const docRef = doc(db, 'users', uid);
+  const docSnap = await getDoc(docRef);
+  const { favorites = [] } = docSnap.data();
 
   for (let i = 0; i < favorites.length; i++) {
     if (favorites[i].id === id) return true;

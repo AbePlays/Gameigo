@@ -6,10 +6,21 @@ import {
   FunctionComponent,
 } from 'react';
 import { useRouter } from 'next/router';
+import {
+  createUserWithEmailAndPassword,
+  GithubAuthProvider,
+  GoogleAuthProvider,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  updateProfile,
+  User as firebaseUser,
+} from 'firebase/auth';
+
 import { useToast } from '@chakra-ui/react';
 
 import { Routes } from '../routes';
-import firebase from './firebase';
+import { auth } from './firebase';
 import { formatUser } from './helper';
 import { AuthContextType, User } from './types';
 import { createUser } from './db';
@@ -29,7 +40,7 @@ const useProvideAuth = () => {
   const router = useRouter();
   const toast = useToast();
 
-  const handleFirebaseUser = async (firebaseUser: firebase.User) => {
+  const handleFirebaseUser = async (firebaseUser: firebaseUser) => {
     await createUser(firebaseUser.uid, formatUser(firebaseUser));
     setUser(formatUser(firebaseUser));
     setLoading(false);
@@ -43,37 +54,31 @@ const useProvideAuth = () => {
     name: string
   ) => {
     setLoading(true);
-    await firebase.auth().createUserWithEmailAndPassword(email, password);
-    await firebase.auth().currentUser.updateProfile({ displayName: name });
-    return handleFirebaseUser(firebase.auth().currentUser);
+    await createUserWithEmailAndPassword(auth, email, password);
+    await updateProfile(auth.currentUser, { displayName: name });
+    return handleFirebaseUser(auth.currentUser);
   };
 
   const signinWithGoogle = async () => {
     setLoading(true);
-    const res = await firebase
-      .auth()
-      .signInWithPopup(new firebase.auth.GoogleAuthProvider());
+    const res = await signInWithPopup(auth, new GoogleAuthProvider());
     return handleFirebaseUser(res.user);
   };
 
   const signinWithGithub = async () => {
     setLoading(true);
-    const res = await firebase
-      .auth()
-      .signInWithPopup(new firebase.auth.GithubAuthProvider());
+    const res = await signInWithPopup(auth, new GithubAuthProvider());
     return handleFirebaseUser(res.user);
   };
 
   const loginWithEmailAndPassword = async (email: string, password: string) => {
     setLoading(true);
-    const res = await firebase
-      .auth()
-      .signInWithEmailAndPassword(email, password);
+    const res = await signInWithEmailAndPassword(auth, email, password);
     return handleFirebaseUser(res.user);
   };
 
   const signout = async () => {
-    await firebase.auth().signOut();
+    await auth.signOut();
     toast({
       title: 'Logout Successful.',
       description: "You've successfully logged out.",
@@ -86,7 +91,7 @@ const useProvideAuth = () => {
   };
 
   useEffect(() => {
-    const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
       setLoading(true);
       if (user) {
         setUser(formatUser(user));
