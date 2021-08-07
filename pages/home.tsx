@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 import { GetStaticProps } from 'next';
-import { Heading, SimpleGrid, Text } from '@chakra-ui/layout';
+import { Heading, Text } from '@chakra-ui/layout';
 
 import Page from '@/containers/Page';
 import GameCard from '@/components/GameCard';
@@ -8,6 +8,8 @@ import ProtectedRoute from '@/containers/Protected';
 import { Game } from '../types';
 import { Endpoints } from '../endpoints';
 import { Routes } from 'routes';
+import { MotionSimpleGrid } from 'utils/MotionElements';
+import { FadeUpAnimation } from 'utils/animations';
 
 interface Props {
   games: Game[];
@@ -23,16 +25,19 @@ const Home: FunctionComponent<Props> = ({ games }) => {
         <Text fontSize={['lg', 'xl']}>
           Based on player counts and release date
         </Text>
-        <SimpleGrid
+        <MotionSimpleGrid
+          animate="show"
+          initial="hidden"
           minChildWidth="320px"
+          mt="8"
           spacingX={[4, 4, 6]}
           spacingY="6"
-          mt="8"
+          variants={FadeUpAnimation.parent}
         >
           {Array.isArray(games) &&
             games.length > 0 &&
             games.map((game) => <GameCard game={game} key={game.id} />)}
-        </SimpleGrid>
+        </MotionSimpleGrid>
       </Page>
     </ProtectedRoute>
   );

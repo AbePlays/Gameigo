@@ -1,6 +1,5 @@
 import { FunctionComponent, useState } from 'react';
 import NextLink from 'next/link';
-import { useRouter } from 'next/router';
 import {
   Avatar,
   Box,
@@ -15,6 +14,7 @@ import { HamburgerIcon, MoonIcon, SunIcon } from '@chakra-ui/icons';
 
 import MobileNavbar from './MobileNavbar';
 import { useAuth } from 'lib/auth';
+import { AnimatePresence } from 'framer-motion';
 
 const iconSize = 5;
 
@@ -26,9 +26,7 @@ const Navbar: FunctionComponent<Props> = ({ setShowContent }) => {
   const [showMobileNav, setShowMobileNav] = useState<boolean>(false);
   const { colorMode, toggleColorMode } = useColorMode();
   const { user } = useAuth();
-  const router = useRouter();
 
-  const currentPath = router.pathname;
   const isDarkMode = colorMode === 'dark';
   const bgColor = isDarkMode ? 'dark-bg-secondary' : 'light-bg-secondary';
 
@@ -38,20 +36,17 @@ const Navbar: FunctionComponent<Props> = ({ setShowContent }) => {
   };
 
   return (
-    <>
+    <AnimatePresence exitBeforeEnter>
       {showMobileNav ? (
-        <MobileNavbar onClick={toggleNav} />
+        <MobileNavbar onClick={toggleNav} key="someKey" />
       ) : (
-        <Box bg={bgColor} shadow="sm">
+        <Box bg={bgColor} shadow="sm" position="sticky" top="0" zIndex="999">
           <Flex
             alignItems="center"
             justifyContent={user ? 'space-between' : 'center'}
             maxW="container.xl"
             mx="auto"
             p="4"
-            position="sticky"
-            top="0"
-            zIndex="999"
           >
             {user && (
               <Box as="button" display={['block', 'none']}>
@@ -76,21 +71,30 @@ const Navbar: FunctionComponent<Props> = ({ setShowContent }) => {
               >
                 <NextLink href="/search" passHref>
                   <Link
-                    fontWeight={currentPath === '/search' ? 'bold' : 'light'}
+                    fontWeight="medium"
+                    _hover={{
+                      opacity: 0.5,
+                    }}
                   >
                     Search
                   </Link>
                 </NextLink>
                 <NextLink href="/favorites" passHref>
                   <Link
-                    fontWeight={currentPath === '/favorites' ? 'bold' : 'light'}
+                    fontWeight="medium"
+                    _hover={{
+                      opacity: 0.5,
+                    }}
                   >
                     Favorites
                   </Link>
                 </NextLink>
                 <NextLink href="/about" passHref>
                   <Link
-                    fontWeight={currentPath === '/about' ? 'bold' : 'light'}
+                    fontWeight="medium"
+                    _hover={{
+                      opacity: 0.5,
+                    }}
                   >
                     About
                   </Link>
@@ -112,7 +116,7 @@ const Navbar: FunctionComponent<Props> = ({ setShowContent }) => {
           </Flex>
         </Box>
       )}
-    </>
+    </AnimatePresence>
   );
 };
 

@@ -10,6 +10,7 @@
     "format": "npm run prettier -- --write",
     "lint": "eslint --ignore-path .gitignore --ext .js,.jsx,.ts,.tsx .",
     "prettier": "prettier --ignore-path .gitignore \"**/*.+(js|json|ts|tsx)\"",
+    "serve": "npm run build && npm start",
     "start": "next start",
     "test:watch": "jest --watch",
     "test": "jest --coverage --runInBand",
