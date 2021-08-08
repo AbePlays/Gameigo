@@ -87,11 +87,31 @@ const useProvideAuth = () => {
 
   useEffect(() => {
     const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
+      let userSessionTimeout = null;
       setLoading(true);
       if (user) {
         setUser(formatUser(user));
+        user.getIdTokenResult().then((idTokenResult) => {
+          const authTime = idTokenResult.claims.auth_time * 1000;
+          const sessionDurationInMilliseconds = 60 * 60 * 1000; // 60 min
+          const expirationInMilliseconds =
+            sessionDurationInMilliseconds - (Date.now() - authTime);
+          userSessionTimeout = setTimeout(() => {
+            firebase.auth().signOut();
+            toast({
+              title: 'Session Expired.',
+              description: 'Your session has expired. Please login again.',
+              status: 'warning',
+              position: 'top',
+              duration: 4000,
+              isClosable: true,
+            });
+          }, expirationInMilliseconds);
+        });
       } else {
         setUser(null);
+        clearTimeout(userSessionTimeout);
+        userSessionTimeout = null;
       }
       setLoading(false);
     });
