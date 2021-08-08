@@ -39,20 +39,19 @@ const Navbar: FunctionComponent<Props> = ({ setShowContent }) => {
       {showMobileNav ? (
         <MobileNavbar onClick={toggleNav} key="someKey" />
       ) : (
-        <Box shadow="sm" position="sticky" top="0" zIndex="999">
-          <Box
-            position="absolute"
-            inset="0"
-            backdropFilter="saturate(180%) blur(20px)"
-          />
+        <Box
+          className="adaptive-glass"
+          position="sticky"
+          shadow="sm"
+          top="0"
+          zIndex="999"
+        >
           <Flex
             alignItems="center"
             justifyContent={user ? 'space-between' : 'center'}
             maxW="container.xl"
             mx="auto"
             p="4"
-            position="relative"
-            zIndex="1"
           >
             {user && (
               <Box as="button" display={['block', 'none']}>
