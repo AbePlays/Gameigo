@@ -33,6 +33,10 @@ const theme = extendTheme({
         fontSize: '20px',
         fontWeight: 'bold',
       },
+      '.adaptive-glass': {
+        background: mode('hsl(0 0% 100% / 50%)', 'hsl(0 0% 30% / 50%)')(props),
+        backdropFilter: 'blur(30px)',
+      },
     }),
   },
   fonts: {
