@@ -14,10 +14,7 @@ import { User } from './types';
 export const createUser = async (uid: string, data: User): Promise<any> => {
   const docRef = doc(db, 'users', uid);
   const docSnap = await getDoc(docRef);
-  if (docSnap.exists()) {
-    console.log('Document data:', docSnap.data());
-  } else {
-    console.log('No such document!');
+  if (!docSnap.exists()) {
     return addDoc(collection(db, 'users'), {
       uid,
       ...data,
