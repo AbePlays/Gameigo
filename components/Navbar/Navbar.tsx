@@ -28,7 +28,6 @@ const Navbar: FunctionComponent<Props> = ({ setShowContent }) => {
   const { user } = useAuth();
 
   const isDarkMode = colorMode === 'dark';
-  const bgColor = isDarkMode ? 'dark-bg-secondary' : 'light-bg-secondary';
 
   const toggleNav = () => {
     setShowMobileNav((prev) => !prev);
@@ -40,7 +39,13 @@ const Navbar: FunctionComponent<Props> = ({ setShowContent }) => {
       {showMobileNav ? (
         <MobileNavbar onClick={toggleNav} key="someKey" />
       ) : (
-        <Box bg={bgColor} shadow="sm" position="sticky" top="0" zIndex="999">
+        <Box
+          className="adaptive-glass"
+          position="sticky"
+          shadow="sm"
+          top="0"
+          zIndex="999"
+        >
           <Flex
             alignItems="center"
             justifyContent={user ? 'space-between' : 'center'}

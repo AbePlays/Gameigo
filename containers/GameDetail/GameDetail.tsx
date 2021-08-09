@@ -1,16 +1,17 @@
 import { FunctionComponent, useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { DeleteIcon, StarIcon } from '@chakra-ui/icons';
+import { LinkIcon } from '@chakra-ui/icons';
 import {
   useToast,
   Box,
-  Button,
   Heading,
   Stack,
   Text,
   Wrap,
   WrapItem,
+  Flex,
+  IconButton,
 } from '@chakra-ui/react';
 
 import BoxWithDivider from '@/components/BoxWithDivider';
@@ -44,6 +45,36 @@ const BackArrow = () => (
   </svg>
 );
 
+const HeartOutline = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+    />
+  </svg>
+);
+
+const HeartFilled = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 20 20"
+    fill="currentColor"
+  >
+    <path
+      fillRule="evenodd"
+      d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
+      clipRule="evenodd"
+    />
+  </svg>
+);
+
 const CustomDivider = () => {
   return (
     <Box
@@ -64,6 +95,21 @@ const GameDetail: FunctionComponent<Props> = ({ game }) => {
   const router = useRouter();
   const [isFav, setIsFav] = useState<boolean>(false);
   const toast = useToast();
+
+  const copyLink = async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      toast({
+        duration: 3000,
+        isClosable: false,
+        position: 'top',
+        status: 'success',
+        title: 'Copied to Clipboard.',
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const onClickHandler = async () => {
     try {
@@ -191,30 +237,28 @@ const GameDetail: FunctionComponent<Props> = ({ game }) => {
       </Box>
       <Box position="relative" zIndex="10">
         <Page title={game.name}>
-          <Box w="8" cursor="pointer" onClick={clickHandler}>
-            <BackArrow />
-          </Box>
+          <Flex justifyContent="space-between" alignItems="center">
+            <Box w="8" as="button" onClick={clickHandler}>
+              <BackArrow />
+            </Box>
+            <Flex alignItems="center" justifyContent="center">
+              <Box w="7" as="button" onClick={onClickHandler} mr="2">
+                {isFav ? <HeartFilled /> : <HeartOutline />}
+              </Box>
+              <IconButton
+                aria-label="Share"
+                icon={<LinkIcon />}
+                fontSize="2xl"
+                onClick={copyLink}
+                variant="unstyled"
+              />
+            </Flex>
+          </Flex>
           <Stack spacing="4" mt="4">
             <Heading as="h1" fontSize={['4xl', '5xl']}>
               {game.name}
             </Heading>
             {renderReleasedandPlaytime()}
-            <Button
-              fontSize="sm"
-              leftIcon={isFav ? <DeleteIcon /> : <StarIcon />}
-              letterSpacing="widest"
-              onClick={onClickHandler}
-              textTransform="uppercase"
-              variant="outline"
-              w="max-content"
-              _hover={{
-                bg: 'light-bg-primary',
-                color: 'dark-text',
-                transform: 'scale(0.99)',
-              }}
-            >
-              {isFav ? 'Remove from Favorites' : 'Add to Favorites'}
-            </Button>
             {renderTriContentBox()}
             {game.description && (
               <GameContent heading="About">

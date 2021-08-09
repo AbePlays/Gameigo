@@ -1,4 +1,5 @@
-import { FunctionComponent, useState } from 'react';
+import { FunctionComponent, useEffect, useState } from 'react';
+import { GetServerSideProps } from 'next';
 import { Box, SimpleGrid } from '@chakra-ui/react';
 
 import GameCard from '@/components/GameCard';
@@ -11,7 +12,11 @@ import { Endpoints } from 'endpoints';
 import { Routes } from 'routes';
 import { Game } from 'types';
 
-const Search: FunctionComponent = () => {
+interface Props {
+  showResults: boolean;
+}
+
+const Search: FunctionComponent<Props> = ({ showResults = false }) => {
   const [games, setGames] = useState<Game[]>([]);
   const [isPristine, setIsPristine] = useState<boolean>(true);
   const [loading, setLoading] = useState<boolean>(false);
@@ -21,6 +26,7 @@ const Search: FunctionComponent = () => {
 
   const keyDownHandler = (event) => {
     if (event.key === 'Enter') {
+      event.target?.blur();
       fetchGames();
     }
   };
@@ -34,12 +40,20 @@ const Search: FunctionComponent = () => {
       const data = await res.json();
       setIsPristine(false);
       setGames(data.results);
+      localStorage.setItem('searchResults', JSON.stringify(data.results));
     } catch (e) {
       console.log(e);
     } finally {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (showResults) {
+      const searchResults = localStorage.getItem('searchResults');
+      setGames(JSON.parse(searchResults));
+    }
+  }, []);
 
   return (
     <ProtectedRoute redirectUrl={Routes.AUTH_SCREEN}>
@@ -76,6 +90,18 @@ const Search: FunctionComponent = () => {
       </Page>
     </ProtectedRoute>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const routes = ['home', 'favorites', 'about', 'profile'];
+  let showResults = true;
+  for (const route of routes) {
+    if (ctx.req.headers.referer.indexOf(route) >= 0) {
+      showResults = false;
+      break;
+    }
+  }
+  return { props: { showResults } };
 };
 
 export default Search;
