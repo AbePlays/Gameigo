@@ -160,9 +160,11 @@ const GameDetail: FunctionComponent<Props> = ({ game, screenshots }) => {
   const renderReleasedandPlaytime = () => {
     return (
       <Wrap spacing={[2, 4]}>
-        <WrapItem bg="white" color="black" px="2" borderRadius="lg">
-          {game?.released ? formatDate(game.released) : 'TBA'}
-        </WrapItem>
+        {game.released ? (
+          <WrapItem bg="white" color="black" px="2" borderRadius="lg">
+            {formatDate(game.released)}
+          </WrapItem>
+        ) : null}
         {game.playtime > 0 && (
           <WrapItem textTransform="uppercase" letterSpacing="widest">
             Average Playtime: {game.playtime} Hours
@@ -194,7 +196,7 @@ const GameDetail: FunctionComponent<Props> = ({ game, screenshots }) => {
         <CustomDivider />
         <Box w="full">
           <Heading as="h4">Metacritic Score</Heading>
-          <Text mt="2">{game.metacritic}</Text>
+          <Text mt="2">{game.metacritic || '-'}</Text>
         </Box>
         <CustomDivider />
         <Box w="full">
