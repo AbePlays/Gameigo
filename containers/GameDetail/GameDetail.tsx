@@ -12,6 +12,7 @@ import {
   WrapItem,
   Flex,
   IconButton,
+  SimpleGrid,
 } from '@chakra-ui/react';
 
 import BoxWithDivider from '@/components/BoxWithDivider';
@@ -21,12 +22,13 @@ import Store from '@/components/Store';
 import Page from '../Page';
 import { useAuth } from 'lib/auth';
 import { addGame, checkGame, deleteGame } from 'lib/db';
-import { GameInfo } from 'types';
+import { GameInfo, Screenshots } from 'types';
 import { formatDate } from 'utils/date';
 import { convertToGame } from 'utils/game';
 
 interface Props {
   game: GameInfo;
+  screenshots: Screenshots;
 }
 
 const BackArrow = () => (
@@ -90,7 +92,7 @@ const CustomDivider = () => {
   );
 };
 
-const GameDetail: FunctionComponent<Props> = ({ game }) => {
+const GameDetail: FunctionComponent<Props> = ({ game, screenshots }) => {
   const { user } = useAuth();
   const router = useRouter();
   const [isFav, setIsFav] = useState<boolean>(false);
@@ -159,7 +161,7 @@ const GameDetail: FunctionComponent<Props> = ({ game }) => {
     return (
       <Wrap spacing={[2, 4]}>
         <WrapItem bg="white" color="black" px="2" borderRadius="lg">
-          {formatDate(game.released)}
+          {game?.released ? formatDate(game.released) : 'TBA'}
         </WrapItem>
         {game.playtime > 0 && (
           <WrapItem textTransform="uppercase" letterSpacing="widest">
@@ -272,6 +274,19 @@ const GameDetail: FunctionComponent<Props> = ({ game }) => {
                 <CustomLink link={game.website} title={game.website} />
               </GameContent>
             )}
+            {game.publishers.length > 0 && (
+              <GameContent heading="Publishers">
+                <Wrap>
+                  {game.publishers.map((item) => {
+                    return (
+                      <WrapItem key={item.id}>
+                        <Text>{item.name}</Text>
+                      </WrapItem>
+                    );
+                  })}
+                </Wrap>
+              </GameContent>
+            )}
             {Array.isArray(game.stores) && game.stores.length > 0 && (
               <GameContent heading="Where to buy">
                 <Wrap>
@@ -283,6 +298,27 @@ const GameDetail: FunctionComponent<Props> = ({ game }) => {
                     );
                   })}
                 </Wrap>
+              </GameContent>
+            )}
+            {screenshots.count > 0 && (
+              <GameContent heading="Screenshots">
+                <SimpleGrid
+                  minChildWidth="320px"
+                  spacingX={[4, 4, 6]}
+                  spacingY="6"
+                >
+                  {screenshots.results.map((item) => {
+                    return (
+                      <Image
+                        alt={`game-screenshot-${item.id}`}
+                        key={item.id}
+                        src={item.image}
+                        width="100%"
+                        height={(item.width / item.height) * 100}
+                      />
+                    );
+                  })}
+                </SimpleGrid>
               </GameContent>
             )}
           </Stack>
