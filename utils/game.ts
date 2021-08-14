@@ -9,6 +9,7 @@ export const convertToGameInfo = (data: any): GameInfo => {
     metacritic: data?.metacritic,
     name: data?.name,
     parent_platforms: data?.parent_platforms,
+    publishers: data?.publishers,
     playtime: data?.playtime,
     released: data?.released,
     slug: data?.slug,
