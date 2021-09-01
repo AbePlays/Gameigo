@@ -1,21 +1,15 @@
-import {
-  addDoc,
-  arrayUnion,
-  collection,
-  doc,
-  getDoc,
-  updateDoc,
-} from 'firebase/firestore';
+import { arrayUnion, doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
 
 import { Game } from 'types';
 import { db } from './firebase';
 import { User } from './types';
 
 export const createUser = async (uid: string, data: User): Promise<any> => {
+  console.log(uid);
   const docRef = doc(db, 'users', uid);
   const docSnap = await getDoc(docRef);
   if (!docSnap.exists()) {
-    return addDoc(collection(db, 'users'), {
+    return setDoc(doc(db, 'users', uid), {
       uid,
       ...data,
       favorites: [],
