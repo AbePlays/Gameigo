@@ -13,6 +13,7 @@ import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signInWithPopup,
+  updatePassword,
   updateProfile,
   User as firebaseUser,
 } from 'firebase/auth';
@@ -90,6 +91,16 @@ const useProvideAuth = () => {
     setUser(null);
   };
 
+  const changePassword = async (newPassword: string) => {
+    const user = auth.currentUser;
+    return updatePassword(user, newPassword);
+  };
+
+  const changeDisplayName = async (newName: string) => {
+    const user = auth.currentUser;
+    return updateProfile(user, { displayName: newName });
+  };
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       let userSessionTimeout = null;
@@ -127,6 +138,8 @@ const useProvideAuth = () => {
   return {
     user,
     loading,
+    changeDisplayName,
+    changePassword,
     signupWithEmailAndPassword,
     loginWithEmailAndPassword,
     signinWithGoogle,

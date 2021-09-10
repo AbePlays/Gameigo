@@ -31,3 +31,8 @@ export type GameInfo = {
   genres: Genre[];
   stores: Store[];
 };
+
+export type ProfileForm = {
+  name: string;
+  password: string;
+};

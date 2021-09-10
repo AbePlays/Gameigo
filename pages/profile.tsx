@@ -1,5 +1,6 @@
 import { FunctionComponent } from 'react';
 import { useRouter } from 'next/router';
+import { Form, Formik, FormikHelpers } from 'formik';
 import {
   useColorMode,
   Avatar,
@@ -9,15 +10,18 @@ import {
   Flex,
   Heading,
   Stack,
+  useToast,
   Text,
 } from '@chakra-ui/react';
 
 import { ButtonWithIcon } from '@/components/Buttons';
-import Input from '@/components/Input';
+import { CustomInput } from '@/components/Input';
+import { checkName, checkPassword } from '@/containers/Auth/helper';
 import Page from '@/containers/Page';
 import ProtectedRoute from '@/containers/Protected';
 import { useAuth } from 'lib/auth';
 import { Routes } from 'routes';
+import { ProfileForm } from 'types';
 
 const BackArrow = () => (
   <svg
@@ -36,11 +40,35 @@ const BackArrow = () => (
 );
 
 const Profile: FunctionComponent = () => {
-  const { user, signout } = useAuth();
+  const { user, signout, changeDisplayName, changePassword } = useAuth();
   const { colorMode } = useColorMode();
   const router = useRouter();
+  const toast = useToast();
 
   const isDarkMode = colorMode === 'dark';
+  const initialValues: ProfileForm = { name: '', password: '' };
+
+  const submitHandler = async (
+    values: ProfileForm,
+    actions: FormikHelpers<ProfileForm>
+  ) => {
+    const { name, password } = values;
+    try {
+      await changePassword(password);
+      await changeDisplayName(name);
+      toast({
+        title: 'Changes Saved.',
+        status: 'success',
+        position: 'top',
+        duration: 4000,
+        isClosable: true,
+      });
+      actions.resetForm();
+      signout();
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <ProtectedRoute redirectUrl={Routes.AUTH_SCREEN}>
@@ -68,21 +96,41 @@ const Profile: FunctionComponent = () => {
             spacing="6"
           >
             <Heading fontSize="xl">Personal Informations</Heading>
-            <Box>
-              <Text fontWeight="bold" color="gray.500">
-                Display Name
-              </Text>
-              <Input type="text" mt="2" />
-            </Box>
-            <Box>
-              <Text fontWeight="bold" color="gray.500">
-                Change Password
-              </Text>
-              <Input type="password" mt="2" />
-            </Box>
+            <Formik initialValues={initialValues} onSubmit={submitHandler}>
+              {() => (
+                <Form id="my-form">
+                  <Stack spacing="4" px="4">
+                    <Text fontWeight="bold" color="gray.500">
+                      Display Name
+                    </Text>
+                    <CustomInput
+                      name="name"
+                      type="text"
+                      placeholder=""
+                      validate={checkName}
+                    />
+                    <Text fontWeight="bold" color="gray.500">
+                      Change Password
+                    </Text>
+                    <CustomInput
+                      name="password"
+                      type="password"
+                      placeholder=""
+                      validate={checkPassword}
+                    />
+                  </Stack>
+                </Form>
+              )}
+            </Formik>
           </Stack>
           <Center mt="8">
-            <ButtonWithIcon title="Save Changes" icon={null} />
+            <ButtonWithIcon
+              form="my-form"
+              type="submit"
+              title="Save Changes"
+              icon={null}
+              // onClick={submitHandler}
+            />
             <Button colorScheme="red" ml="4" onClick={signout}>
               Log Out
             </Button>
