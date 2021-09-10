@@ -43,3 +43,8 @@ export type GameInfo = {
   stores: Store[];
   website: string;
 };
+
+export type ProfileForm = {
+  name: string;
+  password: string;
+};

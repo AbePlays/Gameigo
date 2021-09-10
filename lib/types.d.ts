@@ -11,6 +11,8 @@ export type User = {
 export type AuthContextType = {
   user: User;
   loading: boolean;
+  changeDisplayName: (name: string) => Promise<void>;
+  changePassword: (newPassword: string) => Promise<void>;
   signupWithEmailAndPassword: (
     email: string,
     password: string,
