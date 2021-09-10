@@ -1,5 +1,5 @@
 import { FunctionComponent, useState } from 'react';
-import { AppProps } from 'next/dist/next-server/lib/router/router';
+import type { AppProps } from 'next/app';
 import { AnimatePresence } from 'framer-motion';
 import { Box, ChakraProvider } from '@chakra-ui/react';
 
