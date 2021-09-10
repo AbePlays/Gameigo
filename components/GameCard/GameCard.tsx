@@ -54,7 +54,7 @@ const GameCard: FunctionComponent<Props> = ({ game }) => {
       <Text fontWeight="semibold">
         Release Date:
         <Text as="span" fontWeight="normal" ml="2">
-          {formatDate(game.released) || 'N/A'}
+          {game?.released ? formatDate(game.released) : 'TBA'}
         </Text>
       </Text>
     );

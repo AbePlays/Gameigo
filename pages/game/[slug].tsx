@@ -5,11 +5,14 @@ import GameDetail from '@/containers/GameDetail';
 import ProtectedRoute from '@/containers/Protected';
 import { Endpoints } from 'endpoints';
 import { Routes } from 'routes';
-import { GameInfo } from 'types';
+import { GameInfo, Screenshots } from 'types';
 import { convertToGameInfo } from 'utils/game';
 
 interface Props {
-  game: GameInfo;
+  data: {
+    game: GameInfo;
+    screenshots: Screenshots;
+  };
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -23,18 +26,31 @@ export const getStaticProps: GetStaticProps = async (
   context: GetStaticPropsContext
 ) => {
   const { slug } = context.params;
-  const result = await fetch(
+  const gameDetailsReq = fetch(
     `${Endpoints.SEARCH_GAME}/${slug}?key=${process.env.NEXT_PUBLIC_RAWG_API_KEY}`
-  );
-  const data = await result.json();
-  const game = convertToGameInfo(data);
-  return { props: { game } };
+  ).then((res) => res.json());
+
+  const screenshotsReq = fetch(
+    `${Endpoints.SCREENSHOTS}/${slug}/screenshots?key=${process.env.NEXT_PUBLIC_RAWG_API_KEY}`
+  ).then((res) => res.json());
+
+  const [gameDetails, screenshots] = await Promise.all([
+    gameDetailsReq,
+    screenshotsReq,
+  ]);
+
+  const data = {
+    game: convertToGameInfo(gameDetails),
+    screenshots,
+  };
+
+  return { props: { data } };
 };
 
-const GameDetailContainer: FunctionComponent<Props> = ({ game }) => {
+const GameDetailContainer: FunctionComponent<Props> = ({ data }) => {
   return (
     <ProtectedRoute redirectUrl={Routes.AUTH_SCREEN}>
-      <GameDetail game={game} />
+      <GameDetail game={data?.game} screenshots={data?.screenshots} />
     </ProtectedRoute>
   );
 };
