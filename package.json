@@ -1,6 +1,6 @@
 {
   "name": "gameigo",
-  "version": "0.1.0",
+  "version": "1.0",
   "private": true,
   "scripts": {
     "build": "next build",
@@ -21,11 +21,11 @@
     "@chakra-ui/react": "^1.6.3",
     "@emotion/react": "^11.4.0",
     "@emotion/styled": "^11.3.0",
-    "firebase": "^9.0.0-beta.7",
+    "firebase": "^9.0.2",
     "firebase-admin": "^9.10.0",
     "formik": "^2.2.9",
     "framer-motion": "^4.1.17",
-    "next": "^11.0.1",
+    "next": "^11.1.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "swr": "^0.5.6"
