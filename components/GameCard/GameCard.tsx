@@ -24,24 +24,11 @@ interface Props {
 
 const GameCard: FunctionComponent<Props> = ({ game }) => {
   const { colorMode } = useColorMode();
-  const router = useRouter();
   const [showImage, setShowImage] = useState<boolean>(false);
+  const router = useRouter();
 
   const isDarkMode = colorMode === 'dark';
   const toggleImage = () => setShowImage((prev) => !prev);
-
-  const renderImage = () => {
-    if (game.background_image)
-      return (
-        <Image
-          src={game.background_image}
-          alt="game background"
-          layout="fill"
-          onLoad={toggleImage}
-          objectFit="cover"
-        />
-      );
-  };
 
   const renderPlatforms = () => {
     return game?.parent_platforms?.map((item) => (
@@ -88,7 +75,13 @@ const GameCard: FunctionComponent<Props> = ({ game }) => {
     >
       <Box h="56" position="relative">
         {!showImage && <Skeleton h="full" />}
-        {renderImage()}
+        <Image
+          src={game?.background_image}
+          alt="game background"
+          layout="fill"
+          onLoadingComplete={toggleImage}
+          objectFit="cover"
+        />
       </Box>
       <Box p="4">
         <Heading fontSize="2xl" mb="1">
