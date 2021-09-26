@@ -14,6 +14,7 @@ const theme = extendTheme({
     'light-bg-primary': '#f9f9f9',
     'dark-text': '#030304',
     'light-text': '#fafafa',
+    grey: '#eeeeee',
   },
   config,
   styles: {
