@@ -97,20 +97,20 @@ const Home: FunctionComponent = () => {
               <Heading as="h2" fontSize="3xl">
                 Why Choose Gameigo?
               </Heading>
-              <Box
-                display="flex"
-                maxW="920px"
-                mt="16"
-                mx="auto"
-                overflow="hidden"
-                rounded="md"
-                shadow="lg"
-              >
-                <Image
-                  alt="Home Page Screenshot"
-                  placeholder="blur"
-                  src={homeDark}
-                />
+              <Box maxW="920px" mt="16" mx="auto" position="relative">
+                <Box
+                  bgGradient="linear(to-r, gradient-red, gradient-blue)"
+                  filter="blur(8px)"
+                  position="absolute"
+                  inset="-3px"
+                ></Box>
+                <Box display="flex" overflow="hidden" rounded="md" shadow="lg">
+                  <Image
+                    alt="Home Page Screenshot"
+                    placeholder="blur"
+                    src={homeDark}
+                  />
+                </Box>
               </Box>
 
               <Box py="8">
