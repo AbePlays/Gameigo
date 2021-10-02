@@ -9,12 +9,13 @@ import {
   Link,
   Stack,
   useColorMode,
+  useMediaQuery,
 } from '@chakra-ui/react';
 import { HamburgerIcon, MoonIcon, SunIcon } from '@chakra-ui/icons';
+import { AnimatePresence } from 'framer-motion';
 
 import MobileNavbar from './MobileNavbar';
 import { useAuth } from 'lib/auth';
-import { AnimatePresence } from 'framer-motion';
 
 const iconSize = 5;
 
@@ -23,9 +24,10 @@ interface Props {
 }
 
 const Navbar: FunctionComponent<Props> = ({ setShowContent }) => {
-  const [showMobileNav, setShowMobileNav] = useState<boolean>(false);
-  const { colorMode, toggleColorMode } = useColorMode();
   const { user } = useAuth();
+  const { colorMode, toggleColorMode } = useColorMode();
+  const [isMobile] = useMediaQuery('(max-width: 479px)');
+  const [showMobileNav, setShowMobileNav] = useState<boolean>(false);
 
   const isDarkMode = colorMode === 'dark';
 
@@ -64,7 +66,14 @@ const Navbar: FunctionComponent<Props> = ({ setShowContent }) => {
               </Box>
             )}
             <NextLink href="/" passHref>
-              <Link letterSpacing="widest" textDecoration="none">
+              <Link
+                letterSpacing="widest"
+                textDecoration="none"
+                position={isMobile ? 'absolute' : 'relative'}
+                right={isMobile ? '50%' : '0'}
+                top={isMobile ? '50%' : '0'}
+                transform={isMobile ? 'translate(50%, -50%)' : 'none'}
+              >
                 GAMEIGO
               </Link>
             </NextLink>
