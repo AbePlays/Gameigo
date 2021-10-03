@@ -28,7 +28,7 @@ const GameCard: FunctionComponent<Props> = ({ game }) => {
   const router = useRouter();
 
   const isDarkMode = colorMode === 'dark';
-  const toggleImage = () => setShowImage((prev) => !prev);
+  const toggleImage = () => setShowImage(true);
 
   const renderPlatforms = () => {
     return game?.parent_platforms?.map((item) => (
