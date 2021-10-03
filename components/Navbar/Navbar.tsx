@@ -50,6 +50,7 @@ const Navbar: FunctionComponent<Props> = ({ setShowContent }) => {
             alignItems="center"
             justifyContent={user ? 'space-between' : 'center'}
             maxW="container.xl"
+            minH="14"
             mx="auto"
             p="4"
           >
