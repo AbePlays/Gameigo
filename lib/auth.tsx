@@ -10,15 +10,15 @@ import {
   createUserWithEmailAndPassword,
   GithubAuthProvider,
   GoogleAuthProvider,
-  onAuthStateChanged,
+  onIdTokenChanged,
   signInWithEmailAndPassword,
   signInWithPopup,
   updatePassword,
   updateProfile,
   User as firebaseUser,
 } from 'firebase/auth';
-
 import { useToast } from '@chakra-ui/react';
+import nookies from 'nookies';
 
 import { Routes } from '../routes';
 import { auth } from './firebase';
@@ -33,7 +33,13 @@ export const AuthProvider: FunctionComponent = ({ children }) => {
   return <AuthContext.Provider value={auth}>{children}</AuthContext.Provider>;
 };
 
-export const useAuth = (): AuthContextType => useContext(AuthContext);
+export const useAuth = (): AuthContextType => {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error('useAuth must be used within an AuthProvider');
+  }
+  return context;
+};
 
 const useProvideAuth = () => {
   const [loading, setLoading] = useState<boolean>(true);
@@ -102,32 +108,16 @@ const useProvideAuth = () => {
   };
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      let userSessionTimeout = null;
-      setLoading(true);
+    const unsubscribe = onIdTokenChanged(auth, async (user) => {
       if (user) {
-        setUser(formatUser(user));
-        user.getIdTokenResult().then((idTokenResult) => {
-          const authTime = Number(idTokenResult.claims.auth_time) * 1000;
-          const sessionDurationInMilliseconds = 60 * 60 * 1000; // 60 min
-          const expirationInMilliseconds =
-            sessionDurationInMilliseconds - (Date.now() - authTime);
-          userSessionTimeout = setTimeout(() => {
-            auth.signOut();
-            toast({
-              title: 'Session Expired.',
-              description: 'Your session has expired. Please login again.',
-              status: 'warning',
-              position: 'top',
-              duration: 4000,
-              isClosable: true,
-            });
-          }, expirationInMilliseconds);
-        });
+        const token = await user.getIdToken();
+        const userData = formatUser(user);
+        userData.token = token;
+        nookies.set(undefined, 'token', token, { path: '/' });
+        setUser(userData);
       } else {
+        nookies.set(undefined, 'token', '', { path: '/' });
         setUser(null);
-        clearTimeout(userSessionTimeout);
-        userSessionTimeout = null;
       }
       setLoading(false);
     });
@@ -136,14 +126,14 @@ const useProvideAuth = () => {
   }, []);
 
   return {
-    user,
-    loading,
     changeDisplayName,
     changePassword,
-    signupWithEmailAndPassword,
+    loading,
     loginWithEmailAndPassword,
-    signinWithGoogle,
     signinWithGithub,
+    signinWithGoogle,
     signout,
+    signupWithEmailAndPassword,
+    user,
   };
 };
