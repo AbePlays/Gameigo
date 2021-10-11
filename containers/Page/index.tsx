@@ -16,7 +16,7 @@ const Page: FunctionComponent<Props> = ({ children, title }) => {
       animate="show"
       exit="hidden"
       maxW="1120px"
-      minH="calc(100vh - 64px)"
+      minH="calc(100vh - 56px)"
       mx="auto"
       px="4"
       py="12"
