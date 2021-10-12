@@ -1,8 +1,11 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { getUserData } from '../../lib/db-admin';
+import { getUserData } from 'lib/db-admin';
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+export default async (
+  req: NextApiRequest,
+  res: NextApiResponse
+): Promise<unknown> => {
   try {
     const { uid } = req.headers;
     if (typeof uid === 'string') {

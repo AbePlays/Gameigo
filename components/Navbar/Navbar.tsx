@@ -99,7 +99,9 @@ const Navbar: FunctionComponent<Props> = ({ setShowContent }) => {
                     opacity: 0.5,
                   }}
                 >
-                  <Tooltip label="Please login first">Favorites</Tooltip>
+                  <Tooltip label="Please login first" isDisabled={!!user}>
+                    Favorites
+                  </Tooltip>
                 </Link>
               </NextLink>
               <NextLink href="/about" passHref>
