@@ -315,8 +315,9 @@ const GameDetail: FunctionComponent<Props> = ({ game, screenshots }) => {
                         alt={`game-screenshot-${item.id}`}
                         key={item.id}
                         src={item.image}
-                        width="100%"
-                        height={(item.width / item.height) * 100}
+                        width={item.width}
+                        objectFit="cover"
+                        height={item.height}
                       />
                     );
                   })}
