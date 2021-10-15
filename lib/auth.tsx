@@ -42,7 +42,7 @@ export const useAuth = (): AuthContextType => {
 };
 
 const useProvideAuth = () => {
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(false);
   const [user, setUser] = useState<User>(null);
   const router = useRouter();
   const toast = useToast();
@@ -108,6 +108,7 @@ const useProvideAuth = () => {
   };
 
   useEffect(() => {
+    setLoading(true);
     const unsubscribe = onIdTokenChanged(auth, async (user) => {
       let sessionTimeout = null;
       if (user) {

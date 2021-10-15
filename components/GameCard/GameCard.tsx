@@ -13,10 +13,11 @@ import {
 } from '@chakra-ui/react';
 
 import Label from '../Label';
-import { Game } from '../../types';
-import { formatDate } from '../../utils/date';
-import { MotionBox } from 'utils/MotionElements';
+import placeholder from 'public/images/placeholder.jpeg';
+import { Game } from 'types';
 import { FadeUpAnimation } from 'utils/animations';
+import { formatDate } from 'utils/date';
+import { MotionBox } from 'utils/MotionElements';
 
 interface Props {
   game: Game;
@@ -76,7 +77,7 @@ const GameCard: FunctionComponent<Props> = ({ game }) => {
       <Box h="56" position="relative">
         {!showImage && <Skeleton h="full" />}
         <Image
-          src={game?.background_image}
+          src={game?.background_image || placeholder}
           alt="game background"
           layout="fill"
           onLoadingComplete={toggleImage}

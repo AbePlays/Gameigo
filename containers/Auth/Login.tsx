@@ -1,15 +1,21 @@
 import { FunctionComponent } from 'react';
 import { Form, Formik, FormikHelpers } from 'formik';
 import { ChevronRightIcon } from '@chakra-ui/icons';
-import { useToast, Box, Heading, Stack, Text } from '@chakra-ui/react';
+import {
+  useColorMode,
+  useToast,
+  Box,
+  Heading,
+  Stack,
+  Text,
+} from '@chakra-ui/react';
 
 import { ButtonWithIcon } from '@/components/Buttons';
 import { CustomInput } from '@/components/Input';
 import SocialAuthProviders from './SocialAuthProviders';
-import { useAuth } from '../../lib/auth';
+import { useAuth } from 'lib/auth';
 import { checkEmail, checkPassword } from './helper';
 import { LoginForm } from './types';
-import { useColorMode } from '@chakra-ui/react';
 
 const Login: FunctionComponent = () => {
   const { loginWithEmailAndPassword } = useAuth();
@@ -54,7 +60,7 @@ const Login: FunctionComponent = () => {
         Login to Your Account
       </Heading>
       <Text
-        color={isDarkMode ? 'light-text' : 'dark-text'}
+        color={isDarkMode ? 'gray.300' : 'gray.700'}
         fontSize="xl"
         maxW="xl"
         mt="8"
