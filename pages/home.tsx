@@ -7,8 +7,8 @@ import GameCard from '@/components/GameCard';
 import { Endpoints } from 'endpoints';
 import { Descriptions } from 'seo';
 import { Game } from 'types';
-import { MotionSimpleGrid } from 'utils/MotionElements';
 import { FadeUpAnimation } from 'utils/animations';
+import { MotionSimpleGrid } from 'utils/MotionElements';
 
 interface Props {
   games: Game[];
