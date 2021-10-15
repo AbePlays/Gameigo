@@ -45,7 +45,13 @@ const Search: FunctionComponent = () => {
   };
 
   return (
-    <Page title="Search" description={Descriptions.Search} px="0" py="0">
+    <Page
+      title="Search"
+      description={Descriptions.Search}
+      maxWidth="1536px"
+      px="0"
+      py="0"
+    >
       <Box position="relative">
         <Box height={['200px', '300px']} overflow="hidden">
           <Image
@@ -88,8 +94,10 @@ const Search: FunctionComponent = () => {
         <Loader />
       ) : Array.isArray(games) && games.length > 0 ? (
         <SimpleGrid
+          maxWidth="1120px"
           minChildWidth="320px"
           mt="0"
+          mx="auto"
           px="4"
           spacingX={[4, 4, 6]}
           spacingY="6"

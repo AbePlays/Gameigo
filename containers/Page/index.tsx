@@ -7,6 +7,7 @@ import { MotionBox } from 'utils/MotionElements';
 interface Props {
   description?: string;
   imageUrl?: string;
+  maxWidth?: string;
   siteLink?: string;
   title: string;
   [key: string]: unknown;
@@ -16,6 +17,7 @@ const Page: FunctionComponent<Props> = ({
   children,
   description,
   imageUrl,
+  maxWidth = '1120px',
   siteLink,
   title,
   ...props
@@ -26,7 +28,7 @@ const Page: FunctionComponent<Props> = ({
       initial="hidden"
       animate="show"
       // exit="hidden"
-      maxW="1120px"
+      maxWidth={maxWidth}
       minH="calc(100vh - 64px)"
       mx="auto"
       px="4"
