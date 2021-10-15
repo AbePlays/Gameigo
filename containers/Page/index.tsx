@@ -64,7 +64,7 @@ const Page: FunctionComponent<Props> = ({
         {description ? (
           <meta name="twitter:description" content={description} />
         ) : null}
-        {imageUrl ? <meta name="twitter:image" content={imageUrl} /> : null}
+        {imageUrl ? <meta name="twitter:image:src" content={imageUrl} /> : null}
       </Head>
       <main>{children}</main>
     </MotionBox>
