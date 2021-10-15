@@ -53,20 +53,10 @@ const Search: FunctionComponent = () => {
       py="0"
     >
       <Box position="relative">
-        <Box height={['200px', '300px']} overflow="hidden">
-          <Image
-            layout="responsive"
-            objectFit="cover"
-            placeholder="blur"
-            src={img}
-          />
+        <Box height={['200px', '300px']} overflow="hidden" position="relative">
+          <Image layout="fill" objectFit="cover" placeholder="blur" src={img} />
         </Box>
-        <Box
-          maxW="container.sm"
-          mx="auto"
-          px="4"
-          transform={['translateY(-60px)', 'translateY(-30px)']}
-        >
+        <Box maxW="container.sm" mx="auto" px="4" transform="translateY(-30px)">
           <Input
             onChange={changeHandler}
             onKeyDown={keyDownHandler}
