@@ -1,5 +1,6 @@
 import { FunctionComponent, useState } from 'react';
-import { Box, SimpleGrid } from '@chakra-ui/react';
+import Image from 'next/image';
+import { Box, Heading, SimpleGrid, Text } from '@chakra-ui/react';
 
 import GameCard from '@/components/GameCard';
 import Input from '@/components/Input';
@@ -7,6 +8,7 @@ import Loader from '@/components/Loader';
 import NoData from '@/components/NoData';
 import Page from '@/containers/Page';
 import { Endpoints } from 'endpoints';
+import img from 'public/images/search_hero.jpeg';
 import { Descriptions } from 'seo';
 import { Game } from 'types';
 
@@ -43,21 +45,52 @@ const Search: FunctionComponent = () => {
   };
 
   return (
-    <Page title="Search" description={Descriptions.Search}>
-      <Box maxW="container.sm" mx="auto">
-        <Input
-          onChange={changeHandler}
-          onKeyDown={keyDownHandler}
-          placeholder="Search Games"
-          value={query}
-        />
+    <Page title="Search" description={Descriptions.Search} px="0" py="0">
+      <Box position="relative">
+        <Box height={['200px', '300px']} overflow="hidden">
+          <Image
+            layout="responsive"
+            objectFit="cover"
+            placeholder="blur"
+            src={img}
+          />
+        </Box>
+        <Box
+          maxW="container.sm"
+          mx="auto"
+          px="4"
+          transform={['translateY(-60px)', 'translateY(-30px)']}
+        >
+          <Input
+            onChange={changeHandler}
+            onKeyDown={keyDownHandler}
+            height="60px"
+            placeholder="Search Games"
+            value={query}
+          />
+        </Box>
+        <Box
+          color="light-text"
+          textAlign="center"
+          px="4"
+          position="absolute"
+          width="100%"
+          left="0"
+          top={[8, 16]}
+        >
+          <Heading>Search Gameigo</Heading>
+          <Text mt={[1, 4]}>
+            Choose from 30,000+ games with new addition every few weeks.
+          </Text>
+        </Box>
       </Box>
       {loading ? (
         <Loader />
       ) : Array.isArray(games) && games.length > 0 ? (
         <SimpleGrid
           minChildWidth="320px"
-          mt="8"
+          mt="0"
+          px="4"
           spacingX={[4, 4, 6]}
           spacingY="6"
         >

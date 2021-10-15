@@ -9,6 +9,7 @@ interface Props {
   imageUrl?: string;
   siteLink?: string;
   title: string;
+  [key: string]: unknown;
 }
 
 const Page: FunctionComponent<Props> = ({
@@ -17,6 +18,7 @@ const Page: FunctionComponent<Props> = ({
   imageUrl,
   siteLink,
   title,
+  ...props
 }) => {
   return (
     <MotionBox
@@ -29,6 +31,7 @@ const Page: FunctionComponent<Props> = ({
       mx="auto"
       px="4"
       py="12"
+      {...props}
     >
       <Head>
         <title>Gameigo | {title}</title>
