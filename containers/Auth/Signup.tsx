@@ -33,22 +33,22 @@ const Signup: FunctionComponent = () => {
       const { email, name, password } = values;
       await signupWithEmailAndPassword(email, password, name);
       toast({
-        title: 'Signup Successful.',
-        description: "We've created your account for you.",
-        status: 'success',
-        position: 'top',
-        duration: 4000,
+        duration: 2000,
         isClosable: true,
+        position: 'top-right',
+        status: 'success',
+        title: 'Signup Successful.',
+        variant: 'subtle',
       });
       actions.resetForm();
     } catch (e) {
       toast({
-        title: 'Signup Failed.',
-        description: 'There was an error while creating your account.',
-        status: 'error',
-        position: 'top',
-        duration: 4000,
+        duration: 2000,
         isClosable: true,
+        position: 'top-right',
+        status: 'error',
+        title: 'Signup Failed.',
+        variant: 'subtle',
       });
       console.log(`Error while signing up ${e}`);
     }

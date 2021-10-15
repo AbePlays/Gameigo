@@ -58,11 +58,12 @@ const Profile: FunctionComponent = () => {
       await changePassword(password);
       await changeDisplayName(name);
       toast({
-        title: 'Changes Saved.',
-        status: 'success',
-        position: 'top',
-        duration: 4000,
+        duration: 2000,
         isClosable: true,
+        position: 'top-right',
+        status: 'success',
+        title: 'Changes Saved.',
+        variant: 'subtle',
       });
       actions.resetForm();
       signout();

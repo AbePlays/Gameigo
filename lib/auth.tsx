@@ -87,12 +87,12 @@ const useProvideAuth = () => {
   const signout = async () => {
     await auth.signOut();
     toast({
-      title: 'Logout Successful.',
-      description: "You've successfully logged out.",
-      status: 'success',
-      position: 'top',
-      duration: 4000,
+      duration: 2000,
       isClosable: true,
+      position: 'top-right',
+      status: 'success',
+      title: 'Logout Successful.',
+      variant: 'subtle',
     });
     setUser(null);
   };

@@ -102,11 +102,12 @@ const GameDetail: FunctionComponent<Props> = ({ game, screenshots }) => {
     try {
       await navigator.clipboard.writeText(window.location.href);
       toast({
-        duration: 3000,
+        duration: 2000,
         isClosable: false,
-        position: 'top',
+        position: 'top-right',
         status: 'success',
         title: 'Copied to Clipboard.',
+        variant: 'subtle',
       });
     } catch (err) {
       console.log(err);
@@ -118,34 +119,34 @@ const GameDetail: FunctionComponent<Props> = ({ game, screenshots }) => {
       if (isFav) {
         await deleteGame(user.uid, game.id);
         toast({
-          description: 'Game was removed from collection successfully.',
-          duration: 4000,
+          duration: 2000,
           isClosable: true,
-          position: 'top',
+          position: 'top-right',
           status: 'success',
           title: 'Collection Updated.',
+          variant: 'subtle',
         });
         setIsFav(false);
       } else {
         await addGame(user.uid, convertToGame(game));
         toast({
-          description: 'Game was addded to collection successfully.',
-          duration: 4000,
+          duration: 2000,
           isClosable: true,
-          position: 'top',
+          position: 'top-right',
           status: 'success',
           title: 'Collection Updated.',
+          variant: 'subtle',
         });
         setIsFav(true);
       }
     } catch (e) {
       toast({
-        description: 'There was an error while updating your collection.',
-        duration: 4000,
+        duration: 2000,
         isClosable: true,
-        position: 'top',
+        position: 'top-right',
         status: 'error',
         title: 'Update Failed.',
+        variant: 'subtle',
       });
       console.log(e);
     }

@@ -27,22 +27,22 @@ const Login: FunctionComponent = () => {
       const { email, password } = values;
       await loginWithEmailAndPassword(email, password);
       toast({
-        title: 'Login Successful.',
-        description: "You've successfully logged in.",
-        status: 'success',
-        position: 'top',
-        duration: 4000,
+        duration: 2000,
         isClosable: true,
+        position: 'top-right',
+        status: 'success',
+        title: 'Login Successful.',
+        variant: 'subtle',
       });
       actions.resetForm();
     } catch (e) {
       toast({
-        title: 'Login Failed.',
-        description: 'There was an issue while logging in.',
-        status: 'error',
-        position: 'top',
-        duration: 4000,
+        duration: 2000,
         isClosable: true,
+        position: 'top-right',
+        status: 'error',
+        title: 'Login Failed.',
+        variant: 'subtle',
       });
       console.log(`Error while logging in ${e}`);
     }
