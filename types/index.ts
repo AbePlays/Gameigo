@@ -31,6 +31,7 @@ export type Publisher = {
 export type GameInfo = {
   background_image: string;
   description: string;
+  description_raw: string;
   genres: Genre[];
   id: number;
   metacritic: number;

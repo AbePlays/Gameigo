@@ -242,7 +242,12 @@ const GameDetail: FunctionComponent<Props> = ({ game, screenshots }) => {
         </Box>
       </Box>
       <Box position="relative" zIndex="10">
-        <Page title={game.name}>
+        <Page
+          description={game.description_raw}
+          imageUrl={game.background_image}
+          siteLink={`/game/${game.slug}`}
+          title={game.name}
+        >
           <Flex justifyContent="space-between" alignItems="center">
             <Box w="8" as="button" onClick={clickHandler}>
               <BackArrow />
