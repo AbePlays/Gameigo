@@ -21,10 +21,10 @@ import { useToast } from '@chakra-ui/react';
 import nookies from 'nookies';
 
 import { Routes } from '../routes';
+import { createUser } from './db';
 import { auth } from './firebase';
 import { formatUser } from './helper';
 import { AuthContextType, User } from './types';
-import { createUser } from './db';
 
 const AuthContext = createContext<AuthContextType>(null);
 
@@ -109,15 +109,27 @@ const useProvideAuth = () => {
 
   useEffect(() => {
     const unsubscribe = onIdTokenChanged(auth, async (user) => {
+      let sessionTimeout = null;
       if (user) {
-        const token = await user.getIdToken();
+        const res = await user.getIdTokenResult();
         const userData = formatUser(user);
+        const token = res.token;
         userData.token = token;
         nookies.set(undefined, 'token', token, { path: '/' });
+        const authTime = Number(res.claims.auth_time) * 1000;
+        const sessionDuration = 1000 * 60 * 60 * 24; // 24 hours
+        const millisecondsUntilExpiration =
+          sessionDuration - (Date.now() - authTime);
+        sessionTimeout = setTimeout(
+          () => auth.signOut(),
+          millisecondsUntilExpiration
+        );
         setUser(userData);
       } else {
         nookies.set(undefined, 'token', '', { path: '/' });
         setUser(null);
+        sessionTimeout && clearTimeout(sessionTimeout);
+        sessionTimeout = null;
       }
       setLoading(false);
     });
