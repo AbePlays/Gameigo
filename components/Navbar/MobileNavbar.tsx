@@ -3,6 +3,7 @@ import { CloseIcon } from '@chakra-ui/icons';
 import { Button, Icon } from '@chakra-ui/react';
 
 import CustomLink from '../CustomLink';
+import { useAuth } from 'lib/auth';
 import {
   MotionBox,
   MotionFlex,
@@ -21,6 +22,8 @@ interface Props {
 }
 
 const MobileNavbar: FunctionComponent<Props> = ({ onClick }) => {
+  const { user } = useAuth();
+
   return (
     <MotionBox
       animate="show"
@@ -67,10 +70,12 @@ const MobileNavbar: FunctionComponent<Props> = ({ onClick }) => {
         </MotionListItem>
         <MotionListItem variants={NavbarItemAnimation}>
           <CustomLink
+            cursor={user ? 'pointer' : 'not-allowed'}
             fontSize="6xl"
             isExt={false}
-            link="/favorites"
-            onClick={onClick}
+            link={user ? '/favorites' : '#'}
+            onClick={user ? onClick : null}
+            opacity={user ? 1 : 0.5}
             title="Favorites"
           ></CustomLink>
         </MotionListItem>

@@ -6,6 +6,7 @@ export type User = {
   name: string;
   provider: string;
   photoUrl: string;
+  token?: string;
 };
 
 export type AuthContextType = {

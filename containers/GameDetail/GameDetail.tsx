@@ -151,10 +151,6 @@ const GameDetail: FunctionComponent<Props> = ({ game, screenshots }) => {
     }
   };
 
-  useEffect(() => {
-    checkGame(user.uid, game.id).then((res) => setIsFav(res));
-  }, []);
-
   const clickHandler = () => router.back();
 
   const renderReleasedandPlaytime = () => {
@@ -221,6 +217,12 @@ const GameDetail: FunctionComponent<Props> = ({ game, screenshots }) => {
     );
   };
 
+  useEffect(() => {
+    if (user) {
+      checkGame(user.uid, game.id).then((res) => setIsFav(res));
+    }
+  }, [user]);
+
   return (
     <Box bg="black" color="white" position="relative">
       <Box pos="absolute" inset="0">
@@ -228,7 +230,7 @@ const GameDetail: FunctionComponent<Props> = ({ game, screenshots }) => {
           w="100%"
           h="calc(100vh - 64px)"
           position="relative"
-          filter="brightness(30%)"
+          filter="brightness(40%)"
         >
           <Image
             src={game.background_image}
@@ -246,9 +248,11 @@ const GameDetail: FunctionComponent<Props> = ({ game, screenshots }) => {
               <BackArrow />
             </Box>
             <Flex alignItems="center" justifyContent="center">
-              <Box w="7" as="button" onClick={onClickHandler} mr="2">
-                {isFav ? <HeartFilled /> : <HeartOutline />}
-              </Box>
+              {user ? (
+                <Box w="7" as="button" onClick={onClickHandler} mr="2">
+                  {isFav ? <HeartFilled /> : <HeartOutline />}
+                </Box>
+              ) : null}
               <IconButton
                 aria-label="Share"
                 icon={<LinkIcon />}
@@ -268,6 +272,7 @@ const GameDetail: FunctionComponent<Props> = ({ game, screenshots }) => {
               <GameContent heading="About">
                 <Box
                   dangerouslySetInnerHTML={{ __html: game.description }}
+                  lineHeight="1.8"
                 ></Box>
               </GameContent>
             )}
@@ -311,13 +316,15 @@ const GameDetail: FunctionComponent<Props> = ({ game, screenshots }) => {
                 >
                   {screenshots.results.map((item) => {
                     return (
-                      <Image
-                        alt={`game-screenshot-${item.id}`}
-                        key={item.id}
-                        src={item.image}
-                        width="100%"
-                        height={(item.width / item.height) * 100}
-                      />
+                      <Flex key={item.id} rounded="sm" overflow="hidden">
+                        <Image
+                          alt={`game-screenshot-${item.id}`}
+                          src={item.image}
+                          width={item.width}
+                          objectFit="cover"
+                          height={item.height}
+                        />
+                      </Flex>
                     );
                   })}
                 </SimpleGrid>

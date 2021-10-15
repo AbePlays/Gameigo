@@ -8,6 +8,7 @@ import {
   Icon,
   Link,
   Stack,
+  Tooltip,
   useColorMode,
 } from '@chakra-ui/react';
 import { HamburgerIcon, MoonIcon, SunIcon } from '@chakra-ui/icons';
@@ -48,23 +49,21 @@ const Navbar: FunctionComponent<Props> = ({ setShowContent }) => {
         >
           <Flex
             alignItems="center"
-            justifyContent={user ? 'space-between' : 'center'}
+            justifyContent="space-between"
             maxW="container.xl"
             minH="14"
             mx="auto"
             p="4"
           >
-            {user && (
-              <Box as="button" display={['block', 'none']}>
-                <Icon
-                  as={HamburgerIcon}
-                  w={iconSize}
-                  h={iconSize}
-                  onClick={toggleNav}
-                />
-              </Box>
-            )}
-            <NextLink href="/" passHref>
+            <Box as="button" display={['block', 'none']}>
+              <Icon
+                as={HamburgerIcon}
+                w={iconSize}
+                h={iconSize}
+                onClick={toggleNav}
+              />
+            </Box>
+            <NextLink href={user ? '/home' : '/'} passHref>
               <Link
                 letterSpacing="widest"
                 textDecoration="none"
@@ -76,56 +75,56 @@ const Navbar: FunctionComponent<Props> = ({ setShowContent }) => {
                 GAMEIGO
               </Link>
             </NextLink>
-            {user && (
-              <Stack
-                isInline
-                spacing={['8', '8', '12']}
-                display={['none', 'block']}
-              >
-                <NextLink href="/search" passHref>
-                  <Link
-                    fontWeight="medium"
-                    _hover={{
-                      opacity: 0.5,
-                    }}
-                  >
-                    Search
-                  </Link>
-                </NextLink>
-                <NextLink href="/favorites" passHref>
-                  <Link
-                    fontWeight="medium"
-                    _hover={{
-                      opacity: 0.5,
-                    }}
-                  >
+            <Stack
+              isInline
+              spacing={['8', '8', '12']}
+              display={['none', 'block']}
+            >
+              <NextLink href="/search" passHref>
+                <Link
+                  fontWeight="medium"
+                  _hover={{
+                    opacity: 0.5,
+                  }}
+                >
+                  Search
+                </Link>
+              </NextLink>
+              <NextLink href={user ? '/favorites' : '#'} passHref>
+                <Link
+                  cursor={user ? 'pointer' : 'not-allowed'}
+                  fontWeight="medium"
+                  opacity={user ? 1 : 0.5}
+                  _hover={{
+                    opacity: 0.5,
+                  }}
+                >
+                  <Tooltip label="Please login first" isDisabled={!!user}>
                     Favorites
-                  </Link>
-                </NextLink>
-                <NextLink href="/about" passHref>
-                  <Link
-                    fontWeight="medium"
-                    _hover={{
-                      opacity: 0.5,
-                    }}
-                  >
-                    About
-                  </Link>
-                </NextLink>
-              </Stack>
-            )}
-            {user && (
-              <Stack isInline spacing="3">
-                <Button w="4" h="8" onClick={toggleColorMode} variant="outline">
-                  <Icon as={isDarkMode ? SunIcon : MoonIcon} />
-                </Button>
-                <NextLink href="/profile" passHref>
-                  <Link>
-                    <Avatar size="sm" src={user.photoUrl} />
-                  </Link>
-                </NextLink>
-              </Stack>
-            )}
+                  </Tooltip>
+                </Link>
+              </NextLink>
+              <NextLink href="/about" passHref>
+                <Link
+                  fontWeight="medium"
+                  _hover={{
+                    opacity: 0.5,
+                  }}
+                >
+                  About
+                </Link>
+              </NextLink>
+            </Stack>
+            <Stack isInline spacing="3">
+              <Button w="4" h="8" onClick={toggleColorMode} variant="outline">
+                <Icon as={isDarkMode ? SunIcon : MoonIcon} />
+              </Button>
+              <NextLink href={user ? '/profile' : '/auth'} passHref>
+                <Link>
+                  <Avatar size="sm" src={user?.photoUrl} />
+                </Link>
+              </NextLink>
+            </Stack>
           </Flex>
         </Box>
       )}
