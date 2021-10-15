@@ -5,6 +5,8 @@ import { useColorMode, Link, Stack, Text } from '@chakra-ui/react';
 import AboutCard from '@/components/AboutCard';
 import Page from '@/containers/Page';
 import { Descriptions } from 'seo';
+import { FadeUpAnimation } from 'utils/animations';
+import { MotionStack } from 'utils/MotionElements';
 
 const About: FunctionComponent = () => {
   const { colorMode } = useColorMode();
@@ -12,7 +14,15 @@ const About: FunctionComponent = () => {
 
   return (
     <Page title="About" description={Descriptions.About}>
-      <Stack maxW="container.xl" mx="auto" textAlign="center" spacing="12">
+      <MotionStack
+        variants={FadeUpAnimation.parent}
+        initial="hidden"
+        animate="show"
+        maxW="container.xl"
+        mx="auto"
+        spacing="12"
+        textAlign="center"
+      >
         <AboutCard heading="Small and Crafty">
           <Text maxW="container.md" mx="auto">
             Gameigo is a video game discovery platform where you can keep all
@@ -78,7 +88,7 @@ const About: FunctionComponent = () => {
             </NextLink>
           </Stack>
         </AboutCard>
-      </Stack>
+      </MotionStack>
     </Page>
   );
 };
