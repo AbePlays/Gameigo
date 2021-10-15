@@ -4,10 +4,11 @@ import { Heading, Text } from '@chakra-ui/layout';
 
 import Page from '@/containers/Page';
 import GameCard from '@/components/GameCard';
-import { Game } from '../types';
-import { Endpoints } from '../endpoints';
-import { MotionSimpleGrid } from 'utils/MotionElements';
+import { Endpoints } from 'endpoints';
+import { Descriptions } from 'seo';
+import { Game } from 'types';
 import { FadeUpAnimation } from 'utils/animations';
+import { MotionSimpleGrid } from 'utils/MotionElements';
 
 interface Props {
   games: Game[];
@@ -15,7 +16,7 @@ interface Props {
 
 const Home: FunctionComponent<Props> = ({ games }) => {
   return (
-    <Page title="Home">
+    <Page title="Home" description={Descriptions.Home}>
       <Heading as="h1" fontSize={['4xl', '5xl', '6xl']}>
         New and trending
       </Heading>

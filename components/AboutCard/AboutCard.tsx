@@ -1,6 +1,9 @@
 import { FunctionComponent } from 'react';
 import { useColorMode, Box, Text } from '@chakra-ui/react';
 
+import { FadeUpAnimation } from 'utils/animations';
+import { MotionBox } from 'utils/MotionElements';
+
 interface Props {
   heading: string;
 }
@@ -10,7 +13,7 @@ const AboutCard: FunctionComponent<Props> = ({ children, heading }) => {
   const isDarkMode = colorMode === 'dark';
 
   return (
-    <Box>
+    <MotionBox variants={FadeUpAnimation.child}>
       <Text textTransform="uppercase" letterSpacing="widest" fontWeight="bold">
         {heading}
       </Text>
@@ -23,7 +26,7 @@ const AboutCard: FunctionComponent<Props> = ({ children, heading }) => {
         w="7"
       />
       {children}
-    </Box>
+    </MotionBox>
   );
 };
 

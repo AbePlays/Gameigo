@@ -42,7 +42,7 @@ export const useAuth = (): AuthContextType => {
 };
 
 const useProvideAuth = () => {
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(false);
   const [user, setUser] = useState<User>(null);
   const router = useRouter();
   const toast = useToast();
@@ -87,12 +87,12 @@ const useProvideAuth = () => {
   const signout = async () => {
     await auth.signOut();
     toast({
-      title: 'Logout Successful.',
-      description: "You've successfully logged out.",
-      status: 'success',
-      position: 'top',
-      duration: 4000,
+      duration: 2000,
       isClosable: true,
+      position: 'top-right',
+      status: 'success',
+      title: 'Logout Successful.',
+      variant: 'subtle',
     });
     setUser(null);
   };
@@ -108,6 +108,7 @@ const useProvideAuth = () => {
   };
 
   useEffect(() => {
+    setLoading(true);
     const unsubscribe = onIdTokenChanged(auth, async (user) => {
       let sessionTimeout = null;
       if (user) {

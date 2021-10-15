@@ -52,21 +52,21 @@ const SocialAuthProviders: FunctionComponent = () => {
     try {
       await signinWithGoogle();
       toast({
-        title: 'Signin Successful.',
-        description: "You've successfully signed in.",
-        status: 'success',
-        position: 'top',
-        duration: 4000,
+        duration: 2000,
         isClosable: true,
+        position: 'top-right',
+        status: 'success',
+        title: 'Signin Successful.',
+        variant: 'subtle',
       });
     } catch (e) {
       toast({
-        title: 'Signin Failed.',
-        description: 'There was an issue while signing in.',
-        status: 'error',
-        position: 'top',
-        duration: 4000,
+        duration: 2000,
         isClosable: true,
+        position: 'top-right',
+        status: 'error',
+        title: 'Signin Failed.',
+        variant: 'subtle',
       });
       console.log(`Error while signing in with Google ${e}`);
     }
@@ -76,21 +76,21 @@ const SocialAuthProviders: FunctionComponent = () => {
     try {
       await signinWithGithub();
       toast({
-        title: 'Signin Successful.',
-        description: "You've successfully signed in.",
-        status: 'success',
-        position: 'top',
-        duration: 4000,
+        duration: 2000,
         isClosable: true,
+        position: 'top-right',
+        status: 'success',
+        title: 'Signin Successful.',
+        variant: 'subtle',
       });
     } catch (e) {
       toast({
-        title: 'Signin Failed.',
-        description: 'There was an issue while signing in.',
-        status: 'error',
-        position: 'top',
-        duration: 4000,
+        duration: 2000,
         isClosable: true,
+        position: 'top-right',
+        status: 'error',
+        title: 'Signin Failed.',
+        variant: 'subtle',
       });
       console.log(`Error while signing in with Github ${e}`);
     }

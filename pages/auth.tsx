@@ -1,18 +1,19 @@
-import { FunctionComponent, useState } from 'react';
+import { FunctionComponent, useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import { useColorMode, Box, Button, Text } from '@chakra-ui/react';
 
 import Loader from '@/components/Loader';
 import { Login, Signup } from '@/containers/Auth';
 import Page from '@/containers/Page';
 import { useAuth } from 'lib/auth';
-import { useRouter } from 'next/router';
 import { Routes } from 'routes';
+import { Descriptions } from 'seo';
 
 const Auth: FunctionComponent = () => {
-  const [isLogin, setIsLogin] = useState<boolean>(true);
-  const { colorMode } = useColorMode();
   const { loading, user } = useAuth();
+  const { colorMode } = useColorMode();
   const router = useRouter();
+  const [isLogin, setIsLogin] = useState<boolean>(true);
 
   const isDarkMode = colorMode === 'dark';
 
@@ -24,13 +25,17 @@ const Auth: FunctionComponent = () => {
 
   const toggle = () => setIsLogin((prev) => !prev);
 
-  if (user) router.replace(Routes.HOME_SCREEN);
+  useEffect(() => {
+    if (!loading && user) {
+      router.replace(Routes.HOME_SCREEN);
+    }
+  }, [loading, user]);
 
-  if (loading) return <Loader />;
-
-  if (!loading && !user) {
-    return (
-      <Page title={pageTitle}>
+  return (
+    <Page title={pageTitle} description={Descriptions.Auth}>
+      {loading ? (
+        <Loader />
+      ) : (
         <Box textAlign="center">
           {isLogin ? <Login /> : <Signup />}
           <Text mt={['10', '10', '16']}>
@@ -46,11 +51,9 @@ const Auth: FunctionComponent = () => {
             instead
           </Text>
         </Box>
-      </Page>
-    );
-  }
-
-  return <Loader />;
+      )}
+    </Page>
+  );
 };
 
 export default Auth;
