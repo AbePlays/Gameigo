@@ -1,12 +1,13 @@
 import { FunctionComponent, useState } from 'react';
+import { useRouter } from 'next/router';
 import { useColorMode, Box, Button, Text } from '@chakra-ui/react';
 
 import Loader from '@/components/Loader';
 import { Login, Signup } from '@/containers/Auth';
 import Page from '@/containers/Page';
 import { useAuth } from 'lib/auth';
-import { useRouter } from 'next/router';
 import { Routes } from 'routes';
+import { Descriptions } from 'seo';
 
 const Auth: FunctionComponent = () => {
   const [isLogin, setIsLogin] = useState<boolean>(true);
@@ -30,7 +31,7 @@ const Auth: FunctionComponent = () => {
 
   if (!loading && !user) {
     return (
-      <Page title={pageTitle}>
+      <Page title={pageTitle} description={Descriptions.Auth}>
         <Box textAlign="center">
           {isLogin ? <Login /> : <Signup />}
           <Text mt={['10', '10', '16']}>

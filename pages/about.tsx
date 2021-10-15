@@ -4,13 +4,14 @@ import { useColorMode, Link, Stack, Text } from '@chakra-ui/react';
 
 import AboutCard from '@/components/AboutCard';
 import Page from '@/containers/Page';
+import { Descriptions } from 'seo';
 
 const About: FunctionComponent = () => {
   const { colorMode } = useColorMode();
   const isDarkMode = colorMode === 'dark';
 
   return (
-    <Page title="About">
+    <Page title="About" description={Descriptions.About}>
       <Stack maxW="container.xl" mx="auto" textAlign="center" spacing="12">
         <AboutCard heading="Small and Crafty">
           <Text maxW="container.md" mx="auto">

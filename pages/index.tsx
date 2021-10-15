@@ -12,8 +12,9 @@ import homeDark from '../public/images/home.png';
 import easy from '../public/images/easy.png';
 import free from '../public/images/free.png';
 import vision from '../public/images/vision.png';
-import { Routes } from '../routes';
 import { useAuth } from 'lib/auth';
+import { Routes } from 'routes';
+import { Descriptions } from 'seo';
 
 const width = 500;
 const height = 500;
@@ -34,7 +35,7 @@ const Home: FunctionComponent = () => {
 
   return (
     <>
-      <Page title="Welcome">
+      <Page title="Welcome" description={Descriptions.Welcome}>
         <Box
           display="flex"
           flexDirection={['column-reverse', 'column-reverse', 'row']}

@@ -11,6 +11,7 @@ import { Game } from 'types';
 import { FadeUpAnimation } from 'utils/animations';
 import fetcher from 'utils/fetcher';
 import { MotionSimpleGrid } from 'utils/MotionElements';
+import { Descriptions } from 'seo';
 
 interface Props {
   data: Game[];
@@ -18,7 +19,7 @@ interface Props {
 
 const Favorites: FunctionComponent<Props> = ({ data }) => {
   return (
-    <Page title="Favorites">
+    <Page title="Favorites" description={Descriptions.Favorites}>
       <Heading as="h1" fontSize={['4xl', '5xl', '6xl']}>
         Favorites
       </Heading>

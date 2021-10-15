@@ -21,6 +21,7 @@ import Page from '@/containers/Page';
 import ProtectedRoute from '@/containers/Protected';
 import { useAuth } from 'lib/auth';
 import { Routes } from 'routes';
+import { Descriptions } from 'seo';
 import { ProfileForm } from 'types';
 
 const BackArrow = () => (
@@ -72,7 +73,7 @@ const Profile: FunctionComponent = () => {
 
   return (
     <ProtectedRoute redirectUrl={Routes.AUTH_SCREEN}>
-      <Page title="Profile">
+      <Page title="Profile" description={Descriptions.Profile}>
         <Box maxW="container.sm" mx="auto">
           <Flex align="center">
             <Box w="8" cursor="pointer" onClick={() => router.back()}>

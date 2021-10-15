@@ -7,6 +7,7 @@ import Loader from '@/components/Loader';
 import NoData from '@/components/NoData';
 import Page from '@/containers/Page';
 import { Endpoints } from 'endpoints';
+import { Descriptions } from 'seo';
 import { Game } from 'types';
 
 const Search: FunctionComponent = () => {
@@ -42,7 +43,7 @@ const Search: FunctionComponent = () => {
   };
 
   return (
-    <Page title="Search">
+    <Page title="Search" description={Descriptions.Search}>
       <Box maxW="container.sm" mx="auto">
         <Input
           onChange={changeHandler}
