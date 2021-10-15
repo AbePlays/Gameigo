@@ -89,7 +89,6 @@ const Search: FunctionComponent = () => {
           mt="0"
           mx="auto"
           px="4"
-          mt="8"
           spacingX={[4, 4, 6]}
           spacingY="6"
         >
