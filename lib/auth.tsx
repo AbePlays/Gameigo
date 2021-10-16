@@ -17,7 +17,7 @@ import {
   updateProfile,
   User as firebaseUser,
 } from 'firebase/auth';
-import { useToast } from '@chakra-ui/react';
+import { useColorMode, useToast } from '@chakra-ui/react';
 import nookies from 'nookies';
 
 import { Routes } from '../routes';
@@ -42,10 +42,13 @@ export const useAuth = (): AuthContextType => {
 };
 
 const useProvideAuth = () => {
+  const { colorMode } = useColorMode();
+  const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
   const [user, setUser] = useState<User>(null);
-  const router = useRouter();
   const toast = useToast();
+
+  const isDarkMode = colorMode === 'dark';
 
   const handleFirebaseUser = async (firebaseUser: firebaseUser) => {
     await createUser(firebaseUser.uid, formatUser(firebaseUser));
@@ -92,7 +95,7 @@ const useProvideAuth = () => {
       position: 'top-right',
       status: 'success',
       title: 'Logout Successful.',
-      variant: 'subtle',
+      variant: isDarkMode ? 'solid' : 'subtle',
     });
     setUser(null);
   };

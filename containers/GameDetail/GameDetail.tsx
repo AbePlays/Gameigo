@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { LinkIcon } from '@chakra-ui/icons';
 import {
+  useColorMode,
   useToast,
   Box,
   Heading,
@@ -94,9 +95,12 @@ const CustomDivider = () => {
 
 const GameDetail: FunctionComponent<Props> = ({ game, screenshots }) => {
   const { user } = useAuth();
+  const { colorMode } = useColorMode();
   const router = useRouter();
   const [isFav, setIsFav] = useState<boolean>(false);
   const toast = useToast();
+
+  const isDarkMode = colorMode === 'dark';
 
   const copyLink = async () => {
     try {
@@ -107,7 +111,7 @@ const GameDetail: FunctionComponent<Props> = ({ game, screenshots }) => {
         position: 'top-right',
         status: 'success',
         title: 'Copied to Clipboard.',
-        variant: 'subtle',
+        variant: isDarkMode ? 'solid' : 'subtle',
       });
     } catch (err) {
       console.log(err);
@@ -124,7 +128,7 @@ const GameDetail: FunctionComponent<Props> = ({ game, screenshots }) => {
           position: 'top-right',
           status: 'success',
           title: 'Collection Updated.',
-          variant: 'subtle',
+          variant: isDarkMode ? 'solid' : 'subtle',
         });
         setIsFav(false);
       } else {
@@ -135,7 +139,7 @@ const GameDetail: FunctionComponent<Props> = ({ game, screenshots }) => {
           position: 'top-right',
           status: 'success',
           title: 'Collection Updated.',
-          variant: 'subtle',
+          variant: isDarkMode ? 'solid' : 'subtle',
         });
         setIsFav(true);
       }
@@ -146,7 +150,7 @@ const GameDetail: FunctionComponent<Props> = ({ game, screenshots }) => {
         position: 'top-right',
         status: 'error',
         title: 'Update Failed.',
-        variant: 'subtle',
+        variant: isDarkMode ? 'solid' : 'subtle',
       });
       console.log(e);
     }
