@@ -7,7 +7,6 @@ import Input from '@/components/Input';
 import Loader from '@/components/Loader';
 import NoData from '@/components/NoData';
 import Page from '@/containers/Page';
-import { Endpoints } from 'endpoints';
 import img from 'public/images/search_hero.jpeg';
 import { Descriptions } from 'seo';
 import { Game } from 'types';
@@ -30,9 +29,7 @@ const Search: FunctionComponent = () => {
   const fetchGames = async () => {
     setLoading(true);
     try {
-      const res = await fetch(
-        `${Endpoints.SEARCH_GAME}?key=${process.env.NEXT_PUBLIC_RAWG_API_KEY}&search=${query}`
-      );
+      const res = await fetch(`/api/search?query=${query}`);
       const data = await res.json();
       setIsPristine(false);
       setGames(data.results);
