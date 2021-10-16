@@ -6546,7 +6546,7 @@
     "invariant" "^2.2.4"
     "tslib" "^1.0.0"
 
-"react@^17.0.2", "react@>= 16.8.0 || 17.x.x || 18.x.x":
+"react@^16.11.0 || ^17.0.0", "react@^17.0.2", "react@>= 16.8.0 || 17.x.x || 18.x.x":
   "integrity" "sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA=="
   "resolved" "https://registry.npmjs.org/react/-/react-17.0.2.tgz"
   "version" "17.0.2"
@@ -7319,10 +7319,10 @@
     "has-flag" "^4.0.0"
     "supports-color" "^7.0.0"
 
-"swr@^0.5.6":
-  "integrity" "sha512-Bmx3L4geMZjYT5S2Z6EE6/5Cx6v1Ka0LhqZKq8d6WL2eu9y6gHWz3dUzfIK/ymZVHVfwT/EweFXiYGgfifei3w=="
-  "resolved" "https://registry.npmjs.org/swr/-/swr-0.5.6.tgz"
-  "version" "0.5.6"
+"swr@^1.0.1":
+  "integrity" "sha512-EPQAxSjoD4IaM49rpRHK0q+/NzcwoT8c0/Ylu/u3/6mFj/CWnQVjNJ0MV2Iuw/U+EJSd2TX5czdAwKPYZIG0YA=="
+  "resolved" "https://registry.npmjs.org/swr/-/swr-1.0.1.tgz"
+  "version" "1.0.1"
   dependencies:
     "dequal" "2.0.2"
 
