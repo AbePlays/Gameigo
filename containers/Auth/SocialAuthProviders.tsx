@@ -1,5 +1,5 @@
 import { FunctionComponent, ReactNode } from 'react';
-import { useToast } from '@chakra-ui/react';
+import { useColorMode, useToast } from '@chakra-ui/react';
 
 import { BrandButton } from '@components/Buttons';
 import { useAuth } from '@lib/auth';
@@ -46,7 +46,10 @@ const Google = () => {
 
 const SocialAuthProviders: FunctionComponent = () => {
   const { signinWithGoogle, signinWithGithub } = useAuth();
+  const { colorMode } = useColorMode();
   const toast = useToast();
+
+  const isDarkMode = colorMode === 'dark';
 
   const googleSignInHandler = async () => {
     try {
@@ -57,7 +60,7 @@ const SocialAuthProviders: FunctionComponent = () => {
         position: 'top-right',
         status: 'success',
         title: 'Signin Successful.',
-        variant: 'subtle',
+        variant: isDarkMode ? 'solid' : 'subtle',
       });
     } catch (e) {
       toast({
@@ -66,7 +69,7 @@ const SocialAuthProviders: FunctionComponent = () => {
         position: 'top-right',
         status: 'error',
         title: 'Signin Failed.',
-        variant: 'subtle',
+        variant: isDarkMode ? 'solid' : 'subtle',
       });
       console.error(e);
     }
@@ -81,7 +84,7 @@ const SocialAuthProviders: FunctionComponent = () => {
         position: 'top-right',
         status: 'success',
         title: 'Signin Successful.',
-        variant: 'subtle',
+        variant: isDarkMode ? 'solid' : 'subtle',
       });
     } catch (e) {
       toast({
@@ -90,7 +93,7 @@ const SocialAuthProviders: FunctionComponent = () => {
         position: 'top-right',
         status: 'error',
         title: 'Signin Failed.',
-        variant: 'subtle',
+        variant: isDarkMode ? 'solid' : 'subtle',
       });
       console.error(e);
     }

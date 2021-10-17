@@ -6,7 +6,7 @@ import {
   FunctionComponent,
 } from 'react';
 import { useRouter } from 'next/router';
-import { useToast } from '@chakra-ui/react';
+import { useColorMode, useToast } from '@chakra-ui/react';
 import { User as SupabaseUser } from '@supabase/supabase-js';
 
 import { Routes } from 'routes';
@@ -31,10 +31,13 @@ export const useAuth = (): AuthContextType => {
 };
 
 const useProvideAuth = () => {
+  const { colorMode } = useColorMode();
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
   const [user, setUser] = useState<User>(null);
   const toast = useToast();
+
+  const isDarkMode = colorMode === 'dark';
 
   const handleUser = async (supabaseUser: SupabaseUser) => {
     const user = formatUser(supabaseUser);
@@ -105,7 +108,7 @@ const useProvideAuth = () => {
       position: 'top-right',
       status: 'success',
       title: 'Logout Successful.',
-      variant: 'subtle',
+      variant: isDarkMode ? 'solid' : 'subtle',
     });
     setLoading(false);
   };

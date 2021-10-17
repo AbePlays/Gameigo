@@ -38,7 +38,7 @@ const Signup: FunctionComponent = () => {
         position: 'top-right',
         status: 'success',
         title: 'Signup Successful.',
-        variant: 'subtle',
+        variant: isDarkMode ? 'solid' : 'subtle',
       });
       actions.resetForm();
     } catch (e) {
@@ -48,7 +48,7 @@ const Signup: FunctionComponent = () => {
         position: 'top-right',
         status: 'error',
         title: 'Signup Failed.',
-        variant: 'subtle',
+        variant: isDarkMode ? 'solid' : 'subtle',
       });
       console.error(e);
     }
