@@ -63,7 +63,7 @@ const Profile: FunctionComponent = () => {
         position: 'top-right',
         status: 'success',
         title: 'Changes Saved.',
-        variant: 'subtle',
+        variant: isDarkMode ? 'solid' : 'subtle',
       });
       actions.resetForm();
       signout();

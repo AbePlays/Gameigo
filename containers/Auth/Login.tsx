@@ -38,7 +38,7 @@ const Login: FunctionComponent = () => {
         position: 'top-right',
         status: 'success',
         title: 'Login Successful.',
-        variant: 'subtle',
+        variant: isDarkMode ? 'solid' : 'subtle',
       });
       actions.resetForm();
     } catch (e) {
@@ -48,7 +48,7 @@ const Login: FunctionComponent = () => {
         position: 'top-right',
         status: 'error',
         title: 'Login Failed.',
-        variant: 'subtle',
+        variant: isDarkMode ? 'solid' : 'subtle',
       });
       console.log(`Error while logging in ${e}`);
     }
