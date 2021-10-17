@@ -5,4 +5,5 @@ export enum Routes {
   HOME_SCREEN = '/home',
   PROFILE_SCREEN = '/profile',
   SEARCH_SCREEN = '/search',
+  INDEX = '/',
 }

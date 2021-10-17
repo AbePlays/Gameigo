@@ -14,15 +14,14 @@ import {
   Text,
 } from '@chakra-ui/react';
 
-import { ButtonWithIcon } from '@/components/Buttons';
-import { CustomInput } from '@/components/Input';
-import { checkName, checkPassword } from '@/containers/Auth/helper';
-import Page from '@/containers/Page';
-import ProtectedRoute from '@/containers/Protected';
-import { useAuth } from 'lib/auth';
+import { ButtonWithIcon } from '@components/Buttons';
+import { CustomInput } from '@components/Input';
+import { checkName, checkPassword } from '@containers/Auth/helper';
+import Page from '@containers/Page';
+import ProtectedRoute from '@containers/Protected';
+import { useAuth } from '@lib/auth';
 import { Routes } from 'routes';
 import { Descriptions } from 'seo';
-import { ProfileForm } from 'types';
 
 const BackArrow = () => (
   <svg
@@ -55,8 +54,8 @@ const Profile: FunctionComponent = () => {
   ) => {
     const { name, password } = values;
     try {
-      await changePassword(password);
-      await changeDisplayName(name);
+      password.length && (await changePassword(password));
+      name.length && (await changeDisplayName(name));
       toast({
         duration: 2000,
         isClosable: true,
@@ -66,15 +65,15 @@ const Profile: FunctionComponent = () => {
         variant: 'subtle',
       });
       actions.resetForm();
-      signout();
+      await signout();
     } catch (error) {
       console.error(error);
     }
   };
 
   return (
-    <ProtectedRoute redirectUrl={Routes.AUTH_SCREEN}>
-      <Page title="Profile" description={Descriptions.Profile}>
+    <Page title="Profile" description={Descriptions.Profile}>
+      <ProtectedRoute redirectUrl={Routes.AUTH_SCREEN}>
         <Box maxW="container.sm" mx="auto">
           <Flex align="center">
             <Box w="8" cursor="pointer" onClick={() => router.back()}>
@@ -138,8 +137,8 @@ const Profile: FunctionComponent = () => {
             </Button>
           </Center>
         </Box>
-      </Page>
-    </ProtectedRoute>
+      </ProtectedRoute>
+    </Page>
   );
 };
 

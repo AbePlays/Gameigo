@@ -2,15 +2,14 @@ import { FunctionComponent, useState } from 'react';
 import Image from 'next/image';
 import { Box, Heading, SimpleGrid, Text } from '@chakra-ui/react';
 
-import GameCard from '@/components/GameCard';
-import Input from '@/components/Input';
-import Loader from '@/components/Loader';
-import NoData from '@/components/NoData';
-import Page from '@/containers/Page';
+import GameCard from '@components/GameCard';
+import Input from '@components/Input';
+import Loader from '@components/Loader';
+import NoData from '@components/NoData';
+import Page from '@containers/Page';
 import { Endpoints } from 'endpoints';
 import img from 'public/images/search_hero.jpeg';
 import { Descriptions } from 'seo';
-import { Game } from 'types';
 
 const Search: FunctionComponent = () => {
   const [games, setGames] = useState<Game[]>([]);

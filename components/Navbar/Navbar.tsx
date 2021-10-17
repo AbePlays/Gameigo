@@ -1,5 +1,7 @@
 import { FunctionComponent, useState } from 'react';
 import NextLink from 'next/link';
+import { AnimatePresence } from 'framer-motion';
+import { HamburgerIcon, MoonIcon, SunIcon } from '@chakra-ui/icons';
 import {
   Avatar,
   Box,
@@ -11,11 +13,9 @@ import {
   Tooltip,
   useColorMode,
 } from '@chakra-ui/react';
-import { HamburgerIcon, MoonIcon, SunIcon } from '@chakra-ui/icons';
-import { AnimatePresence } from 'framer-motion';
 
+import { useAuth } from '@lib/auth';
 import MobileNavbar from './MobileNavbar';
-import { useAuth } from 'lib/auth';
 
 const iconSize = 5;
 

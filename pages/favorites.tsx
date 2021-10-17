@@ -1,30 +1,52 @@
 import { FunctionComponent } from 'react';
-import { GetServerSideProps } from 'next';
-import { Heading } from '@chakra-ui/react';
-import nookies from 'nookies';
+import { useRouter } from 'next/router';
+import useSWR from 'swr';
+import { Heading, useColorMode, useToast } from '@chakra-ui/react';
 
-import GameCard from '@/components/GameCard';
-import NoData from '@/components/NoData';
-import Page from '@/containers/Page';
-import { auth } from 'lib/firebase-admin';
+import GameCard from '@components/GameCard';
+import Loader from '@components/Loader';
+import NoData from '@components/NoData';
+import Page from '@containers/Page';
+import { useAuth } from '@lib/auth';
+import { FadeUpAnimation } from '@utils/animations';
+import fetcher from '@utils/fetcher';
+import { MotionSimpleGrid } from '@utils/MotionElements';
+import { Routes } from 'routes';
 import { Descriptions } from 'seo';
-import { Game } from 'types';
-import { FadeUpAnimation } from 'utils/animations';
-import fetcher from 'utils/fetcher';
-import { MotionSimpleGrid } from 'utils/MotionElements';
 
+const Favorites: FunctionComponent = () => {
+  const { user } = useAuth();
+  const { colorMode } = useColorMode();
+  const router = useRouter();
+  const { data, error } = useSWR(
+    user ? ['/api/favorites', user.uid] : null,
+    fetcher
+  );
+  const toast = useToast();
 
-interface Props {
-  data: Game[];
-}
+  const isDarkMode = colorMode === 'dark';
 
-const Favorites: FunctionComponent<Props> = ({ data }) => {
+  if (error) {
+    console.error(error);
+    toast({
+      duration: 2000,
+      isClosable: true,
+      position: 'top-right',
+      status: 'error',
+      title: 'An error occured',
+      variant: isDarkMode ? 'solid' : 'subtle',
+    });
+    router.replace(Routes.INDEX);
+  }
+
   return (
     <Page title="Favorites" description={Descriptions.Favorites}>
       <Heading as="h1" fontSize={['4xl', '5xl', '6xl']}>
         Favorites
       </Heading>
-      {Array.isArray(data) && data.length > 0 ? (
+      {!data ? (
+        <Loader />
+      ) : Array.isArray(data) && data.length > 0 ? (
         <MotionSimpleGrid
           animate="show"
           columns={[1, 2, 3]}
@@ -34,7 +56,7 @@ const Favorites: FunctionComponent<Props> = ({ data }) => {
           spacingY="6"
           variants={FadeUpAnimation.parent}
         >
-          {data.map((game) => (
+          {data.map((game: Game) => (
             <GameCard game={game} key={game.id} />
           ))}
         </MotionSimpleGrid>
@@ -43,25 +65,6 @@ const Favorites: FunctionComponent<Props> = ({ data }) => {
       )}
     </Page>
   );
-};
-
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  try {
-    const { token } = nookies.get(ctx);
-    const { uid } = await auth.verifyIdToken(token);
-    const data = await fetcher('https://gameigo.vercel.app/api/favorites', uid);
-    return {
-      props: { data },
-    };
-  } catch (e) {
-    console.log(e);
-    return {
-      redirect: {
-        destination: '/auth',
-        permanent: false,
-      },
-    };
-  }
 };
 
 export default Favorites;

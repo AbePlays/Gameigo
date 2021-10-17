@@ -12,12 +12,11 @@ import {
   Text,
 } from '@chakra-ui/react';
 
-import Label from '../Label';
+import Label from '@components/Label';
+import { FadeUpAnimation } from '@utils/animations';
+import { formatDate } from '@utils/date';
+import { MotionBox } from '@utils/MotionElements';
 import placeholder from 'public/images/placeholder.jpeg';
-import { Game } from 'types';
-import { FadeUpAnimation } from 'utils/animations';
-import { formatDate } from 'utils/date';
-import { MotionBox } from 'utils/MotionElements';
 
 interface Props {
   game: Game;

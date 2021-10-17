@@ -1,13 +1,15 @@
-import { User as firebaseUser } from 'firebase/auth';
+import { User as SupabaseUser } from '@supabase/supabase-js';
+
 import { User } from './types';
 
-export const formatUser = (firebaseUser: firebaseUser): User => {
+export const formatUser = (supabaseUser: SupabaseUser): User => {
   const user = {
-    uid: firebaseUser.uid,
-    email: firebaseUser.email,
-    name: firebaseUser.displayName,
-    provider: firebaseUser.providerData[0].providerId,
-    photoUrl: firebaseUser.photoURL,
+    uid: supabaseUser.id,
+    email: supabaseUser.email,
+    name:
+      supabaseUser.user_metadata?.name || supabaseUser.user_metadata?.full_name,
+    provider: supabaseUser.app_metadata.provider,
+    photoUrl: supabaseUser.user_metadata?.avatar_url,
   };
 
   return user;

@@ -10,10 +10,10 @@ import {
   Text,
 } from '@chakra-ui/react';
 
-import { ButtonWithIcon } from '@/components/Buttons';
-import { CustomInput } from '@/components/Input';
+import { ButtonWithIcon } from '@components/Buttons';
+import { CustomInput } from '@components/Input';
+import { useAuth } from '@lib/auth';
 import SocialAuthProviders from './SocialAuthProviders';
-import { useAuth } from '../../lib/auth';
 import { checkEmail, checkName, checkPassword } from './helper';
 import { SignupForm } from './types';
 
@@ -50,7 +50,7 @@ const Signup: FunctionComponent = () => {
         title: 'Signup Failed.',
         variant: 'subtle',
       });
-      console.log(`Error while signing up ${e}`);
+      console.error(e);
     }
   };
 

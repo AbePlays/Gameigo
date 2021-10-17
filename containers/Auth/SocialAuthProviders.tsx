@@ -1,8 +1,8 @@
 import { FunctionComponent, ReactNode } from 'react';
 import { useToast } from '@chakra-ui/react';
 
-import { BrandButton } from '@/components/Buttons';
-import { useAuth } from '../../lib/auth';
+import { BrandButton } from '@components/Buttons';
+import { useAuth } from '@lib/auth';
 import { SOCIALAUTHPROVIDERS } from './constant';
 import { SocialAuthProvider } from './types';
 
@@ -68,7 +68,7 @@ const SocialAuthProviders: FunctionComponent = () => {
         title: 'Signin Failed.',
         variant: 'subtle',
       });
-      console.log(`Error while signing in with Google ${e}`);
+      console.error(e);
     }
   };
 
@@ -92,7 +92,7 @@ const SocialAuthProviders: FunctionComponent = () => {
         title: 'Signin Failed.',
         variant: 'subtle',
       });
-      console.log(`Error while signing in with Github ${e}`);
+      console.error(e);
     }
   };
 

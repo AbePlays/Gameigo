@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { getUserData } from 'lib/db-admin';
+import { getUserData } from 'lib/db';
 
 export default async (
   req: NextApiRequest,

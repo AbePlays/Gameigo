@@ -15,16 +15,15 @@ import {
   SimpleGrid,
 } from '@chakra-ui/react';
 
-import BoxWithDivider from '@/components/BoxWithDivider';
-import CustomLink from '@/components/CustomLink';
-import GameContent from '@/components/GameContent';
-import Store from '@/components/Store';
-import Page from '../Page';
-import { useAuth } from 'lib/auth';
-import { addGame, checkGame, deleteGame } from 'lib/db';
-import { GameInfo, Screenshots } from 'types';
-import { formatDate } from 'utils/date';
-import { convertToGame } from 'utils/game';
+import BoxWithDivider from '@components/BoxWithDivider';
+import CustomLink from '@components/CustomLink';
+import GameContent from '@components/GameContent';
+import Store from '@components/Store';
+import Page from '@containers/Page';
+import { useAuth } from '@lib/auth';
+import { addGame, checkGame, deleteGame } from '@lib/db';
+import { formatDate } from '@utils/date';
+import { convertToGame } from '@utils/game';
 
 interface Props {
   game: GameInfo;

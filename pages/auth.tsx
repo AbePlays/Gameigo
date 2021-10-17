@@ -2,10 +2,10 @@ import { FunctionComponent, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useColorMode, Box, Button, Text } from '@chakra-ui/react';
 
-import Loader from '@/components/Loader';
-import { Login, Signup } from '@/containers/Auth';
-import Page from '@/containers/Page';
-import { useAuth } from 'lib/auth';
+import Loader from '@components/Loader';
+import { Login, Signup } from '@containers/Auth';
+import Page from '@containers/Page';
+import { useAuth } from '@lib/auth';
 import { Routes } from 'routes';
 import { Descriptions } from 'seo';
 

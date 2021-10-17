@@ -2,20 +2,20 @@ import { FunctionComponent } from 'react';
 import { CloseIcon } from '@chakra-ui/icons';
 import { Button, Icon } from '@chakra-ui/react';
 
-import CustomLink from '../CustomLink';
-import { useAuth } from 'lib/auth';
-import {
-  MotionBox,
-  MotionFlex,
-  MotionListItem,
-  MotionUnorderedList,
-} from 'utils/MotionElements';
+import CustomLink from '@components/CustomLink';
+import { useAuth } from '@lib/auth';
 import {
   CloseButtonAnimation,
   MoveDownAnimation,
   NavbarItemAnimation,
   NavbarListAnimation,
-} from 'utils/animations';
+} from '@utils/animations';
+import {
+  MotionBox,
+  MotionFlex,
+  MotionListItem,
+  MotionUnorderedList,
+} from '@utils/MotionElements';
 
 interface Props {
   onClick: () => void;

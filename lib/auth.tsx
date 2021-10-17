@@ -6,24 +6,13 @@ import {
   FunctionComponent,
 } from 'react';
 import { useRouter } from 'next/router';
-import {
-  createUserWithEmailAndPassword,
-  GithubAuthProvider,
-  GoogleAuthProvider,
-  onIdTokenChanged,
-  signInWithEmailAndPassword,
-  signInWithPopup,
-  updatePassword,
-  updateProfile,
-  User as firebaseUser,
-} from 'firebase/auth';
 import { useToast } from '@chakra-ui/react';
-import nookies from 'nookies';
+import { User as SupabaseUser } from '@supabase/supabase-js';
 
-import { Routes } from '../routes';
+import { Routes } from 'routes';
 import { createUser } from './db';
-import { auth } from './firebase';
 import { formatUser } from './helper';
+import supabase from './supabase';
 import { AuthContextType, User } from './types';
 
 const AuthContext = createContext<AuthContextType>(null);
@@ -42,17 +31,18 @@ export const useAuth = (): AuthContextType => {
 };
 
 const useProvideAuth = () => {
+  const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
   const [user, setUser] = useState<User>(null);
-  const router = useRouter();
   const toast = useToast();
 
-  const handleFirebaseUser = async (firebaseUser: firebaseUser) => {
-    await createUser(firebaseUser.uid, formatUser(firebaseUser));
-    setUser(formatUser(firebaseUser));
+  const handleUser = async (supabaseUser: SupabaseUser) => {
+    const user = formatUser(supabaseUser);
+    await createUser(supabaseUser?.id, user);
+    setUser(user);
     setLoading(false);
     router.replace(Routes.HOME_SCREEN);
-    return firebaseUser;
+    return supabaseUser;
   };
 
   const signupWithEmailAndPassword = async (
@@ -61,31 +51,54 @@ const useProvideAuth = () => {
     name: string
   ) => {
     setLoading(true);
-    await createUserWithEmailAndPassword(auth, email, password);
-    await updateProfile(auth.currentUser, { displayName: name });
-    return handleFirebaseUser(auth.currentUser);
+    const { error } = await supabase.auth.signUp({ email, password });
+    if (error) {
+      throw new Error(error.message);
+    }
+
+    const { user, error: newError } = await supabase.auth.update({
+      data: { name },
+    });
+    if (newError) {
+      throw new Error(newError.message);
+    }
+    if (user) handleUser(user);
   };
 
   const signinWithGoogle = async () => {
     setLoading(true);
-    const res = await signInWithPopup(auth, new GoogleAuthProvider());
-    return handleFirebaseUser(res.user);
+    const { error } = await supabase.auth.signIn({
+      provider: 'google',
+    });
+    if (error) {
+      throw new Error(error.message);
+    }
   };
 
   const signinWithGithub = async () => {
     setLoading(true);
-    const res = await signInWithPopup(auth, new GithubAuthProvider());
-    return handleFirebaseUser(res.user);
+    const { error } = await supabase.auth.signIn({
+      provider: 'github',
+    });
+    if (error) {
+      throw new Error(error.message);
+    }
   };
 
   const loginWithEmailAndPassword = async (email: string, password: string) => {
     setLoading(true);
-    const res = await signInWithEmailAndPassword(auth, email, password);
-    return handleFirebaseUser(res.user);
+    const { error } = await supabase.auth.signIn({ email, password });
+    if (error) {
+      throw new Error(error.message);
+    }
   };
 
   const signout = async () => {
-    await auth.signOut();
+    setLoading(true);
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      throw new Error(error.message);
+    }
     toast({
       duration: 2000,
       isClosable: true,
@@ -94,48 +107,48 @@ const useProvideAuth = () => {
       title: 'Logout Successful.',
       variant: 'subtle',
     });
-    setUser(null);
+    setLoading(false);
   };
 
   const changePassword = async (newPassword: string) => {
-    const user = auth.currentUser;
-    return updatePassword(user, newPassword);
+    const { error } = await supabase.auth.update({ password: newPassword });
+    if (error) {
+      throw new Error(error.message);
+    }
   };
 
   const changeDisplayName = async (newName: string) => {
-    const user = auth.currentUser;
-    return updateProfile(user, { displayName: newName });
+    const { error } = await supabase.auth.update({ data: { name: newName } });
+    if (error) {
+      throw new Error(error.message);
+    }
   };
 
   useEffect(() => {
     setLoading(true);
-    const unsubscribe = onIdTokenChanged(auth, async (user) => {
-      let sessionTimeout = null;
-      if (user) {
-        const res = await user.getIdTokenResult();
-        const userData = formatUser(user);
-        const token = res.token;
-        userData.token = token;
-        nookies.set(undefined, 'token', token, { path: '/' });
-        const authTime = Number(res.claims.auth_time) * 1000;
-        const sessionDuration = 1000 * 60 * 60 * 24; // 24 hours
-        const millisecondsUntilExpiration =
-          sessionDuration - (Date.now() - authTime);
-        sessionTimeout = setTimeout(
-          () => auth.signOut(),
-          millisecondsUntilExpiration
-        );
-        setUser(userData);
-      } else {
-        nookies.set(undefined, 'token', '', { path: '/' });
-        setUser(null);
-        sessionTimeout && clearTimeout(sessionTimeout);
-        sessionTimeout = null;
-      }
-      setLoading(false);
-    });
 
-    return () => unsubscribe();
+    const session = supabase.auth.session();
+    if (session) {
+      setUser(formatUser(session?.user));
+    }
+
+    setLoading(false);
+  }, []);
+
+  useEffect(() => {
+    const { data: authListener } = supabase.auth.onAuthStateChange(
+      (event, session) => {
+        if (event === 'SIGNED_IN') {
+          handleUser(session?.user);
+        } else if (event === 'SIGNED_OUT') {
+          setUser(null);
+        }
+      }
+    );
+
+    return () => {
+      authListener.unsubscribe();
+    };
   }, []);
 
   return {

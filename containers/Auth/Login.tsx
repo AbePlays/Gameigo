@@ -10,10 +10,10 @@ import {
   Text,
 } from '@chakra-ui/react';
 
-import { ButtonWithIcon } from '@/components/Buttons';
-import { CustomInput } from '@/components/Input';
+import { ButtonWithIcon } from '@components/Buttons';
+import { CustomInput } from '@components/Input';
+import { useAuth } from '@lib/auth';
 import SocialAuthProviders from './SocialAuthProviders';
-import { useAuth } from 'lib/auth';
 import { checkEmail, checkPassword } from './helper';
 import { LoginForm } from './types';
 
@@ -50,7 +50,7 @@ const Login: FunctionComponent = () => {
         title: 'Login Failed.',
         variant: 'subtle',
       });
-      console.log(`Error while logging in ${e}`);
+      console.error(e);
     }
   };
 

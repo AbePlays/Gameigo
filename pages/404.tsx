@@ -1,9 +1,9 @@
 import { FunctionComponent } from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import { Box, Button, Heading, Text, useColorMode } from '@chakra-ui/react';
 
-import Page from '@/containers/Page';
-import { useRouter } from 'next/router';
+import Page from '@containers/Page';
 
 const Error: FunctionComponent = () => {
   const { colorMode } = useColorMode();

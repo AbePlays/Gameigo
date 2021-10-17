@@ -4,7 +4,7 @@ import { ColorModeScript } from '@chakra-ui/react';
 import theme from '../styles/theme';
 
 class MyDocument extends Document {
-  siteLink = 'https://gameigo.com';
+  siteLink = 'https://gameigo.vercel.app';
 
   render() {
     return (

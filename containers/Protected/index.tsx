@@ -1,8 +1,8 @@
 import { FunctionComponent, useEffect } from 'react';
 import { useRouter } from 'next/router';
 
-import Loader from '@/components/Loader';
-import { useAuth } from 'lib/auth';
+import Loader from '@components/Loader';
+import { useAuth } from '@lib/auth';
 
 interface Props {
   redirectUrl: string;

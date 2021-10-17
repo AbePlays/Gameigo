@@ -1,12 +1,9 @@
-import firebase from './firebase';
-
 export type User = {
   uid: string;
   email: string;
   name: string;
   provider: string;
   photoUrl: string;
-  token?: string;
 };
 
 export type AuthContextType = {
@@ -18,12 +15,9 @@ export type AuthContextType = {
     email: string,
     password: string,
     name: string
-  ) => Promise<firebase.User>;
-  loginWithEmailAndPassword: (
-    email: string,
-    password: string
-  ) => Promise<firebase.User>;
-  signinWithGoogle: () => Promise<firebase.User>;
-  signinWithGithub: () => Promise<firebase.User>;
+  ) => Promise<void>;
+  loginWithEmailAndPassword: (email: string, password: string) => Promise<void>;
+  signinWithGoogle: () => Promise<void>;
+  signinWithGithub: () => Promise<void>;
   signout: () => Promise<void>;
 };
