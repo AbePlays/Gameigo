@@ -2,11 +2,11 @@ import { FunctionComponent } from 'react';
 import NextLink from 'next/link';
 import { useColorMode, Link, Stack, Text } from '@chakra-ui/react';
 
-import AboutCard from '@/components/AboutCard';
-import Page from '@/containers/Page';
+import AboutCard from '@components/AboutCard';
+import Page from '@containers/Page';
+import { FadeUpAnimation } from '@utils/animations';
+import { MotionStack } from '@utils/MotionElements';
 import { Descriptions } from 'seo';
-import { FadeUpAnimation } from 'utils/animations';
-import { MotionStack } from 'utils/MotionElements';
 
 const About: FunctionComponent = () => {
   const { colorMode } = useColorMode();

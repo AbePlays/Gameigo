@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { Form, Formik, FormikHelpers } from 'formik';
 import {
   useColorMode,
+  useToast,
   Avatar,
   Box,
   Button,
@@ -10,19 +11,17 @@ import {
   Flex,
   Heading,
   Stack,
-  useToast,
   Text,
 } from '@chakra-ui/react';
 
-import { ButtonWithIcon } from '@/components/Buttons';
-import { CustomInput } from '@/components/Input';
-import { checkName, checkPassword } from '@/containers/Auth/helper';
-import Page from '@/containers/Page';
-import ProtectedRoute from '@/containers/Protected';
-import { useAuth } from 'lib/auth';
+import { ButtonWithIcon } from '@components/Buttons';
+import { CustomInput } from '@components/Input';
+import { checkName, checkPassword } from '@containers/Auth/helper';
+import Page from '@containers/Page';
+import ProtectedRoute from '@containers/Protected';
+import { useAuth } from '@lib/auth';
 import { Routes } from 'routes';
 import { Descriptions } from 'seo';
-import { ProfileForm } from 'types';
 
 const BackArrow = () => (
   <svg

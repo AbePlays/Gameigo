@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 
-import Store from '@/components/Store';
+import Store from '@components/Store';
 
 const testName = 'TEST_NAME';
 const testUrl = 'TEST_URL';

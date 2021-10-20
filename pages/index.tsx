@@ -1,18 +1,24 @@
 import { FunctionComponent, useEffect } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { useColorMode } from '@chakra-ui/color-mode';
 import { ChevronRightIcon } from '@chakra-ui/icons';
-import { Box, Flex, Heading, Stack, Text } from '@chakra-ui/layout';
+import {
+  useColorMode,
+  Box,
+  Flex,
+  Heading,
+  Stack,
+  Text,
+} from '@chakra-ui/react';
 
-import { ButtonWithIcon } from '@/components/Buttons';
-import ProductInfo from '@/components/ProductInfo';
-import Page from '@/containers/Page';
-import homeDark from '../public/images/home.png';
-import easy from '../public/images/easy.png';
-import free from '../public/images/free.png';
-import vision from '../public/images/vision.png';
-import { useAuth } from 'lib/auth';
+import { ButtonWithIcon } from '@components/Buttons';
+import ProductInfo from '@components/ProductInfo';
+import Page from '@containers/Page';
+import { useAuth } from '@lib/auth';
+import homeDark from 'public/images/home.png';
+import easy from 'public/images/easy.png';
+import free from 'public/images/free.png';
+import vision from 'public/images/vision.png';
 import { Routes } from 'routes';
 import { Descriptions } from 'seo';
 
@@ -20,8 +26,8 @@ const width = 500;
 const height = 500;
 
 const Home: FunctionComponent = () => {
-  const { colorMode } = useColorMode();
   const { loading, user } = useAuth();
+  const { colorMode } = useColorMode();
   const router = useRouter();
   const isDarkMode = colorMode === 'dark';
 

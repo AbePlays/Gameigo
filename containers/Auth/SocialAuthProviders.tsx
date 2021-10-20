@@ -1,8 +1,8 @@
 import { FunctionComponent, ReactNode } from 'react';
 import { useColorMode, useToast } from '@chakra-ui/react';
 
-import { BrandButton } from '@/components/Buttons';
-import { useAuth } from '../../lib/auth';
+import { BrandButton } from '@components/Buttons';
+import { useAuth } from '@lib/auth';
 import { SOCIALAUTHPROVIDERS } from './constant';
 import { SocialAuthProvider } from './types';
 

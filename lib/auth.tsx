@@ -18,9 +18,8 @@ import {
   User as firebaseUser,
 } from 'firebase/auth';
 import { useColorMode, useToast } from '@chakra-ui/react';
-import nookies from 'nookies';
 
-import { Routes } from '../routes';
+import { Routes } from 'routes';
 import { createUser } from './db';
 import { auth } from './firebase';
 import { formatUser } from './helper';
@@ -119,7 +118,6 @@ const useProvideAuth = () => {
         const userData = formatUser(user);
         const token = res.token;
         userData.token = token;
-        nookies.set(undefined, 'token', token, { path: '/' });
         const authTime = Number(res.claims.auth_time) * 1000;
         const sessionDuration = 1000 * 60 * 60 * 24; // 24 hours
         const millisecondsUntilExpiration =
@@ -130,7 +128,6 @@ const useProvideAuth = () => {
         );
         setUser(userData);
       } else {
-        nookies.set(undefined, 'token', '', { path: '/' });
         setUser(null);
         sessionTimeout && clearTimeout(sessionTimeout);
         sessionTimeout = null;

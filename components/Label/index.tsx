@@ -8,6 +8,7 @@ interface Props {
 const Label: FunctionComponent<Props> = ({ title }) => {
   const { colorMode } = useColorMode();
   const isDarkMode = colorMode === 'dark';
+
   return (
     <Box
       bg={isDarkMode ? 'light-bg-primary' : 'dark-bg-primary'}

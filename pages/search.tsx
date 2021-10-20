@@ -2,9 +2,9 @@ import { FunctionComponent, useRef, useState } from 'react';
 import Image from 'next/image';
 import { Box, Heading, Text } from '@chakra-ui/react';
 
-import Input from '@/components/Input';
-import SearchResult from '@/components/SearchResult';
-import Page from '@/containers/Page';
+import Input from '@components/Input';
+import SearchResult from '@components/SearchResult';
+import Page from '@containers/Page';
 import img from 'public/images/search_hero.jpeg';
 import { Descriptions } from 'seo';
 

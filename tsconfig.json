@@ -5,8 +5,10 @@
     "allowJs": true,
     "baseUrl": ".",
     "paths": {
-      "@/components/*": ["components/*"],
-      "@/containers/*": ["containers/*"]
+      "@components/*": ["components/*"],
+      "@containers/*": ["containers/*"],
+      "@lib/*": ["lib/*"],
+      "@utils/*": ["utils/*"]
     },
     "skipLibCheck": true,
     "strict": false,
@@ -17,7 +19,8 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "typeRoots": ["node_modules/@types", "types"]
   },
   "include": [
     "next-env.d.ts",

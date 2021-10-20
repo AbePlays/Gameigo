@@ -5,7 +5,7 @@ interface Props {
   heading: string;
 }
 
-const GameContent: FunctionComponent<Props> = ({ heading, children }) => {
+const GameContent: FunctionComponent<Props> = ({ children, heading }) => {
   return (
     <Box>
       <Heading as="h2" mb="2">

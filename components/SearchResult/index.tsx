@@ -2,12 +2,12 @@ import { FunctionComponent } from 'react';
 import useSWR from 'swr';
 import { useColorMode, useToast, Stack, Text } from '@chakra-ui/react';
 
-import { ButtonWithIcon } from '@/components/Buttons';
-import GameCard from '@/components/GameCard';
-import Loader from '@/components/Loader';
-import { FadeUpAnimation } from 'utils/animations';
-import fetcher from 'utils/fetcher';
-import { MotionSimpleGrid } from 'utils/MotionElements';
+import { ButtonWithIcon } from '@components/Buttons';
+import GameCard from '@components/GameCard';
+import Loader from '@components/Loader';
+import { FadeUpAnimation } from '@utils/animations';
+import fetcher from '@utils/fetcher';
+import { MotionSimpleGrid } from '@utils/MotionElements';
 
 interface Props {
   onNext: () => void;

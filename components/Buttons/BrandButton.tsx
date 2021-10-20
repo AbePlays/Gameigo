@@ -1,17 +1,13 @@
 import { FunctionComponent, ReactNode } from 'react';
 import { useColorMode, Button, Text } from '@chakra-ui/react';
 
-interface BrandButtonProps {
+interface Props {
   icon: ReactNode;
   onClick?: () => void;
   title: string;
 }
 
-const BrandButton: FunctionComponent<BrandButtonProps> = ({
-  icon,
-  onClick,
-  title,
-}) => {
+const BrandButton: FunctionComponent<Props> = ({ icon, onClick, title }) => {
   const { colorMode } = useColorMode();
   const isDarkMode = colorMode === 'dark';
 
@@ -24,9 +20,7 @@ const BrandButton: FunctionComponent<BrandButtonProps> = ({
       justifyContent="flex-start"
       onClick={onClick}
       variant="outline"
-      _hover={{
-        transform: 'scale(0.99)',
-      }}
+      _hover={{ transform: 'scale(0.99)' }}
     >
       {icon}
       <Text ml="8">{title}</Text>

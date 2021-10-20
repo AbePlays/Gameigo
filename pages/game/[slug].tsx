@@ -1,10 +1,9 @@
 import { FunctionComponent } from 'react';
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next';
 
-import GameDetail from '@/containers/GameDetail';
+import GameDetail from '@containers/GameDetail';
+import { convertToGameInfo } from '@utils/game';
 import { Endpoints } from 'endpoints';
-import { GameInfo, Screenshots } from 'types';
-import { convertToGameInfo } from 'utils/game';
 
 interface Props {
   data: {

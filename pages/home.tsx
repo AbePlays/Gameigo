@@ -1,14 +1,13 @@
 import { FunctionComponent } from 'react';
 import { GetStaticProps } from 'next';
-import { Heading, Text } from '@chakra-ui/layout';
+import { Heading, Text } from '@chakra-ui/react';
 
-import Page from '@/containers/Page';
-import GameCard from '@/components/GameCard';
+import Page from '@containers/Page';
+import GameCard from '@components/GameCard';
+import { FadeUpAnimation } from '@utils/animations';
+import { MotionSimpleGrid } from '@utils/MotionElements';
 import { Endpoints } from 'endpoints';
 import { Descriptions } from 'seo';
-import { Game } from 'types';
-import { FadeUpAnimation } from 'utils/animations';
-import { MotionSimpleGrid } from 'utils/MotionElements';
 
 interface Props {
   games: Game[];

@@ -2,18 +2,17 @@ import { FunctionComponent } from 'react';
 import { useColorMode, useToast, Heading } from '@chakra-ui/react';
 import useSWR from 'swr';
 
-import Loader from '@/components/Loader';
-import GameCard from '@/components/GameCard';
-import NoData from '@/components/NoData';
-import Page from '@/containers/Page';
-import ProtectedRoute from '@/containers/Protected';
-import { useAuth } from 'lib/auth';
+import Loader from '@components/Loader';
+import GameCard from '@components/GameCard';
+import NoData from '@components/NoData';
+import Page from '@containers/Page';
+import ProtectedRoute from '@containers/Protected';
+import { useAuth } from '@lib/auth';
+import { FadeUpAnimation } from '@utils/animations';
+import fetcher from '@utils/fetcher';
+import { MotionSimpleGrid } from '@utils/MotionElements';
 import { Routes } from 'routes';
 import { Descriptions } from 'seo';
-import { Game } from 'types';
-import { FadeUpAnimation } from 'utils/animations';
-import fetcher from 'utils/fetcher';
-import { MotionSimpleGrid } from 'utils/MotionElements';
 
 const Favorites: FunctionComponent = () => {
   const { user } = useAuth();

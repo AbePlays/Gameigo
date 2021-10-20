@@ -1,4 +1,4 @@
-import { validateEmail, validatePassword } from '../../utils/auth';
+import { validateEmail, validatePassword } from '@utils/auth';
 
 export const checkEmail = (value: string): string => {
   let error: string;
