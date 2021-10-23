@@ -229,7 +229,34 @@ const GameDetail: FunctionComponent<Props> = ({ game, screenshots }) => {
 
   return (
     <Box bg="black" color="white" position="relative">
-      <Box pos="absolute" inset="0">
+      <Box position="absolute" top={['4', '4', '12']} w="full" zIndex="1">
+        <Flex
+          alignItems="center"
+          justifyContent="space-between"
+          maxW="1120px"
+          mx="auto"
+          px="4"
+        >
+          <Box w="8" as="button" onClick={clickHandler}>
+            <BackArrow />
+          </Box>
+          <Flex alignItems="center" justifyContent="center">
+            {user ? (
+              <Box w="7" as="button" onClick={onClickHandler} mr="2">
+                {isFav ? <HeartFilled /> : <HeartOutline />}
+              </Box>
+            ) : null}
+            <IconButton
+              aria-label="Share"
+              icon={<LinkIcon />}
+              fontSize="2xl"
+              onClick={copyLink}
+              variant="unstyled"
+            />
+          </Flex>
+        </Flex>
+      </Box>
+      <Box display={['none', 'none', 'block']} pos="absolute" inset="0">
         <Box
           w="100%"
           h="calc(100vh - 64px)"
@@ -245,32 +272,23 @@ const GameDetail: FunctionComponent<Props> = ({ game, screenshots }) => {
           />
         </Box>
       </Box>
+      <Box display={['block', 'block', 'none']} h="300px" position="relative">
+        <Image
+          src={game.background_image}
+          layout="fill"
+          objectFit="cover"
+          objectPosition="top"
+          alt="game background"
+        />
+      </Box>
       <Box position="relative" zIndex="10">
         <Page
           description={game.description_raw}
           imageUrl={game.background_image}
+          pt={['0', '0', '24']}
           siteLink={`/game/${game.slug}`}
           title={game.name}
         >
-          <Flex justifyContent="space-between" alignItems="center">
-            <Box w="8" as="button" onClick={clickHandler}>
-              <BackArrow />
-            </Box>
-            <Flex alignItems="center" justifyContent="center">
-              {user ? (
-                <Box w="7" as="button" onClick={onClickHandler} mr="2">
-                  {isFav ? <HeartFilled /> : <HeartOutline />}
-                </Box>
-              ) : null}
-              <IconButton
-                aria-label="Share"
-                icon={<LinkIcon />}
-                fontSize="2xl"
-                onClick={copyLink}
-                variant="unstyled"
-              />
-            </Flex>
-          </Flex>
           <Stack spacing="4" mt="4">
             <Heading as="h1" fontSize={['4xl', '5xl']}>
               {game.name}
