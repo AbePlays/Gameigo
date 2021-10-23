@@ -69,12 +69,10 @@ const GameCard: FunctionComponent<Props> = ({ game }) => {
       rounded="lg"
       shadow="lg"
       variants={FadeUpAnimation.child}
-      whileHover={{
-        scale: 1.01,
-      }}
+      whileHover={{ scale: 1.01 }}
     >
       <Box h="56" position="relative">
-        {!showImage && <Skeleton h="full" />}
+        {!showImage && <Skeleton speed={2} h="full" />}
         <Image
           src={game?.background_image || placeholder}
           alt="game background"
