@@ -65,12 +65,14 @@ const Search: FunctionComponent = () => {
           </Text>
         </Box>
       </Box>
-      <SearchResult
-        query={query}
-        page={page}
-        onNext={incrementPage}
-        onPrevious={decrementPage}
-      />
+      {query ? (
+        <SearchResult
+          query={query}
+          page={page}
+          onNext={incrementPage}
+          onPrevious={decrementPage}
+        />
+      ) : null}
     </Page>
   );
 };

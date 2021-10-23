@@ -24,7 +24,6 @@ const SearchResult: FunctionComponent<Props> = ({
 }) => {
   const { colorMode } = useColorMode();
   const isDarkMode = colorMode === 'dark';
-  if (!query) return null;
 
   window.scrollTo(0, 0);
 
