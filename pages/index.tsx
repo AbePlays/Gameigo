@@ -45,6 +45,7 @@ const Home: FunctionComponent = () => {
       title="Welcome"
       description={Descriptions.Welcome}
       maxWidth="1536px"
+      pt="8"
       px="0"
       py="0"
     >
