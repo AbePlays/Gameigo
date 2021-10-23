@@ -3,14 +3,12 @@ import { arrayUnion, doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
 import { db } from './firebase';
 import { User } from './types';
 
-export const createUser = async (uid: string, data: User): Promise<any> => {
-  console.log(uid);
-  const docRef = doc(db, 'users', uid);
+export const createUser = async (user: User): Promise<any> => {
+  const docRef = doc(db, 'users', user.uid);
   const docSnap = await getDoc(docRef);
   if (!docSnap.exists()) {
-    return setDoc(doc(db, 'users', uid), {
-      uid,
-      ...data,
+    return setDoc(doc(db, 'users', user.uid), {
+      ...user,
       favorites: [],
     });
   }
