@@ -13,8 +13,16 @@ interface Props {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
+  const res = await fetch(Endpoints.TRENDING_GAMES);
+  const data = await res.json();
+  let paths = [{ params: { slug: 'cyberpunk-2077' } }];
+  if (data && data.results && data.results.length > 0) {
+    paths = data?.results?.map((game: Game) => ({
+      params: { slug: game.slug },
+    }));
+  }
   return {
-    paths: [{ params: { slug: 'cyberpunk-2077' } }],
+    paths,
     fallback: 'blocking',
   };
 };
