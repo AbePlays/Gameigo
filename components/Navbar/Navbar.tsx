@@ -63,7 +63,7 @@ const Navbar: FunctionComponent<Props> = ({ setShowContent }) => {
                 onClick={toggleNav}
               />
             </Box>
-            <NextLink href={user ? '/home' : '/'} passHref>
+            <NextLink href="/home" passHref>
               <Link
                 letterSpacing="widest"
                 textDecoration="none"
