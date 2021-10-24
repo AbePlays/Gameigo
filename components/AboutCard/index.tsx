@@ -1,8 +1,8 @@
 import { FunctionComponent } from 'react';
 import { useColorMode, Box, Text } from '@chakra-ui/react';
 
-import { FadeUpAnimation } from 'utils/animations';
-import { MotionBox } from 'utils/MotionElements';
+import { FadeUpAnimation } from '@utils/animations';
+import { MotionBox } from '@utils/MotionElements';
 
 interface Props {
   heading: string;

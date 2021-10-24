@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 
-import NoData from '@/components/NoData';
+import NoData from '@components/NoData';
 
 const testTitle = 'TEST_TITLE';
 

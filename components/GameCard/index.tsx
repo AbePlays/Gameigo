@@ -14,10 +14,9 @@ import {
 
 import Label from '../Label';
 import placeholder from 'public/images/placeholder.jpeg';
-import { Game } from 'types';
-import { FadeUpAnimation } from 'utils/animations';
-import { formatDate } from 'utils/date';
-import { MotionBox } from 'utils/MotionElements';
+import { FadeUpAnimation } from '@utils/animations';
+import { formatDate } from '@utils/date';
+import { MotionBox } from '@utils/MotionElements';
 
 interface Props {
   game: Game;
@@ -25,8 +24,8 @@ interface Props {
 
 const GameCard: FunctionComponent<Props> = ({ game }) => {
   const { colorMode } = useColorMode();
-  const [showImage, setShowImage] = useState<boolean>(false);
   const router = useRouter();
+  const [showImage, setShowImage] = useState<boolean>(false);
 
   const isDarkMode = colorMode === 'dark';
   const toggleImage = () => setShowImage(true);
@@ -70,12 +69,10 @@ const GameCard: FunctionComponent<Props> = ({ game }) => {
       rounded="lg"
       shadow="lg"
       variants={FadeUpAnimation.child}
-      whileHover={{
-        scale: 1.01,
-      }}
+      whileHover={{ scale: 1.01 }}
     >
       <Box h="56" position="relative">
-        {!showImage && <Skeleton h="full" />}
+        {!showImage && <Skeleton speed={2} h="full" />}
         <Image
           src={game?.background_image || placeholder}
           alt="game background"

@@ -1,8 +1,8 @@
 import { FunctionComponent } from 'react';
 import Head from 'next/head';
 
-import { PageAnimation } from 'utils/animations';
-import { MotionBox } from 'utils/MotionElements';
+import { PageAnimation } from '@utils/animations';
+import { MotionBox } from '@utils/MotionElements';
 
 interface Props {
   description?: string;

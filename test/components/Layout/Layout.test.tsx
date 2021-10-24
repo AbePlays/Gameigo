@@ -1,6 +1,6 @@
-import { Text } from '@chakra-ui/layout';
+import { Text } from '@chakra-ui/react';
 
-import Layout from '@/components/Layout';
+import Layout from '@components/Layout';
 import { render, screen } from '../../test-utils';
 
 describe('Testing Layout Component', () => {

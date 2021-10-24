@@ -1,7 +1,7 @@
-const fetcher = async (url: string, uid?: string): Promise<any> => {
+const fetcher = async (url: string, token?: string): Promise<any> => {
   const res = await fetch(url, {
     method: 'GET',
-    headers: new Headers({ 'Content-Type': 'application/json', uid }),
+    headers: new Headers({ 'Content-Type': 'application/json', token }),
     credentials: 'same-origin',
   });
 

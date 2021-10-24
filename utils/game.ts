@@ -1,5 +1,3 @@
-import { Game, GameInfo } from 'types';
-
 export const convertToGameInfo = (data: any): GameInfo => {
   const game = {
     background_image: data?.background_image,

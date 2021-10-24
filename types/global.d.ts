@@ -1,8 +1,8 @@
-export type Platform = { id: number; slug: string; name: string };
+type Platform = { id: number; slug: string; name: string };
 
-export type Genre = { id: number; name: string };
+type Genre = { id: number; name: string };
 
-export type Game = {
+type Game = {
   background_image: string;
   genres: Genre[];
   id: number;
@@ -12,23 +12,23 @@ export type Game = {
   slug: string;
 };
 
-export type Store = {
+type Store = {
   id: number;
   store: { id: number; name: string; domain: string };
 };
 
-export type Screenshots = {
+type Screenshots = {
   count: number;
   results: { id: number; image: string; width: number; height: number }[];
 };
 
-export type Publisher = {
+type Publisher = {
   id: number;
   name: string;
   slug: string;
 };
 
-export type GameInfo = {
+type GameInfo = {
   background_image: string;
   description: string;
   description_raw: string;
@@ -45,7 +45,7 @@ export type GameInfo = {
   website: string;
 };
 
-export type ProfileForm = {
+type ProfileForm = {
   name: string;
   password: string;
 };

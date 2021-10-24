@@ -3,8 +3,8 @@ module.exports = {
   moduleDirectories: ['node_modules', 'components', 'containers'],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'json', 'jsx'],
   moduleNameMapper: {
-    '^@/components(.*)$': '<rootDir>/components$1',
-    '^@/containers(.*)$': '<rootDir>/containers$1',
+    '^@components(.*)$': '<rootDir>/components$1',
+    '^@containers(.*)$': '<rootDir>/containers$1',
     '\\.(css|less|sass|scss)$': 'identity-obj-proxy',
     '\\.(gif|ttf|eot|svg|png)$': '<rootDir>/test/__mocks__/fileMock.js',
   },

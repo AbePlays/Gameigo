@@ -1,4 +1,4 @@
-import { BrandButton } from '@/components/Buttons';
+import { BrandButton } from '@components/Buttons';
 import { fireEvent, render, screen } from '../../test-utils';
 
 const title = 'title';

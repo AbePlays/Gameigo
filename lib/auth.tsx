@@ -18,9 +18,8 @@ import {
   User as firebaseUser,
 } from 'firebase/auth';
 import { useColorMode, useToast } from '@chakra-ui/react';
-import nookies from 'nookies';
 
-import { Routes } from '../routes';
+import { Routes } from 'routes';
 import { createUser } from './db';
 import { auth } from './firebase';
 import { formatUser } from './helper';
@@ -51,10 +50,29 @@ const useProvideAuth = () => {
   const isDarkMode = colorMode === 'dark';
 
   const handleFirebaseUser = async (firebaseUser: firebaseUser) => {
-    await createUser(firebaseUser.uid, formatUser(firebaseUser));
-    setUser(formatUser(firebaseUser));
+    let sessionTimeout = null;
+    if (firebaseUser) {
+      const userData = formatUser(firebaseUser);
+      await createUser(userData);
+      const res = await firebaseUser.getIdTokenResult();
+      const token = res.token;
+      userData.token = token;
+      const authTime = Number(res.claims.auth_time) * 1000;
+      const sessionDuration = 1000 * 60 * 60 * 24; // 24 hours
+      const millisecondsUntilExpiration =
+        sessionDuration - (Date.now() - authTime);
+      sessionTimeout = setTimeout(
+        () => auth.signOut(),
+        millisecondsUntilExpiration
+      );
+      setUser(userData);
+      router.replace(Routes.HOME_SCREEN);
+    } else {
+      setUser(null);
+      sessionTimeout && clearTimeout(sessionTimeout);
+      sessionTimeout = null;
+    }
     setLoading(false);
-    router.replace(Routes.HOME_SCREEN);
     return firebaseUser;
   };
 
@@ -113,29 +131,8 @@ const useProvideAuth = () => {
   useEffect(() => {
     setLoading(true);
     const unsubscribe = onIdTokenChanged(auth, async (user) => {
-      let sessionTimeout = null;
-      if (user) {
-        const res = await user.getIdTokenResult();
-        const userData = formatUser(user);
-        const token = res.token;
-        userData.token = token;
-        nookies.set(undefined, 'token', token, { path: '/' });
-        const authTime = Number(res.claims.auth_time) * 1000;
-        const sessionDuration = 1000 * 60 * 60 * 24; // 24 hours
-        const millisecondsUntilExpiration =
-          sessionDuration - (Date.now() - authTime);
-        sessionTimeout = setTimeout(
-          () => auth.signOut(),
-          millisecondsUntilExpiration
-        );
-        setUser(userData);
-      } else {
-        nookies.set(undefined, 'token', '', { path: '/' });
-        setUser(null);
-        sessionTimeout && clearTimeout(sessionTimeout);
-        sessionTimeout = null;
-      }
-      setLoading(false);
+      setLoading(true);
+      handleFirebaseUser(user);
     });
 
     return () => unsubscribe();

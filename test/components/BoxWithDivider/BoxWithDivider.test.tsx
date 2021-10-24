@@ -1,4 +1,4 @@
-import BoxWithDivider from '@/components/BoxWithDivider';
+import BoxWithDivider from '@components/BoxWithDivider';
 import { render, screen } from '../../test-utils';
 
 const renderBox = (id = 0) => {

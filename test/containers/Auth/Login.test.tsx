@@ -1,4 +1,4 @@
-import { Login } from '@/containers/Auth';
+import { Login } from '@containers/Auth';
 import { render, screen } from '../../test-utils';
 
 describe('Testing Login Container', () => {
