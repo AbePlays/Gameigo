@@ -16,15 +16,13 @@ import Loader from '@components/Loader';
 import ProductInfo from '@components/ProductInfo';
 import Page from '@containers/Page';
 import { useAuth } from '@lib/auth';
-import homeDark from 'public/images/home.png';
 import easy from 'public/images/easy.png';
 import free from 'public/images/free.png';
+import hero from 'public/images/hero.png';
+import homeDark from 'public/images/home.png';
 import vision from 'public/images/vision.png';
 import { Routes } from 'routes';
 import { Descriptions } from 'seo';
-
-const width = 500;
-const height = 500;
 
 const Home: FunctionComponent = () => {
   const { loading, user } = useAuth();
@@ -103,12 +101,7 @@ const Home: FunctionComponent = () => {
                 </Stack>
               </Box>
               <Flex flex="1" justifyContent="flex-end">
-                <Image
-                  src="/images/hero.svg"
-                  height={height}
-                  width={width}
-                  alt="man playing on his laptop"
-                />
+                <Image alt="robots smiling" placeholder="blur" src={hero} />
               </Flex>
             </Box>
             <Box mt="24" textAlign="center">
