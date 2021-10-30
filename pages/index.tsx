@@ -132,6 +132,7 @@ const Home: FunctionComponent = () => {
 
                 <Box py="8">
                   <ProductInfo
+                    alt="Two people looking at a lantern"
                     content="Gameigo is a free and open source application backed by a huge
                   database of video games provided by ROG. It supports features
                   such as searching for games, creating collections, and sharing
@@ -140,6 +141,7 @@ const Home: FunctionComponent = () => {
                     title="Free to use and open source"
                   />
                   <ProductInfo
+                    alt="A person sitting and texting"
                     content="Gameigo provides a simple user interface and a simple user
                   experience. The UI is designed to be intuitive and easy to
                   use. The UX is designed to be simple and easy to understand.
@@ -148,6 +150,7 @@ const Home: FunctionComponent = () => {
                     title="Simple UI &amp; UX"
                   />
                   <ProductInfo
+                    alt="A person and a dog looking at a distance"
                     content="Stop jumping from game to game, and stop having to search for
                   games. Gameigo provides everything you need in one place.
                   Manage your collections, discover new games, and share your

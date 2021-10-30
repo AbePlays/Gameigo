@@ -12,11 +12,11 @@ interface Props {
 const NoData: FunctionComponent<Props> = ({ title, ...args }) => {
   return (
     <Box textAlign="center" {...args}>
-      <Box position="relative" py="8">
+      <Box position="relative" py="6">
         <Image
           alt="confused cat"
-          height="300"
-          width="330"
+          height="400"
+          width="350"
           placeholder="blur"
           src={notFound}
         />

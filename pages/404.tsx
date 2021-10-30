@@ -15,15 +15,15 @@ const Error: FunctionComponent = () => {
 
   return (
     <Page title="Page not found" py="0">
-      <Box textAlign="center">
+      <Box textAlign="center" mt="6">
         <Image
           alt="sad robot"
-          height="400"
-          width="400"
+          height="300"
+          width="500"
           placeholder="blur"
           src={error}
         />
-        <Heading>Oh Snap!</Heading>
+        <Heading mt="6">Oh Snap!</Heading>
         <Text
           color={isDarkMode ? 'light-text' : 'dark-text'}
           fontSize="lg"
@@ -37,8 +37,8 @@ const Error: FunctionComponent = () => {
           never existed.
         </Text>
         <Button
-          bg={isDarkMode ? 'light-bg-primary' : 'dark-bg-primary'}
-          color={isDarkMode ? 'dark-text' : 'light-text'}
+          borderColor={isDarkMode ? 'light-bg-primary' : 'dark-bg-primary'}
+          color={isDarkMode ? 'light-text' : 'dark-text'}
           letterSpacing="widest"
           mt="8"
           onClick={goHome}
