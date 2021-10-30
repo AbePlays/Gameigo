@@ -20,7 +20,7 @@ const ProductInfo: FunctionComponent<Props> = ({
 
   return (
     <Box maxWidth="container.sm" mx="auto" my="14" spacing="16" align="center">
-      <Box height="300" width="500px">
+      <Box height="300" maxW="500px">
         <Image alt={alt} src={src} placeholder="blur" />
       </Box>
       <Box>
