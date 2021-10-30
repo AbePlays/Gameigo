@@ -17,7 +17,7 @@ const Error: FunctionComponent = () => {
     <Page title="Page not found" py="0">
       <Box textAlign="center" mt="6">
         <Image
-          alt="sad robot"
+          alt="A pilot watching the sky while sitting in front of his crashed plane"
           height="300"
           width="500"
           placeholder="blur"

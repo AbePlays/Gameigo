@@ -14,7 +14,7 @@ const NoData: FunctionComponent<Props> = ({ title, ...args }) => {
     <Box textAlign="center" {...args}>
       <Box position="relative" py="6">
         <Image
-          alt="confused cat"
+          alt="Two people sat down and looking at a map drawn on sand"
           height="400"
           width="350"
           placeholder="blur"
