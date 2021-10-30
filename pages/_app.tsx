@@ -2,11 +2,14 @@ import { FunctionComponent, useState } from 'react';
 import type { AppProps } from 'next/app';
 import { AnimatePresence } from 'framer-motion';
 import { Box, ChakraProvider } from '@chakra-ui/react';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 import Layout from '@components/Layout';
 import Navbar from '@components/Navbar';
 import { AuthProvider } from '@lib/auth';
 import 'styles/loader.css';
+import 'styles/slider.css';
 import theme from 'styles/theme';
 
 const MyApp: FunctionComponent<AppProps> = ({

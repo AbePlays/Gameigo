@@ -1,6 +1,7 @@
 import { FunctionComponent, useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import Slider from 'react-slick';
 import { LinkIcon } from '@chakra-ui/icons';
 import {
   useColorMode,
@@ -9,7 +10,6 @@ import {
   Flex,
   Heading,
   IconButton,
-  SimpleGrid,
   Stack,
   Text,
   Wrap,
@@ -45,6 +45,17 @@ const CustomDivider = () => {
       rounded="lg"
     />
   );
+};
+
+const settings = {
+  arrows: false,
+  dots: true,
+  dotsClass: 'slider-dots',
+  fade: true,
+  infinite: false,
+  slidesToScroll: 1,
+  slidesToShow: 1,
+  speed: 500,
 };
 
 const GameDetail: FunctionComponent<Props> = ({ game, screenshots }) => {
@@ -115,11 +126,9 @@ const GameDetail: FunctionComponent<Props> = ({ game, screenshots }) => {
   const renderReleasedandPlaytime = () => {
     return (
       <Wrap spacing={[2, 4]}>
-        {game.released ? (
-          <WrapItem bg="white" color="black" px="2" borderRadius="lg">
-            {formatDate(game.released)}
-          </WrapItem>
-        ) : null}
+        <WrapItem bg="white" color="black" px="2" py="0.5" borderRadius="lg">
+          {game.released ? formatDate(game.released) : 'TBA'}
+        </WrapItem>
         {game.playtime > 0 && (
           <WrapItem textTransform="uppercase" letterSpacing="widest">
             Average Playtime: {game.playtime} Hours
@@ -291,25 +300,21 @@ const GameDetail: FunctionComponent<Props> = ({ game, screenshots }) => {
             )}
             {screenshots.count > 0 && (
               <GameContent heading="Screenshots">
-                <SimpleGrid
-                  minChildWidth="320px"
-                  spacingX={[4, 4, 6]}
-                  spacingY="6"
-                >
+                <Slider lazyLoad="ondemand" {...settings}>
                   {screenshots.results.map((item) => {
                     return (
                       <Flex key={item.id} rounded="sm" overflow="hidden">
                         <Image
                           alt={`game-screenshot-${item.id}`}
-                          src={item.image}
+                          height={item.height}
                           width={item.width}
                           objectFit="cover"
-                          height={item.height}
+                          src={item.image}
                         />
                       </Flex>
                     );
                   })}
-                </SimpleGrid>
+                </Slider>
               </GameContent>
             )}
           </Stack>
