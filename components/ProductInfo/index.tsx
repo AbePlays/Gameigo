@@ -3,19 +3,25 @@ import Image from 'next/image';
 import { useColorMode, Box, Heading, Text } from '@chakra-ui/react';
 
 interface Props {
+  alt: string;
   content: string;
   src: StaticImageData;
   title: string;
 }
 
-const ProductInfo: FunctionComponent<Props> = ({ content, src, title }) => {
+const ProductInfo: FunctionComponent<Props> = ({
+  alt = '',
+  content,
+  src,
+  title,
+}) => {
   const { colorMode } = useColorMode();
   const isDarkMode = colorMode === 'dark';
 
   return (
     <Box maxWidth="container.sm" mx="auto" my="14" spacing="16" align="center">
-      <Box width="250px">
-        <Image src={src} placeholder="blur" />
+      <Box maxW="500px">
+        <Image alt={alt} src={src} placeholder="blur" />
       </Box>
       <Box>
         <Heading as="h3" fontSize="2xl">

@@ -16,15 +16,13 @@ import Loader from '@components/Loader';
 import ProductInfo from '@components/ProductInfo';
 import Page from '@containers/Page';
 import { useAuth } from '@lib/auth';
-import homeDark from 'public/images/home.png';
 import easy from 'public/images/easy.png';
 import free from 'public/images/free.png';
+import hero from 'public/images/hero.png';
+import homeDark from 'public/images/home.png';
 import vision from 'public/images/vision.png';
 import { Routes } from 'routes';
 import { Descriptions } from 'seo';
-
-const width = 500;
-const height = 500;
 
 const Home: FunctionComponent = () => {
   const { loading, user } = useAuth();
@@ -103,12 +101,7 @@ const Home: FunctionComponent = () => {
                 </Stack>
               </Box>
               <Flex flex="1" justifyContent="flex-end">
-                <Image
-                  src="/images/hero.svg"
-                  height={height}
-                  width={width}
-                  alt="man playing on his laptop"
-                />
+                <Image alt="robots smiling" placeholder="blur" src={hero} />
               </Flex>
             </Box>
             <Box mt="24" textAlign="center">
@@ -139,6 +132,7 @@ const Home: FunctionComponent = () => {
 
                 <Box py="8">
                   <ProductInfo
+                    alt="Two people looking at a lantern"
                     content="Gameigo is a free and open source application backed by a huge
                   database of video games provided by ROG. It supports features
                   such as searching for games, creating collections, and sharing
@@ -147,6 +141,7 @@ const Home: FunctionComponent = () => {
                     title="Free to use and open source"
                   />
                   <ProductInfo
+                    alt="A person sitting and texting"
                     content="Gameigo provides a simple user interface and a simple user
                   experience. The UI is designed to be intuitive and easy to
                   use. The UX is designed to be simple and easy to understand.
@@ -155,6 +150,7 @@ const Home: FunctionComponent = () => {
                     title="Simple UI &amp; UX"
                   />
                   <ProductInfo
+                    alt="A person and a dog looking at a distance"
                     content="Stop jumping from game to game, and stop having to search for
                   games. Gameigo provides everything you need in one place.
                   Manage your collections, discover new games, and share your

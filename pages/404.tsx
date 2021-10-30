@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useColorMode, Box, Button, Heading, Text } from '@chakra-ui/react';
 
+import error from 'public/images/error.png';
 import Page from '@containers/Page';
 
 const Error: FunctionComponent = () => {
@@ -13,33 +14,40 @@ const Error: FunctionComponent = () => {
   const goHome = () => router.replace('/home');
 
   return (
-    <Page title="Page not found">
-      <Box textAlign="center" mt="-8">
-        <Image width="400" height="400" src="/images/error.svg" />
-        <Heading>Oh Snap!</Heading>
+    <Page title="Page not found" py="0">
+      <Box textAlign="center" mt="6">
+        <Image
+          alt="A pilot watching the sky while sitting in front of his crashed plane"
+          height="300"
+          width="500"
+          placeholder="blur"
+          src={error}
+        />
+        <Heading mt="6">Oh Snap!</Heading>
         <Text
-          color="gray.400"
+          color={isDarkMode ? 'light-text' : 'dark-text'}
           fontSize="lg"
           fontWeight="medium"
-          maxW="xl"
+          maxW="lg"
           mt="4"
           mx="auto"
+          opacity="0.7"
         >
           The page you're looking for was moved, removed, renamed or might have
           never existed.
         </Text>
         <Button
-          bg={isDarkMode ? 'light-bg-primary' : 'dark-bg-primary'}
-          color={isDarkMode ? 'dark-text' : 'light-text'}
+          borderColor={isDarkMode ? 'light-bg-primary' : 'dark-bg-primary'}
+          color={isDarkMode ? 'light-text' : 'dark-text'}
+          letterSpacing="widest"
           mt="8"
           onClick={goHome}
           px="6"
-          py="6"
-          rounded="full"
+          py="5"
+          rounded="md"
+          textTransform="uppercase"
           variant="outline"
-          _hover={{
-            transform: 'scale(0.99)',
-          }}
+          _hover={{ transform: 'scale(0.99)' }}
         >
           Return to Home
         </Button>

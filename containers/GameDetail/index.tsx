@@ -21,6 +21,7 @@ import CustomLink from '@components/CustomLink';
 import GameContent from '@components/GameContent';
 import Store from '@components/Store';
 import Page from '@containers/Page';
+import { IconArrowBack, IconHeartFilled, IconHeartOutline } from '@icons';
 import { useAuth } from '@lib/auth';
 import { addGame, checkGame, deleteGame } from '@lib/db';
 import { formatDate } from '@utils/date';
@@ -31,61 +32,15 @@ interface Props {
   screenshots: Screenshots;
 }
 
-const BackArrow = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    viewBox="0 0 24 24"
-    stroke="currentColor"
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="2"
-      d="M10 19l-7-7m0 0l7-7m-7 7h18"
-    />
-  </svg>
-);
-
-const HeartOutline = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    viewBox="0 0 24 24"
-    stroke="currentColor"
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth={2}
-      d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-    />
-  </svg>
-);
-
-const HeartFilled = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 20 20"
-    fill="currentColor"
-  >
-    <path
-      fillRule="evenodd"
-      d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
-      clipRule="evenodd"
-    />
-  </svg>
-);
-
 const CustomDivider = () => {
   return (
     <Box
-      height="10"
-      w="1"
       alignSelf="center"
-      flexShrink={0}
-      display={['none', 'none', 'block']}
       bg="white"
+      display={['none', 'none', 'block']}
+      flexShrink={0}
+      height="10"
+      width="1"
       mx="2"
       rounded="lg"
     />
@@ -238,12 +193,12 @@ const GameDetail: FunctionComponent<Props> = ({ game, screenshots }) => {
           px="4"
         >
           <Box w="8" as="button" onClick={clickHandler}>
-            <BackArrow />
+            <IconArrowBack />
           </Box>
           <Flex alignItems="center" justifyContent="center">
             {user ? (
               <Box w="7" as="button" onClick={onClickHandler} mr="2">
-                {isFav ? <HeartFilled /> : <HeartOutline />}
+                {isFav ? <IconHeartFilled /> : <IconHeartOutline />}
               </Box>
             ) : null}
             <IconButton
@@ -281,7 +236,7 @@ const GameDetail: FunctionComponent<Props> = ({ game, screenshots }) => {
           alt="game background"
         />
       </Box>
-      <Box position="relative" zIndex="10">
+      <Box position="relative">
         <Page
           description={game.description_raw}
           imageUrl={game.background_image}
