@@ -1,6 +1,7 @@
 import { FunctionComponent, useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import Slider from 'react-slick';
 import { LinkIcon } from '@chakra-ui/icons';
 import {
   useColorMode,
@@ -9,7 +10,6 @@ import {
   Flex,
   Heading,
   IconButton,
-  SimpleGrid,
   Stack,
   Text,
   Wrap,
@@ -45,6 +45,17 @@ const CustomDivider = () => {
       rounded="lg"
     />
   );
+};
+
+const settings = {
+  arrows: false,
+  dots: true,
+  dotsClass: 'slider-dots',
+  fade: true,
+  infinite: false,
+  slidesToScroll: 1,
+  slidesToShow: 1,
+  speed: 500,
 };
 
 const GameDetail: FunctionComponent<Props> = ({ game, screenshots }) => {
@@ -115,11 +126,9 @@ const GameDetail: FunctionComponent<Props> = ({ game, screenshots }) => {
   const renderReleasedandPlaytime = () => {
     return (
       <Wrap spacing={[2, 4]}>
-        {game.released ? (
-          <WrapItem bg="white" color="black" px="2" borderRadius="lg">
-            {formatDate(game.released)}
-          </WrapItem>
-        ) : null}
+        <WrapItem bg="white" color="black" px="2" py="0.5" borderRadius="lg">
+          {game.released ? formatDate(game.released) : 'TBA'}
+        </WrapItem>
         {game.playtime > 0 && (
           <WrapItem textTransform="uppercase" letterSpacing="widest">
             Average Playtime: {game.playtime} Hours
@@ -192,19 +201,25 @@ const GameDetail: FunctionComponent<Props> = ({ game, screenshots }) => {
           mx="auto"
           px="4"
         >
-          <Box w="8" as="button" onClick={clickHandler}>
+          <Box aria-label="Go Back" as="button" onClick={clickHandler} w="8">
             <IconArrowBack />
           </Box>
           <Flex alignItems="center" justifyContent="center">
             {user ? (
-              <Box w="7" as="button" onClick={onClickHandler} mr="2">
+              <Box
+                aria-label={`${isFav ? 'UnFavorite' : 'Favorite'}`}
+                as="button"
+                w="7"
+                onClick={onClickHandler}
+                mr="2"
+              >
                 {isFav ? <IconHeartFilled /> : <IconHeartOutline />}
               </Box>
             ) : null}
             <IconButton
               aria-label="Share"
-              icon={<LinkIcon />}
               fontSize="2xl"
+              icon={<LinkIcon />}
               onClick={copyLink}
               variant="unstyled"
             />
@@ -291,25 +306,23 @@ const GameDetail: FunctionComponent<Props> = ({ game, screenshots }) => {
             )}
             {screenshots.count > 0 && (
               <GameContent heading="Screenshots">
-                <SimpleGrid
-                  minChildWidth="320px"
-                  spacingX={[4, 4, 6]}
-                  spacingY="6"
-                >
+                <Slider lazyLoad="ondemand" {...settings}>
                   {screenshots.results.map((item) => {
+                    const aspectRatio = item.width / item.height;
                     return (
                       <Flex key={item.id} rounded="sm" overflow="hidden">
                         <Image
                           alt={`game-screenshot-${item.id}`}
-                          src={item.image}
-                          width={item.width}
+                          height={1080 / aspectRatio}
+                          width="1080"
+                          layout="responsive"
                           objectFit="cover"
-                          height={item.height}
+                          src={item.image}
                         />
                       </Flex>
                     );
                   })}
-                </SimpleGrid>
+                </Slider>
               </GameContent>
             )}
           </Stack>
