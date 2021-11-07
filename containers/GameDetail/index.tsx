@@ -201,19 +201,25 @@ const GameDetail: FunctionComponent<Props> = ({ game, screenshots }) => {
           mx="auto"
           px="4"
         >
-          <Box w="8" as="button" onClick={clickHandler}>
+          <Box aria-label="Go Back" as="button" onClick={clickHandler} w="8">
             <IconArrowBack />
           </Box>
           <Flex alignItems="center" justifyContent="center">
             {user ? (
-              <Box w="7" as="button" onClick={onClickHandler} mr="2">
+              <Box
+                aria-label={`${isFav ? 'UnFavorite' : 'Favorite'}`}
+                as="button"
+                w="7"
+                onClick={onClickHandler}
+                mr="2"
+              >
                 {isFav ? <IconHeartFilled /> : <IconHeartOutline />}
               </Box>
             ) : null}
             <IconButton
               aria-label="Share"
-              icon={<LinkIcon />}
               fontSize="2xl"
+              icon={<LinkIcon />}
               onClick={copyLink}
               variant="unstyled"
             />
@@ -302,12 +308,14 @@ const GameDetail: FunctionComponent<Props> = ({ game, screenshots }) => {
               <GameContent heading="Screenshots">
                 <Slider lazyLoad="ondemand" {...settings}>
                   {screenshots.results.map((item) => {
+                    const aspectRatio = item.width / item.height;
                     return (
                       <Flex key={item.id} rounded="sm" overflow="hidden">
                         <Image
                           alt={`game-screenshot-${item.id}`}
-                          height={item.height}
-                          width={item.width}
+                          height={1080 / aspectRatio}
+                          width="1080"
+                          layout="responsive"
                           objectFit="cover"
                           src={item.image}
                         />
