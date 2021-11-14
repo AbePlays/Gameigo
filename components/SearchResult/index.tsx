@@ -23,6 +23,8 @@ const SearchResult: FunctionComponent<Props> = ({
   query,
 }) => {
   const { colorMode } = useColorMode();
+  const toast = useToast();
+
   const isDarkMode = colorMode === 'dark';
 
   window.scrollTo(0, 0);
@@ -33,7 +35,6 @@ const SearchResult: FunctionComponent<Props> = ({
   );
 
   if (error) {
-    const toast = useToast();
     toast({
       duration: 2000,
       isClosable: true,

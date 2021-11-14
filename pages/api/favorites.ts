@@ -3,7 +3,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { auth } from '@lib/firebase-admin';
 import { getUserData } from '@lib/db-admin';
 
-export default async (
+const favorites = async (
   req: NextApiRequest,
   res: NextApiResponse
 ): Promise<unknown> => {
@@ -19,3 +19,5 @@ export default async (
     res.status(500).json({ error });
   }
 };
+
+export default favorites;

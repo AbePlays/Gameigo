@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 
 import { Endpoints } from 'endpoints';
 
-export default async (
+const search = async (
   req: NextApiRequest,
   res: NextApiResponse
 ): Promise<unknown> => {
@@ -20,3 +20,5 @@ export default async (
     res.status(500).json({ error });
   }
 };
+
+export default search;

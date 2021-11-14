@@ -17,6 +17,7 @@ import { Descriptions } from 'seo';
 const Favorites: FunctionComponent = () => {
   const { user } = useAuth();
   const { colorMode } = useColorMode();
+  const toast = useToast();
 
   const isDarkMode = colorMode === 'dark';
   const token = user?.token;
@@ -24,7 +25,6 @@ const Favorites: FunctionComponent = () => {
   const { data, error } = useSWR(['/api/favorites', token], fetcher);
 
   if (error) {
-    const toast = useToast();
     toast({
       duration: 2000,
       isClosable: true,

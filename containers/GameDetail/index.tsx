@@ -142,7 +142,7 @@ const GameDetail: FunctionComponent<Props> = ({ game, screenshots }) => {
     return (
       <Stack direction={['column', 'column', 'row']} py="4" textAlign="center">
         <Box w="full">
-          <Heading as="h4">Platforms</Heading>
+          <Heading as="h2">Platforms</Heading>
           <Wrap
             justify="center"
             spacing="0"
@@ -159,12 +159,12 @@ const GameDetail: FunctionComponent<Props> = ({ game, screenshots }) => {
         </Box>
         <CustomDivider />
         <Box w="full">
-          <Heading as="h4">Metacritic Score</Heading>
+          <Heading as="h2">Metacritic Score</Heading>
           <Text mt="2">{game.metacritic || '-'}</Text>
         </Box>
         <CustomDivider />
         <Box w="full">
-          <Heading as="h4">Genres</Heading>
+          <Heading as="h2">Genres</Heading>
           <Wrap
             justify="center"
             spacing="0"
@@ -189,7 +189,7 @@ const GameDetail: FunctionComponent<Props> = ({ game, screenshots }) => {
     if (user) {
       checkGame(user.uid, game.id).then((res) => setIsFav(res));
     }
-  }, [user]);
+  }, [game.id, user]);
 
   return (
     <Box bg="black" color="white" position="relative">

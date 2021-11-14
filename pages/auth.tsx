@@ -29,7 +29,7 @@ const Auth: FunctionComponent = () => {
     if (!loading && user) {
       router.replace(Routes.HOME_SCREEN);
     }
-  }, [loading, user]);
+  }, [loading, router, user]);
 
   return (
     <Page title={pageTitle} description={Descriptions.Auth}>

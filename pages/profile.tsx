@@ -1,5 +1,4 @@
 import { FunctionComponent } from 'react';
-import { useRouter } from 'next/router';
 import { Form, Formik, FormikHelpers } from 'formik';
 import {
   useColorMode,
@@ -19,7 +18,6 @@ import { CustomInput } from '@components/Input';
 import { checkName, checkPassword } from '@containers/Auth/helper';
 import Page from '@containers/Page';
 import ProtectedRoute from '@containers/Protected';
-import { IconArrowBack } from '@icons';
 import { useAuth } from '@lib/auth';
 import { Routes } from 'routes';
 import { Descriptions } from 'seo';
@@ -27,7 +25,6 @@ import { Descriptions } from 'seo';
 const Profile: FunctionComponent = () => {
   const { user, signout, changeDisplayName, changePassword } = useAuth();
   const { colorMode } = useColorMode();
-  const router = useRouter();
   const toast = useToast();
 
   const isDarkMode = colorMode === 'dark';
@@ -60,16 +57,9 @@ const Profile: FunctionComponent = () => {
     <Page title="Profile" description={Descriptions.Profile}>
       <ProtectedRoute redirectUrl={Routes.AUTH_SCREEN}>
         <Box maxW="container.sm" mx="auto">
-          <Flex align="center">
-            <Box w="8" cursor="pointer" onClick={() => router.back()}>
-              <IconArrowBack />
-            </Box>
-            <Heading as="h1" ml="4">
-              Profile
-            </Heading>
-          </Flex>
+          <Heading as="h1">Profile</Heading>
           <Flex align="center" my="8">
-            <Avatar src={user?.photoUrl} />
+            <Avatar aria-hidden="true" src={user?.photoUrl} />
             <Heading fontSize="2xl" ml="4">
               {user?.name}
             </Heading>
