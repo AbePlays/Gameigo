@@ -137,7 +137,7 @@ const Home: FunctionComponent = () => {
                     />
                   </Box>
                 </Box>
-                <UnorderedList py="8" listStyleType="none">
+                <UnorderedList py="8" mx="0" listStyleType="none">
                   <ListItem>
                     <ProductInfo
                       content="Gameigo is a free and open source application backed by a huge
