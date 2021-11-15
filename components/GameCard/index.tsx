@@ -1,5 +1,6 @@
 import { useState, FunctionComponent } from 'react';
 import Image from 'next/image';
+import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import {
   useColorMode,
@@ -7,6 +8,7 @@ import {
   Divider,
   Flex,
   Heading,
+  Link,
   Skeleton,
   Stack,
   Text,
@@ -71,27 +73,31 @@ const GameCard: FunctionComponent<Props> = ({ game }) => {
       variants={FadeUpAnimation.child}
       whileHover={{ scale: 1.01 }}
     >
-      <Box h="56" position="relative">
-        {!showImage && <Skeleton speed={2} h="full" />}
-        <Image
-          src={game?.background_image || placeholder}
-          alt="game background"
-          layout="fill"
-          onLoadingComplete={toggleImage}
-          objectFit="cover"
-        />
-      </Box>
-      <Box p="4">
-        <Heading fontSize="2xl" mb="1">
-          {game.name}
-        </Heading>
-        <Flex wrap="wrap">{renderPlatforms()}</Flex>
-        <Stack mt="5">
-          {renderReleasedDate()}
-          <Divider />
-          {renderGenres()}
-        </Stack>
-      </Box>
+      <NextLink href={`/game/${game.slug}`} passHref>
+        <Link aria-label={`${game.name}`}>
+          <Box h="56" position="relative">
+            {!showImage && <Skeleton speed={2} h="full" />}
+            <Image
+              src={game?.background_image || placeholder}
+              alt="game background"
+              layout="fill"
+              onLoadingComplete={toggleImage}
+              objectFit="cover"
+            />
+          </Box>
+          <Box p="4">
+            <Heading fontSize="2xl" mb="1">
+              {game.name}
+            </Heading>
+            <Flex wrap="wrap">{renderPlatforms()}</Flex>
+            <Stack mt="5">
+              {renderReleasedDate()}
+              <Divider />
+              {renderGenres()}
+            </Stack>
+          </Box>
+        </Link>
+      </NextLink>
     </MotionBox>
   );
 };

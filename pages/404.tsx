@@ -33,8 +33,8 @@ const Error: FunctionComponent = () => {
           mx="auto"
           opacity="0.7"
         >
-          The page you're looking for was moved, removed, renamed or might have
-          never existed.
+          The page you&apos;re looking for was moved, removed, renamed or might
+          have never existed.
         </Text>
         <Button
           borderColor={isDarkMode ? 'light-bg-primary' : 'dark-bg-primary'}

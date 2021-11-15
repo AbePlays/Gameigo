@@ -7,8 +7,10 @@ import {
   Box,
   Flex,
   Heading,
+  ListItem,
   Stack,
   Text,
+  UnorderedList,
 } from '@chakra-ui/react';
 
 import { ButtonWithIcon } from '@components/Buttons';
@@ -36,7 +38,7 @@ const Home: FunctionComponent = () => {
     if (!loading && user) {
       router.replace(Routes.HOME_SCREEN);
     }
-  }, [loading, user]);
+  }, [loading, router, user]);
 
   return (
     <Page
@@ -101,7 +103,7 @@ const Home: FunctionComponent = () => {
                 </Stack>
               </Box>
               <Flex flex="1" justifyContent="flex-end">
-                <Image alt="robots smiling" placeholder="blur" src={hero} />
+                <Image alt="" placeholder="blur" src={hero} />
               </Flex>
             </Box>
             <Box mt="24" textAlign="center">
@@ -109,7 +111,13 @@ const Home: FunctionComponent = () => {
                 <Heading as="h2" fontSize="3xl">
                   Why Choose Gameigo?
                 </Heading>
-                <Box maxW="920px" mt="16" mx="auto" position="relative">
+                <Box
+                  aria-hidden="true"
+                  maxW="920px"
+                  mt="16"
+                  mx="auto"
+                  position="relative"
+                >
                   <Box
                     bgGradient="linear(to-r, gradient-red, gradient-blue)"
                     filter="blur(8px)"
@@ -129,36 +137,38 @@ const Home: FunctionComponent = () => {
                     />
                   </Box>
                 </Box>
-
-                <Box py="8">
-                  <ProductInfo
-                    alt="Two people looking at a lantern"
-                    content="Gameigo is a free and open source application backed by a huge
+                <UnorderedList py="8" mx="0" listStyleType="none">
+                  <ListItem>
+                    <ProductInfo
+                      content="Gameigo is a free and open source application backed by a huge
                   database of video games provided by ROG. It supports features
                   such as searching for games, creating collections, and sharing
                   your collections with friends."
-                    src={free}
-                    title="Free to use and open source"
-                  />
-                  <ProductInfo
-                    alt="A person sitting and texting"
-                    content="Gameigo provides a simple user interface and a simple user
-                  experience. The UI is designed to be intuitive and easy to
-                  use. The UX is designed to be simple and easy to understand.
-                  Gameigo makes it easy to discover and share video games."
-                    src={easy}
-                    title="Simple UI &amp; UX"
-                  />
-                  <ProductInfo
-                    alt="A person and a dog looking at a distance"
-                    content="Stop jumping from game to game, and stop having to search for
-                  games. Gameigo provides everything you need in one place.
-                  Manage your collections, discover new games, and share your
-                  collections with friends."
-                    src={vision}
-                    title="Everything in one place"
-                  />
-                </Box>
+                      src={free}
+                      title="Free to use and open source"
+                    />
+                  </ListItem>
+                  <ListItem>
+                    <ProductInfo
+                      content="Gameigo provides a simple user interface and a simple user
+                    experience. The UI is designed to be intuitive and easy to
+                    use. The UX is designed to be simple and easy to understand.
+                    Gameigo makes it easy to discover and share video games."
+                      src={easy}
+                      title="Simple UI &amp; UX"
+                    />
+                  </ListItem>
+                  <ListItem>
+                    <ProductInfo
+                      content="Stop jumping from game to game, and stop having to search for
+                    games. Gameigo provides everything you need in one place.
+                    Manage your collections, discover new games, and share your
+                    collections with friends."
+                      src={vision}
+                      title="Everything in one place"
+                    />
+                  </ListItem>
+                </UnorderedList>
               </Box>
             </Box>
           </Box>

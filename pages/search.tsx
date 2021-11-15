@@ -35,6 +35,7 @@ const Search: FunctionComponent = () => {
       <Box position="relative">
         <Box height={['200px', '300px']} overflow="hidden" position="relative">
           <Image
+            alt=""
             layout="fill"
             objectFit="cover"
             objectPosition="top"

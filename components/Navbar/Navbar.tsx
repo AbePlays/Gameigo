@@ -55,7 +55,12 @@ const Navbar: FunctionComponent<Props> = ({ setShowContent }) => {
             mx="auto"
             p="4"
           >
-            <Box as="button" display={['block', 'none']}>
+            <Box
+              aria-label="Menu"
+              aria-expanded={showMobileNav ? 'true' : 'false'}
+              as="button"
+              display={['block', 'none']}
+            >
               <Icon
                 as={HamburgerIcon}
                 w={iconSize}
@@ -116,11 +121,17 @@ const Navbar: FunctionComponent<Props> = ({ setShowContent }) => {
               </NextLink>
             </Stack>
             <Stack isInline spacing="3">
-              <Button w="4" h="8" onClick={toggleColorMode} variant="outline">
+              <Button
+                aria-label={isDarkMode ? 'Light Mode' : 'Dark Mode'}
+                w="4"
+                h="8"
+                onClick={toggleColorMode}
+                variant="outline"
+              >
                 <Icon as={isDarkMode ? SunIcon : MoonIcon} />
               </Button>
               <NextLink href={user ? '/profile' : '/auth'} passHref>
-                <Link>
+                <Link aria-label="Profile">
                   <Avatar size="sm" src={user?.photoUrl} />
                 </Link>
               </NextLink>
