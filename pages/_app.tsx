@@ -1,15 +1,16 @@
-import { FunctionComponent, useState } from 'react';
+import { FunctionComponent } from 'react';
 import type { AppProps } from 'next/app';
 import { AnimatePresence } from 'framer-motion';
-import { Box, ChakraProvider } from '@chakra-ui/react';
+import { ChakraProvider } from '@chakra-ui/react';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 import Layout from '@components/Layout';
 import Navbar from '@components/Navbar';
 import { AuthProvider } from '@lib/auth';
-import 'styles/loader.css';
-import 'styles/slider.css';
+import 'styles/global.css';
+// import 'styles/loader.css';
+// import 'styles/slider.css';
 import theme from 'styles/theme';
 
 const MyApp: FunctionComponent<AppProps> = ({
@@ -17,20 +18,17 @@ const MyApp: FunctionComponent<AppProps> = ({
   pageProps,
   router,
 }) => {
-  const [showContent, setShowContent] = useState<boolean>(true);
   const { route } = router;
 
   return (
     <ChakraProvider theme={theme}>
       <AuthProvider>
-        <Navbar setShowContent={setShowContent} />
-        <Box display={showContent ? 'block' : 'none'}>
-          <Layout>
-            <AnimatePresence exitBeforeEnter>
-              <Component {...pageProps} key={route} />
-            </AnimatePresence>
-          </Layout>
-        </Box>
+        <Navbar />
+        <Layout>
+          <AnimatePresence exitBeforeEnter>
+            <Component {...pageProps} key={route} />
+          </AnimatePresence>
+        </Layout>
       </AuthProvider>
     </ChakraProvider>
   );

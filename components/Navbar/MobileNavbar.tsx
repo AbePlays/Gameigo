@@ -1,17 +1,13 @@
 import { FunctionComponent } from 'react';
-import { CloseIcon } from '@chakra-ui/icons';
-import { Button, Icon } from '@chakra-ui/react';
 
 import CustomLink from '@components/CustomLink';
 import { useAuth } from '@lib/auth';
 import {
-  CloseButtonAnimation,
   MoveDownAnimation,
   NavbarItemAnimation,
   NavbarListAnimation,
 } from '@utils/animations';
 import {
-  MotionBox,
   MotionFlex,
   MotionListItem,
   MotionUnorderedList,
@@ -25,43 +21,26 @@ const MobileNavbar: FunctionComponent<Props> = ({ onClick }) => {
   const { user } = useAuth();
 
   return (
-    <MotionBox
-      animate="show"
-      bg="dark-bg-secondary"
-      color="light-text"
-      exit="exit"
-      h="100vh"
-      initial="hidden"
-      px="4"
-      py="14"
+    <MotionFlex
       variants={MoveDownAnimation}
-      w="100vw"
+      initial="hidden"
+      animate="show"
+      exit="exit"
+      alignItems="center"
+      justifyContent="center"
+      px="2"
     >
-      <MotionFlex justifyContent="flex-end" variants={CloseButtonAnimation}>
-        <Button
-          alignItems="baseline"
-          display="flex"
-          fontWeight="medium"
-          letterSpacing="widest"
-          onClick={onClick}
-          textTransform="uppercase"
-          variant="unstyled"
-        >
-          Close <Icon as={CloseIcon} w="3" h="3" ml="2" />
-        </Button>
-      </MotionFlex>
       <MotionUnorderedList
         display="flex"
-        flexDirection="column"
-        h="full"
         justifyContent="space-evenly"
+        mx="0"
         styleType="none"
         textAlign="center"
         variants={NavbarListAnimation}
+        w="full"
       >
         <MotionListItem variants={NavbarItemAnimation}>
           <CustomLink
-            fontSize="6xl"
             isExt={false}
             link="/search"
             onClick={onClick}
@@ -71,7 +50,6 @@ const MobileNavbar: FunctionComponent<Props> = ({ onClick }) => {
         <MotionListItem variants={NavbarItemAnimation}>
           <CustomLink
             cursor={user ? 'pointer' : 'not-allowed'}
-            fontSize="6xl"
             isExt={false}
             link={user ? '/favorites' : '#'}
             onClick={user ? onClick : null}
@@ -81,7 +59,6 @@ const MobileNavbar: FunctionComponent<Props> = ({ onClick }) => {
         </MotionListItem>
         <MotionListItem variants={NavbarItemAnimation}>
           <CustomLink
-            fontSize="6xl"
             isExt={false}
             link="/about"
             onClick={onClick}
@@ -89,7 +66,7 @@ const MobileNavbar: FunctionComponent<Props> = ({ onClick }) => {
           ></CustomLink>
         </MotionListItem>
       </MotionUnorderedList>
-    </MotionBox>
+    </MotionFlex>
   );
 };
 
