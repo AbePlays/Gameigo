@@ -10,7 +10,7 @@ import ProtectedRoute from '@containers/Protected';
 import { useAuth } from '@lib/auth';
 import { FadeUpAnimation } from '@utils/animations';
 import fetcher from '@utils/fetcher';
-import { MotionSimpleGrid } from '@utils/MotionElements';
+import { MotionBox } from '@utils/MotionElements';
 import { Routes } from 'routes';
 import { Descriptions } from 'seo';
 
@@ -43,19 +43,16 @@ const Favorites: FunctionComponent = () => {
         </Heading>
         {data ? (
           Array.isArray(data) && data.length > 0 ? (
-            <MotionSimpleGrid
+            <MotionBox
+              className="grid"
               animate="show"
-              columns={[1, 2, 3]}
               initial="hidden"
-              mt="8"
-              spacingX={[4, 4, 6]}
-              spacingY="6"
               variants={FadeUpAnimation.parent}
             >
               {data.map((game: Game) => (
                 <GameCard game={game} key={game.id} />
               ))}
-            </MotionSimpleGrid>
+            </MotionBox>
           ) : (
             <NoData title="Please add games to your collection." />
           )

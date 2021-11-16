@@ -7,7 +7,7 @@ import GameCard from '@components/GameCard';
 import Loader from '@components/Loader';
 import { FadeUpAnimation } from '@utils/animations';
 import fetcher from '@utils/fetcher';
-import { MotionSimpleGrid } from '@utils/MotionElements';
+import { MotionBox } from '@utils/MotionElements';
 
 interface Props {
   onNext: () => void;
@@ -55,22 +55,20 @@ const SearchResult: FunctionComponent<Props> = ({
     <>
       {Array.isArray(results) && results.length > 0 ? (
         <>
-          <MotionSimpleGrid
+          <MotionBox
+            className="grid"
             maxWidth="1120px"
-            minChildWidth="320px"
             mt="0"
             mx="auto"
             px="4"
-            spacingX={[4, 4, 6]}
-            spacingY="6"
             variants={FadeUpAnimation.parent}
-            initial="hidden"
             animate="show"
+            initial="hidden"
           >
             {results.map((game) => (
               <GameCard game={game} key={game.id} />
             ))}
-          </MotionSimpleGrid>
+          </MotionBox>
           <Stack
             isInline
             alignItems="center"
