@@ -8,7 +8,7 @@ interface Props {
 const GameContent: FunctionComponent<Props> = ({ children, heading }) => {
   return (
     <Box>
-      <Heading as="h3" mb="2">
+      <Heading as="h3" fontSize={['2xl']} mb="2">
         {heading}
       </Heading>
       {children}

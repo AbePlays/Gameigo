@@ -125,12 +125,23 @@ const GameDetail: FunctionComponent<Props> = ({ game, screenshots }) => {
 
   const renderReleasedandPlaytime = () => {
     return (
-      <Wrap spacing={[2, 4]}>
-        <WrapItem bg="white" color="black" px="2" py="0.5" borderRadius="lg">
+      <Wrap direction={['column', 'row']} spacing={[2, 4]}>
+        <WrapItem
+          bg="white"
+          borderRadius="lg"
+          color="black"
+          px="2"
+          py="0.5"
+          w="fit-content"
+        >
           {game.released ? formatDate(game.released) : 'TBA'}
         </WrapItem>
         {game.playtime > 0 && (
-          <WrapItem textTransform="uppercase" letterSpacing="widest">
+          <WrapItem
+            alignItems="center"
+            textTransform="uppercase"
+            letterSpacing="widest"
+          >
             Average Playtime: {game.playtime} Hours
           </WrapItem>
         )}
@@ -142,7 +153,9 @@ const GameDetail: FunctionComponent<Props> = ({ game, screenshots }) => {
     return (
       <Stack direction={['column', 'column', 'row']} py="4" textAlign="center">
         <Box w="full">
-          <Heading as="h2">Platforms</Heading>
+          <Heading as="h2" fontSize={['2xl', '3xl']}>
+            Platforms
+          </Heading>
           <Wrap
             justify="center"
             spacing="0"
@@ -159,12 +172,16 @@ const GameDetail: FunctionComponent<Props> = ({ game, screenshots }) => {
         </Box>
         <CustomDivider />
         <Box w="full">
-          <Heading as="h2">Metacritic Score</Heading>
+          <Heading as="h2" fontSize={['2xl', '3xl']}>
+            Metacritic Score
+          </Heading>
           <Text mt="2">{game.metacritic || '-'}</Text>
         </Box>
         <CustomDivider />
         <Box w="full">
-          <Heading as="h2">Genres</Heading>
+          <Heading as="h2" fontSize={['2xl', '3xl']}>
+            Genres
+          </Heading>
           <Wrap
             justify="center"
             spacing="0"
@@ -260,7 +277,7 @@ const GameDetail: FunctionComponent<Props> = ({ game, screenshots }) => {
           title={game.name}
         >
           <Stack spacing="4" mt="4">
-            <Heading as="h1" fontSize={['4xl', '5xl']}>
+            <Heading as="h1" fontSize={['3xl', '5xl']}>
               {game.name}
             </Heading>
             {renderReleasedandPlaytime()}
@@ -271,11 +288,6 @@ const GameDetail: FunctionComponent<Props> = ({ game, screenshots }) => {
                   dangerouslySetInnerHTML={{ __html: game.description }}
                   lineHeight="1.8"
                 ></Box>
-              </GameContent>
-            )}
-            {game.website && (
-              <GameContent heading="Website">
-                <CustomLink link={game.website} title={game.website} />
               </GameContent>
             )}
             {game.publishers.length > 0 && (
@@ -289,6 +301,11 @@ const GameDetail: FunctionComponent<Props> = ({ game, screenshots }) => {
                     );
                   })}
                 </Wrap>
+              </GameContent>
+            )}
+            {game.website && (
+              <GameContent heading="Website">
+                <CustomLink link={game.website} title={game.website} />
               </GameContent>
             )}
             {Array.isArray(game.stores) && game.stores.length > 0 && (
@@ -306,7 +323,7 @@ const GameDetail: FunctionComponent<Props> = ({ game, screenshots }) => {
             )}
             {screenshots.count > 0 && (
               <GameContent heading="Screenshots">
-                <Slider lazyLoad="ondemand" {...settings}>
+                <Slider lazyLoad="progressive" {...settings}>
                   {screenshots.results.map((item) => {
                     const aspectRatio = item.width / item.height;
                     return (
