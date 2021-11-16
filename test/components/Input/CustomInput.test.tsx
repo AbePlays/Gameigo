@@ -1,7 +1,7 @@
 import { Form, Formik } from 'formik';
-import { Button } from '@chakra-ui/button';
+import { Button } from '@chakra-ui/react';
 
-import { CustomInput } from '@/components/Input';
+import { CustomInput } from '@components/Input';
 import { render, screen, fireEvent, waitFor } from '../../test-utils';
 
 const placeholder = 'placeholder';

@@ -1,15 +1,21 @@
 import { FunctionComponent } from 'react';
 import { Form, Formik, FormikHelpers } from 'formik';
 import { ChevronRightIcon } from '@chakra-ui/icons';
-import { useToast, Box, Heading, Stack, Text } from '@chakra-ui/react';
+import {
+  useColorMode,
+  useToast,
+  Box,
+  Heading,
+  Stack,
+  Text,
+} from '@chakra-ui/react';
 
-import { ButtonWithIcon } from '@/components/Buttons';
-import { CustomInput } from '@/components/Input';
+import { ButtonWithIcon } from '@components/Buttons';
+import { CustomInput } from '@components/Input';
+import { useAuth } from '@lib/auth';
 import SocialAuthProviders from './SocialAuthProviders';
-import { useAuth } from '../../lib/auth';
 import { checkEmail, checkPassword } from './helper';
 import { LoginForm } from './types';
-import { useColorMode } from '@chakra-ui/react';
 
 const Login: FunctionComponent = () => {
   const { loginWithEmailAndPassword } = useAuth();
@@ -27,22 +33,22 @@ const Login: FunctionComponent = () => {
       const { email, password } = values;
       await loginWithEmailAndPassword(email, password);
       toast({
-        title: 'Login Successful.',
-        description: "You've successfully logged in.",
-        status: 'success',
-        position: 'top',
-        duration: 4000,
+        duration: 2000,
         isClosable: true,
+        position: 'top-right',
+        status: 'success',
+        title: 'Login Successful.',
+        variant: isDarkMode ? 'solid' : 'subtle',
       });
       actions.resetForm();
     } catch (e) {
       toast({
-        title: 'Login Failed.',
-        description: 'There was an issue while logging in.',
-        status: 'error',
-        position: 'top',
-        duration: 4000,
+        duration: 2000,
         isClosable: true,
+        position: 'top-right',
+        status: 'error',
+        title: 'Login Failed.',
+        variant: isDarkMode ? 'solid' : 'subtle',
       });
       console.log(`Error while logging in ${e}`);
     }
@@ -54,7 +60,7 @@ const Login: FunctionComponent = () => {
         Login to Your Account
       </Heading>
       <Text
-        color={isDarkMode ? 'light-text' : 'dark-text'}
+        color={isDarkMode ? 'gray.300' : 'gray.700'}
         fontSize="xl"
         maxW="xl"
         mt="8"

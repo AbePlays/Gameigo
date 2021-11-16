@@ -9,6 +9,7 @@ import {
 } from '@chakra-ui/react';
 
 interface CustomInputProps {
+  autoComplete?: string;
   name: string;
   placeholder: string;
   type: string;
@@ -16,6 +17,7 @@ interface CustomInputProps {
 }
 
 const CustomInput: FunctionComponent<CustomInputProps> = ({
+  autoComplete = 'off',
   name,
   placeholder,
   type,
@@ -33,6 +35,7 @@ const CustomInput: FunctionComponent<CustomInputProps> = ({
           </FormLabel>
           <Input
             {...field}
+            autoComplete={autoComplete}
             bg={isDarkMode ? 'dark-bg-secondary' : 'light-bg-secondary'}
             borderColor={isDarkMode ? 'light-text' : 'dark-text'}
             focusBorderColor={

@@ -5,7 +5,7 @@ interface Props {
   icon: React.ReactElement;
   onClick?: () => void;
   title: string;
-  [key: string]: unknown;
+  [key: string]: any;
 }
 
 const ButtonWithIcon: FunctionComponent<Props> = ({
@@ -25,9 +25,7 @@ const ButtonWithIcon: FunctionComponent<Props> = ({
       onClick={onClick}
       rightIcon={icon}
       shadow="sm"
-      _hover={{
-        transform: 'scale(0.99)',
-      }}
+      _hover={{ transform: 'scale(0.99)' }}
       {...props}
     >
       {title}

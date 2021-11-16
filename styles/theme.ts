@@ -3,7 +3,7 @@ import { mode } from '@chakra-ui/theme-tools';
 
 const config: ThemeConfig = {
   initialColorMode: 'light',
-  useSystemColorMode: false,
+  useSystemColorMode: true,
 };
 
 const theme = extendTheme({
@@ -14,6 +14,9 @@ const theme = extendTheme({
     'light-bg-primary': '#f9f9f9',
     'dark-text': '#030304',
     'light-text': '#fafafa',
+    'gradient-red': '#b92b27',
+    'gradient-blue': '#1565C0',
+    grey: '#eeeeee',
   },
   config,
   styles: {
@@ -32,6 +35,10 @@ const theme = extendTheme({
         margin: '8px 0',
         fontSize: '20px',
         fontWeight: 'bold',
+      },
+      '.adaptive-glass': {
+        background: mode('hsl(0 0% 100% / 50%)', 'hsl(0 0% 30% / 50%)')(props),
+        backdropFilter: 'blur(30px)',
       },
     }),
   },

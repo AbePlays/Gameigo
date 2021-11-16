@@ -2,18 +2,29 @@ import { FunctionComponent } from 'react';
 import NextLink from 'next/link';
 import { useColorMode, Link, Stack, Text } from '@chakra-ui/react';
 
-import AboutCard from '@/components/AboutCard';
-import Page from '@/containers/Page';
+import AboutCard from '@components/AboutCard';
+import Page from '@containers/Page';
+import { FadeUpAnimation } from '@utils/animations';
+import { MotionStack } from '@utils/MotionElements';
+import { Descriptions } from 'seo';
 
 const About: FunctionComponent = () => {
   const { colorMode } = useColorMode();
   const isDarkMode = colorMode === 'dark';
 
   return (
-    <Page title="About">
-      <Stack maxW="container.xl" mx="auto" textAlign="center" spacing="12">
+    <Page title="About" description={Descriptions.About}>
+      <MotionStack
+        variants={FadeUpAnimation.parent}
+        initial="hidden"
+        animate="show"
+        maxW="container.xl"
+        mx="auto"
+        spacing="12"
+        textAlign="center"
+      >
         <AboutCard heading="Small and Crafty">
-          <Text maxW="container.md" mx="auto" fontWeight="medium">
+          <Text lineHeight="7" maxW="container.md" mx="auto">
             Gameigo is a video game discovery platform where you can keep all
             your games in one unified profile and create your exclusive
             collection. The application is powered by a public API provided by
@@ -22,7 +33,7 @@ const About: FunctionComponent = () => {
           </Text>
         </AboutCard>
         <AboutCard heading="Creator">
-          <Text maxW="container.md" mx="auto" fontWeight="medium">
+          <Text lineHeight="7" maxW="container.md" mx="auto">
             Hi there, I&apos;m Abhishek - aka Abe 👋 I am a self learner trying
             to get hands on new technologies and producing exciting products
             that are as smart, as they are effective. Wanna talk about Computer
@@ -77,7 +88,7 @@ const About: FunctionComponent = () => {
             </NextLink>
           </Stack>
         </AboutCard>
-      </Stack>
+      </MotionStack>
     </Page>
   );
 };

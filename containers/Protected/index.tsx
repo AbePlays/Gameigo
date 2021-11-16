@@ -1,22 +1,24 @@
 import { FunctionComponent, useEffect } from 'react';
 import { useRouter } from 'next/router';
 
-import Loader from '@/components/Loader';
-import { useAuth } from 'lib/auth';
+import Loader from '@components/Loader';
+import { useAuth } from '@lib/auth';
 
 interface Props {
   redirectUrl: string;
 }
 
 const Protected: FunctionComponent<Props> = ({ children, redirectUrl }) => {
-  const { user, loading } = useAuth();
+  const { loading, user } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
-    if (!user) router.push(redirectUrl);
-  }, [user]);
+    if (!loading && !user) router.push(redirectUrl);
+  }, [loading, user]);
 
-  return <>{loading ? <Loader /> : user && children}</>;
+  if (loading) return <Loader />;
+
+  return <>{children}</>;
 };
 
 export default Protected;

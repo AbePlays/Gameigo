@@ -6,13 +6,24 @@ import {
   FunctionComponent,
 } from 'react';
 import { useRouter } from 'next/router';
-import { useToast } from '@chakra-ui/react';
+import {
+  createUserWithEmailAndPassword,
+  GithubAuthProvider,
+  GoogleAuthProvider,
+  onIdTokenChanged,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  updatePassword,
+  updateProfile,
+  User as firebaseUser,
+} from 'firebase/auth';
+import { useColorMode, useToast } from '@chakra-ui/react';
 
-import { Routes } from '../routes';
-import firebase from './firebase';
+import { Routes } from 'routes';
+import { createUser } from './db';
+import { auth } from './firebase';
 import { formatUser } from './helper';
 import { AuthContextType, User } from './types';
-import { createUser } from './db';
 
 const AuthContext = createContext<AuthContextType>(null);
 
@@ -21,19 +32,47 @@ export const AuthProvider: FunctionComponent = ({ children }) => {
   return <AuthContext.Provider value={auth}>{children}</AuthContext.Provider>;
 };
 
-export const useAuth = (): AuthContextType => useContext(AuthContext);
+export const useAuth = (): AuthContextType => {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error('useAuth must be used within an AuthProvider');
+  }
+  return context;
+};
 
 const useProvideAuth = () => {
+  const { colorMode } = useColorMode();
+  const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
   const [user, setUser] = useState<User>(null);
-  const router = useRouter();
   const toast = useToast();
 
-  const handleFirebaseUser = async (firebaseUser: firebase.User) => {
-    await createUser(firebaseUser.uid, formatUser(firebaseUser));
-    setUser(formatUser(firebaseUser));
+  const isDarkMode = colorMode === 'dark';
+
+  const handleFirebaseUser = async (firebaseUser: firebaseUser) => {
+    let sessionTimeout = null;
+    if (firebaseUser) {
+      const userData = formatUser(firebaseUser);
+      await createUser(userData);
+      const res = await firebaseUser.getIdTokenResult();
+      const token = res.token;
+      userData.token = token;
+      const authTime = Number(res.claims.auth_time) * 1000;
+      const sessionDuration = 1000 * 60 * 60 * 24; // 24 hours
+      const millisecondsUntilExpiration =
+        sessionDuration - (Date.now() - authTime);
+      sessionTimeout = setTimeout(
+        () => auth.signOut(),
+        millisecondsUntilExpiration
+      );
+      setUser(userData);
+      router.replace(Routes.HOME_SCREEN);
+    } else {
+      setUser(null);
+      sessionTimeout && clearTimeout(sessionTimeout);
+      sessionTimeout = null;
+    }
     setLoading(false);
-    router.replace(Routes.HOME_SCREEN);
     return firebaseUser;
   };
 
@@ -43,67 +82,71 @@ const useProvideAuth = () => {
     name: string
   ) => {
     setLoading(true);
-    await firebase.auth().createUserWithEmailAndPassword(email, password);
-    await firebase.auth().currentUser.updateProfile({ displayName: name });
-    return handleFirebaseUser(firebase.auth().currentUser);
+    await createUserWithEmailAndPassword(auth, email, password);
+    await updateProfile(auth.currentUser, { displayName: name });
+    return handleFirebaseUser(auth.currentUser);
   };
 
   const signinWithGoogle = async () => {
     setLoading(true);
-    const res = await firebase
-      .auth()
-      .signInWithPopup(new firebase.auth.GoogleAuthProvider());
+    const res = await signInWithPopup(auth, new GoogleAuthProvider());
     return handleFirebaseUser(res.user);
   };
 
   const signinWithGithub = async () => {
     setLoading(true);
-    const res = await firebase
-      .auth()
-      .signInWithPopup(new firebase.auth.GithubAuthProvider());
+    const res = await signInWithPopup(auth, new GithubAuthProvider());
     return handleFirebaseUser(res.user);
   };
 
   const loginWithEmailAndPassword = async (email: string, password: string) => {
     setLoading(true);
-    const res = await firebase
-      .auth()
-      .signInWithEmailAndPassword(email, password);
+    const res = await signInWithEmailAndPassword(auth, email, password);
     return handleFirebaseUser(res.user);
   };
 
   const signout = async () => {
-    await firebase.auth().signOut();
+    await auth.signOut();
     toast({
-      title: 'Logout Successful.',
-      description: "You've successfully logged out.",
-      status: 'success',
-      position: 'top',
-      duration: 4000,
+      duration: 2000,
       isClosable: true,
+      position: 'top-right',
+      status: 'success',
+      title: 'Logout Successful.',
+      variant: isDarkMode ? 'solid' : 'subtle',
     });
     setUser(null);
   };
 
+  const changePassword = async (newPassword: string) => {
+    const user = auth.currentUser;
+    return updatePassword(user, newPassword);
+  };
+
+  const changeDisplayName = async (newName: string) => {
+    const user = auth.currentUser;
+    return updateProfile(user, { displayName: newName });
+  };
+
   useEffect(() => {
-    const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        setUser(formatUser(user));
-      } else {
-        setUser(null);
-      }
+    setLoading(true);
+    const unsubscribe = onIdTokenChanged(auth, async (user) => {
+      setLoading(true);
+      handleFirebaseUser(user);
     });
 
     return () => unsubscribe();
   }, []);
 
   return {
-    user,
+    changeDisplayName,
+    changePassword,
     loading,
-    signupWithEmailAndPassword,
     loginWithEmailAndPassword,
-    signinWithGoogle,
     signinWithGithub,
+    signinWithGoogle,
     signout,
+    signupWithEmailAndPassword,
+    user,
   };
 };

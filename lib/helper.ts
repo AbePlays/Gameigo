@@ -1,7 +1,7 @@
-import firebase from './firebase';
+import { User as firebaseUser } from 'firebase/auth';
 import { User } from './types';
 
-export const formatUser = (firebaseUser: firebase.User): User => {
+export const formatUser = (firebaseUser: firebaseUser): User => {
   const user = {
     uid: firebaseUser.uid,
     email: firebaseUser.email,

@@ -6,11 +6,14 @@ export type User = {
   name: string;
   provider: string;
   photoUrl: string;
+  token?: string;
 };
 
 export type AuthContextType = {
   user: User;
   loading: boolean;
+  changeDisplayName: (name: string) => Promise<void>;
+  changePassword: (newPassword: string) => Promise<void>;
   signupWithEmailAndPassword: (
     email: string,
     password: string,

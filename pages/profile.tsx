@@ -1,7 +1,8 @@
 import { FunctionComponent } from 'react';
-import { useRouter } from 'next/router';
+import { Form, Formik, FormikHelpers } from 'formik';
 import {
   useColorMode,
+  useToast,
   Avatar,
   Box,
   Button,
@@ -12,50 +13,53 @@ import {
   Text,
 } from '@chakra-ui/react';
 
-import { ButtonWithIcon } from '@/components/Buttons';
-import Input from '@/components/Input';
-import Page from '@/containers/Page';
-import ProtectedRoute from '@/containers/Protected';
-import { useAuth } from 'lib/auth';
+import { ButtonWithIcon } from '@components/Buttons';
+import { CustomInput } from '@components/Input';
+import { checkName, checkPassword } from '@containers/Auth/helper';
+import Page from '@containers/Page';
+import ProtectedRoute from '@containers/Protected';
+import { useAuth } from '@lib/auth';
 import { Routes } from 'routes';
-
-const BackArrow = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    viewBox="0 0 24 24"
-    stroke="currentColor"
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="2"
-      d="M10 19l-7-7m0 0l7-7m-7 7h18"
-    />
-  </svg>
-);
+import { Descriptions } from 'seo';
 
 const Profile: FunctionComponent = () => {
-  const { user, signout } = useAuth();
+  const { user, signout, changeDisplayName, changePassword } = useAuth();
   const { colorMode } = useColorMode();
-  const router = useRouter();
+  const toast = useToast();
 
   const isDarkMode = colorMode === 'dark';
+  const initialValues: ProfileForm = { name: '', password: '' };
+
+  const submitHandler = async (
+    values: ProfileForm,
+    actions: FormikHelpers<ProfileForm>
+  ) => {
+    const { name, password } = values;
+    try {
+      await changePassword(password);
+      await changeDisplayName(name);
+      toast({
+        duration: 2000,
+        isClosable: true,
+        position: 'top-right',
+        status: 'success',
+        title: 'Changes Saved.',
+        variant: isDarkMode ? 'solid' : 'subtle',
+      });
+      actions.resetForm();
+      signout();
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
-    <ProtectedRoute redirectUrl={Routes.AUTH_SCREEN}>
-      <Page title="Profile">
+    <Page title="Profile" description={Descriptions.Profile}>
+      <ProtectedRoute redirectUrl={Routes.AUTH_SCREEN}>
         <Box maxW="container.sm" mx="auto">
-          <Flex align="center">
-            <Box w="8" cursor="pointer" onClick={() => router.back()}>
-              <BackArrow />
-            </Box>
-            <Heading as="h1" ml="4">
-              Profile
-            </Heading>
-          </Flex>
+          <Heading as="h1">Profile</Heading>
           <Flex align="center" my="8">
-            <Avatar src={user?.photoUrl} />
+            <Avatar aria-hidden="true" src={user?.photoUrl} />
             <Heading fontSize="2xl" ml="4">
               {user?.name}
             </Heading>
@@ -68,28 +72,48 @@ const Profile: FunctionComponent = () => {
             spacing="6"
           >
             <Heading fontSize="xl">Personal Informations</Heading>
-            <Box>
-              <Text fontWeight="bold" color="gray.500">
-                Display Name
-              </Text>
-              <Input type="text" mt="2" />
-            </Box>
-            <Box>
-              <Text fontWeight="bold" color="gray.500">
-                Change Password
-              </Text>
-              <Input type="password" mt="2" />
-            </Box>
+            <Formik initialValues={initialValues} onSubmit={submitHandler}>
+              {() => (
+                <Form id="my-form">
+                  <Stack spacing="4" px="4">
+                    <Text fontWeight="bold" color="gray.500">
+                      Display Name
+                    </Text>
+                    <CustomInput
+                      name="name"
+                      type="text"
+                      placeholder=""
+                      validate={checkName}
+                    />
+                    <Text fontWeight="bold" color="gray.500">
+                      Change Password
+                    </Text>
+                    <CustomInput
+                      name="password"
+                      type="password"
+                      placeholder=""
+                      validate={checkPassword}
+                    />
+                  </Stack>
+                </Form>
+              )}
+            </Formik>
           </Stack>
           <Center mt="8">
-            <ButtonWithIcon title="Save Changes" icon={null} />
+            <ButtonWithIcon
+              form="my-form"
+              type="submit"
+              title="Save Changes"
+              icon={null}
+              // onClick={submitHandler}
+            />
             <Button colorScheme="red" ml="4" onClick={signout}>
               Log Out
             </Button>
           </Center>
         </Box>
-      </Page>
-    </ProtectedRoute>
+      </ProtectedRoute>
+    </Page>
   );
 };
 

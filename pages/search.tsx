@@ -1,80 +1,80 @@
-import { FunctionComponent, useState } from 'react';
-import { Box, SimpleGrid } from '@chakra-ui/react';
+import { FunctionComponent, useRef, useState } from 'react';
+import Image from 'next/image';
+import { Box, Heading, Text } from '@chakra-ui/react';
 
-import GameCard from '@/components/GameCard';
-import Input from '@/components/Input';
-import Loader from '@/components/Loader';
-import NoData from '@/components/NoData';
-import Page from '@/containers/Page';
-import ProtectedRoute from '@/containers/Protected';
-import { Endpoints } from 'endpoints';
-import { Routes } from 'routes';
-import { Game } from 'types';
+import Input from '@components/Input';
+import SearchResult from '@components/SearchResult';
+import Page from '@containers/Page';
+import img from 'public/images/search_hero.jpeg';
+import { Descriptions } from 'seo';
 
 const Search: FunctionComponent = () => {
-  const [games, setGames] = useState<Game[]>([]);
-  const [isPristine, setIsPristine] = useState<boolean>(true);
-  const [loading, setLoading] = useState<boolean>(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [page, setPage] = useState<number>(1);
   const [query, setQuery] = useState<string>('');
-
-  const changeHandler = (event) => setQuery(event.target.value);
 
   const keyDownHandler = (event) => {
     if (event.key === 'Enter') {
-      fetchGames();
+      event.target?.blur();
+      setQuery(inputRef.current?.value);
+      setPage(1);
     }
   };
 
-  const fetchGames = async () => {
-    setLoading(true);
-    try {
-      const res = await fetch(
-        `${Endpoints.SEARCH_GAME}?key=${process.env.NEXT_PUBLIC_RAWG_API_KEY}&search=${query}`
-      );
-      const data = await res.json();
-      setIsPristine(false);
-      setGames(data.results);
-    } catch (e) {
-      console.log(e);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const decrementPage = () => setPage((prev) => prev - 1);
+  const incrementPage = () => setPage((prev) => prev + 1);
 
   return (
-    <ProtectedRoute redirectUrl={Routes.AUTH_SCREEN}>
-      <Page title="Search">
-        <Box maxW="container.sm" mx="auto">
-          <Input
-            onChange={changeHandler}
-            onKeyDown={keyDownHandler}
-            placeholder="Search Games"
-            value={query}
+    <Page
+      title="Search"
+      description={Descriptions.Search}
+      maxWidth="1536px"
+      px="0"
+      pt="0"
+    >
+      <Box position="relative">
+        <Box height={['200px', '300px']} overflow="hidden" position="relative">
+          <Image
+            alt=""
+            layout="fill"
+            objectFit="cover"
+            objectPosition="top"
+            placeholder="blur"
+            src={img}
           />
         </Box>
-        {loading ? (
-          <Loader />
-        ) : Array.isArray(games) && games.length > 0 ? (
-          <SimpleGrid
-            minChildWidth="320px"
-            mt="8"
-            spacingX={[4, 4, 6]}
-            spacingY="6"
-          >
-            {games.map((game) => (
-              <GameCard game={game} key={game.id} />
-            ))}
-          </SimpleGrid>
-        ) : (
-          !isPristine && (
-            <NoData
-              title="Sorry, couldn't find any results for your query"
-              mt="8"
-            />
-          )
-        )}
-      </Page>
-    </ProtectedRoute>
+        <Box maxW="container.sm" mx="auto" px="4" transform="translateY(-30px)">
+          <Input
+            ref={inputRef}
+            onKeyDown={keyDownHandler}
+            height="60px"
+            placeholder="Search Games"
+          />
+        </Box>
+        <Box
+          color="light-text"
+          textAlign="center"
+          px="4"
+          position="absolute"
+          width="100%"
+          left="0"
+          top={[8, 16]}
+        >
+          <Heading>Search Gameigo</Heading>
+          <Text mt={[1, 4]}>
+            Choose from 30,000+ games with new addition every few weeks.
+          </Text>
+        </Box>
+      </Box>
+      {query ? (
+        <SearchResult
+          query={query}
+          page={page}
+          onNext={incrementPage}
+          onPrevious={decrementPage}
+        />
+      ) : null}
+    </Page>
   );
 };
 

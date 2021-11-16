@@ -1,103 +1,136 @@
 import { FunctionComponent, useState } from 'react';
 import NextLink from 'next/link';
+import { AnimatePresence } from 'framer-motion';
+import { CloseIcon, HamburgerIcon, MoonIcon, SunIcon } from '@chakra-ui/icons';
 import {
-  Flex,
-  Box,
   Avatar,
+  Box,
   Button,
+  Flex,
+  Icon,
   Link,
   Stack,
-  Icon,
+  Tooltip,
   useColorMode,
 } from '@chakra-ui/react';
-import { HamburgerIcon, MoonIcon, SunIcon } from '@chakra-ui/icons';
 
 import MobileNavbar from './MobileNavbar';
-import { useAuth } from 'lib/auth';
+import { useAuth } from '@lib/auth';
 
-const iconSize = 5;
+const iconSize = {
+  sm: 3,
+  lg: 5,
+};
 
-interface Props {
-  setShowContent: (a) => void;
-}
-
-const Navbar: FunctionComponent<Props> = ({ setShowContent }) => {
-  const [showMobileNav, setShowMobileNav] = useState<boolean>(false);
-  const { colorMode, toggleColorMode } = useColorMode();
+const Navbar: FunctionComponent = () => {
   const { user } = useAuth();
+  const { colorMode, toggleColorMode } = useColorMode();
+  const [showMobileNav, setShowMobileNav] = useState<boolean>(false);
 
   const isDarkMode = colorMode === 'dark';
-  const bgColor = isDarkMode ? 'dark-bg-secondary' : 'light-bg-secondary';
 
   const toggleNav = () => {
     setShowMobileNav((prev) => !prev);
-    setShowContent((prev) => !prev);
   };
 
   return (
-    <>
-      {showMobileNav ? (
-        <MobileNavbar onClick={toggleNav} />
-      ) : (
-        <Box bg={bgColor} shadow="sm">
-          <Flex
-            alignItems="center"
-            justifyContent={user ? 'space-between' : 'center'}
-            maxW="container.xl"
-            mx="auto"
-            p="4"
-            position="sticky"
-            top="0"
-            zIndex="999"
-          >
-            {user && (
-              <Box as="button" display={['block', 'none']}>
-                <Icon
-                  as={HamburgerIcon}
-                  w={iconSize}
-                  h={iconSize}
-                  onClick={toggleNav}
-                />
-              </Box>
-            )}
-            <NextLink href="/" passHref>
-              <Link letterSpacing="widest" textDecoration="none">
-                GAMEIGO
-              </Link>
-            </NextLink>
-            {user && (
-              <Stack
-                isInline
-                spacing={['8', '8', '12']}
-                display={['none', 'block']}
-              >
-                <NextLink href="/search" passHref>
-                  <Link>Search</Link>
-                </NextLink>
-                <NextLink href="/favorites" passHref>
-                  <Link>Favorites</Link>
-                </NextLink>
-                <NextLink href="/about" passHref>
-                  <Link>About</Link>
-                </NextLink>
-              </Stack>
-            )}
-            {user && (
-              <Stack isInline spacing="3">
-                <Button w="4" h="8" onClick={toggleColorMode} variant="outline">
-                  <Icon as={isDarkMode ? SunIcon : MoonIcon} />
-                </Button>
-                <NextLink href="/profile" passHref>
-                  <Link>
-                    <Avatar size="sm" src={user.photoUrl} />
-                  </Link>
-                </NextLink>
-              </Stack>
-            )}
-          </Flex>
+    <Box
+      className="adaptive-glass"
+      position="sticky"
+      shadow="sm"
+      top="0"
+      zIndex="999"
+    >
+      <Flex
+        alignItems="center"
+        justifyContent="space-between"
+        maxW="container.xl"
+        minH="14"
+        mx="auto"
+        p="4"
+      >
+        <Box
+          aria-label="Menu"
+          aria-expanded={showMobileNav ? 'true' : 'false'}
+          as="button"
+          display={['block', 'none']}
+          onClick={toggleNav}
+        >
+          {showMobileNav ? (
+            <Icon as={CloseIcon} w={iconSize.sm} h={iconSize.sm} />
+          ) : (
+            <Icon as={HamburgerIcon} w={iconSize.lg} h={iconSize.lg} />
+          )}
         </Box>
-      )}
-    </>
+        <NextLink href="/home" passHref>
+          <Link
+            letterSpacing="widest"
+            textDecoration="none"
+            position={['absolute', 'relative']}
+            right={['50%', '0']}
+            top={['6', '0']}
+            transform={['translate(50%, 0)', 'none']}
+          >
+            GAMEIGO
+          </Link>
+        </NextLink>
+        <Stack isInline spacing={['8', '8', '12']} display={['none', 'block']}>
+          <NextLink href="/search" passHref>
+            <Link
+              fontWeight="medium"
+              _hover={{
+                opacity: 0.5,
+              }}
+            >
+              Search
+            </Link>
+          </NextLink>
+          <NextLink href={user ? '/favorites' : '#'} passHref>
+            <Link
+              cursor={user ? 'pointer' : 'not-allowed'}
+              fontWeight="medium"
+              opacity={user ? 1 : 0.5}
+              _hover={{
+                opacity: 0.5,
+              }}
+            >
+              <Tooltip label="Please login first" isDisabled={!!user}>
+                Favorites
+              </Tooltip>
+            </Link>
+          </NextLink>
+          <NextLink href="/about" passHref>
+            <Link
+              fontWeight="medium"
+              _hover={{
+                opacity: 0.5,
+              }}
+            >
+              About
+            </Link>
+          </NextLink>
+        </Stack>
+        <Stack isInline spacing="3">
+          <Button
+            aria-label={isDarkMode ? 'Light Mode' : 'Dark Mode'}
+            w="4"
+            h="8"
+            onClick={toggleColorMode}
+            variant="outline"
+          >
+            <Icon as={isDarkMode ? SunIcon : MoonIcon} />
+          </Button>
+          <NextLink href={user ? '/profile' : '/auth'} passHref>
+            <Link aria-label="Profile">
+              <Avatar size="sm" src={user?.photoUrl} />
+            </Link>
+          </NextLink>
+        </Stack>
+      </Flex>
+      <AnimatePresence exitBeforeEnter>
+        {showMobileNav ? <MobileNavbar onClick={toggleNav} /> : null}
+      </AnimatePresence>
+    </Box>
   );
 };
 

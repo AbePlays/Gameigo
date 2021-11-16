@@ -2,8 +2,8 @@
   "settings": {
     "import/resolver": {
       "alias": [
-        ["@/components", "./components"],
-        ["@/containers", "./containers"]
+        ["@components", "./components"],
+        ["@containers", "./containers"]
       ]
     },
     "react": {
@@ -16,7 +16,7 @@
     "node": true,
     "jest": true
   },
-  "extends": ["eslint:recommended", "eslint-config-prettier"],
+  "extends": ["eslint:recommended", "eslint-config-prettier", "next"],
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true

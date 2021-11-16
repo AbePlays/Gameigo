@@ -10,10 +10,10 @@ import {
   Text,
 } from '@chakra-ui/react';
 
-import { ButtonWithIcon } from '@/components/Buttons';
-import { CustomInput } from '@/components/Input';
+import { ButtonWithIcon } from '@components/Buttons';
+import { CustomInput } from '@components/Input';
+import { useAuth } from '@lib/auth';
 import SocialAuthProviders from './SocialAuthProviders';
-import { useAuth } from '../../lib/auth';
 import { checkEmail, checkName, checkPassword } from './helper';
 import { SignupForm } from './types';
 
@@ -33,22 +33,22 @@ const Signup: FunctionComponent = () => {
       const { email, name, password } = values;
       await signupWithEmailAndPassword(email, password, name);
       toast({
-        title: 'Signup Successful.',
-        description: "We've created your account for you.",
-        status: 'success',
-        position: 'top',
-        duration: 4000,
+        duration: 2000,
         isClosable: true,
+        position: 'top-right',
+        status: 'success',
+        title: 'Signup Successful.',
+        variant: isDarkMode ? 'solid' : 'subtle',
       });
       actions.resetForm();
     } catch (e) {
       toast({
-        title: 'Signup Failed.',
-        description: 'There was an error while creating your account.',
-        status: 'error',
-        position: 'top',
-        duration: 4000,
+        duration: 2000,
         isClosable: true,
+        position: 'top-right',
+        status: 'error',
+        title: 'Signup Failed.',
+        variant: isDarkMode ? 'solid' : 'subtle',
       });
       console.log(`Error while signing up ${e}`);
     }
