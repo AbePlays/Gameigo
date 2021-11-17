@@ -3,5 +3,5 @@ module.exports = {
     domains: ['media.rawg.io'],
     formats: ['image/avif', 'image/webp'],
   },
-  swcMinify: true,
+  // swcMinify: true,
 };
