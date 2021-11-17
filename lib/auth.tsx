@@ -20,7 +20,7 @@ import {
 import { useColorMode, useToast } from '@chakra-ui/react';
 
 import { Routes } from 'routes';
-import { createUser } from './db';
+import { checkUser, createUser } from './db';
 import { auth } from './firebase';
 import { formatUser } from './helper';
 import { AuthContextType, User } from './types';
@@ -53,7 +53,10 @@ const useProvideAuth = () => {
     let sessionTimeout = null;
     if (firebaseUser) {
       const userData = formatUser(firebaseUser);
-      await createUser(userData);
+      const user = await checkUser(userData.uid);
+      if (!user.exists()) {
+        await createUser(userData);
+      }
       const res = await firebaseUser.getIdTokenResult();
       const token = res.token;
       userData.token = token;
