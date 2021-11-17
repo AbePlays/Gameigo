@@ -64,6 +64,7 @@ const GameCard: FunctionComponent<Props> = ({ game }) => {
 
   return (
     <MotionBox
+      as="article"
       bg={isDarkMode ? 'dark-bg-secondary' : 'light-bg-secondary'}
       cursor="pointer"
       onClick={clickHandler}
