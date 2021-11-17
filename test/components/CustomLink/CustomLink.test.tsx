@@ -1,5 +1,6 @@
+import { render, screen } from '@testing-library/react';
+
 import CustomLink from '@components/CustomLink';
-import { render, screen } from '../../test-utils';
 
 describe('Testing CustomLink Component', () => {
   it('should check anchor element', () => {

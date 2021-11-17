@@ -1,5 +1,6 @@
+import { render, screen } from '@testing-library/react';
+
 import AboutCard from '@components/AboutCard';
-import { render, screen } from '../../test-utils';
 
 describe('Testing AboutCard Component', () => {
   it('should check heading', () => {

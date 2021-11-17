@@ -1,17 +1,17 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 
-import { BrandButton } from '@components/Buttons';
+import { ButtonWithIcon } from '@components/Buttons';
 
 const title = 'title';
 const mockOnClick = jest.fn();
 
-const renderButton = () => {
+const renderButton = (icon = null) => {
   return render(
-    <BrandButton icon={null} title={title} onClick={mockOnClick} />
+    <ButtonWithIcon icon={icon} title={title} onClick={mockOnClick} />
   );
 };
 
-describe('Testing BrandButton Component', () => {
+describe('Testing ButtonWithIcon Component', () => {
   it('should check title and onClick event on the button', () => {
     renderButton();
     const buttonEl = screen.getByRole('button');
