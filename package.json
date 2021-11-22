@@ -52,9 +52,11 @@
     "identity-obj-proxy": "^3.0.0",
     "jest": "^27.3.1",
     "lint-staged": "^12.0.2",
+    "msw": "^0.35.0",
     "node-modules-regexp": "^1.0.0",
     "prettier": "^2.4.1",
-    "typescript": "^4.4.4"
+    "typescript": "^4.4.4",
+    "whatwg-fetch": "^2.0.4"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": "eslint --cache --fix",
