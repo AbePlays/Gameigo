@@ -1,15 +1,12 @@
-import { render, screen } from '@testing-library/react';
-
 import Store from '@components/Store';
-
-const testName = 'TEST_NAME';
-const testUrl = 'TEST_URL';
+import { mockTitle, mockLink } from 'test/mockData';
+import { render, screen } from '../../test-utils';
 
 describe('Testing Store Component', () => {
   it('should check link', () => {
-    render(<Store name={testName} url={testUrl} />);
+    render(<Store name={mockTitle} url={mockLink} />);
     const anchorEl = screen.getByRole('link');
-    expect(anchorEl).toHaveTextContent(testName);
-    expect(anchorEl).toHaveAttribute('href', `https://${testUrl}`);
+    expect(anchorEl).toHaveTextContent(mockTitle);
+    expect(anchorEl).toHaveAttribute('href', `https://${mockLink}`);
   });
 });
