@@ -1,6 +1,7 @@
 import {
   useState,
   useEffect,
+  useCallback,
   useContext,
   createContext,
   FunctionComponent,
@@ -25,7 +26,7 @@ import { auth } from './firebase';
 import { formatUser } from './helper';
 import { AuthContextType, User } from './types';
 
-const AuthContext = createContext<AuthContextType>(null);
+export const AuthContext = createContext<AuthContextType>(null);
 
 export const AuthProvider: FunctionComponent = ({ children }) => {
   const auth = useProvideAuth();
@@ -49,7 +50,7 @@ const useProvideAuth = () => {
 
   const isDarkMode = colorMode === 'dark';
 
-  const handleFirebaseUser = async (firebaseUser: firebaseUser) => {
+  const handleFirebaseUser = useCallback(async (firebaseUser: firebaseUser) => {
     let sessionTimeout = null;
     if (firebaseUser) {
       const userData = formatUser(firebaseUser);
@@ -77,7 +78,10 @@ const useProvideAuth = () => {
     }
     setLoading(false);
     return firebaseUser;
-  };
+    // bug in nextjs router
+    // https://github.com/vercel/next.js/issues/18127
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const signupWithEmailAndPassword = async (
     email: string,
@@ -139,7 +143,7 @@ const useProvideAuth = () => {
     });
 
     return () => unsubscribe();
-  }, []);
+  }, [handleFirebaseUser]);
 
   return {
     changeDisplayName,

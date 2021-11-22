@@ -1,15 +1,14 @@
-import { Text } from '@chakra-ui/react';
-
 import Layout from '@components/Layout';
+import { mockText } from '../../mockData';
 import { render, screen } from '../../test-utils';
 
 describe('Testing Layout Component', () => {
   it('should check whether children are rendered', () => {
     render(
       <Layout>
-        <Text>Hello world</Text>
+        <span>{mockText}</span>
       </Layout>
     );
-    expect(screen.getByText(/hello world/i)).toBeInTheDocument();
+    expect(screen.getByText(mockText)).toBeInTheDocument();
   });
 });

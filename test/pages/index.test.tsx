@@ -10,19 +10,14 @@ jest.mock('next/router', () => ({
 }));
 
 describe('Testing Home Component', () => {
-  it('should check for hero-image', () => {
+  it('should check CTA', async () => {
     render(<Home />);
-    expect(
-      screen.getByRole('img', { name: /man playing on his laptop/i })
-    ).toBeInTheDocument();
-  });
+    const buttonEls = await screen.findAllByRole('button', {
+      name: /get started/i,
+    });
+    expect(buttonEls.length).toBe(2);
 
-  it('should check CTA', () => {
-    render(<Home />);
-    const button = screen.getByRole('button', { name: /get started/i });
-    expect(button).toBeInTheDocument();
-
-    fireEvent.click(button);
+    fireEvent.click(buttonEls[0]);
     expect(mockPush).toHaveBeenCalledWith(Routes.AUTH_SCREEN);
     expect(mockPush).toHaveBeenCalledTimes(1);
   });

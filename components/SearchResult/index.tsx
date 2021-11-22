@@ -43,6 +43,8 @@ const SearchResult: FunctionComponent<Props> = ({
       title: 'Search Failed.',
       variant: isDarkMode ? 'solid' : 'subtle',
     });
+
+    return null;
   }
 
   if (!data) {

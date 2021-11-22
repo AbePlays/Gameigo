@@ -11,7 +11,6 @@ import { useAuth } from '@lib/auth';
 import { FadeUpAnimation } from '@utils/animations';
 import fetcher from '@utils/fetcher';
 import { MotionBox } from '@utils/MotionElements';
-import { Routes } from 'routes';
 import { Descriptions } from 'seo';
 
 const Favorites: FunctionComponent = () => {
@@ -36,7 +35,7 @@ const Favorites: FunctionComponent = () => {
   }
 
   return (
-    <ProtectedRoute redirectUrl={Routes.AUTH_SCREEN}>
+    <ProtectedRoute>
       <Page title="Favorites" description={Descriptions.Favorites}>
         <Heading as="h1" fontSize={['4xl', '5xl', '6xl']}>
           Favorites

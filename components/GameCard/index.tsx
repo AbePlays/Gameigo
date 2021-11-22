@@ -1,7 +1,6 @@
 import { useState, FunctionComponent } from 'react';
 import Image from 'next/image';
 import NextLink from 'next/link';
-import { useRouter } from 'next/router';
 import {
   useColorMode,
   Box,
@@ -26,7 +25,6 @@ interface Props {
 
 const GameCard: FunctionComponent<Props> = ({ game }) => {
   const { colorMode } = useColorMode();
-  const router = useRouter();
   const [showImage, setShowImage] = useState<boolean>(false);
 
   const isDarkMode = colorMode === 'dark';
@@ -60,13 +58,11 @@ const GameCard: FunctionComponent<Props> = ({ game }) => {
     );
   };
 
-  const clickHandler = () => router.push(`/game/${game.slug}`);
-
   return (
     <MotionBox
+      as="article"
       bg={isDarkMode ? 'dark-bg-secondary' : 'light-bg-secondary'}
       cursor="pointer"
-      onClick={clickHandler}
       overflow="hidden"
       rounded="lg"
       shadow="lg"

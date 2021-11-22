@@ -1,4 +1,4 @@
-import { BrandButton } from '@components/Buttons';
+import { ButtonWithIcon } from '@components/Buttons';
 import { mockTitle } from '../../mockData';
 import { fireEvent, render, screen } from '../../test-utils';
 
@@ -6,11 +6,11 @@ const mockOnClick = jest.fn();
 
 const renderButton = (icon = null) => {
   return render(
-    <BrandButton icon={icon} title={mockTitle} onClick={mockOnClick} />
+    <ButtonWithIcon icon={icon} title={mockTitle} onClick={mockOnClick} />
   );
 };
 
-describe('Testing BrandButton Component', () => {
+describe('Testing ButtonWithIcon Component', () => {
   it('should render icon', () => {
     renderButton(<span data-testid="icon">I am an icon</span>);
     const buttonEl = screen.getByRole('button');

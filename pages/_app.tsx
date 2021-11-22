@@ -9,8 +9,6 @@ import Layout from '@components/Layout';
 import Navbar from '@components/Navbar';
 import { AuthProvider } from '@lib/auth';
 import 'styles/global.css';
-// import 'styles/loader.css';
-// import 'styles/slider.css';
 import theme from 'styles/theme';
 
 const MyApp: FunctionComponent<AppProps> = ({

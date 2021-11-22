@@ -10,16 +10,9 @@ const BoxWithDivider: FunctionComponent<Props> = ({ id, title }) => {
   return (
     <Flex alignItems="center">
       {id !== 0 && (
-        <Box
-          w="0.5"
-          h="4"
-          mx="2"
-          bg="white"
-          rounded="lg"
-          data-testid="divider"
-        />
+        <Box bg="white" h="4" w="0.5" mx="2" role="separator" rounded="lg" />
       )}
-      <Text>{title}</Text>
+      <Text as="span">{title}</Text>
     </Flex>
   );
 };

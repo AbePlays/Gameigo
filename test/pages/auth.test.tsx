@@ -1,5 +1,12 @@
 import Auth from '../../pages/auth';
-import { render, screen, fireEvent } from '../test-utils';
+import { fireEvent, mockUser, mockValue, render, screen } from '../test-utils';
+
+const mockReplace = jest.fn();
+jest.mock('next/router', () => ({
+  useRouter: () => ({
+    replace: mockReplace,
+  }),
+}));
 
 describe('Testing Auth Component', () => {
   it('should check for CTA', () => {
@@ -10,5 +17,13 @@ describe('Testing Auth Component', () => {
     fireEvent.click(button);
     button = screen.getByRole('button', { name: /log in/i });
     expect(button).toBeInTheDocument();
+  });
+
+  it('should redirect to home screen if user is logged in', () => {
+    render(<Auth />, { value: { ...mockValue, user: mockUser } });
+
+    expect(mockReplace).toHaveBeenCalled();
+    expect(mockReplace).toHaveBeenCalledTimes(1);
+    expect(mockReplace).toHaveBeenCalledWith('/home');
   });
 });
