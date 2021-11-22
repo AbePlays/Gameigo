@@ -19,7 +19,6 @@ import { checkName, checkPassword } from '@containers/Auth/helper';
 import Page from '@containers/Page';
 import ProtectedRoute from '@containers/Protected';
 import { useAuth } from '@lib/auth';
-import { Routes } from 'routes';
 import { Descriptions } from 'seo';
 
 const Profile: FunctionComponent = () => {
@@ -55,7 +54,7 @@ const Profile: FunctionComponent = () => {
 
   return (
     <Page title="Profile" description={Descriptions.Profile}>
-      <ProtectedRoute redirectUrl={Routes.AUTH_SCREEN}>
+      <ProtectedRoute>
         <Box maxW="container.sm" mx="auto">
           <Heading as="h1">Profile</Heading>
           <Flex align="center" my="8">
