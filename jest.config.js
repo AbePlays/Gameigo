@@ -1,5 +1,6 @@
 module.exports = {
   collectCoverageFrom: ['(components|pages|containers)/**/*.{js,jsx,tsx}'],
+  coveragePathIgnorePatterns: ['<rootDir>/pages/_(app|document).tsx'],
   moduleDirectories: [
     'node_modules',
     'components',
