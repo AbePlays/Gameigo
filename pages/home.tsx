@@ -2,8 +2,8 @@ import { FunctionComponent } from 'react';
 import { GetStaticProps } from 'next';
 import { Heading, Text } from '@chakra-ui/react';
 
-import Page from '@containers/Page';
 import GameCard from '@components/GameCard';
+import Page from '@containers/Page';
 import { FadeUpAnimation } from '@utils/animations';
 import { MotionBox } from '@utils/MotionElements';
 import { Endpoints } from 'endpoints';
@@ -30,7 +30,11 @@ const Home: FunctionComponent<Props> = ({ games }) => {
       >
         {Array.isArray(games) &&
           games.length > 0 &&
-          games.map((game) => <GameCard game={game} key={game.id} />)}
+          games.map((game) => (
+            <MotionBox key={game.id} variants={FadeUpAnimation.child}>
+              <GameCard game={game} />
+            </MotionBox>
+          ))}
       </MotionBox>
     </Page>
   );
@@ -44,4 +48,5 @@ export const getStaticProps: GetStaticProps = async () => {
     revalidate: 12 * 60 * 60, // 12 hours
   };
 };
+
 export default Home;
