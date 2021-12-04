@@ -5,6 +5,7 @@ import { Heading, Text } from '@chakra-ui/react';
 import GameCard from '@components/GameCard';
 import Page from '@containers/Page';
 import { FadeUpAnimation } from '@utils/animations';
+import { convertToGame } from '@utils/game';
 import { MotionBox } from '@utils/MotionElements';
 import { Endpoints } from 'endpoints';
 import { Descriptions } from 'seo';
@@ -43,8 +44,13 @@ const Home: FunctionComponent<Props> = ({ games }) => {
 export const getStaticProps: GetStaticProps = async () => {
   const res = await fetch(Endpoints.TRENDING_GAMES);
   const data = await res.json();
+  let games = [];
+  if (data.results && Array.isArray(data.results)) {
+    games = data.results.map((game) => convertToGame(game));
+  }
+
   return {
-    props: { games: data.results },
+    props: { games },
     revalidate: 12 * 60 * 60, // 12 hours
   };
 };
