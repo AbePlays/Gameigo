@@ -292,11 +292,11 @@ const GameDetail: FunctionComponent<Props> = ({ game, screenshots }) => {
             )}
             {game.publishers.length > 0 && (
               <GameContent heading="Publishers">
-                <Wrap>
-                  {game.publishers.map((item) => {
+                <Wrap spacing="0">
+                  {game.publishers.map((item, index) => {
                     return (
                       <WrapItem key={item.id}>
-                        <Text>{item.name}</Text>
+                        <BoxWithDivider id={index} title={item.name} />
                       </WrapItem>
                     );
                   })}

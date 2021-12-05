@@ -55,6 +55,7 @@ const Page: FunctionComponent<Props> = ({
         {imageUrl ? (
           <meta property="og:image:secure_url" content={imageUrl} />
         ) : null}
+        <meta property="og:site_name" content="Gameigo" />
         <meta property="og:type" content="website" />
         {siteLink ? (
           <meta
