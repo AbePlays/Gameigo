@@ -1,5 +1,5 @@
 import SearchResult from '@components/SearchResult';
-import { render, screen, waitForElementToBeRemoved } from '../../test-utils';
+import { render, screen, waitFor } from '../../test-utils';
 
 // TODO:- Improve this test
 
@@ -14,7 +14,9 @@ describe('Testing SearchResult Component', () => {
       />
     );
 
-    expect(screen.getByTestId('loader')).toBeInTheDocument();
-    await waitForElementToBeRemoved(() => screen.queryByTestId('loader'));
+    expect(screen.getAllByTestId('loading-card').length).toBeGreaterThan(0);
+    await waitFor(() =>
+      expect(screen.queryAllByTestId('loading-card').length).toBe(0)
+    );
   });
 });

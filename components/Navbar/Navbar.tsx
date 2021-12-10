@@ -121,7 +121,7 @@ const Navbar: FunctionComponent = () => {
             <Icon as={isDarkMode ? SunIcon : MoonIcon} />
           </Button>
           <NextLink href={user ? '/profile' : '/auth'} passHref>
-            <Link aria-label="Profile">
+            <Link aria-label="Profile" rounded="full">
               <Avatar size="sm" src={user?.photoUrl} />
             </Link>
           </NextLink>

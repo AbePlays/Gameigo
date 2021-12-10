@@ -15,7 +15,6 @@ import {
 
 import Label from '../Label';
 import placeholder from 'public/images/placeholder.jpeg';
-import { FadeUpAnimation } from '@utils/animations';
 import { formatDate } from '@utils/date';
 import { MotionBox } from '@utils/MotionElements';
 
@@ -63,10 +62,10 @@ const GameCard: FunctionComponent<Props> = ({ game }) => {
       as="article"
       bg={isDarkMode ? 'dark-bg-secondary' : 'light-bg-secondary'}
       cursor="pointer"
+      h="full"
       overflow="hidden"
       rounded="lg"
       shadow="lg"
-      variants={FadeUpAnimation.child}
       whileHover={{ scale: 1.01 }}
     >
       <NextLink href={`/game/${game.slug}`} passHref>
