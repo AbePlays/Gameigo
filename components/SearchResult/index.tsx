@@ -1,13 +1,11 @@
 import { FunctionComponent } from 'react';
 import useSWR from 'swr';
-import { useColorMode, useToast, Stack, Text } from '@chakra-ui/react';
+import { useColorMode, useToast, Box, Stack, Text } from '@chakra-ui/react';
 
 import { ButtonWithIcon } from '@components/Buttons';
 import GameCard from '@components/GameCard';
-import Loader from '@components/Loader';
-import { FadeUpAnimation } from '@utils/animations';
+import LoadingCard from '@components/LoadingCard';
 import fetcher from '@utils/fetcher';
-import { MotionBox } from '@utils/MotionElements';
 
 interface Props {
   onNext: () => void;
@@ -48,7 +46,11 @@ const SearchResult: FunctionComponent<Props> = ({
   }
 
   if (!data) {
-    return <Loader />;
+    return (
+      <Box className="grid" maxW="1120px" mt="0" mx="auto" px="4">
+        <LoadingCard count={6} />
+      </Box>
+    );
   }
 
   const results = data.results;
@@ -57,20 +59,11 @@ const SearchResult: FunctionComponent<Props> = ({
     <>
       {Array.isArray(results) && results.length > 0 ? (
         <>
-          <MotionBox
-            className="grid"
-            maxWidth="1120px"
-            mt="0"
-            mx="auto"
-            px="4"
-            variants={FadeUpAnimation.parent}
-            animate="show"
-            initial="hidden"
-          >
+          <Box className="grid" maxWidth="1120px" mt="0" mx="auto" px="4">
             {results.map((game) => (
               <GameCard game={game} key={game.id} />
             ))}
-          </MotionBox>
+          </Box>
           <Stack
             isInline
             alignItems="center"

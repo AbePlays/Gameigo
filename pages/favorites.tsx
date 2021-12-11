@@ -1,16 +1,14 @@
 import { FunctionComponent } from 'react';
-import { useColorMode, useToast, Heading } from '@chakra-ui/react';
+import { useColorMode, useToast, Box, Heading } from '@chakra-ui/react';
 import useSWR from 'swr';
 
-import Loader from '@components/Loader';
 import GameCard from '@components/GameCard';
+import LoadingCard from '@components/LoadingCard';
 import NoData from '@components/NoData';
 import Page from '@containers/Page';
 import ProtectedRoute from '@containers/Protected';
 import { useAuth } from '@lib/auth';
-import { FadeUpAnimation } from '@utils/animations';
 import fetcher from '@utils/fetcher';
-import { MotionBox } from '@utils/MotionElements';
 import { Descriptions } from 'seo';
 
 const Favorites: FunctionComponent = () => {
@@ -42,21 +40,20 @@ const Favorites: FunctionComponent = () => {
         </Heading>
         {data ? (
           Array.isArray(data) && data.length > 0 ? (
-            <MotionBox
-              className="grid"
-              animate="show"
-              initial="hidden"
-              variants={FadeUpAnimation.parent}
-            >
+            <Box className="grid">
               {data.map((game: Game) => (
-                <GameCard game={game} key={game.id} />
+                <Box key={game.id}>
+                  <GameCard game={game} />
+                </Box>
               ))}
-            </MotionBox>
+            </Box>
           ) : (
             <NoData title="Please add games to your collection." />
           )
         ) : (
-          <Loader />
+          <Box className="grid">
+            <LoadingCard count={6} />
+          </Box>
         )}
       </Page>
     </ProtectedRoute>
