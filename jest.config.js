@@ -22,7 +22,9 @@ module.exports = {
   },
   roots: ['<rootDir>'],
   setupFilesAfterEnv: ['./jest.setup.js'],
-  testPathIgnorePatterns: ['<rootDir>[/\\\\](node_modules|.next)[/\\\\]'],
+  testPathIgnorePatterns: [
+    '<rootDir>[/\\\\](node_modules|.next|cypress)[/\\\\]',
+  ],
   testEnvironment: 'jsdom',
   transformIgnorePatterns: ['[/\\\\]node_modules[/\\\\].+\\.(ts|tsx)$'],
   transform: {
