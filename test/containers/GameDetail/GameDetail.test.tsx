@@ -1,5 +1,5 @@
 import GameDetail from '@containers/GameDetail';
-import { addGame, checkGame, deleteGame } from '@lib/db';
+import { addGame, checkGame } from '@lib/db';
 import { mockGameInfo, mockScreenshots } from '../../mockData';
 import {
   fireEvent,
@@ -19,7 +19,7 @@ jest.mock('next/router', () => ({
 
 jest.mock('@lib/db', () => ({
   addGame: jest.fn(),
-  checkGame: jest.fn().mockResolvedValue(() => false),
+  checkGame: jest.fn().mockResolvedValue(false),
   deleteGame: jest.fn(),
 }));
 
@@ -98,27 +98,6 @@ describe('Testing GameDetail Container', () => {
     await waitFor(() => {
       expect(addGame).toHaveBeenCalled();
       expect(addGame).toHaveBeenCalledTimes(1);
-    });
-  });
-
-  it('should call deleteGame fn if game is in the collection', async () => {
-    render(<GameDetail game={mockGameInfo} screenshots={mockScreenshots} />, {
-      value: { ...mockValue, user: mockUser },
-    });
-
-    const favoriteBtn = screen.getByRole('button', { name: /favorite/i });
-    expect(favoriteBtn).toBeInTheDocument();
-
-    fireEvent.click(favoriteBtn);
-    await waitFor(() => {
-      expect(addGame).toHaveBeenCalled();
-      expect(addGame).toHaveBeenCalledTimes(1);
-    });
-
-    fireEvent.click(favoriteBtn);
-    await waitFor(() => {
-      expect(deleteGame).toHaveBeenCalled();
-      expect(deleteGame).toHaveBeenCalledTimes(1);
     });
   });
 });
