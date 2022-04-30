@@ -1,7 +1,6 @@
 import { FunctionComponent, useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import Slider from 'react-slick';
 import { LinkIcon } from '@chakra-ui/icons';
 import {
   useColorMode,
@@ -12,8 +11,10 @@ import {
   IconButton,
   Stack,
   Text,
+  UnorderedList,
   Wrap,
   WrapItem,
+  ListItem,
 } from '@chakra-ui/react';
 
 import BoxWithDivider from '@components/BoxWithDivider';
@@ -45,17 +46,6 @@ const CustomDivider = () => {
       rounded="lg"
     />
   );
-};
-
-const settings = {
-  arrows: false,
-  dots: true,
-  dotsClass: 'slider-dots',
-  fade: true,
-  infinite: false,
-  slidesToScroll: 1,
-  slidesToShow: 1,
-  speed: 500,
 };
 
 const GameDetail: FunctionComponent<Props> = ({ game, screenshots }) => {
@@ -218,7 +208,12 @@ const GameDetail: FunctionComponent<Props> = ({ game, screenshots }) => {
           mx="auto"
           px="4"
         >
-          <Box aria-label="Go Back" as="button" onClick={clickHandler} w="8">
+          <Box
+            aria-label="Go Back"
+            as="button"
+            onClick={clickHandler}
+            w={['6', '8']}
+          >
             <IconArrowBack />
           </Box>
           <Flex alignItems="center" justifyContent="center">
@@ -226,7 +221,7 @@ const GameDetail: FunctionComponent<Props> = ({ game, screenshots }) => {
               <Box
                 aria-label={`${isFav ? 'UnFavorite' : 'Favorite'}`}
                 as="button"
-                w="7"
+                w={['6', '7']}
                 onClick={onClickHandler}
                 mr="2"
               >
@@ -235,7 +230,7 @@ const GameDetail: FunctionComponent<Props> = ({ game, screenshots }) => {
             ) : null}
             <IconButton
               aria-label="Share"
-              fontSize="2xl"
+              fontSize={['xl', '2xl']}
               icon={<LinkIcon />}
               onClick={copyLink}
               variant="unstyled"
@@ -323,23 +318,40 @@ const GameDetail: FunctionComponent<Props> = ({ game, screenshots }) => {
             )}
             {screenshots.count > 0 && (
               <GameContent heading="Screenshots">
-                <Slider lazyLoad="progressive" {...settings}>
+                <UnorderedList
+                  className="no-scrollbar"
+                  display="flex"
+                  gap="6"
+                  marginInline="2"
+                  style={{ scrollSnapType: 'x mandatory' }}
+                  overflowX="auto"
+                >
                   {screenshots.results.map((item) => {
-                    const aspectRatio = item.width / item.height;
                     return (
-                      <Flex key={item.id} rounded="sm" overflow="hidden">
-                        <Image
-                          alt={`game-screenshot-${item.id}`}
-                          height={1080 / aspectRatio}
-                          width="1080"
-                          layout="responsive"
-                          objectFit="cover"
-                          src={item.image}
-                        />
-                      </Flex>
+                      <ListItem
+                        flexShrink={0}
+                        key={item.id}
+                        listStyleType="none"
+                        style={{ scrollSnapAlign: 'start' }}
+                      >
+                        <Flex
+                          rounded="sm"
+                          overflow="hidden"
+                          height={['216px', '256px']}
+                          width={['calc(100vw - 32px - 16px)', '384px']}
+                          pos="relative"
+                        >
+                          <Image
+                            alt={`game-screenshot-${item.id}`}
+                            layout="fill"
+                            objectFit="cover"
+                            src={item.image}
+                          />
+                        </Flex>
+                      </ListItem>
                     );
                   })}
-                </Slider>
+                </UnorderedList>
               </GameContent>
             )}
           </Stack>
