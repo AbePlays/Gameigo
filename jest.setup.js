@@ -18,6 +18,8 @@ jest.mock('firebase/firestore', () => {
 const noop = () => {};
 Object.defineProperty(window, 'scrollTo', { value: noop, writable: true });
 
+jest.spyOn(console, 'error').mockImplementation(noop);
+
 window.matchMedia =
   window.matchMedia ||
   function () {

@@ -1,7 +1,11 @@
 import { FunctionComponent } from 'react';
 import { Box } from '@chakra-ui/react';
 
-const Layout: FunctionComponent = ({ children }) => {
+interface Props {
+  children?: React.ReactNode;
+}
+
+const Layout: FunctionComponent<Props> = ({ children }) => {
   return (
     <Box maxW="1536px" mx="auto">
       {children}

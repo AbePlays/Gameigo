@@ -32,5 +32,5 @@
     "test/__mocks__/fileMock.js",
     "jest.setup.js"
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["cypress", "node_modules"]
 }

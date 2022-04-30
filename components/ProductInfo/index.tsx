@@ -1,8 +1,9 @@
 import { FunctionComponent } from 'react';
-import Image from 'next/image';
-import { useColorMode, Box, Heading, Text } from '@chakra-ui/react';
+import Image, { StaticImageData } from 'next/image';
+import { useColorMode, Box, Heading, Stack, Text } from '@chakra-ui/react';
 
 interface Props {
+  children?: React.ReactNode;
   content: string;
   src: StaticImageData;
   title: string;
@@ -13,7 +14,13 @@ const ProductInfo: FunctionComponent<Props> = ({ content, src, title }) => {
   const isDarkMode = colorMode === 'dark';
 
   return (
-    <Box maxWidth="container.sm" mx="auto" my="14" spacing="16" align="center">
+    <Stack
+      maxWidth="container.sm"
+      mx="auto"
+      my="14"
+      spacing="16"
+      align="center"
+    >
       <Box maxW="500px">
         <Image alt="" placeholder="blur" src={src} />
       </Box>
@@ -31,7 +38,7 @@ const ProductInfo: FunctionComponent<Props> = ({ content, src, title }) => {
           {content}
         </Text>
       </Box>
-    </Box>
+    </Stack>
   );
 };
 
