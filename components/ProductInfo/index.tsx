@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import Image from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 import { useColorMode, Box, Heading, Text } from '@chakra-ui/react';
 
 interface Props {
