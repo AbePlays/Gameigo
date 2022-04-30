@@ -26,9 +26,13 @@ import { auth } from './firebase';
 import { formatUser } from './helper';
 import { AuthContextType, User } from './types';
 
+interface Props {
+  children?: React.ReactNode;
+}
+
 export const AuthContext = createContext<AuthContextType>(null);
 
-export const AuthProvider: FunctionComponent = ({ children }) => {
+export const AuthProvider: FunctionComponent<Props> = ({ children }) => {
   const auth = useProvideAuth();
   return <AuthContext.Provider value={auth}>{children}</AuthContext.Provider>;
 };

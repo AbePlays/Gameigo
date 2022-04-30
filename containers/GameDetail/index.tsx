@@ -334,18 +334,13 @@ const GameDetail: FunctionComponent<Props> = ({ game, screenshots }) => {
                         listStyleType="none"
                         style={{ scrollSnapAlign: 'start' }}
                       >
-                        <Flex
-                          rounded="sm"
-                          overflow="hidden"
-                          height={['216px', '256px']}
-                          width={['calc(100vw - 32px - 16px)', '384px']}
-                          pos="relative"
-                        >
+                        <Flex rounded="sm" overflow="hidden">
                           <Image
                             alt={`game-screenshot-${item.id}`}
-                            layout="fill"
+                            height="180px"
                             objectFit="cover"
                             src={item.image}
+                            width="320px"
                           />
                         </Flex>
                       </ListItem>

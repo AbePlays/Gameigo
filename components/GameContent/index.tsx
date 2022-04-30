@@ -2,6 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { Heading, Box } from '@chakra-ui/react';
 
 interface Props {
+  children?: React.ReactNode;
   heading: string;
 }
 

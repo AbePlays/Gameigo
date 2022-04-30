@@ -5,6 +5,7 @@ import { FadeUpAnimation } from '@utils/animations';
 import { MotionBox } from '@utils/MotionElements';
 
 interface Props {
+  children?: React.ReactNode;
   heading: string;
 }
 

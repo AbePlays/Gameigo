@@ -6,6 +6,7 @@ import { useAuth } from '@lib/auth';
 import { Routes } from 'routes';
 
 interface Props {
+  children?: React.ReactNode;
   redirectUrl?: string;
 }
 
