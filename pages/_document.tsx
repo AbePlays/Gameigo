@@ -35,6 +35,7 @@ class MyDocument extends Document {
             color="#000000"
           />
           <link rel="canonical" href={this.siteLink} />
+          {/* <link rel="preload" as="image" href="/images/search_hero.jpeg" /> */}
           <meta
             content="/favicons/browserconfig.xml"
             name="msapplication-config"

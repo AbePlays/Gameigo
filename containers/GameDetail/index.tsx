@@ -1,5 +1,4 @@
 import { FunctionComponent, useEffect, useState } from 'react';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { LinkIcon } from '@chakra-ui/icons';
 import {
@@ -27,6 +26,7 @@ import { useAuth } from '@lib/auth';
 import { addGame, checkGame, deleteGame } from '@lib/db';
 import { formatDate } from '@utils/date';
 import { convertToGame } from '@utils/game';
+import BlurImage from '@components/BlurImage';
 
 interface Props {
   game: GameInfo;
@@ -242,20 +242,20 @@ const GameDetail: FunctionComponent<Props> = ({ game, screenshots }) => {
         <Box
           w="100%"
           h="calc(100vh - 64px)"
-          position="relative"
+          position="fixed"
           filter="brightness(40%)"
         >
-          <Image
+          <BlurImage
             src={game.background_image}
             layout="fill"
-            objectFit="contain"
+            objectFit="cover"
             objectPosition="top"
             alt="game background"
           />
         </Box>
       </Box>
       <Box display={['block', 'block', 'none']} h="300px" position="relative">
-        <Image
+        <BlurImage
           src={game.background_image}
           layout="fill"
           objectFit="cover"
@@ -335,7 +335,7 @@ const GameDetail: FunctionComponent<Props> = ({ game, screenshots }) => {
                         style={{ scrollSnapAlign: 'start' }}
                       >
                         <Flex rounded="sm" overflow="hidden">
-                          <Image
+                          <BlurImage
                             alt={`game-screenshot-${item.id}`}
                             height="180px"
                             objectFit="cover"

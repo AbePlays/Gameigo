@@ -1,5 +1,4 @@
-import { useState, FunctionComponent } from 'react';
-import Image from 'next/image';
+import { FunctionComponent } from 'react';
 import NextLink from 'next/link';
 import {
   useColorMode,
@@ -8,13 +7,13 @@ import {
   Flex,
   Heading,
   Link,
-  Skeleton,
   Stack,
   Text,
 } from '@chakra-ui/react';
 
 import Label from '../Label';
 import placeholder from 'public/images/placeholder.jpeg';
+import BlurImage from '@components/BlurImage';
 import { formatDate } from '@utils/date';
 import { MotionBox } from '@utils/MotionElements';
 
@@ -24,10 +23,8 @@ interface Props {
 
 const GameCard: FunctionComponent<Props> = ({ game }) => {
   const { colorMode } = useColorMode();
-  const [showImage, setShowImage] = useState<boolean>(false);
 
   const isDarkMode = colorMode === 'dark';
-  const toggleImage = () => setShowImage(true);
 
   const renderPlatforms = () => {
     return game?.parent_platforms?.map((item) => (
@@ -71,13 +68,11 @@ const GameCard: FunctionComponent<Props> = ({ game }) => {
       <NextLink href={`/game/${game.slug}`} passHref>
         <Link aria-label={`${game.name}`}>
           <Box h="56" position="relative">
-            {!showImage && <Skeleton speed={2} h="full" />}
-            <Image
-              src={game?.background_image || placeholder}
+            <BlurImage
               alt="game background"
               layout="fill"
-              onLoadingComplete={toggleImage}
-              objectFit="cover"
+              showBg
+              src={game?.background_image || placeholder}
             />
           </Box>
           <Box p="4">
