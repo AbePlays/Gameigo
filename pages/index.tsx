@@ -32,7 +32,7 @@ const Home: FunctionComponent = () => {
   const router = useRouter();
   const isDarkMode = colorMode === 'dark';
 
-  const redirectToAuthScreen = () => router.push(Routes.AUTH_SCREEN);
+  const redirectToAuthScreen = () => router.push(Routes.HOME_SCREEN);
 
   useEffect(() => {
     if (!loading && user) {
@@ -103,7 +103,7 @@ const Home: FunctionComponent = () => {
                 </Stack>
               </Box>
               <Flex flex="1" justifyContent="flex-end">
-                <BlurImage src={hero} />
+                <BlurImage src={hero} height="400" width="500" />
               </Flex>
             </Box>
             <Box mt="24" textAlign="center">
@@ -130,7 +130,13 @@ const Home: FunctionComponent = () => {
                     rounded="md"
                     shadow="lg"
                   >
-                    <BlurImage alt="Home Page Screenshot" src={homeDark} />
+                    <BlurImage
+                      alt="Home Page Screenshot"
+                      showBg
+                      src={homeDark}
+                      height="575"
+                      width="920"
+                    />
                   </Box>
                 </Box>
                 <UnorderedList py="8" mx="0" listStyleType="none">

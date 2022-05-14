@@ -339,6 +339,7 @@ const GameDetail: FunctionComponent<Props> = ({ game, screenshots }) => {
                             alt={`game-screenshot-${item.id}`}
                             height="180px"
                             objectFit="cover"
+                            showBg
                             src={item.image}
                             width="320px"
                           />

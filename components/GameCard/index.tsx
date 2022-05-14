@@ -67,12 +67,13 @@ const GameCard: FunctionComponent<Props> = ({ game }) => {
     >
       <NextLink href={`/game/${game.slug}`} passHref>
         <Link aria-label={`${game.name}`}>
-          <Box h="56" position="relative">
+          <Box h="56" overflow="hidden">
             <BlurImage
               alt="game background"
-              layout="fill"
+              height="300"
               showBg
               src={game?.background_image || placeholder}
+              width="450"
             />
           </Box>
           <Box p="4">
