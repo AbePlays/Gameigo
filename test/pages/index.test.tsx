@@ -24,7 +24,7 @@ describe('Testing Home Component', () => {
     expect(buttonEls.length).toBe(2);
 
     fireEvent.click(buttonEls[0]);
-    expect(mockPush).toHaveBeenCalledWith(Routes.AUTH_SCREEN);
+    expect(mockPush).toHaveBeenCalledWith(Routes.HOME_SCREEN);
     expect(mockPush).toHaveBeenCalledTimes(1);
   });
 
