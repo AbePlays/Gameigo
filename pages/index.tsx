@@ -1,5 +1,4 @@
 import { FunctionComponent, useEffect } from 'react';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { ChevronRightIcon } from '@chakra-ui/icons';
 import {
@@ -13,6 +12,7 @@ import {
   UnorderedList,
 } from '@chakra-ui/react';
 
+import BlurImage from '@components/BlurImage';
 import { ButtonWithIcon } from '@components/Buttons';
 import Loader from '@components/Loader';
 import ProductInfo from '@components/ProductInfo';
@@ -32,7 +32,7 @@ const Home: FunctionComponent = () => {
   const router = useRouter();
   const isDarkMode = colorMode === 'dark';
 
-  const redirectToAuthScreen = () => router.push(Routes.AUTH_SCREEN);
+  const redirectToAuthScreen = () => router.push(Routes.HOME_SCREEN);
 
   useEffect(() => {
     if (!loading && user) {
@@ -103,7 +103,7 @@ const Home: FunctionComponent = () => {
                 </Stack>
               </Box>
               <Flex flex="1" justifyContent="flex-end">
-                <Image alt="" placeholder="blur" src={hero} />
+                <BlurImage src={hero} height="400" width="500" />
               </Flex>
             </Box>
             <Box mt="24" textAlign="center">
@@ -130,10 +130,12 @@ const Home: FunctionComponent = () => {
                     rounded="md"
                     shadow="lg"
                   >
-                    <Image
+                    <BlurImage
                       alt="Home Page Screenshot"
-                      placeholder="blur"
+                      showBg
                       src={homeDark}
+                      height="575"
+                      width="920"
                     />
                   </Box>
                 </Box>

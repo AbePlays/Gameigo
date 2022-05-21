@@ -24,15 +24,25 @@ const LoadingCard: FunctionComponent<Props> = ({ count = 1 }) => {
               rounded="lg"
               shadow="lg"
             >
-              <Skeleton h="56" />
+              <Skeleton startColor="gray.300" endColor="gray.500" h="56" />
               <Stack p="4" spacing="4">
-                <Skeleton h="8" />
+                <Skeleton startColor="gray.300" endColor="gray.500" h="8" />
                 <Stack isInline spacing="4">
-                  <Skeleton h="8" w="20" />
-                  <Skeleton h="8" w="20" />
+                  <Skeleton
+                    startColor="gray.300"
+                    endColor="gray.500"
+                    h="8"
+                    w="20"
+                  />
+                  <Skeleton
+                    startColor="gray.300"
+                    endColor="gray.500"
+                    h="8"
+                    w="20"
+                  />
                 </Stack>
-                <Skeleton h="6" />
-                <Skeleton h="6" />
+                <Skeleton startColor="gray.300" endColor="gray.500" h="6" />
+                <Skeleton startColor="gray.300" endColor="gray.500" h="6" />
               </Stack>
             </Box>
           );

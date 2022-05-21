@@ -1,6 +1,8 @@
 import { FunctionComponent } from 'react';
-import Image, { StaticImageData } from 'next/image';
+import { StaticImageData } from 'next/image';
 import { useColorMode, Box, Heading, Stack, Text } from '@chakra-ui/react';
+
+import BlurImage from '@components/BlurImage';
 
 interface Props {
   children?: React.ReactNode;
@@ -22,7 +24,7 @@ const ProductInfo: FunctionComponent<Props> = ({ content, src, title }) => {
       align="center"
     >
       <Box maxW="500px">
-        <Image alt="" placeholder="blur" src={src} />
+        <BlurImage src={src} height="300" width="500" />
       </Box>
       <Box>
         <Heading as="h3" fontSize="2xl">

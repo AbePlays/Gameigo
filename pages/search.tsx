@@ -1,7 +1,7 @@
 import { FunctionComponent, useRef, useState } from 'react';
-import Image from 'next/image';
 import { Box, Heading, Text } from '@chakra-ui/react';
 
+import BlurImage from '@components/BlurImage';
 import Input from '@components/Input';
 import SearchResult from '@components/SearchResult';
 import Page from '@containers/Page';
@@ -34,12 +34,11 @@ const Search: FunctionComponent = () => {
     >
       <Box position="relative">
         <Box height={['200px', '300px']} overflow="hidden" position="relative">
-          <Image
+          <BlurImage
             alt=""
             layout="fill"
-            objectFit="cover"
             objectPosition="top"
-            placeholder="blur"
+            showBg
             src={img}
           />
         </Box>

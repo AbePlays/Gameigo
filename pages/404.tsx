@@ -1,10 +1,10 @@
 import { FunctionComponent } from 'react';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useColorMode, Box, Button, Heading, Text } from '@chakra-ui/react';
 
 import error from 'public/images/error.png';
 import Page from '@containers/Page';
+import BlurImage from '@components/BlurImage';
 
 const Error: FunctionComponent = () => {
   const { colorMode } = useColorMode();
@@ -16,11 +16,10 @@ const Error: FunctionComponent = () => {
   return (
     <Page title="Page not found" py="0">
       <Box textAlign="center" mt="6">
-        <Image
+        <BlurImage
           alt="A pilot watching the sky while sitting in front of his crashed plane"
           height="300"
           width="500"
-          placeholder="blur"
           src={error}
         />
         <Heading mt="6">Oh Snap!</Heading>
