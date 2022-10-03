@@ -58,7 +58,7 @@
     "msw": "^0.39.2",
     "node-modules-regexp": "^1.0.0",
     "prettier": "^2.6.2",
-    "typescript": "^4.6.4",
+    "typescript": "^4.8.4",
     "whatwg-fetch": "^3.6.2"
   },
   "lint-staged": {
