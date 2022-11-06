@@ -24,7 +24,13 @@ const About: FunctionComponent = () => {
         textAlign="center"
       >
         <AboutCard heading="Small and Crafty">
-          <Text lineHeight="7" maxW="container.md" mx="auto">
+          <Text
+            lineHeight="7"
+            maxW="container.md"
+            mx="auto"
+            style={{ textAlignLast: 'center' }}
+            textAlign="justify"
+          >
             Gameigo is a video game discovery platform where you can keep all
             your games in one unified profile and create your exclusive
             collection. The application is powered by a public API provided by
@@ -33,7 +39,13 @@ const About: FunctionComponent = () => {
           </Text>
         </AboutCard>
         <AboutCard heading="Creator">
-          <Text lineHeight="7" maxW="container.md" mx="auto">
+          <Text
+            lineHeight="7"
+            maxW="container.md"
+            mx="auto"
+            style={{ textAlignLast: 'center' }}
+            textAlign="justify"
+          >
             Hi there, I&apos;m Abhishek - aka Abe 👋 I am a self learner trying
             to get hands on new technologies and producing exciting products
             that are as smart, as they are effective. Wanna talk about Computer
@@ -43,7 +55,7 @@ const About: FunctionComponent = () => {
         <AboutCard heading="Contact">
           <Stack isInline spacing="2" justifyContent="center">
             <NextLink
-              href="https://www.linkedin.com/in/abe10/"
+              href="https://github.com/AbePlays"
               legacyBehavior
               passHref
             >
@@ -58,7 +70,7 @@ const About: FunctionComponent = () => {
                   transform: 'translateY(-2px)',
                 }}
               >
-                LinkedIn
+                Github
               </Link>
             </NextLink>
             <NextLink
@@ -80,7 +92,7 @@ const About: FunctionComponent = () => {
               </Link>
             </NextLink>
             <NextLink
-              href="https://github.com/AbePlays"
+              href="https://www.linkedin.com/in/abe10/"
               legacyBehavior
               passHref
             >
@@ -95,7 +107,7 @@ const About: FunctionComponent = () => {
                   transform: 'translateY(-2px)',
                 }}
               >
-                Github
+                LinkedIn
               </Link>
             </NextLink>
           </Stack>
