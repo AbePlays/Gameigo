@@ -23,7 +23,7 @@ const MyApp: FunctionComponent<AppProps> = ({
       <AuthProvider>
         <Navbar />
         <Layout>
-          <AnimatePresence exitBeforeEnter>
+          <AnimatePresence mode="wait">
             <Component {...pageProps} key={route} />
           </AnimatePresence>
         </Layout>

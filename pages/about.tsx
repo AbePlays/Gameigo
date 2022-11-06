@@ -42,7 +42,11 @@ const About: FunctionComponent = () => {
         </AboutCard>
         <AboutCard heading="Contact">
           <Stack isInline spacing="2" justifyContent="center">
-            <NextLink href="https://www.linkedin.com/in/abe10/" passHref>
+            <NextLink
+              href="https://www.linkedin.com/in/abe10/"
+              legacyBehavior
+              passHref
+            >
               <Link
                 bg={isDarkMode ? 'light-bg-primary' : 'dark-bg-primary'}
                 color={isDarkMode ? 'dark-text' : 'light-text'}
@@ -57,7 +61,11 @@ const About: FunctionComponent = () => {
                 LinkedIn
               </Link>
             </NextLink>
-            <NextLink href="mailto:abhi.rawat456@gmail.com" passHref>
+            <NextLink
+              href="mailto:abhi.rawat456@gmail.com"
+              legacyBehavior
+              passHref
+            >
               <Link
                 bg={isDarkMode ? 'light-bg-primary' : 'dark-bg-primary'}
                 color={isDarkMode ? 'dark-text' : 'light-text'}
@@ -71,7 +79,11 @@ const About: FunctionComponent = () => {
                 Mail
               </Link>
             </NextLink>
-            <NextLink href="https://github.com/AbePlays" passHref>
+            <NextLink
+              href="https://github.com/AbePlays"
+              legacyBehavior
+              passHref
+            >
               <Link
                 bg={isDarkMode ? 'light-bg-primary' : 'dark-bg-primary'}
                 color={isDarkMode ? 'dark-text' : 'light-text'}

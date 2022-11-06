@@ -9,7 +9,7 @@ interface Props {
 
 const Store: FunctionComponent<Props> = ({ name, url }) => {
   return (
-    <NextLink href={`https://${url}`} passHref>
+    <NextLink href={`https://${url}`} legacyBehavior passHref>
       <Link
         bg="dark-bg-secondary"
         fontWeight="medium"

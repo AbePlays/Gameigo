@@ -62,7 +62,7 @@ const Navbar: FunctionComponent = () => {
             <Icon as={HamburgerIcon} w={iconSize.lg} h={iconSize.lg} />
           )}
         </Box>
-        <NextLink href="/home" passHref>
+        <NextLink href="/home" legacyBehavior passHref>
           <Link
             letterSpacing="widest"
             textDecoration="none"
@@ -75,7 +75,7 @@ const Navbar: FunctionComponent = () => {
           </Link>
         </NextLink>
         <Stack isInline spacing={['8', '8', '12']} display={['none', 'block']}>
-          <NextLink href="/search" passHref>
+          <NextLink href="/search" legacyBehavior passHref>
             <Link
               fontWeight="medium"
               _hover={{
@@ -85,7 +85,7 @@ const Navbar: FunctionComponent = () => {
               Search
             </Link>
           </NextLink>
-          <NextLink href={user ? '/favorites' : '#'} passHref>
+          <NextLink href={user ? '/favorites' : '#'} legacyBehavior passHref>
             <Link
               cursor={user ? 'pointer' : 'not-allowed'}
               fontWeight="medium"
@@ -99,7 +99,7 @@ const Navbar: FunctionComponent = () => {
               </Tooltip>
             </Link>
           </NextLink>
-          <NextLink href="/about" passHref>
+          <NextLink href="/about" legacyBehavior passHref>
             <Link
               fontWeight="medium"
               _hover={{
@@ -120,14 +120,14 @@ const Navbar: FunctionComponent = () => {
           >
             <Icon as={isDarkMode ? SunIcon : MoonIcon} />
           </Button>
-          <NextLink href={user ? '/profile' : '/auth'} passHref>
+          <NextLink href={user ? '/profile' : '/auth'} legacyBehavior passHref>
             <Link aria-label="Profile" rounded="full">
               <Avatar size="sm" src={user?.photoUrl} />
             </Link>
           </NextLink>
         </Stack>
       </Flex>
-      <AnimatePresence exitBeforeEnter>
+      <AnimatePresence mode="wait">
         {showMobileNav ? <MobileNavbar onClick={toggleNav} /> : null}
       </AnimatePresence>
     </Box>

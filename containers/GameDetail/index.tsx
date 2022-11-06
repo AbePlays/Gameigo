@@ -246,20 +246,24 @@ const GameDetail: FunctionComponent<Props> = ({ game, screenshots }) => {
           filter="brightness(40%)"
         >
           <BlurImage
+            fill
             src={game.background_image}
-            layout="fill"
-            objectFit="cover"
-            objectPosition="top"
+            style={{
+              objectFit: 'cover',
+              objectPosition: 'top',
+            }}
             alt="game background"
           />
         </Box>
       </Box>
       <Box display={['block', 'block', 'none']} h="300px" position="relative">
         <BlurImage
+          fill
           src={game.background_image}
-          layout="fill"
-          objectFit="cover"
-          objectPosition="top"
+          style={{
+            objectFit: 'cover',
+            objectPosition: 'top',
+          }}
           alt="game background"
         />
       </Box>
@@ -337,11 +341,13 @@ const GameDetail: FunctionComponent<Props> = ({ game, screenshots }) => {
                         <Flex rounded="sm" overflow="hidden">
                           <BlurImage
                             alt={`game-screenshot-${item.id}`}
-                            height="180px"
-                            objectFit="cover"
+                            height="180"
                             showBg
+                            style={{
+                              objectFit: 'cover',
+                            }}
                             src={item.image}
-                            width="320px"
+                            width="320"
                           />
                         </Flex>
                       </ListItem>

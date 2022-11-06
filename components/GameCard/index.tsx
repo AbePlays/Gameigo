@@ -65,15 +65,14 @@ const GameCard: FunctionComponent<Props> = ({ game }) => {
       shadow="lg"
       whileHover={{ scale: 1.01 }}
     >
-      <NextLink href={`/game/${game.slug}`} passHref>
+      <NextLink href={`/game/${game.slug}`} legacyBehavior passHref>
         <Link aria-label={`${game.name}`}>
-          <Box h="56" overflow="hidden">
+          <Box h="56" overflow="hidden" position="relative">
             <BlurImage
               alt="game background"
-              height="300"
+              fill
               showBg
               src={game?.background_image || placeholder}
-              width="450"
             />
           </Box>
           <Box p="4">
