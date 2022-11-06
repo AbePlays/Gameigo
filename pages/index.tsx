@@ -103,7 +103,7 @@ const Home: FunctionComponent = () => {
                 </Stack>
               </Box>
               <Flex flex="1" justifyContent="flex-end">
-                <BlurImage src={hero} height="400" width="500" />
+                <BlurImage alt="" src={hero} height="400" width="500" />
               </Flex>
             </Box>
             <Box mt="24" textAlign="center">
