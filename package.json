@@ -7,7 +7,7 @@
     "check-format": "npm run prettier -- --list-different",
     "check-types": "tsc",
     "cy:run": "cypress run",
-    "cy:open": "cypress open",
+    "cy:open": "cypress open --config-file=cypress.config.ts",
     "dev": "next dev",
     "format": "npm run prettier -- --write",
     "lint": "eslint --ignore-path .gitignore --ext .js,.jsx,.ts,.tsx .",
