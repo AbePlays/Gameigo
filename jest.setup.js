@@ -15,6 +15,17 @@ jest.mock('firebase/firestore', () => {
   return { getFirestore: jest.fn() };
 });
 
+jest.mock('firebase/auth', () => {
+  return { getAuth: jest.fn() };
+});
+
+jest.mock('firebase/app', () => {
+  return {
+    getApps: jest.fn().mockReturnValue([]),
+    initializeApp: jest.fn(),
+  };
+});
+
 const noop = () => {};
 Object.defineProperty(window, 'scrollTo', { value: noop, writable: true });
 
