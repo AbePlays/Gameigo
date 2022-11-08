@@ -6,7 +6,7 @@
     "build": "next build",
     "check-format": "npm run prettier -- --list-different",
     "check-types": "tsc",
-    "cy:run": "cypress run",
+    "cy:run": "cypress run --config-file=cypress.config.ts",
     "cy:open": "cypress open --config-file=cypress.config.ts",
     "dev": "next dev",
     "format": "npm run prettier -- --write",
