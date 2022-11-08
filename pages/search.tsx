@@ -1,6 +1,6 @@
 import { SearchIcon } from '@chakra-ui/icons';
 import { Box, Heading, InputGroup, InputLeftElement, Text } from '@chakra-ui/react';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import BlurImage from '@components/BlurImage';
 import Input from '@components/Input';
@@ -24,6 +24,21 @@ export default function Search() {
 
   const decrementPage = () => setPage((prev) => prev - 1);
   const incrementPage = () => setPage((prev) => prev + 1);
+
+  useEffect(() => {
+    function focusInput(event: KeyboardEvent) {
+      if (event.key === '/') {
+        inputRef.current?.focus();
+        event.preventDefault();
+      }
+    }
+
+    window.addEventListener('keydown', focusInput);
+
+    return function cleaup() {
+      window.removeEventListener('keydown', focusInput);
+    };
+  }, []);
 
   return (
     <Page title="Search" description={Descriptions.Search} maxWidth="1536px" px="0" pt="0">
