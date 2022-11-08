@@ -1,5 +1,5 @@
+import { Box, Flex, Text, useColorMode } from '@chakra-ui/react';
 import { FunctionComponent } from 'react';
-import { Box, Flex, Text } from '@chakra-ui/react';
 
 interface Props {
   id: number;
@@ -7,9 +7,12 @@ interface Props {
 }
 
 const BoxWithDivider: FunctionComponent<Props> = ({ id, title }) => {
+  const { colorMode } = useColorMode();
+  const isDarkMode = colorMode === 'dark';
+
   return (
     <Flex alignItems="center">
-      {id !== 0 && <Box bg="white" h="4" w="0.5" mx="2" role="separator" rounded="lg" />}
+      {id !== 0 && <Box bg={isDarkMode ? 'white' : 'black'} h="4" w="0.5" mx="2" role="separator" rounded="lg" />}
       <Text as="span">{title}</Text>
     </Flex>
   );

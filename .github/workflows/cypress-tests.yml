@@ -19,12 +19,10 @@ jobs:
   cypress-run:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
       - name: Cypress run
-        uses: actions/setup-node@v2
+        uses: cypress-io/github-action@v4.2.0
         with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'npm'
           build: npm run build
           start: npm start
-      - run: npm run cy:run
