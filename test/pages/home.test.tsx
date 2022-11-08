@@ -6,9 +6,7 @@ describe('Testing Home Page', () => {
   it('should display the correct title', () => {
     render(<HomePage games={[mockGame]} />);
     expect(screen.getByText(/new and trending/i)).toBeInTheDocument();
-    expect(
-      screen.getByRole('link', { name: 'Forza Horizon 5' })
-    ).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Forza Horizon 5' })).toBeInTheDocument();
   });
 
   it('should test getStaticProps', async () => {

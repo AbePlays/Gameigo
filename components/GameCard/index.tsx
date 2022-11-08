@@ -1,15 +1,6 @@
 import { FunctionComponent } from 'react';
 import NextLink from 'next/link';
-import {
-  useColorMode,
-  Box,
-  Divider,
-  Flex,
-  Heading,
-  Link,
-  Stack,
-  Text,
-} from '@chakra-ui/react';
+import { useColorMode, Box, Divider, Flex, Heading, Link, Stack, Text } from '@chakra-ui/react';
 
 import Label from '../Label';
 import placeholder from 'public/images/placeholder.jpeg';
@@ -27,9 +18,7 @@ const GameCard: FunctionComponent<Props> = ({ game }) => {
   const isDarkMode = colorMode === 'dark';
 
   const renderPlatforms = () => {
-    return game?.parent_platforms?.map((item) => (
-      <Label title={item.platform.name} key={item.platform.id} />
-    ));
+    return game?.parent_platforms?.map((item) => <Label title={item.platform.name} key={item.platform.id} />);
   };
 
   const renderReleasedDate = () => {
@@ -68,12 +57,7 @@ const GameCard: FunctionComponent<Props> = ({ game }) => {
       <NextLink href={`/game/${game.slug}`} legacyBehavior passHref>
         <Link aria-label={`${game.name}`}>
           <Box h="56" overflow="hidden" position="relative">
-            <BlurImage
-              alt="game background"
-              fill
-              showBg
-              src={game?.background_image || placeholder}
-            />
+            <BlurImage alt="game background" fill showBg src={game?.background_image || placeholder} />
           </Box>
           <Box p="4">
             <Heading fontSize="2xl" mb="1">

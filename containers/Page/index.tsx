@@ -41,37 +41,21 @@ const Page: FunctionComponent<Props> = ({
         <title>{pageTitle}</title>
         {description ? <meta name="description" content={description} /> : null}
         {imageUrl ? <meta name="image" content={imageUrl} /> : null}
-        {siteLink ? (
-          <link
-            rel="canonical"
-            href={`https://gameigo.vercel.app${siteLink}`}
-          />
-        ) : null}
+        {siteLink ? <link rel="canonical" href={`https://gameigo.vercel.app${siteLink}`} /> : null}
 
         {/* Open Graph */}
         <meta property="og:title" content={title} />
-        {description ? (
-          <meta property="og:description" content={description} />
-        ) : null}
+        {description ? <meta property="og:description" content={description} /> : null}
         {imageUrl ? <meta property="og:image" content={imageUrl} /> : null}
-        {imageUrl ? (
-          <meta property="og:image:secure_url" content={imageUrl} />
-        ) : null}
+        {imageUrl ? <meta property="og:image:secure_url" content={imageUrl} /> : null}
         <meta property="og:site_name" content="Gameigo" />
         <meta property="og:type" content="website" />
-        {siteLink ? (
-          <meta
-            property="og:url"
-            content={`https://gameigo.vercel.app${siteLink}`}
-          />
-        ) : null}
+        {siteLink ? <meta property="og:url" content={`https://gameigo.vercel.app${siteLink}`} /> : null}
 
         {/* Twitter */}
         <meta name="twitter:title" content={title} />
         <meta name="twitter:card" content="summary_large_image" />
-        {description ? (
-          <meta name="twitter:description" content={description} />
-        ) : null}
+        {description ? <meta name="twitter:description" content={description} /> : null}
         {imageUrl ? <meta name="twitter:image:src" content={imageUrl} /> : null}
       </Head>
       <main>{children}</main>

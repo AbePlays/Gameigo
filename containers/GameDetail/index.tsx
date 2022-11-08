@@ -116,22 +116,11 @@ const GameDetail: FunctionComponent<Props> = ({ game, screenshots }) => {
   const renderReleasedandPlaytime = () => {
     return (
       <Wrap direction={['column', 'row']} spacing={[2, 4]}>
-        <WrapItem
-          bg="white"
-          borderRadius="lg"
-          color="black"
-          px="2"
-          py="0.5"
-          w="fit-content"
-        >
+        <WrapItem bg="white" borderRadius="lg" color="black" px="2" py="0.5" w="fit-content">
           {game.released ? formatDate(game.released) : 'TBA'}
         </WrapItem>
         {game.playtime > 0 && (
-          <WrapItem
-            alignItems="center"
-            textTransform="uppercase"
-            letterSpacing="widest"
-          >
+          <WrapItem alignItems="center" textTransform="uppercase" letterSpacing="widest">
             Average Playtime: {game.playtime} Hours
           </WrapItem>
         )}
@@ -146,13 +135,7 @@ const GameDetail: FunctionComponent<Props> = ({ game, screenshots }) => {
           <Heading as="h2" fontSize={['2xl', '3xl']}>
             Platforms
           </Heading>
-          <Wrap
-            justify="center"
-            spacing="0"
-            mt="2"
-            w={['full', 'full', 4 / 5]}
-            mx="auto"
-          >
+          <Wrap justify="center" spacing="0" mt="2" w={['full', 'full', 4 / 5]} mx="auto">
             {game.parent_platforms.map((item, index) => (
               <WrapItem key={item.platform.id}>
                 <BoxWithDivider id={index} title={item.platform.name} />
@@ -172,13 +155,7 @@ const GameDetail: FunctionComponent<Props> = ({ game, screenshots }) => {
           <Heading as="h2" fontSize={['2xl', '3xl']}>
             Genres
           </Heading>
-          <Wrap
-            justify="center"
-            spacing="0"
-            mt="2"
-            w={['full', 'full', 4 / 5]}
-            mx="auto"
-          >
+          <Wrap justify="center" spacing="0" mt="2" w={['full', 'full', 4 / 5]} mx="auto">
             {game.genres.map((item, index) => {
               return (
                 <WrapItem key={item.id}>
@@ -201,19 +178,8 @@ const GameDetail: FunctionComponent<Props> = ({ game, screenshots }) => {
   return (
     <Box bg="black" color="white" position="relative">
       <Box position="absolute" top={['4', '4', '12']} w="full" zIndex="1">
-        <Flex
-          alignItems="center"
-          justifyContent="space-between"
-          maxW="1120px"
-          mx="auto"
-          px="4"
-        >
-          <Box
-            aria-label="Go Back"
-            as="button"
-            onClick={clickHandler}
-            w={['6', '8']}
-          >
+        <Flex alignItems="center" justifyContent="space-between" maxW="1120px" mx="auto" px="4">
+          <Box aria-label="Go Back" as="button" onClick={clickHandler} w={['6', '8']}>
             <IconArrowBack />
           </Box>
           <Flex alignItems="center" justifyContent="center">
@@ -239,12 +205,7 @@ const GameDetail: FunctionComponent<Props> = ({ game, screenshots }) => {
         </Flex>
       </Box>
       <Box display={['none', 'none', 'block']} pos="absolute" inset="0">
-        <Box
-          w="100%"
-          h="calc(100vh - 64px)"
-          position="fixed"
-          filter="brightness(40%)"
-        >
+        <Box w="100%" h="calc(100vh - 64px)" position="fixed" filter="brightness(40%)">
           <BlurImage
             fill
             src={game.background_image}
@@ -283,10 +244,7 @@ const GameDetail: FunctionComponent<Props> = ({ game, screenshots }) => {
             {renderTriContentBox()}
             {game.description && (
               <GameContent heading="About">
-                <Box
-                  dangerouslySetInnerHTML={{ __html: game.description }}
-                  lineHeight="1.8"
-                ></Box>
+                <Box dangerouslySetInnerHTML={{ __html: game.description }} lineHeight="1.8"></Box>
               </GameContent>
             )}
             {game.publishers.length > 0 && (
@@ -332,12 +290,7 @@ const GameDetail: FunctionComponent<Props> = ({ game, screenshots }) => {
                 >
                   {screenshots.results.map((item) => {
                     return (
-                      <ListItem
-                        flexShrink={0}
-                        key={item.id}
-                        listStyleType="none"
-                        style={{ scrollSnapAlign: 'start' }}
-                      >
+                      <ListItem flexShrink={0} key={item.id} listStyleType="none" style={{ scrollSnapAlign: 'start' }}>
                         <Flex rounded="sm" overflow="hidden">
                           <BlurImage
                             alt={`game-screenshot-${item.id}`}

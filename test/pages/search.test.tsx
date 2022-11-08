@@ -12,7 +12,7 @@ describe('Testing Search Page', () => {
     fireEvent.keyDown(searchInput, { key: 'Enter' });
 
     await waitFor(() => {
-      expect(screen.getByText(mockGame.name)).toBeInTheDocument();
+      expect(screen.getAllByText(mockGame.name).length).toBeGreaterThan(0);
       expect(screen.getByRole('button', { name: /next/i })).toBeInTheDocument();
     });
   });
@@ -26,7 +26,7 @@ describe('Testing Search Page', () => {
     fireEvent.keyDown(searchInput, { key: 'Enter' });
 
     await waitFor(() => {
-      expect(screen.getByText(mockGame.name)).toBeInTheDocument();
+      expect(screen.getAllByText(mockGame.name).length).toBeGreaterThan(0);
     });
     const nextBtn = screen.getByRole('button', { name: /next/i });
     expect(nextBtn).toBeInTheDocument();

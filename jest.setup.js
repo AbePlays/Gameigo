@@ -52,6 +52,5 @@ jest.mock('next/image', () => ({
 jest.mock('next/link', () => {
   const React = require('react');
 
-  return ({ children, href }) =>
-    React.cloneElement(React.Children.only(children), { href });
+  return ({ children, href }) => React.cloneElement(React.Children.only(children), { href });
 });

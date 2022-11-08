@@ -1,12 +1,6 @@
 import { Login } from '@containers/Auth';
 import { mockEmail, mockPassword } from '../../mockData';
-import {
-  fireEvent,
-  mockValue,
-  render,
-  screen,
-  waitFor,
-} from '../../test-utils';
+import { fireEvent, mockValue, render, screen, waitFor } from '../../test-utils';
 
 describe('Testing Login Container', () => {
   afterEach(() => {
@@ -39,12 +33,8 @@ describe('Testing Login Container', () => {
 
   it('should check for auth providers', () => {
     render(<Login />);
-    expect(
-      screen.getByRole('button', { name: /sign in with google/i })
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole('button', { name: /sign in with github/i })
-    ).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /sign in with google/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /sign in with github/i })).toBeInTheDocument();
   });
 
   it('should show error text on invalid input', async () => {
@@ -59,9 +49,7 @@ describe('Testing Login Container', () => {
     fireEvent.click(buttonEl);
     await waitFor(() => {
       expect(screen.getByText(/invalid email/i)).toBeInTheDocument();
-      expect(
-        screen.getByText(/password should be atleast 6 characters long/i)
-      ).toBeInTheDocument();
+      expect(screen.getByText(/password should be atleast 6 characters long/i)).toBeInTheDocument();
     });
   });
 
@@ -78,10 +66,7 @@ describe('Testing Login Container', () => {
     await waitFor(() => {
       expect(mockValue.loginWithEmailAndPassword).toHaveBeenCalled();
       expect(mockValue.loginWithEmailAndPassword).toHaveBeenCalledTimes(1);
-      expect(mockValue.loginWithEmailAndPassword).toHaveBeenCalledWith(
-        mockEmail,
-        mockPassword
-      );
+      expect(mockValue.loginWithEmailAndPassword).toHaveBeenCalledWith(mockEmail, mockPassword);
       expect(screen.getByText(/login successful/i)).toBeInTheDocument();
     });
   });
@@ -101,10 +86,7 @@ describe('Testing Login Container', () => {
     await waitFor(() => {
       expect(mockValue.loginWithEmailAndPassword).toHaveBeenCalled();
       expect(mockValue.loginWithEmailAndPassword).toHaveBeenCalledTimes(1);
-      expect(mockValue.loginWithEmailAndPassword).toHaveBeenCalledWith(
-        mockEmail,
-        mockPassword
-      );
+      expect(mockValue.loginWithEmailAndPassword).toHaveBeenCalledWith(mockEmail, mockPassword);
       expect(screen.getByText(/login failed/i)).toBeInTheDocument();
     });
   });

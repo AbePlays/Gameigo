@@ -33,10 +33,7 @@ const Providers = ({ children, value }) => {
   );
 };
 
-const customRender = (
-  ui: JSX.Element,
-  { value = mockValue, ...options } = {}
-): RenderResult => {
+const customRender = (ui: JSX.Element, { value = mockValue, ...options } = {}): RenderResult => {
   return render(<Providers value={value}>{ui}</Providers>, options);
 };
 

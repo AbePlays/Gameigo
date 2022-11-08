@@ -16,13 +16,7 @@ const ProductInfo: FunctionComponent<Props> = ({ content, src, title }) => {
   const isDarkMode = colorMode === 'dark';
 
   return (
-    <Stack
-      maxWidth="container.sm"
-      mx="auto"
-      my="14"
-      spacing="16"
-      align="center"
-    >
+    <Stack maxWidth="container.sm" mx="auto" my="14" spacing="16" align="center">
       <Box maxW="500px">
         <BlurImage alt="" src={src} height="300" width="500" />
       </Box>
@@ -30,13 +24,7 @@ const ProductInfo: FunctionComponent<Props> = ({ content, src, title }) => {
         <Heading as="h3" fontSize="2xl">
           {title}
         </Heading>
-        <Text
-          color={isDarkMode ? 'light-text' : 'dark-text'}
-          fontSize="md"
-          lineHeight="tall"
-          mt="4"
-          opacity="0.7"
-        >
+        <Text color={isDarkMode ? 'light-text' : 'dark-text'} fontSize="md" lineHeight="tall" mt="4" opacity="0.7">
           {content}
         </Text>
       </Box>

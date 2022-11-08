@@ -2,16 +2,8 @@ import { FunctionComponent } from 'react';
 
 import CustomLink from '@components/CustomLink';
 import { useAuth } from '@lib/auth';
-import {
-  MoveDownAnimation,
-  NavbarItemAnimation,
-  NavbarListAnimation,
-} from '@utils/animations';
-import {
-  MotionFlex,
-  MotionListItem,
-  MotionUnorderedList,
-} from '@utils/MotionElements';
+import { MoveDownAnimation, NavbarItemAnimation, NavbarListAnimation } from '@utils/animations';
+import { MotionFlex, MotionListItem, MotionUnorderedList } from '@utils/MotionElements';
 
 interface Props {
   onClick: () => void;
@@ -40,12 +32,7 @@ const MobileNavbar: FunctionComponent<Props> = ({ onClick }) => {
         w="full"
       >
         <MotionListItem variants={NavbarItemAnimation}>
-          <CustomLink
-            isExt={false}
-            link="/search"
-            onClick={onClick}
-            title="Search"
-          ></CustomLink>
+          <CustomLink isExt={false} link="/search" onClick={onClick} title="Search"></CustomLink>
         </MotionListItem>
         <MotionListItem variants={NavbarItemAnimation}>
           <CustomLink
@@ -58,12 +45,7 @@ const MobileNavbar: FunctionComponent<Props> = ({ onClick }) => {
           ></CustomLink>
         </MotionListItem>
         <MotionListItem variants={NavbarItemAnimation}>
-          <CustomLink
-            isExt={false}
-            link="/about"
-            onClick={onClick}
-            title="About"
-          ></CustomLink>
+          <CustomLink isExt={false} link="/about" onClick={onClick} title="About"></CustomLink>
         </MotionListItem>
       </MotionUnorderedList>
     </MotionFlex>

@@ -1,6 +1,6 @@
-import { FunctionComponent } from 'react';
+import { Box, Stack, Text, useColorMode, useToast } from '@chakra-ui/react';
+import { useEffect } from 'react';
 import useSWR from 'swr';
-import { useColorMode, useToast, Box, Stack, Text } from '@chakra-ui/react';
 
 import { ButtonWithIcon } from '@components/Buttons';
 import GameCard from '@components/GameCard';
@@ -14,23 +14,17 @@ interface Props {
   query: string;
 }
 
-const SearchResult: FunctionComponent<Props> = ({
-  onNext,
-  onPrevious,
-  page,
-  query,
-}) => {
+export default function SearchResult({ onNext, onPrevious, page, query }: Props) {
   const { colorMode } = useColorMode();
   const toast = useToast();
 
   const isDarkMode = colorMode === 'dark';
 
-  window.scrollTo(0, 0);
+  const { data, error } = useSWR(`/api/search?query=${query}&page=${page}`, fetcher);
 
-  const { data, error } = useSWR(
-    `/api/search?query=${query}&page=${page}`,
-    fetcher
-  );
+  useEffect(() => {
+    window.scrollTo({ behavior: 'smooth', top: 0 });
+  }, [page]);
 
   if (error) {
     toast({
@@ -64,35 +58,15 @@ const SearchResult: FunctionComponent<Props> = ({
               <GameCard game={game} key={game.id} />
             ))}
           </Box>
-          <Stack
-            isInline
-            alignItems="center"
-            justifyContent="center"
-            mt="8"
-            spacing="8"
-          >
-            <ButtonWithIcon
-              icon={null}
-              isDisabled={data.previous === null}
-              title="Previous"
-              width="100px"
-              onClick={onPrevious}
-            />
+          <Stack isInline alignItems="center" justifyContent="center" mt="8" spacing="8">
+            <ButtonWithIcon isDisabled={data.previous === null} title="Previous" width="100px" onClick={onPrevious} />
             <Text as="span" fontSize="lg">
               {page}
             </Text>
-            <ButtonWithIcon
-              icon={null}
-              isDisabled={data.next === null}
-              title="Next"
-              width="100px"
-              onClick={onNext}
-            />
+            <ButtonWithIcon isDisabled={data.next === null} title="Next" width="100px" onClick={onNext} />
           </Stack>
         </>
       ) : null}
     </>
   );
-};
-
-export default SearchResult;
+}

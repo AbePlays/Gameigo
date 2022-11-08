@@ -1,14 +1,7 @@
 import GameDetail from '@containers/GameDetail';
 import { addGame, checkGame } from '@lib/db';
 import { mockGameInfo, mockScreenshots } from '../../mockData';
-import {
-  fireEvent,
-  mockUser,
-  mockValue,
-  render,
-  screen,
-  waitFor,
-} from '../../test-utils';
+import { fireEvent, mockUser, mockValue, render, screen, waitFor } from '../../test-utils';
 
 const mockBack = jest.fn();
 jest.mock('next/router', () => ({
@@ -81,9 +74,7 @@ describe('Testing GameDetail Container', () => {
       value: { ...mockValue, user: mockUser },
     });
 
-    expect(
-      screen.getByRole('button', { name: /favorite/i })
-    ).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /favorite/i })).toBeInTheDocument();
   });
 
   it('should call addGame fn if game is not in the collection', async () => {

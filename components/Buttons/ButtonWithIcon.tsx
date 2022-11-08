@@ -1,19 +1,13 @@
 import { FunctionComponent } from 'react';
-import { useColorMode, Button } from '@chakra-ui/react';
+import { useColorMode, Button, ButtonProps } from '@chakra-ui/react';
 
-interface Props {
-  icon: React.ReactElement;
+interface Props extends ButtonProps {
+  icon?: React.ReactElement;
   onClick?: () => void;
   title: string;
-  [key: string]: any;
 }
 
-const ButtonWithIcon: FunctionComponent<Props> = ({
-  icon,
-  onClick,
-  title,
-  ...props
-}) => {
+const ButtonWithIcon: FunctionComponent<Props> = ({ icon = null, onClick, title, ...props }) => {
   const { colorMode } = useColorMode();
   const isDarkMode = colorMode === 'dark';
 

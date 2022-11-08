@@ -1,17 +1,10 @@
-import GameDetailContainer, {
-  getStaticPaths,
-  getStaticProps,
-} from 'pages/game/[slug]';
+import GameDetailContainer, { getStaticPaths, getStaticProps } from 'pages/game/[slug]';
 import { mockGame, mockGameInfo, mockScreenshots } from '../../mockData';
 import { render, screen } from '../../test-utils';
 
 describe('Testing Game Details Page', () => {
   it('should check game title', () => {
-    render(
-      <GameDetailContainer
-        data={{ game: mockGameInfo, screenshots: mockScreenshots }}
-      />
-    );
+    render(<GameDetailContainer data={{ game: mockGameInfo, screenshots: mockScreenshots }} />);
 
     expect(screen.getByText(mockGameInfo.name)).toBeInTheDocument();
   });

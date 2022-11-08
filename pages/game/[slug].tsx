@@ -27,22 +27,17 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-export const getStaticProps: GetStaticProps = async (
-  context: GetStaticPropsContext
-) => {
+export const getStaticProps: GetStaticProps = async (context: GetStaticPropsContext) => {
   const { slug } = context.params;
-  const gameDetailsReq = fetch(
-    `${Endpoints.SEARCH_GAME}/${slug}?key=${process.env.NEXT_PUBLIC_RAWG_API_KEY}`
-  ).then((res) => res.json());
+  const gameDetailsReq = fetch(`${Endpoints.SEARCH_GAME}/${slug}?key=${process.env.NEXT_PUBLIC_RAWG_API_KEY}`).then(
+    (res) => res.json()
+  );
 
   const screenshotsReq = fetch(
     `${Endpoints.SCREENSHOTS}/${slug}/screenshots?key=${process.env.NEXT_PUBLIC_RAWG_API_KEY}`
   ).then((res) => res.json());
 
-  const [gameDetails, screenshots] = await Promise.all([
-    gameDetailsReq,
-    screenshotsReq,
-  ]);
+  const [gameDetails, screenshots] = await Promise.all([gameDetailsReq, screenshotsReq]);
 
   const data = {
     game: convertToGameInfo(gameDetails),

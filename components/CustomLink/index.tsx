@@ -1,22 +1,14 @@
-import { FunctionComponent } from 'react';
+import { Link, LinkProps } from '@chakra-ui/react';
 import NextLink from 'next/link';
-import { Link } from '@chakra-ui/react';
 
-interface Props {
+interface Props extends LinkProps {
   link: string;
   isExt?: boolean;
   onClick?: () => void;
   title: string;
-  [key: string]: any;
 }
 
-const CustomLink: FunctionComponent<Props> = ({
-  isExt = true,
-  link,
-  onClick = null,
-  title,
-  ...props
-}) => {
+export default function CustomLink({ isExt = true, link, onClick = null, title, ...props }: Props) {
   return (
     <NextLink href={link} legacyBehavior passHref>
       <Link isExternal={isExt} w="fit-content" onClick={onClick} {...props}>
@@ -24,6 +16,4 @@ const CustomLink: FunctionComponent<Props> = ({
       </Link>
     </NextLink>
   );
-};
-
-export default CustomLink;
+}

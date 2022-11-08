@@ -40,12 +40,7 @@ const Auth: FunctionComponent = () => {
           {isLogin ? <Login /> : <Signup />}
           <Text mt={['10', '10', '16']}>
             {footer.head}
-            <Button
-              variant="link"
-              color={isDarkMode ? 'white' : 'black'}
-              onClick={toggle}
-              fontWeight="bold"
-            >
+            <Button variant="link" color={isDarkMode ? 'white' : 'black'} onClick={toggle} fontWeight="bold">
               {footer.tail}
             </Button>{' '}
             instead

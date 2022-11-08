@@ -2,13 +2,11 @@ const mockGame = {
   released: '2021-11-08',
   slug: 'forza-horizon-5',
   id: 622492,
-  background_image:
-    'https://media.rawg.io/media/games/082/082365507ff04d456c700157072d35db.jpg',
+  background_image: 'https://media.rawg.io/media/games/082/082365507ff04d456c700157072d35db.jpg',
   genres: [
     {
       name: 'Action',
-      image_background:
-        'https://media.rawg.io/media/games/16b/16b1b7b36e2042d1128d5a3e852b3b2f.jpg',
+      image_background: 'https://media.rawg.io/media/games/16b/16b1b7b36e2042d1128d5a3e852b3b2f.jpg',
       games_count: 133079,
       slug: 'action',
       id: 4,
@@ -18,13 +16,11 @@ const mockGame = {
       id: 3,
       games_count: 98549,
       name: 'Adventure',
-      image_background:
-        'https://media.rawg.io/media/games/63f/63f0e68688cad279ed38cde931dbfcdb.jpg',
+      image_background: 'https://media.rawg.io/media/games/63f/63f0e68688cad279ed38cde931dbfcdb.jpg',
     },
     {
       id: 14,
-      image_background:
-        'https://media.rawg.io/media/games/e40/e40cc9d1957b0a0ed7e389834457b524.jpg',
+      image_background: 'https://media.rawg.io/media/games/e40/e40cc9d1957b0a0ed7e389834457b524.jpg',
       games_count: 51343,
       name: 'Simulation',
       slug: 'simulation',
@@ -32,15 +28,13 @@ const mockGame = {
     {
       id: 15,
       slug: 'sports',
-      image_background:
-        'https://media.rawg.io/media/games/9e5/9e52a797f049e701d4eee84774a99007.jpg',
+      image_background: 'https://media.rawg.io/media/games/9e5/9e52a797f049e701d4eee84774a99007.jpg',
       games_count: 17886,
       name: 'Sports',
     },
     {
       id: 1,
-      image_background:
-        'https://media.rawg.io/media/games/367/367463d43c2a1465f27e830b5b1334ee.jpg',
+      image_background: 'https://media.rawg.io/media/games/367/367463d43c2a1465f27e830b5b1334ee.jpg',
       name: 'Racing',
       games_count: 19959,
       slug: 'racing',
@@ -66,8 +60,7 @@ const mockGame = {
 };
 
 const mockGameInfo = {
-  background_image:
-    'https://media.rawg.io/media/games/018/01857c5ff9579c48fa8bd76b4d83a946.jpg',
+  background_image: 'https://media.rawg.io/media/games/018/01857c5ff9579c48fa8bd76b4d83a946.jpg',
   description:
     '<p>“DEATHLOOP” transports players to the lawless island of Blackreef in an eternal struggle between two extraordinary assassins. Explore stunning environments and meticulously designed levels in an immersive gameplay experience that lets you approach every situation any way you like. Hunt down targets all over the island in an effort to put an end to the cycle once and for all, and remember, if at first you don’t succeed… die, die again.</p>',
   description_raw:
@@ -78,16 +71,14 @@ const mockGameInfo = {
       name: 'Action',
       slug: 'action',
       games_count: 133220,
-      image_background:
-        'https://media.rawg.io/media/games/f87/f87457e8347484033cb34cde6101d08d.jpg',
+      image_background: 'https://media.rawg.io/media/games/f87/f87457e8347484033cb34cde6101d08d.jpg',
     },
     {
       id: 5,
       name: 'RPG',
       slug: 'role-playing-games-rpg',
       games_count: 40624,
-      image_background:
-        'https://media.rawg.io/media/games/4e6/4e6e8e7f50c237d76f38f3c885dae3d2.jpg',
+      image_background: 'https://media.rawg.io/media/games/4e6/4e6e8e7f50c237d76f38f3c885dae3d2.jpg',
     },
   ],
   id: 326251,
@@ -116,8 +107,7 @@ const mockGameInfo = {
       name: 'Bethesda Softworks',
       slug: 'bethesda-softworks',
       games_count: 162,
-      image_background:
-        'https://media.rawg.io/media/games/d5f/d5fd2f970f48d0877a53aec98825faba.jpg',
+      image_background: 'https://media.rawg.io/media/games/d5f/d5fd2f970f48d0877a53aec98825faba.jpg',
     },
   ],
   released: '2021-09-14',
@@ -132,8 +122,7 @@ const mockGameInfo = {
         slug: 'playstation-store',
         domain: 'store.playstation.com',
         games_count: 7685,
-        image_background:
-          'https://media.rawg.io/media/games/c4b/c4b0cab189e73432de3a250d8cf1c84e.jpg',
+        image_background: 'https://media.rawg.io/media/games/c4b/c4b0cab189e73432de3a250d8cf1c84e.jpg',
       },
     },
     {
@@ -145,8 +134,7 @@ const mockGameInfo = {
         slug: 'steam',
         domain: 'store.steampowered.com',
         games_count: 56919,
-        image_background:
-          'https://media.rawg.io/media/games/b7d/b7d3f1715fa8381a4e780173a197a615.jpg',
+        image_background: 'https://media.rawg.io/media/games/b7d/b7d3f1715fa8381a4e780173a197a615.jpg',
       },
     },
   ],
@@ -160,48 +148,42 @@ const mockScreenshots = {
   results: [
     {
       id: 2934405,
-      image:
-        'https://media.rawg.io/media/screenshots/115/1150f954fe98f1b0913540b37d4d9815.jpg',
+      image: 'https://media.rawg.io/media/screenshots/115/1150f954fe98f1b0913540b37d4d9815.jpg',
       width: 1920,
       height: 1080,
       is_deleted: false,
     },
     {
       id: 2934406,
-      image:
-        'https://media.rawg.io/media/screenshots/271/271c92208b15bd69af75fb9d8bd63fe8.jpg',
+      image: 'https://media.rawg.io/media/screenshots/271/271c92208b15bd69af75fb9d8bd63fe8.jpg',
       width: 1920,
       height: 1080,
       is_deleted: false,
     },
     {
       id: 2934407,
-      image:
-        'https://media.rawg.io/media/screenshots/b9a/b9a8f300bfa3e90dcf0e4600b41cff12.jpg',
+      image: 'https://media.rawg.io/media/screenshots/b9a/b9a8f300bfa3e90dcf0e4600b41cff12.jpg',
       width: 1920,
       height: 1080,
       is_deleted: false,
     },
     {
       id: 2934408,
-      image:
-        'https://media.rawg.io/media/screenshots/4b1/4b1a2ee4267624067fb3e61deb469bd8.jpg',
+      image: 'https://media.rawg.io/media/screenshots/4b1/4b1a2ee4267624067fb3e61deb469bd8.jpg',
       width: 1920,
       height: 1080,
       is_deleted: false,
     },
     {
       id: 2934409,
-      image:
-        'https://media.rawg.io/media/screenshots/6d8/6d8eb3cd202eb20a57ab925455b9d6e2.jpg',
+      image: 'https://media.rawg.io/media/screenshots/6d8/6d8eb3cd202eb20a57ab925455b9d6e2.jpg',
       width: 1920,
       height: 1080,
       is_deleted: false,
     },
     {
       id: 2934410,
-      image:
-        'https://media.rawg.io/media/screenshots/ca7/ca7e88fbfebe19d34f6b916835c8901b.jpg',
+      image: 'https://media.rawg.io/media/screenshots/ca7/ca7e88fbfebe19d34f6b916835c8901b.jpg',
       width: 1920,
       height: 1080,
       is_deleted: false,
@@ -216,14 +198,4 @@ const mockPassword = 'bigb**bz';
 const mockText = 'Regional Manager, Scranton, Dunder Mifflin';
 const mockTitle = 'Michael Scott';
 
-export {
-  mockEmail,
-  mockGame,
-  mockGameInfo,
-  mockHeading,
-  mockLink,
-  mockPassword,
-  mockScreenshots,
-  mockText,
-  mockTitle,
-};
+export { mockEmail, mockGame, mockGameInfo, mockHeading, mockLink, mockPassword, mockScreenshots, mockText, mockTitle };

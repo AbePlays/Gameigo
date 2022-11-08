@@ -20,15 +20,8 @@ const Home: FunctionComponent<Props> = ({ games }) => {
       <Heading as="h1" fontSize={['4xl', '5xl', '6xl']}>
         New and trending
       </Heading>
-      <Text fontSize={['lg', 'xl']}>
-        Based on player counts and release date
-      </Text>
-      <MotionBox
-        className="grid"
-        animate="show"
-        initial="hidden"
-        variants={FadeUpAnimation.parent}
-      >
+      <Text fontSize={['lg', 'xl']}>Based on player counts and release date</Text>
+      <MotionBox className="grid" animate="show" initial="hidden" variants={FadeUpAnimation.parent}>
         {Array.isArray(games) &&
           games.length > 0 &&
           games.map((game) => (

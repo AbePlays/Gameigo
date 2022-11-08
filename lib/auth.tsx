@@ -1,11 +1,4 @@
-import {
-  useState,
-  useEffect,
-  useCallback,
-  useContext,
-  createContext,
-  FunctionComponent,
-} from 'react';
+import { useState, useEffect, useCallback, useContext, createContext, FunctionComponent } from 'react';
 import { useRouter } from 'next/router';
 import {
   createUserWithEmailAndPassword,
@@ -67,12 +60,8 @@ const useProvideAuth = () => {
       userData.token = token;
       const authTime = Number(res.claims.auth_time) * 1000;
       const sessionDuration = 1000 * 60 * 60 * 24; // 24 hours
-      const millisecondsUntilExpiration =
-        sessionDuration - (Date.now() - authTime);
-      sessionTimeout = setTimeout(
-        () => auth.signOut(),
-        millisecondsUntilExpiration
-      );
+      const millisecondsUntilExpiration = sessionDuration - (Date.now() - authTime);
+      sessionTimeout = setTimeout(() => auth.signOut(), millisecondsUntilExpiration);
       setUser(userData);
       router.replace(Routes.HOME_SCREEN);
     } else {
@@ -87,11 +76,7 @@ const useProvideAuth = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const signupWithEmailAndPassword = async (
-    email: string,
-    password: string,
-    name: string
-  ) => {
+  const signupWithEmailAndPassword = async (email: string, password: string, name: string) => {
     setLoading(true);
     await createUserWithEmailAndPassword(auth, email, password);
     await updateProfile(auth.currentUser, { displayName: name });

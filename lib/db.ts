@@ -1,19 +1,9 @@
-import {
-  arrayUnion,
-  doc,
-  DocumentData,
-  DocumentSnapshot,
-  getDoc,
-  setDoc,
-  updateDoc,
-} from 'firebase/firestore';
+import { arrayUnion, doc, DocumentData, DocumentSnapshot, getDoc, setDoc, updateDoc } from 'firebase/firestore';
 
 import { db } from './firebase';
 import { User } from './types';
 
-export const checkUser = async (
-  uid: string
-): Promise<DocumentSnapshot<DocumentData>> => {
+export const checkUser = async (uid: string): Promise<DocumentSnapshot<DocumentData>> => {
   const docRef = doc(db, 'users', uid);
   return getDoc(docRef);
 };

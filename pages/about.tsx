@@ -24,41 +24,22 @@ const About: FunctionComponent = () => {
         textAlign="center"
       >
         <AboutCard heading="Small and Crafty">
-          <Text
-            lineHeight="7"
-            maxW="container.md"
-            mx="auto"
-            style={{ textAlignLast: 'center' }}
-            textAlign="justify"
-          >
-            Gameigo is a video game discovery platform where you can keep all
-            your games in one unified profile and create your exclusive
-            collection. The application is powered by a public API provided by
-            RAWG which houses more than 350,000 games across half a hundred
-            platforms.
+          <Text lineHeight="7" maxW="container.md" mx="auto" style={{ textAlignLast: 'center' }} textAlign="justify">
+            Gameigo is a video game discovery platform where you can keep all your games in one unified profile and
+            create your exclusive collection. The application is powered by a public API provided by RAWG which houses
+            more than 350,000 games across half a hundred platforms.
           </Text>
         </AboutCard>
         <AboutCard heading="Creator">
-          <Text
-            lineHeight="7"
-            maxW="container.md"
-            mx="auto"
-            style={{ textAlignLast: 'center' }}
-            textAlign="justify"
-          >
-            Hi there, I&apos;m Abhishek - aka Abe 👋 I am a self learner trying
-            to get hands on new technologies and producing exciting products
-            that are as smart, as they are effective. Wanna talk about Computer
-            Sciency things? Drop a message : )
+          <Text lineHeight="7" maxW="container.md" mx="auto" style={{ textAlignLast: 'center' }} textAlign="justify">
+            Hi there, I&apos;m Abhishek - aka Abe 👋 I am a self learner trying to get hands on new technologies and
+            producing exciting products that are as smart, as they are effective. Wanna talk about Computer Sciency
+            things? Drop a message : )
           </Text>
         </AboutCard>
         <AboutCard heading="Contact">
           <Stack isInline spacing="2" justifyContent="center">
-            <NextLink
-              href="https://github.com/AbePlays"
-              legacyBehavior
-              passHref
-            >
+            <NextLink href="https://github.com/AbePlays" legacyBehavior passHref>
               <Link
                 bg={isDarkMode ? 'light-bg-primary' : 'dark-bg-primary'}
                 color={isDarkMode ? 'dark-text' : 'light-text'}
@@ -73,11 +54,7 @@ const About: FunctionComponent = () => {
                 Github
               </Link>
             </NextLink>
-            <NextLink
-              href="mailto:abhi.rawat456@gmail.com"
-              legacyBehavior
-              passHref
-            >
+            <NextLink href="mailto:abhi.rawat456@gmail.com" legacyBehavior passHref>
               <Link
                 bg={isDarkMode ? 'light-bg-primary' : 'dark-bg-primary'}
                 color={isDarkMode ? 'dark-text' : 'light-text'}
@@ -91,11 +68,7 @@ const About: FunctionComponent = () => {
                 Mail
               </Link>
             </NextLink>
-            <NextLink
-              href="https://www.linkedin.com/in/abe10/"
-              legacyBehavior
-              passHref
-            >
+            <NextLink href="https://www.linkedin.com/in/abe10/" legacyBehavior passHref>
               <Link
                 bg={isDarkMode ? 'light-bg-primary' : 'dark-bg-primary'}
                 color={isDarkMode ? 'dark-text' : 'light-text'}

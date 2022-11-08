@@ -20,18 +20,12 @@ const handlers = [
   rest.get('https://api.rawg.io/api/games', async (req, res, ctx) => {
     return res(ctx.status(200), ctx.json({ results: [mockGame] }));
   }),
-  rest.get(
-    `https://api.rawg.io/api/games/${mockGame.slug}`,
-    async (req, res, ctx) => {
-      return res(ctx.status(200), ctx.json(mockGameInfo));
-    }
-  ),
-  rest.get(
-    `https://api.rawg.io/api/games/${mockGame.slug}/screenshots`,
-    async (req, res, ctx) => {
-      return res(ctx.status(200), ctx.json(mockScreenshots));
-    }
-  ),
+  rest.get(`https://api.rawg.io/api/games/${mockGame.slug}`, async (req, res, ctx) => {
+    return res(ctx.status(200), ctx.json(mockGameInfo));
+  }),
+  rest.get(`https://api.rawg.io/api/games/${mockGame.slug}/screenshots`, async (req, res, ctx) => {
+    return res(ctx.status(200), ctx.json(mockScreenshots));
+  }),
 ];
 
 export { handlers };

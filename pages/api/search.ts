@@ -2,10 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 
 import { Endpoints } from 'endpoints';
 
-const search = async (
-  req: NextApiRequest,
-  res: NextApiResponse
-): Promise<unknown> => {
+const search = async (req: NextApiRequest, res: NextApiResponse): Promise<unknown> => {
   try {
     const { page, query } = req.query;
     if (typeof query === 'string' && typeof page === 'string') {

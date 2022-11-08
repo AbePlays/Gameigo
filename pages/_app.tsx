@@ -9,11 +9,7 @@ import { AuthProvider } from '@lib/auth';
 import 'styles/global.css';
 import theme from 'styles/theme';
 
-const MyApp: FunctionComponent<AppProps> = ({
-  Component,
-  pageProps,
-  router,
-}) => {
+const MyApp: FunctionComponent<AppProps> = ({ Component, pageProps, router }) => {
   const { route } = router;
 
   return (

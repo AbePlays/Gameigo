@@ -14,12 +14,7 @@ const renderForm = (validate = mockValidate) => {
   return render(
     <Formik initialValues={{ email: '' }} onSubmit={mockOnSubmit}>
       <Form>
-        <CustomInput
-          name="email"
-          placeholder={placeholder}
-          type={type}
-          validate={validate}
-        />
+        <CustomInput name="email" placeholder={placeholder} type={type} validate={validate} />
         <Button type="submit">Submit</Button>
       </Form>
     </Formik>
@@ -58,8 +53,6 @@ describe('Testing CustomInput Component', () => {
 
     fireEvent.change(emailInput, { target: { value: invalidEmail } });
     fireEvent.focusOut(emailInput);
-    await waitFor(() =>
-      expect(screen.getByText(/invalid email/i)).toBeInTheDocument()
-    );
+    await waitFor(() => expect(screen.getByText(/invalid email/i)).toBeInTheDocument());
   });
 });

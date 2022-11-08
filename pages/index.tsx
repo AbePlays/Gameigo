@@ -1,16 +1,7 @@
 import { FunctionComponent, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { ChevronRightIcon } from '@chakra-ui/icons';
-import {
-  useColorMode,
-  Box,
-  Flex,
-  Heading,
-  ListItem,
-  Stack,
-  Text,
-  UnorderedList,
-} from '@chakra-ui/react';
+import { useColorMode, Box, Flex, Heading, ListItem, Stack, Text, UnorderedList } from '@chakra-ui/react';
 
 import BlurImage from '@components/BlurImage';
 import { ButtonWithIcon } from '@components/Buttons';
@@ -41,14 +32,7 @@ const Home: FunctionComponent = () => {
   }, [loading, router, user]);
 
   return (
-    <Page
-      title="Welcome"
-      description={Descriptions.Welcome}
-      maxWidth="1536px"
-      pt="8"
-      px="0"
-      py="0"
-    >
+    <Page title="Welcome" description={Descriptions.Welcome} maxWidth="1536px" pt="8" px="0" py="0">
       {loading ? (
         <Loader />
       ) : (
@@ -62,16 +46,8 @@ const Home: FunctionComponent = () => {
               minHeight="calc(100vh - 108px)"
             >
               <Box flex="1" mt={['8', '8', '0']}>
-                <Stack
-                  spacing="8"
-                  w={['100%', '100%', '100%', '30rem']}
-                  textAlign={['center', 'center', 'left']}
-                >
-                  <Heading
-                    as="h1"
-                    fontWeight={['extrabold', 'black']}
-                    fontSize={['5xl', '6xl']}
-                  >
+                <Stack spacing="8" w={['100%', '100%', '100%', '30rem']} textAlign={['center', 'center', 'left']}>
+                  <Heading as="h1" fontWeight={['extrabold', 'black']} fontSize={['5xl', '6xl']}>
                     The database platform for{' '}
                     <Text
                       color="white"
@@ -83,15 +59,9 @@ const Home: FunctionComponent = () => {
                       gamers
                     </Text>
                   </Heading>
-                  <Text
-                    fontSize="lg"
-                    color={isDarkMode ? 'light-text' : 'dark-text'}
-                    opacity="0.7"
-                    lineHeight="7"
-                  >
-                    Gameigo provides users a video game discovery platform where
-                    they can explore and create an exclusive collection of video
-                    games from around the world.
+                  <Text fontSize="lg" color={isDarkMode ? 'light-text' : 'dark-text'} opacity="0.7" lineHeight="7">
+                    Gameigo provides users a video game discovery platform where they can explore and create an
+                    exclusive collection of video games from around the world.
                   </Text>
                   <Box>
                     <ButtonWithIcon
@@ -111,32 +81,15 @@ const Home: FunctionComponent = () => {
                 <Heading as="h2" fontSize="3xl">
                   Why Choose Gameigo?
                 </Heading>
-                <Box
-                  aria-hidden="true"
-                  maxW="920px"
-                  mt="16"
-                  mx="auto"
-                  position="relative"
-                >
+                <Box aria-hidden="true" maxW="920px" mt="16" mx="auto" position="relative">
                   <Box
                     bgGradient="linear(to-r, gradient-red, gradient-blue)"
                     filter="blur(8px)"
                     position="absolute"
                     inset="-3px"
                   ></Box>
-                  <Box
-                    display="flex"
-                    overflow="hidden"
-                    rounded="md"
-                    shadow="lg"
-                  >
-                    <BlurImage
-                      alt="Home Page Screenshot"
-                      showBg
-                      src={homeDark}
-                      height="575"
-                      width="920"
-                    />
+                  <Box display="flex" overflow="hidden" rounded="md" shadow="lg">
+                    <BlurImage alt="Home Page Screenshot" showBg src={homeDark} height="575" width="920" />
                   </Box>
                 </Box>
                 <UnorderedList py="8" mx="0" listStyleType="none">
@@ -174,11 +127,7 @@ const Home: FunctionComponent = () => {
               </Box>
             </Box>
           </Box>
-          <Box
-            bg={isDarkMode ? 'dark-bg-secondary' : 'grey'}
-            py="6"
-            textAlign="center"
-          >
+          <Box bg={isDarkMode ? 'dark-bg-secondary' : 'grey'} py="6" textAlign="center">
             <Heading as="h3">Ready to Explore?</Heading>
             <Box mt="4">
               <ButtonWithIcon

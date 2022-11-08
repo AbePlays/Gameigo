@@ -1,13 +1,6 @@
 import ProfilePage from '../../pages/profile';
 import { mockPassword, mockTitle } from '../mockData';
-import {
-  fireEvent,
-  mockUser,
-  mockValue,
-  render,
-  screen,
-  waitFor,
-} from '../test-utils';
+import { fireEvent, mockUser, mockValue, render, screen, waitFor } from '../test-utils';
 
 const mockPush = jest.fn();
 jest.mock('next/router', () => ({

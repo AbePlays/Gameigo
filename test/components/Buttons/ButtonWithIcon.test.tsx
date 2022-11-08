@@ -5,9 +5,7 @@ import { fireEvent, render, screen } from '../../test-utils';
 const mockOnClick = jest.fn();
 
 const renderButton = (icon = null) => {
-  return render(
-    <ButtonWithIcon icon={icon} title={mockTitle} onClick={mockOnClick} />
-  );
+  return render(<ButtonWithIcon icon={icon} title={mockTitle} onClick={mockOnClick} />);
 };
 
 describe('Testing ButtonWithIcon Component', () => {

@@ -2,8 +2,7 @@ export const Descriptions = {
   Welcome:
     'Gameigo is a video game discovery platform where users can explore and create an exclusive collection of video games from around the world.',
   Home: 'Gameigo provides a simple user interface and a simple user experience. Explore and take a look at what games are trending at the moment.',
-  Profile:
-    'Manage your profile, change your password and access many other settings on this page.',
+  Profile: 'Manage your profile, change your password and access many other settings on this page.',
   Favorites:
     'Stop jumping from game to game, and stop having to search for games. Manage your collections, discover new games, and share your collections with friends.',
   Search:

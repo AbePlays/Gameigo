@@ -2,17 +2,7 @@ import { FunctionComponent, useState } from 'react';
 import NextLink from 'next/link';
 import { AnimatePresence } from 'framer-motion';
 import { CloseIcon, HamburgerIcon, MoonIcon, SunIcon } from '@chakra-ui/icons';
-import {
-  Avatar,
-  Box,
-  Button,
-  Flex,
-  Icon,
-  Link,
-  Stack,
-  Tooltip,
-  useColorMode,
-} from '@chakra-ui/react';
+import { Avatar, Box, Button, Flex, Icon, Link, Stack, Tooltip, useColorMode } from '@chakra-ui/react';
 
 import MobileNavbar from './MobileNavbar';
 import { useAuth } from '@lib/auth';
@@ -34,21 +24,8 @@ const Navbar: FunctionComponent = () => {
   };
 
   return (
-    <Box
-      className="adaptive-glass"
-      position="sticky"
-      shadow="sm"
-      top="0"
-      zIndex="999"
-    >
-      <Flex
-        alignItems="center"
-        justifyContent="space-between"
-        maxW="container.xl"
-        minH="14"
-        mx="auto"
-        p="4"
-      >
+    <Box className="adaptive-glass" position="sticky" shadow="sm" top="0" zIndex="999">
+      <Flex alignItems="center" justifyContent="space-between" maxW="container.xl" minH="14" mx="auto" p="4">
         <Box
           aria-label="Menu"
           aria-expanded={showMobileNav ? 'true' : 'false'}
@@ -127,9 +104,7 @@ const Navbar: FunctionComponent = () => {
           </NextLink>
         </Stack>
       </Flex>
-      <AnimatePresence mode="wait">
-        {showMobileNav ? <MobileNavbar onClick={toggleNav} /> : null}
-      </AnimatePresence>
+      <AnimatePresence mode="wait">{showMobileNav ? <MobileNavbar onClick={toggleNav} /> : null}</AnimatePresence>
     </Box>
   );
 };

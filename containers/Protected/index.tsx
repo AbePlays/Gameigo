@@ -10,10 +10,7 @@ interface Props {
   redirectUrl?: string;
 }
 
-const Protected: FunctionComponent<Props> = ({
-  children,
-  redirectUrl = Routes.AUTH_SCREEN,
-}) => {
+const Protected: FunctionComponent<Props> = ({ children, redirectUrl = Routes.AUTH_SCREEN }) => {
   const { loading, user } = useAuth();
   const router = useRouter();
 

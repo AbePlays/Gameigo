@@ -1,17 +1,6 @@
 import { FunctionComponent } from 'react';
 import { Form, Formik, FormikHelpers } from 'formik';
-import {
-  useColorMode,
-  useToast,
-  Avatar,
-  Box,
-  Button,
-  Center,
-  Flex,
-  Heading,
-  Stack,
-  Text,
-} from '@chakra-ui/react';
+import { useColorMode, useToast, Avatar, Box, Button, Center, Flex, Heading, Stack, Text } from '@chakra-ui/react';
 
 import { ButtonWithIcon } from '@components/Buttons';
 import { CustomInput } from '@components/Input';
@@ -29,10 +18,7 @@ const Profile: FunctionComponent = () => {
   const isDarkMode = colorMode === 'dark';
   const initialValues: ProfileForm = { name: '', password: '' };
 
-  const submitHandler = async (
-    values: ProfileForm,
-    actions: FormikHelpers<ProfileForm>
-  ) => {
+  const submitHandler = async (values: ProfileForm, actions: FormikHelpers<ProfileForm>) => {
     const { name, password } = values;
     try {
       await changePassword(password);
@@ -63,13 +49,7 @@ const Profile: FunctionComponent = () => {
               {user?.name}
             </Heading>
           </Flex>
-          <Stack
-            bg={isDarkMode ? '#1f1f1f' : 'gray.100'}
-            px={['4', '6']}
-            py={['4', '8']}
-            rounded="md"
-            spacing="6"
-          >
+          <Stack bg={isDarkMode ? '#1f1f1f' : 'gray.100'} px={['4', '6']} py={['4', '8']} rounded="md" spacing="6">
             <Heading fontSize="xl">Personal Informations</Heading>
             <Formik initialValues={initialValues} onSubmit={submitHandler}>
               {() => (
@@ -78,21 +58,11 @@ const Profile: FunctionComponent = () => {
                     <Text fontWeight="bold" color="gray.500">
                       Display Name
                     </Text>
-                    <CustomInput
-                      name="name"
-                      type="text"
-                      placeholder=""
-                      validate={checkName}
-                    />
+                    <CustomInput name="name" type="text" placeholder="" validate={checkName} />
                     <Text fontWeight="bold" color="gray.500">
                       Change Password
                     </Text>
-                    <CustomInput
-                      name="password"
-                      type="password"
-                      placeholder=""
-                      validate={checkPassword}
-                    />
+                    <CustomInput name="password" type="password" placeholder="" validate={checkPassword} />
                   </Stack>
                 </Form>
               )}

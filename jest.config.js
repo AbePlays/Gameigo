@@ -1,15 +1,7 @@
 module.exports = {
   collectCoverageFrom: ['(components|pages|containers)/**/*.{js,jsx,tsx}'],
   coveragePathIgnorePatterns: ['<rootDir>/pages/_(app|document).tsx'],
-  moduleDirectories: [
-    'node_modules',
-    'components',
-    'containers',
-    'icons',
-    'lib',
-    'utils',
-    '<rootDir>',
-  ],
+  moduleDirectories: ['node_modules', 'components', 'containers', 'icons', 'lib', 'utils', '<rootDir>'],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'json', 'jsx'],
   moduleNameMapper: {
     '^@components(.*)$': '<rootDir>/components$1',
@@ -22,9 +14,7 @@ module.exports = {
   },
   roots: ['<rootDir>'],
   setupFilesAfterEnv: ['./jest.setup.js'],
-  testPathIgnorePatterns: [
-    '<rootDir>[/\\\\](node_modules|.next|cypress)[/\\\\]',
-  ],
+  testPathIgnorePatterns: ['<rootDir>[/\\\\](node_modules|.next|cypress)[/\\\\]'],
   testEnvironment: 'jsdom',
   transformIgnorePatterns: ['[/\\\\]node_modules[/\\\\].+\\.(ts|tsx)$'],
   transform: {

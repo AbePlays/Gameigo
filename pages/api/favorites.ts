@@ -3,10 +3,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { auth } from '@lib/firebase-admin';
 import { getUserData } from '@lib/db-admin';
 
-const favorites = async (
-  req: NextApiRequest,
-  res: NextApiResponse
-): Promise<unknown> => {
+const favorites = async (req: NextApiRequest, res: NextApiResponse): Promise<unknown> => {
   try {
     const { token } = req.headers;
     if (typeof token === 'string') {

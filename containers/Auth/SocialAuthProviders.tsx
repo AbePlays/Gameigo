@@ -79,14 +79,7 @@ const SocialAuthProviders: FunctionComponent = () => {
           default:
             onClickHandler = () => true;
         }
-        return (
-          <BrandButton
-            key={provider.id}
-            icon={icon}
-            title={provider.title}
-            onClick={onClickHandler}
-          />
-        );
+        return <BrandButton key={provider.id} icon={icon} title={provider.title} onClick={onClickHandler} />;
       })}
     </>
   );
