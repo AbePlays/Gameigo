@@ -24,7 +24,7 @@ const ProductInfo: FunctionComponent<Props> = ({ content, src, title }) => {
       align="center"
     >
       <Box maxW="500px">
-        <BlurImage src={src} height="300" width="500" />
+        <BlurImage alt="" src={src} height="300" width="500" />
       </Box>
       <Box>
         <Heading as="h3" fontSize="2xl">

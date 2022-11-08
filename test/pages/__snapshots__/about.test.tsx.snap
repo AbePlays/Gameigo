@@ -1,56 +1,99 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Testing About Page should render about page 1`] = `
-Object {
-  "debug": [Function],
-  "findAllByAltText": [Function],
-  "findAllByDisplayValue": [Function],
-  "findAllByLabelText": [Function],
-  "findAllByPlaceholderText": [Function],
-  "findAllByRole": [Function],
-  "findAllByTestId": [Function],
-  "findAllByText": [Function],
-  "findAllByTitle": [Function],
-  "findByAltText": [Function],
-  "findByDisplayValue": [Function],
-  "findByLabelText": [Function],
-  "findByPlaceholderText": [Function],
-  "findByRole": [Function],
-  "findByTestId": [Function],
-  "findByText": [Function],
-  "findByTitle": [Function],
-  "getAllByAltText": [Function],
-  "getAllByDisplayValue": [Function],
-  "getAllByLabelText": [Function],
-  "getAllByPlaceholderText": [Function],
-  "getAllByRole": [Function],
-  "getAllByTestId": [Function],
-  "getAllByText": [Function],
-  "getAllByTitle": [Function],
-  "getByAltText": [Function],
-  "getByDisplayValue": [Function],
-  "getByLabelText": [Function],
-  "getByPlaceholderText": [Function],
-  "getByRole": [Function],
-  "getByTestId": [Function],
-  "getByText": [Function],
-  "getByTitle": [Function],
-  "logTestingPlaygroundURL": [Function],
-  "queryAllByAltText": [Function],
-  "queryAllByDisplayValue": [Function],
-  "queryAllByLabelText": [Function],
-  "queryAllByPlaceholderText": [Function],
-  "queryAllByRole": [Function],
-  "queryAllByTestId": [Function],
-  "queryAllByText": [Function],
-  "queryAllByTitle": [Function],
-  "queryByAltText": [Function],
-  "queryByDisplayValue": [Function],
-  "queryByLabelText": [Function],
-  "queryByPlaceholderText": [Function],
-  "queryByRole": [Function],
-  "queryByTestId": [Function],
-  "queryByText": [Function],
-  "queryByTitle": [Function],
-}
+<div>
+  <div
+    class="css-1fw334b"
+    style="opacity: 0;"
+  >
+    <main>
+      <div
+        class="chakra-stack css-1cuod9q"
+      >
+        <div
+          class="css-0"
+          style="opacity: 0; transform: translateY(50px) translateZ(0);"
+        >
+          <h2
+            class="chakra-heading css-1v7ukgk"
+          >
+            Small and Crafty
+          </h2>
+          <div
+            aria-hidden="true"
+            class="css-1asknlk"
+          />
+          <p
+            class="chakra-text css-1gjhz2p"
+            style="text-align-last: center;"
+          >
+            Gameigo is a video game discovery platform where you can keep all your games in one unified profile and create your exclusive collection. The application is powered by a public API provided by RAWG which houses more than 350,000 games across half a hundred platforms.
+          </p>
+        </div>
+        <div
+          class="css-0"
+          style="opacity: 0; transform: translateY(50px) translateZ(0);"
+        >
+          <h2
+            class="chakra-heading css-1v7ukgk"
+          >
+            Creator
+          </h2>
+          <div
+            aria-hidden="true"
+            class="css-1asknlk"
+          />
+          <p
+            class="chakra-text css-1gjhz2p"
+            style="text-align-last: center;"
+          >
+            Hi there, I'm Abhishek - aka Abe 👋 I am a self learner trying to get hands on new technologies and producing exciting products that are as smart, as they are effective. Wanna talk about Computer Sciency things? Drop a message : )
+          </p>
+        </div>
+        <div
+          class="css-0"
+          style="opacity: 0; transform: translateY(50px) translateZ(0);"
+        >
+          <h2
+            class="chakra-heading css-1v7ukgk"
+          >
+            Contact
+          </h2>
+          <div
+            aria-hidden="true"
+            class="css-1asknlk"
+          />
+          <div
+            class="chakra-stack css-1f49ad2"
+          >
+            <a
+              class="chakra-link css-1xxwiyr"
+              href="https://github.com/AbePlays"
+              target="_blank"
+            >
+              Github
+            </a>
+            <a
+              class="chakra-link css-1xxwiyr"
+              href="mailto:abhi.rawat456@gmail.com"
+            >
+              Mail
+            </a>
+            <a
+              class="chakra-link css-1xxwiyr"
+              href="https://www.linkedin.com/in/abe10/"
+              target="_blank"
+            >
+              LinkedIn
+            </a>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+  <span
+    hidden=""
+    id="__chakra_env"
+  />
+</div>
 `;

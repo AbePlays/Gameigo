@@ -18,7 +18,7 @@ const CustomLink: FunctionComponent<Props> = ({
   ...props
 }) => {
   return (
-    <NextLink href={link} passHref>
+    <NextLink href={link} legacyBehavior passHref>
       <Link isExternal={isExt} w="fit-content" onClick={onClick} {...props}>
         {title}
       </Link>

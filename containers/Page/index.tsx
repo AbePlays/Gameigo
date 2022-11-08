@@ -23,6 +23,7 @@ const Page: FunctionComponent<Props> = ({
   title,
   ...props
 }) => {
+  const pageTitle = `Gameigo | ${title}`;
   return (
     <MotionBox
       variants={PageAnimation}
@@ -37,7 +38,7 @@ const Page: FunctionComponent<Props> = ({
       {...props}
     >
       <Head>
-        <title>Gameigo | {title}</title>
+        <title>{pageTitle}</title>
         {description ? <meta name="description" content={description} /> : null}
         {imageUrl ? <meta name="image" content={imageUrl} /> : null}
         {siteLink ? (

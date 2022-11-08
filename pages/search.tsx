@@ -36,8 +36,7 @@ const Search: FunctionComponent = () => {
         <Box height={['200px', '300px']} overflow="hidden" position="relative">
           <BlurImage
             alt=""
-            layout="fill"
-            objectPosition="top"
+            style={{ objectPosition: 'top' }}
             showBg
             src={img}
           />
