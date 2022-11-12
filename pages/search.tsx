@@ -1,5 +1,6 @@
 import { Box, Heading, InputGroup, InputLeftElement, Text } from '@chakra-ui/react';
 import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
+import { useRouter } from 'next/router';
 import { useEffect, useRef, useState } from 'react';
 
 import BlurImage from '@components/BlurImage';
@@ -11,8 +12,15 @@ import { Descriptions } from 'seo';
 
 export default function Search() {
   const inputRef = useRef<HTMLInputElement>(null);
-  const [page, setPage] = useState<number>(1);
-  const [query, setQuery] = useState<string>('');
+  const router = useRouter();
+  const [page, setPage] = useState(1);
+  const [query, setQuery] = useState(() => {
+    const { searchTerm = '' } = router.query;
+    if (typeof searchTerm === 'string') {
+      return searchTerm;
+    }
+    return '';
+  });
 
   const keyDownHandler = (event) => {
     if (event.key === 'Enter') {
@@ -24,6 +32,12 @@ export default function Search() {
 
   const decrementPage = () => setPage((prev) => prev - 1);
   const incrementPage = () => setPage((prev) => prev + 1);
+
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.value = query;
+    }
+  }, [query]);
 
   useEffect(() => {
     function focusInput(event: KeyboardEvent) {

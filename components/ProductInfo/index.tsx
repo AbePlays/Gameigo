@@ -16,7 +16,7 @@ const ProductInfo: FunctionComponent<Props> = ({ content, src, title }) => {
 
   return (
     <Stack maxWidth="container.sm" mx="auto" my="14" spacing="16">
-      <Box maxW="500px">
+      <Box maxW="500px" mx="auto">
         <BlurImage alt="" src={src} height="300" width="500" />
       </Box>
       <Box>

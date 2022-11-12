@@ -21,6 +21,7 @@ const Error: FunctionComponent = () => {
           height="300"
           width="500"
           src={error}
+          style={{ marginInline: 'auto' }}
         />
         <Heading mt="6">Oh Snap!</Heading>
         <Text

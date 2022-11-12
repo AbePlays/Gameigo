@@ -113,6 +113,16 @@ export default function GameDetail({ game, screenshots }: Props) {
   const clickHandler = () => router.back();
 
   useEffect(() => {
+    router.beforePopState(({ as: to }) => {
+      if (to === '/search') {
+        router.push(`/search?searchTerm=${router.query.searchTerm}`);
+        return false;
+      }
+      return true;
+    });
+  }, [router]);
+
+  useEffect(() => {
     if (user) {
       checkGame(user.uid, game.id).then((res) => setIsFav(res));
     }

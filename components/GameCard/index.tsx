@@ -1,18 +1,18 @@
-import { FunctionComponent } from 'react';
+import { Box, Divider, Flex, Heading, Link, Stack, Text, useColorMode } from '@chakra-ui/react';
 import NextLink from 'next/link';
-import { useColorMode, Box, Divider, Flex, Heading, Link, Stack, Text } from '@chakra-ui/react';
 
-import Label from '../Label';
-import placeholder from 'public/images/placeholder.jpeg';
 import BlurImage from '@components/BlurImage';
 import { formatDate } from '@utils/date';
 import { MotionBox } from '@utils/MotionElements';
+import placeholder from 'public/images/placeholder.jpeg';
+import Label from '../Label';
 
 interface Props {
   game: Game;
+  query?: string;
 }
 
-const GameCard: FunctionComponent<Props> = ({ game }) => {
+export default function GameCard({ game, query = '' }: Props) {
   const { colorMode } = useColorMode();
 
   const isDarkMode = colorMode === 'dark';
@@ -43,6 +43,8 @@ const GameCard: FunctionComponent<Props> = ({ game }) => {
     );
   };
 
+  const queryParam = query.length > 0 ? `?searchTerm=${query}` : '';
+
   return (
     <MotionBox
       as="article"
@@ -54,7 +56,7 @@ const GameCard: FunctionComponent<Props> = ({ game }) => {
       shadow="lg"
       whileHover={{ scale: 1.01 }}
     >
-      <NextLink href={`/game/${game.slug}`} legacyBehavior passHref>
+      <NextLink href={`/game/${game.slug}${queryParam}`} legacyBehavior passHref>
         <Link aria-label={`${game.name}`}>
           <Box h="56" overflow="hidden" position="relative">
             <BlurImage alt="game background" fill showBg src={game?.background_image || placeholder} />
@@ -74,6 +76,4 @@ const GameCard: FunctionComponent<Props> = ({ game }) => {
       </NextLink>
     </MotionBox>
   );
-};
-
-export default GameCard;
+}
