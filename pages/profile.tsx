@@ -1,6 +1,5 @@
-import { FunctionComponent } from 'react';
+import { Avatar, Box, Button, Flex, Heading, Stack, Text, useColorMode, useToast } from '@chakra-ui/react';
 import { Form, Formik, FormikHelpers } from 'formik';
-import { useColorMode, useToast, Avatar, Box, Button, Center, Flex, Heading, Stack, Text } from '@chakra-ui/react';
 
 import { ButtonWithIcon } from '@components/Buttons';
 import { CustomInput } from '@components/Input';
@@ -10,7 +9,7 @@ import ProtectedRoute from '@containers/Protected';
 import { useAuth } from '@lib/auth';
 import { Descriptions } from 'seo';
 
-const Profile: FunctionComponent = () => {
+export default function Profile() {
   const { user, signout, changeDisplayName, changePassword } = useAuth();
   const { colorMode } = useColorMode();
   const toast = useToast();
@@ -50,17 +49,17 @@ const Profile: FunctionComponent = () => {
             </Heading>
           </Flex>
           <Stack bg={isDarkMode ? '#1f1f1f' : 'gray.100'} px={['4', '6']} py={['4', '8']} rounded="md" spacing="6">
-            <Heading fontSize="xl">Personal Informations</Heading>
+            <Heading fontSize="xl">Personal Information</Heading>
             <Formik initialValues={initialValues} onSubmit={submitHandler}>
               {() => (
                 <Form id="my-form">
                   <Stack spacing="4" px="4">
-                    <Text fontWeight="bold" color="gray.500">
+                    <Text as="label" color="gray.500" htmlFor="name" fontWeight="bold">
                       Display Name
                     </Text>
                     <CustomInput name="name" type="text" placeholder="" validate={checkName} />
-                    <Text fontWeight="bold" color="gray.500">
-                      Change Password
+                    <Text as="label" color="gray.500" htmlFor="password" fontWeight="bold">
+                      New Password
                     </Text>
                     <CustomInput name="password" type="password" placeholder="" validate={checkPassword} />
                   </Stack>
@@ -68,22 +67,14 @@ const Profile: FunctionComponent = () => {
               )}
             </Formik>
           </Stack>
-          <Center mt="8">
-            <ButtonWithIcon
-              form="my-form"
-              type="submit"
-              title="Save Changes"
-              icon={null}
-              // onClick={submitHandler}
-            />
-            <Button colorScheme="red" ml="4" onClick={signout}>
+          <Stack isInline justify="flex-end" mt="4" spacing="4">
+            <Button colorScheme="red" onClick={signout}>
               Log Out
             </Button>
-          </Center>
+            <ButtonWithIcon form="my-form" type="submit" title="Save Changes" />
+          </Stack>
         </Box>
       </ProtectedRoute>
     </Page>
   );
-};
-
-export default Profile;
+}
