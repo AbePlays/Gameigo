@@ -1,27 +1,22 @@
-import { FunctionComponent, useState } from 'react';
-import NextLink from 'next/link';
-import { AnimatePresence } from 'framer-motion';
-import { CloseIcon, HamburgerIcon, MoonIcon, SunIcon } from '@chakra-ui/icons';
 import { Avatar, Box, Button, Flex, Icon, Link, Stack, Tooltip, useColorMode } from '@chakra-ui/react';
+import { Cross1Icon, HamburgerMenuIcon, MoonIcon, SunIcon } from '@radix-ui/react-icons';
+import { AnimatePresence } from 'framer-motion';
+import NextLink from 'next/link';
+import { useState } from 'react';
 
-import MobileNavbar from './MobileNavbar';
 import { useAuth } from '@lib/auth';
+import MobileNavbar from './MobileNavbar';
 
-const iconSize = {
-  sm: 3,
-  lg: 5,
-};
+const iconSize = 4;
 
-const Navbar: FunctionComponent = () => {
+export default function Navbar() {
   const { user } = useAuth();
   const { colorMode, toggleColorMode } = useColorMode();
-  const [showMobileNav, setShowMobileNav] = useState<boolean>(false);
+  const [showMobileNav, setShowMobileNav] = useState(false);
 
   const isDarkMode = colorMode === 'dark';
 
-  const toggleNav = () => {
-    setShowMobileNav((prev) => !prev);
-  };
+  const toggleNav = () => setShowMobileNav((prev) => !prev);
 
   return (
     <Box className="adaptive-glass" position="sticky" shadow="sm" top="0" zIndex="999">
@@ -30,22 +25,23 @@ const Navbar: FunctionComponent = () => {
           aria-label="Menu"
           aria-expanded={showMobileNav ? 'true' : 'false'}
           as="button"
-          display={['block', 'none']}
+          display={['flex', 'none']}
           onClick={toggleNav}
         >
           {showMobileNav ? (
-            <Icon as={CloseIcon} w={iconSize.sm} h={iconSize.sm} />
+            <Icon as={Cross1Icon} w={iconSize} h={iconSize} />
           ) : (
-            <Icon as={HamburgerIcon} w={iconSize.lg} h={iconSize.lg} />
+            <Icon as={HamburgerMenuIcon} w={iconSize} h={iconSize} />
           )}
         </Box>
         <NextLink href="/home" legacyBehavior passHref>
           <Link
+            fontWeight="semibold"
             letterSpacing="widest"
             textDecoration="none"
             position={['absolute', 'relative']}
             right={['50%', '0']}
-            top={['6', '0']}
+            top={['5', '0']}
             transform={['translate(50%, 0)', 'none']}
           >
             GAMEIGO
@@ -107,6 +103,4 @@ const Navbar: FunctionComponent = () => {
       <AnimatePresence mode="wait">{showMobileNav ? <MobileNavbar onClick={toggleNav} /> : null}</AnimatePresence>
     </Box>
   );
-};
-
-export default Navbar;
+}

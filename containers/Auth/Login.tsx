@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 import { Form, Formik, FormikHelpers } from 'formik';
-import { ChevronRightIcon } from '@chakra-ui/icons';
+import { ChevronRightIcon } from '@radix-ui/react-icons';
 import { useColorMode, useToast, Box, Heading, Stack, Text } from '@chakra-ui/react';
 
 import { ButtonWithIcon } from '@components/Buttons';
@@ -70,7 +70,7 @@ const Login: FunctionComponent = () => {
                   <CustomInput name="password" placeholder="Password" type="password" validate={checkPassword} />
                   <ButtonWithIcon
                     h="12"
-                    icon={<ChevronRightIcon h="6" w="6" />}
+                    icon={<ChevronRightIcon height="20" width="20" />}
                     isLoading={props.isSubmitting}
                     title="Login to Your Account"
                     type="submit"

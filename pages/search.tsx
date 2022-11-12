@@ -1,5 +1,5 @@
-import { SearchIcon } from '@chakra-ui/icons';
 import { Box, Heading, InputGroup, InputLeftElement, Text } from '@chakra-ui/react';
+import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
 import { useEffect, useRef, useState } from 'react';
 
 import BlurImage from '@components/BlurImage';
@@ -60,7 +60,7 @@ export default function Search() {
         <Box maxW="container.sm" mx="auto" px="4" transform="translateY(-25px)">
           <InputGroup>
             <InputLeftElement height="100%" pl="2" pointerEvents="none">
-              <SearchIcon color="gray.300" />
+              <MagnifyingGlassIcon color="gray" height={20} width={20} />
             </InputLeftElement>
             <Input
               height="50px"

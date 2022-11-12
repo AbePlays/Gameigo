@@ -1,4 +1,4 @@
-import { ExternalLinkIcon } from '@chakra-ui/icons';
+import { ExternalLinkIcon } from '@radix-ui/react-icons';
 import { Link, useColorMode } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import { FunctionComponent } from 'react';

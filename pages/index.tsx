@@ -1,6 +1,6 @@
 import { FunctionComponent, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { ChevronRightIcon } from '@chakra-ui/icons';
+import { ChevronRightIcon } from '@radix-ui/react-icons';
 import { useColorMode, Box, Flex, Heading, ListItem, Stack, Text, UnorderedList } from '@chakra-ui/react';
 
 import BlurImage from '@components/BlurImage';
@@ -50,23 +50,23 @@ const Home: FunctionComponent = () => {
                   <Heading as="h1" fontWeight={['extrabold', 'black']} fontSize={['5xl', '6xl']}>
                     The database platform for{' '}
                     <Text
-                      color="white"
                       as="span"
+                      color="white"
                       textShadow="
-                  #000 0px 0px 1px,   #000 0px 0px 1px,   #000 0px 0px 1px,
-                  #000 0px 0px 1px,   #000 0px 0px 1px,   #000 0px 0px 1px"
+                        #000 0px 0px 1px,   #000 0px 0px 1px,   #000 0px 0px 1px,
+                        #000 0px 0px 1px,   #000 0px 0px 1px,   #000 0px 0px 1px"
                     >
                       gamers
                     </Text>
                   </Heading>
-                  <Text fontSize="lg" color={isDarkMode ? 'light-text' : 'dark-text'} opacity="0.7" lineHeight="7">
+                  <Text color={isDarkMode ? 'light-text' : 'dark-text'} fontSize="lg" lineHeight="7" opacity="0.7">
                     Gameigo provides users a video game discovery platform where they can explore and create an
                     exclusive collection of video games from around the world.
                   </Text>
                   <Box>
                     <ButtonWithIcon
                       title="Get started"
-                      icon={<ChevronRightIcon w="6" h="6" />}
+                      icon={<ChevronRightIcon width="16" height="16" />}
                       onClick={redirectToAuthScreen}
                     />
                   </Box>
@@ -95,30 +95,21 @@ const Home: FunctionComponent = () => {
                 <UnorderedList py="8" mx="0" listStyleType="none">
                   <ListItem>
                     <ProductInfo
-                      content="Gameigo is a free and open source application backed by a huge
-                  database of video games provided by ROG. It supports features
-                  such as searching for games, creating collections, and sharing
-                  your collections with friends."
+                      content="Gameigo is a free and open source application backed by a huge database of video games provided by ROG. It supports features such as searching for games, creating collections, and sharing your collections with friends."
                       src={free}
                       title="Free to use and open source"
                     />
                   </ListItem>
                   <ListItem>
                     <ProductInfo
-                      content="Gameigo provides a simple user interface and a simple user
-                    experience. The UI is designed to be intuitive and easy to
-                    use. The UX is designed to be simple and easy to understand.
-                    Gameigo makes it easy to discover and share video games."
+                      content="Gameigo provides a simple user interface and a simple user experience. The UI is designed to be intuitive and easy to use. The UX is designed to be simple and easy to understand. Gameigo makes it easy to discover and share video games."
                       src={easy}
                       title="Simple UI &amp; UX"
                     />
                   </ListItem>
                   <ListItem>
                     <ProductInfo
-                      content="Stop jumping from game to game, and stop having to search for
-                    games. Gameigo provides everything you need in one place.
-                    Manage your collections, discover new games, and share your
-                    collections with friends."
+                      content="Stop jumping from game to game, and stop having to search for games. Gameigo provides everything you need in one place. Manage your collections, discover new games, and share your collections with friends."
                       src={vision}
                       title="Everything in one place"
                     />
@@ -131,7 +122,7 @@ const Home: FunctionComponent = () => {
             <Heading as="h3">Ready to Explore?</Heading>
             <Box mt="4">
               <ButtonWithIcon
-                icon={<ChevronRightIcon w="6" h="6" />}
+                icon={<ChevronRightIcon width="16" height="16" />}
                 onClick={redirectToAuthScreen}
                 title="Get started"
               />

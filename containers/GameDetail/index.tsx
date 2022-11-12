@@ -1,4 +1,3 @@
-import { LinkIcon } from '@chakra-ui/icons';
 import {
   Box,
   Flex,
@@ -13,6 +12,7 @@ import {
   Wrap,
   WrapItem,
 } from '@chakra-ui/react';
+import { ArrowLeftIcon, BookmarkFilledIcon, BookmarkIcon, Share1Icon } from '@radix-ui/react-icons';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
@@ -22,7 +22,6 @@ import CustomLink from '@components/CustomLink';
 import GameContent from '@components/GameContent';
 import Store from '@components/Store';
 import Page from '@containers/Page';
-import { IconArrowBack, IconHeartFilled, IconHeartOutline } from '@icons';
 import { useAuth } from '@lib/auth';
 import { addGame, checkGame, deleteGame } from '@lib/db';
 import { formatDate } from '@utils/date';
@@ -125,19 +124,35 @@ export default function GameDetail({ game, screenshots }: Props) {
       imageUrl={game.background_image}
       siteLink={`/game/${game.slug}`}
       title={game.name}
+      pt={[4, 4, 12]}
     >
       {/* CTAs */}
       <Flex alignItems="center" justifyContent="space-between">
-        <Box aria-label="Go Back" as="button" onClick={clickHandler} w="6">
-          <IconArrowBack />
+        <Box aria-label="Go Back" as="button" onClick={clickHandler} w="6" title="Back">
+          <ArrowLeftIcon height={24} width={24} />
         </Box>
         <Flex alignItems="center" justifyContent="center">
           {user ? (
-            <Box aria-label={`${isFav ? 'UnFavorite' : 'Favorite'}`} as="button" w="6" onClick={onClickHandler} mr="2">
-              {isFav ? <IconHeartFilled /> : <IconHeartOutline />}
+            <Box
+              aria-label={`${isFav ? 'UnFavorite' : 'Favorite'}`}
+              as="button"
+              w="6"
+              onClick={onClickHandler}
+              mr="2"
+              title={isFav ? 'Unfavorite' : 'Favorite'}
+            >
+              {isFav ? <BookmarkFilledIcon height={20} width={20} /> : <BookmarkIcon height={20} width={20} />}
             </Box>
           ) : null}
-          <IconButton aria-label="Share" fontSize="xl" icon={<LinkIcon />} onClick={copyLink} variant="unstyled" />
+          <IconButton
+            aria-label="Share"
+            display="flex"
+            fontSize="xl"
+            icon={<Share1Icon height={20} width={20} />}
+            onClick={copyLink}
+            title="Share"
+            variant="unstyled"
+          />
         </Flex>
       </Flex>
 
