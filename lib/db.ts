@@ -1,4 +1,4 @@
-import { arrayUnion, doc, DocumentData, DocumentSnapshot, getDoc, setDoc, updateDoc } from 'firebase/firestore';
+import { arrayUnion, doc, DocumentData, DocumentSnapshot, getDoc, setDoc, updateDoc } from 'firebase/firestore/lite';
 
 import { db } from './firebase';
 import { User } from './types';
