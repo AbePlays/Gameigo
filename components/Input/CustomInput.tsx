@@ -1,6 +1,6 @@
-import { FunctionComponent } from 'react';
+import { FormControl, FormErrorMessage, Input, useColorMode, VisuallyHidden } from '@chakra-ui/react';
 import { Field } from 'formik';
-import { useColorMode, FormControl, FormErrorMessage, Input } from '@chakra-ui/react';
+import { FunctionComponent } from 'react';
 
 interface CustomInputProps {
   name: string;
@@ -17,6 +17,9 @@ const CustomInput: FunctionComponent<CustomInputProps> = ({ name, placeholder, t
     <Field name={name} validate={validate}>
       {({ field, form }) => (
         <FormControl isInvalid={form.errors[name] && form.touched[name]}>
+          <VisuallyHidden as="label" htmlFor={name}>
+            {name}
+          </VisuallyHidden>
           <Input
             {...field}
             bg={isDarkMode ? 'dark-bg-secondary' : 'light-bg-secondary'}

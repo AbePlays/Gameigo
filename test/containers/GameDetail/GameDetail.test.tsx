@@ -7,6 +7,7 @@ const mockBack = jest.fn();
 jest.mock('next/router', () => ({
   useRouter: jest.fn().mockImplementation(() => ({
     back: mockBack,
+    beforePopState: jest.fn(),
   })),
 }));
 

@@ -2,6 +2,12 @@ import GameDetailContainer, { getStaticPaths, getStaticProps } from 'pages/game/
 import { mockGame, mockGameInfo, mockScreenshots } from '../../mockData';
 import { render, screen } from '../../test-utils';
 
+jest.mock('next/router', () => ({
+  useRouter: jest.fn().mockImplementation(() => ({
+    beforePopState: jest.fn(),
+  })),
+}));
+
 describe('Testing Game Details Page', () => {
   it('should check game title', () => {
     render(<GameDetailContainer data={{ game: mockGameInfo, screenshots: mockScreenshots }} />);

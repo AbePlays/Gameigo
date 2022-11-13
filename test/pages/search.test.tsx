@@ -2,6 +2,13 @@ import SearchPage from '../../pages/search';
 import { mockGame, mockText } from '../mockData';
 import { fireEvent, render, screen, waitFor } from '../test-utils';
 
+jest.mock('next/router', () => ({
+  useRouter: jest.fn().mockImplementation(() => ({
+    beforePopState: jest.fn(),
+    query: {},
+  })),
+}));
+
 describe('Testing Search Page', () => {
   it('should check search input', async () => {
     render(<SearchPage />);
