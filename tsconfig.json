@@ -25,5 +25,5 @@
     "incremental": true
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "jest.config.js", "test/__mocks__/fileMock.js", "jest.setup.js"],
-  "exclude": ["cypress", "node_modules"]
+  "exclude": ["cypress", "node_modules", "cypress.config.ts"]
 }
