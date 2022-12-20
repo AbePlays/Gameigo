@@ -11,7 +11,7 @@ beforeAll(() => server.listen());
 afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
-jest.mock('firebase/firestore', () => {
+jest.mock('firebase/firestore/lite', () => {
   return { getFirestore: jest.fn() };
 });
 
