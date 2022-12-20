@@ -1,7 +1,7 @@
-import { FunctionComponent, useEffect } from 'react';
-import { useRouter } from 'next/router';
+import { Box, Heading, ListItem, Stack, Text, UnorderedList, useColorMode } from '@chakra-ui/react';
 import { ChevronRightIcon } from '@radix-ui/react-icons';
-import { useColorMode, Box, Flex, Heading, ListItem, Stack, Text, UnorderedList } from '@chakra-ui/react';
+import { useRouter } from 'next/router';
+import { FunctionComponent, useEffect } from 'react';
 
 import BlurImage from '@components/BlurImage';
 import { ButtonWithIcon } from '@components/Buttons';
@@ -72,9 +72,7 @@ const Home: FunctionComponent = () => {
                   </Box>
                 </Stack>
               </Box>
-              <Flex flex="1" justifyContent="flex-end">
-                <BlurImage alt="" src={hero} height="400" width="500" />
-              </Flex>
+              <BlurImage alt="" src={hero} height="400" width="500" />
             </Box>
             <Box mt="24" textAlign="center">
               <Box>

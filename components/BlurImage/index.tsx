@@ -11,12 +11,14 @@ const BlurImage: FunctionComponent<ImageProps & { showBg?: boolean }> = ({
 }) => {
   const [loading, setLoading] = useState(true);
 
+  const shouldBlur = typeof src === 'string' || loading;
+
   return (
     <Image
       alt={alt}
       className={className}
       onLoadingComplete={() => setLoading(false)}
-      placeholder={typeof src === 'string' ? 'empty' : 'blur'}
+      placeholder={shouldBlur ? 'blur' : 'empty'}
       src={src}
       style={{
         backgroundColor: showBg ? '#9ca3af' : 'transparent',
