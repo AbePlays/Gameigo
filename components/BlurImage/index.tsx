@@ -10,8 +10,7 @@ const BlurImage: FunctionComponent<ImageProps & { showBg?: boolean }> = ({
   ...props
 }) => {
   const [loading, setLoading] = useState(true);
-
-  const shouldBlur = typeof src === 'string' || loading;
+  const shouldBlur = typeof src === 'object' && loading;
 
   return (
     <Image
@@ -22,7 +21,7 @@ const BlurImage: FunctionComponent<ImageProps & { showBg?: boolean }> = ({
       src={src}
       style={{
         backgroundColor: showBg ? '#9ca3af' : 'transparent',
-        filter: loading ? 'blur(40px) grayscale(100%)' : 'blur(0) grayscale(0)',
+        filter: loading ? 'blur(15px) grayscale(100%)' : 'blur(0) grayscale(0)',
         objectFit: 'cover',
         objectPosition: 'center',
         scale: loading ? 1.1 : 1,
