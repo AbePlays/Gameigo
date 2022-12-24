@@ -59,7 +59,13 @@ const Home: FunctionComponent = () => {
                       gamers
                     </Text>
                   </Heading>
-                  <Text color={isDarkMode ? 'light-text' : 'dark-text'} fontSize="lg" lineHeight="7" opacity="0.7">
+                  <Text
+                    color={isDarkMode ? 'light-text' : 'dark-text'}
+                    fontSize="xl"
+                    fontWeight="medium"
+                    lineHeight="8"
+                    opacity="0.7"
+                  >
                     Gameigo provides users a video game discovery platform where they can explore and create an
                     exclusive collection of video games from around the world.
                   </Text>
@@ -76,7 +82,7 @@ const Home: FunctionComponent = () => {
             </Box>
             <Box mt="24" textAlign="center">
               <Box>
-                <Heading as="h2" fontSize="3xl">
+                <Heading as="h2" fontSize="4xl" textDecor="underline">
                   Why Choose Gameigo?
                 </Heading>
                 <Box aria-hidden="true" maxW="920px" mt="16" mx="auto" position="relative">
@@ -87,7 +93,7 @@ const Home: FunctionComponent = () => {
                     inset="-3px"
                   ></Box>
                   <Box display="flex" overflow="hidden" rounded="md" shadow="lg">
-                    <BlurImage alt="Home Page Screenshot" showBg src={homeDark} height="575" width="920" />
+                    <BlurImage alt="Gameigo home page" showBg src={homeDark} height="575" width="920" />
                   </Box>
                 </Box>
                 <UnorderedList py="8" mx="0" listStyleType="none">

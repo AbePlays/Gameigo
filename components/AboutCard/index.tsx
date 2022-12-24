@@ -15,7 +15,7 @@ const AboutCard: FunctionComponent<Props> = ({ children, heading }) => {
 
   return (
     <MotionBox variants={FadeUpAnimation.child}>
-      <Heading fontSize="lg" fontWeight="bold" letterSpacing="widest" textTransform="uppercase">
+      <Heading fontSize="xl" fontWeight="bold" letterSpacing="widest" textTransform="uppercase">
         {heading}
       </Heading>
       <Box

@@ -49,7 +49,7 @@ const Login: FunctionComponent = () => {
       <Heading as="h1" fontWeight="extrabold" fontSize={['5xl', '6xl']}>
         Login to Your Account
       </Heading>
-      <Text color={isDarkMode ? 'gray.300' : 'gray.700'} fontSize="xl" maxW="xl" mt="8" mx="auto">
+      <Text color={isDarkMode ? 'gray.300' : 'gray.700'} fontSize="xl" fontWeight="medium" maxW="xl" mt="8" mx="auto">
         Choose from 30,000+ games around the world with new addition every few weeks
       </Text>
       <Box

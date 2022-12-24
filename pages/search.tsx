@@ -65,7 +65,7 @@ export default function Search() {
         {/* Intro Text */}
         <Box color="light-text" textAlign="center" px="4" position="absolute" width="100%" left="0" top={[8, 16]}>
           <Heading as="h1">Search Gameigo</Heading>
-          <Text fontWeight="medium" mt={[1, 4]}>
+          <Text fontSize={['md', 'lg']} fontWeight="medium" mt={[1, 4]}>
             Choose from 30,000+ games with new addition every few weeks.
           </Text>
         </Box>

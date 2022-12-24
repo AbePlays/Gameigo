@@ -24,14 +24,28 @@ const About: FunctionComponent = () => {
         textAlign="center"
       >
         <AboutCard heading="Small and Crafty">
-          <Text lineHeight="7" maxW="container.md" mx="auto" style={{ textAlignLast: 'center' }} textAlign="justify">
+          <Text
+            fontWeight="medium"
+            lineHeight="7"
+            maxW="container.sm"
+            mx="auto"
+            style={{ textAlignLast: 'center' }}
+            textAlign="justify"
+          >
             Gameigo is a video game discovery platform where you can keep all your games in one unified profile and
             create your exclusive collection. The application is powered by a public API provided by RAWG which houses
             more than 350,000 games across half a hundred platforms.
           </Text>
         </AboutCard>
         <AboutCard heading="Creator">
-          <Text lineHeight="7" maxW="container.md" mx="auto" style={{ textAlignLast: 'center' }} textAlign="justify">
+          <Text
+            fontWeight="medium"
+            lineHeight="7"
+            maxW="container.sm"
+            mx="auto"
+            style={{ textAlignLast: 'center' }}
+            textAlign="justify"
+          >
             Hi there, I&apos;m Abhishek - aka Abe 👋 I am a self learner trying to get hands on new technologies and
             producing exciting products that are as smart, as they are effective. Wanna talk about Computer Sciency
             things? Drop a message : )

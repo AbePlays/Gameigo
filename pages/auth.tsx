@@ -38,7 +38,7 @@ const Auth: FunctionComponent = () => {
       ) : (
         <Box textAlign="center">
           {isLogin ? <Login /> : <Signup />}
-          <Text mt={['10', '10', '16']}>
+          <Text fontWeight="medium" mt={['10', '10', '16']}>
             {footer.head}
             <Button variant="link" color={isDarkMode ? 'white' : 'black'} onClick={toggle} fontWeight="bold">
               {footer.tail}

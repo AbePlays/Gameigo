@@ -26,7 +26,7 @@ export default function GameCard({ game, query = '' }: Props) {
       <Text fontWeight="semibold">
         Release Date:
         <Text as="span" fontWeight="normal" ml="2">
-          {game?.released ? formatDate(game.released) : 'TBA'}
+          {game?.released ? <time dateTime={game.released}>{formatDate(game.released)}</time> : 'TBA'}
         </Text>
       </Text>
     );
@@ -57,7 +57,7 @@ export default function GameCard({ game, query = '' }: Props) {
       whileHover={{ scale: 1.01 }}
     >
       <NextLink href={`/game/${game.slug}${queryParam}`} legacyBehavior passHref>
-        <Link aria-label={`${game.name}`}>
+        <Link aria-label={game.name}>
           <Box h="56" overflow="hidden" position="relative">
             <BlurImage alt="game background" fill showBg src={game?.background_image || placeholder} />
           </Box>

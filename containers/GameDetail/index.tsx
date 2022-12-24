@@ -168,16 +168,18 @@ export default function GameDetail({ game, screenshots }: Props) {
 
       {/* Header */}
       <Box mt="16" textAlign="center">
-        <Text fontWeight="medium">Day of Release - {game.released ? formatDate(game.released) : 'TBA'}</Text>
+        <Text fontWeight="medium">
+          Day of Release - {game.released ? <time dateTime={game.released}>{formatDate(game.released)}</time> : 'TBA'}
+        </Text>
         <Heading as="h1" fontSize={['5xl', '6xl']} lineHeight="1.25" mt="8">
           {game.name}
         </Heading>
       </Box>
 
       {/* Game Background */}
-      <Box bg={isDarkMode ? 'dark-bg-secondary' : 'grey'} mt="8" p={['8', '8', '10']} rounded="2xl">
-        <Box pos="relative" rounded="xl" overflow="hidden">
-          <BlurImage height="400" width="1200" showBg src={game.background_image} alt="game background" />
+      <Box bg={isDarkMode ? 'dark-bg-secondary' : 'grey'} mt="8" p={['6', '6', '8']} rounded="2xl">
+        <Box pos="relative" rounded="xl" overflow="hidden" width="full" style={{ aspectRatio: '16 / 9' }}>
+          <BlurImage fill showBg src={game.background_image} alt="game background" />
         </Box>
       </Box>
 
