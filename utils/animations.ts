@@ -10,8 +10,8 @@ export const FadeUpAnimation = {
 };
 
 export const PageAnimation = {
-  hidden: { opacity: 0 },
-  show: { opacity: 1 },
+  hidden: { opacity: 0, y: 20, transition: { duration: 0.3 } },
+  show: { opacity: 1, y: 0, transition: { duration: 0.3 } },
 };
 
 export const MoveDownAnimation = {
