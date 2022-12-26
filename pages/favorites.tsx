@@ -1,5 +1,4 @@
-import { FunctionComponent } from 'react';
-import { useColorMode, useToast, Box, Heading } from '@chakra-ui/react';
+import { Box, Heading, useColorMode, useToast } from '@chakra-ui/react';
 import useSWR from 'swr';
 
 import GameCard from '@components/GameCard';
@@ -11,7 +10,7 @@ import { useAuth } from '@lib/auth';
 import fetcher from '@utils/fetcher';
 import { Descriptions } from 'seo';
 
-const Favorites: FunctionComponent = () => {
+export default function Favorites() {
   const { user } = useAuth();
   const { colorMode } = useColorMode();
   const toast = useToast();
@@ -19,7 +18,7 @@ const Favorites: FunctionComponent = () => {
   const isDarkMode = colorMode === 'dark';
   const token = user?.token;
 
-  const { data, error } = useSWR(['/api/favorites', token], fetcher);
+  const { data, error } = useSWR<Game[]>(['/api/favorites', token], fetcher);
 
   if (error) {
     toast({
@@ -41,7 +40,7 @@ const Favorites: FunctionComponent = () => {
         {data ? (
           Array.isArray(data) && data.length > 0 ? (
             <Box className="grid">
-              {data.map((game: Game) => (
+              {data.map((game) => (
                 <Box key={game.id}>
                   <GameCard game={game} />
                 </Box>
@@ -58,6 +57,4 @@ const Favorites: FunctionComponent = () => {
       </Page>
     </ProtectedRoute>
   );
-};
-
-export default Favorites;
+}

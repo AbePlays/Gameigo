@@ -1,4 +1,6 @@
-const fetcher = async (url: string, token?: string): Promise<any> => {
+type FetcherArgs = [string, string];
+
+async function fetcher<T = unknown>([url, token]: FetcherArgs): Promise<T> {
   const res = await fetch(url, {
     method: 'GET',
     headers: new Headers({ 'Content-Type': 'application/json', token }),
@@ -6,6 +8,6 @@ const fetcher = async (url: string, token?: string): Promise<any> => {
   });
 
   return res.json();
-};
+}
 
 export default fetcher;
