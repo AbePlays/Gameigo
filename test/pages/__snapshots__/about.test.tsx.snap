@@ -4,7 +4,7 @@ exports[`Testing About Page should render about page 1`] = `
 <div>
   <div
     class="css-1fw334b"
-    style="opacity: 0;"
+    style="opacity: 0; transform: translateY(20px) translateZ(0);"
   >
     <main>
       <div
@@ -15,7 +15,7 @@ exports[`Testing About Page should render about page 1`] = `
           style="opacity: 0; transform: translateY(50px) translateZ(0);"
         >
           <h2
-            class="chakra-heading css-1v7ukgk"
+            class="chakra-heading css-1pi25zo"
           >
             Small and Crafty
           </h2>
@@ -24,7 +24,7 @@ exports[`Testing About Page should render about page 1`] = `
             class="css-1asknlk"
           />
           <p
-            class="chakra-text css-1gjhz2p"
+            class="chakra-text css-1dtrxbm"
             style="text-align-last: center;"
           >
             Gameigo is a video game discovery platform where you can keep all your games in one unified profile and create your exclusive collection. The application is powered by a public API provided by RAWG which houses more than 350,000 games across half a hundred platforms.
@@ -35,7 +35,7 @@ exports[`Testing About Page should render about page 1`] = `
           style="opacity: 0; transform: translateY(50px) translateZ(0);"
         >
           <h2
-            class="chakra-heading css-1v7ukgk"
+            class="chakra-heading css-1pi25zo"
           >
             Creator
           </h2>
@@ -44,7 +44,7 @@ exports[`Testing About Page should render about page 1`] = `
             class="css-1asknlk"
           />
           <p
-            class="chakra-text css-1gjhz2p"
+            class="chakra-text css-1dtrxbm"
             style="text-align-last: center;"
           >
             Hi there, I'm Abhishek - aka Abe 👋 I am a self learner trying to get hands on new technologies and producing exciting products that are as smart, as they are effective. Wanna talk about Computer Sciency things? Drop a message : )
@@ -55,7 +55,7 @@ exports[`Testing About Page should render about page 1`] = `
           style="opacity: 0; transform: translateY(50px) translateZ(0);"
         >
           <h2
-            class="chakra-heading css-1v7ukgk"
+            class="chakra-heading css-1pi25zo"
           >
             Contact
           </h2>
