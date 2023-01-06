@@ -21,7 +21,7 @@ export default function SearchResult({ onNext, onPrevious, page, query }: Props)
   const isDarkMode = colorMode === 'dark';
 
   const { data, error } = useSWR<{ next: string; previous: string; results: Game[] }>(
-    `/api/search?query=${query}&page=${page}`,
+    [`/api/search?query=${query}&page=${page}`],
     fetcher
   );
 
