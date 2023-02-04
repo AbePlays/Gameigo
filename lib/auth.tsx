@@ -18,6 +18,8 @@ import { checkUser, createUser } from './db';
 import { auth } from './firebase';
 import { formatUser } from './helper';
 import { AuthContextType, User } from './types';
+import { preload } from 'swr';
+import fetcher from '@utils/fetcher';
 
 interface Props {
   children?: React.ReactNode;
@@ -63,6 +65,7 @@ const useProvideAuth = () => {
       const millisecondsUntilExpiration = sessionDuration - (Date.now() - authTime);
       sessionTimeout = setTimeout(() => auth.signOut(), millisecondsUntilExpiration);
       setUser(userData);
+      preload(['/api/favorites', token], fetcher);
       router.replace(Routes.HOME_SCREEN);
     } else {
       setUser(null);
