@@ -1,14 +1,14 @@
-import { User as firebaseUser } from 'firebase/auth';
+import type { User as FirebaseUser } from 'firebase/auth';
 import { User } from './types';
 
-export const formatUser = (firebaseUser: firebaseUser): User => {
+export function formatUser(firebaseUser: FirebaseUser): User {
   const user = {
-    uid: firebaseUser.uid,
     email: firebaseUser.email,
     name: firebaseUser.displayName,
-    provider: firebaseUser.providerData[0].providerId,
     photoUrl: firebaseUser.photoURL,
+    provider: firebaseUser.providerData[0].providerId,
+    uid: firebaseUser.uid,
   };
 
   return user;
-};
+}

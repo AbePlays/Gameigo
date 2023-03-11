@@ -16,7 +16,7 @@ export const mockUser: User = {
 export const mockValue = {
   changeDisplayName: jest.fn(),
   changePassword: jest.fn(),
-  loading: false,
+  loaded: true,
   loginWithEmailAndPassword: jest.fn(),
   signinWithGithub: jest.fn(),
   signinWithGoogle: jest.fn(),

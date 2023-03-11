@@ -29,7 +29,7 @@ describe('Testing Home Component', () => {
   });
 
   it('should show loader while loading data in context', () => {
-    render(<Home />, { value: { ...mockValue, loading: true } });
+    render(<Home />, { value: { ...mockValue, loaded: false } });
     expect(screen.getByTestId('loader')).toBeInTheDocument();
   });
 

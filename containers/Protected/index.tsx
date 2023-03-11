@@ -11,16 +11,17 @@ interface Props {
 }
 
 const Protected: FunctionComponent<Props> = ({ children, redirectUrl = Routes.AUTH_SCREEN }) => {
-  const { loading, user } = useAuth();
+  const { loaded, user } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
-    if (!loading && !user) router.push(redirectUrl);
-  }, [loading, redirectUrl, router, user]);
+    if (loaded && !user) router.push(redirectUrl);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loaded, redirectUrl, user]);
 
-  if (loading) return <Loader />;
+  if (!loaded) return <Loader />;
 
-  if (!loading && !user) return null;
+  if (loaded && !user) return null;
 
   return <>{children}</>;
 };

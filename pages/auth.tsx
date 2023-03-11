@@ -10,7 +10,7 @@ import { Routes } from 'routes';
 import { Descriptions } from 'seo';
 
 const Auth: FunctionComponent = () => {
-  const { loading, user } = useAuth();
+  const { loaded, user } = useAuth();
   const { colorMode } = useColorMode();
   const router = useRouter();
   const [isLogin, setIsLogin] = useState<boolean>(true);
@@ -26,27 +26,28 @@ const Auth: FunctionComponent = () => {
   const toggle = () => setIsLogin((prev) => !prev);
 
   useEffect(() => {
-    if (!loading && user) {
+    if (loaded && user) {
       router.replace(Routes.HOME_SCREEN);
     }
-  }, [loading, router, user]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loaded, user]);
+
+  if (!loaded) return <Loader />;
+
+  if (loaded && user) return null;
 
   return (
     <Page title={pageTitle} description={Descriptions.Auth}>
-      {loading ? (
-        <Loader />
-      ) : (
-        <Box textAlign="center">
-          {isLogin ? <Login /> : <Signup />}
-          <Text fontWeight="medium" mt={['10', '10', '16']}>
-            {footer.head}
-            <Button variant="link" color={isDarkMode ? 'white' : 'black'} onClick={toggle} fontWeight="bold">
-              {footer.tail}
-            </Button>{' '}
-            instead
-          </Text>
-        </Box>
-      )}
+      <Box textAlign="center">
+        {isLogin ? <Login /> : <Signup />}
+        <Text fontWeight="medium" mt={['10', '10', '16']}>
+          {footer.head}
+          <Button variant="link" color={isDarkMode ? 'white' : 'black'} onClick={toggle} fontWeight="bold">
+            {footer.tail}
+          </Button>{' '}
+          instead
+        </Text>
+      </Box>
     </Page>
   );
 };

@@ -1,5 +1,4 @@
-import { useState, useEffect, useCallback, useContext, createContext, FunctionComponent } from 'react';
-import { useRouter } from 'next/router';
+import { useColorMode, useToast } from '@chakra-ui/react';
 import {
   createUserWithEmailAndPassword,
   GithubAuthProvider,
@@ -9,17 +8,18 @@ import {
   signInWithPopup,
   updatePassword,
   updateProfile,
-  User as firebaseUser,
+  User as FirebaseUser,
 } from 'firebase/auth';
-import { useColorMode, useToast } from '@chakra-ui/react';
+import { useRouter } from 'next/router';
+import { createContext, FunctionComponent, useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import { preload } from 'swr';
 
+import fetcher from '@utils/fetcher';
 import { Routes } from 'routes';
 import { checkUser, createUser } from './db';
 import { auth } from './firebase';
 import { formatUser } from './helper';
 import { AuthContextType, User } from './types';
-import { preload } from 'swr';
-import fetcher from '@utils/fetcher';
 
 interface Props {
   children?: React.ReactNode;
@@ -43,13 +43,14 @@ export const useAuth = (): AuthContextType => {
 const useProvideAuth = () => {
   const { colorMode } = useColorMode();
   const router = useRouter();
-  const [loading, setLoading] = useState<boolean>(false);
+  const [status, setStatus] = useState<'IDLE' | 'PENDING' | 'RESOLVED'>('IDLE');
   const [user, setUser] = useState<User>(null);
   const toast = useToast();
 
   const isDarkMode = colorMode === 'dark';
 
-  const handleFirebaseUser = useCallback(async (firebaseUser: firebaseUser) => {
+  const handleFirebaseUser = useCallback(async (firebaseUser: FirebaseUser) => {
+    setStatus('PENDING');
     let sessionTimeout = null;
     if (firebaseUser) {
       const userData = formatUser(firebaseUser);
@@ -57,10 +58,10 @@ const useProvideAuth = () => {
       if (!user.exists()) {
         await createUser(userData);
       }
-      const res = await firebaseUser.getIdTokenResult();
-      const token = res.token;
+      const idTokenResult = await firebaseUser.getIdTokenResult();
+      const { claims, token } = idTokenResult;
       userData.token = token;
-      const authTime = Number(res.claims.auth_time) * 1000;
+      const authTime = Number(claims.auth_time) * 1000;
       const sessionDuration = 1000 * 60 * 60 * 24; // 24 hours
       const millisecondsUntilExpiration = sessionDuration - (Date.now() - authTime);
       sessionTimeout = setTimeout(() => auth.signOut(), millisecondsUntilExpiration);
@@ -72,39 +73,41 @@ const useProvideAuth = () => {
       sessionTimeout && clearTimeout(sessionTimeout);
       sessionTimeout = null;
     }
-    setLoading(false);
+    setStatus('RESOLVED');
     return firebaseUser;
     // bug in nextjs router
     // https://github.com/vercel/next.js/issues/18127
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const signupWithEmailAndPassword = async (email: string, password: string, name: string) => {
-    setLoading(true);
-    await createUserWithEmailAndPassword(auth, email, password);
-    await updateProfile(auth.currentUser, { displayName: name });
-    return handleFirebaseUser(auth.currentUser);
-  };
+  const signupWithEmailAndPassword = useCallback(
+    async (email: string, password: string, name: string) => {
+      await createUserWithEmailAndPassword(auth, email, password);
+      await updateProfile(auth.currentUser, { displayName: name });
+      return handleFirebaseUser(auth.currentUser);
+    },
+    [handleFirebaseUser]
+  );
 
-  const signinWithGoogle = async () => {
-    setLoading(true);
+  const signinWithGoogle = useCallback(async () => {
     const res = await signInWithPopup(auth, new GoogleAuthProvider());
     return handleFirebaseUser(res.user);
-  };
+  }, [handleFirebaseUser]);
 
-  const signinWithGithub = async () => {
-    setLoading(true);
+  const signinWithGithub = useCallback(async () => {
     const res = await signInWithPopup(auth, new GithubAuthProvider());
     return handleFirebaseUser(res.user);
-  };
+  }, [handleFirebaseUser]);
 
-  const loginWithEmailAndPassword = async (email: string, password: string) => {
-    setLoading(true);
-    const res = await signInWithEmailAndPassword(auth, email, password);
-    return handleFirebaseUser(res.user);
-  };
+  const loginWithEmailAndPassword = useCallback(
+    async (email: string, password: string) => {
+      const res = await signInWithEmailAndPassword(auth, email, password);
+      return handleFirebaseUser(res.user);
+    },
+    [handleFirebaseUser]
+  );
 
-  const signout = async () => {
+  const signout = useCallback(async () => {
     await auth.signOut();
     toast({
       duration: 2000,
@@ -115,37 +118,52 @@ const useProvideAuth = () => {
       variant: isDarkMode ? 'solid' : 'subtle',
     });
     setUser(null);
-  };
+  }, [isDarkMode, toast]);
 
-  const changePassword = async (newPassword: string) => {
+  const changePassword = useCallback(async (newPassword: string) => {
     const user = auth.currentUser;
     return updatePassword(user, newPassword);
-  };
+  }, []);
 
-  const changeDisplayName = async (newName: string) => {
+  const changeDisplayName = useCallback(async (newName: string) => {
     const user = auth.currentUser;
     return updateProfile(user, { displayName: newName });
-  };
+  }, []);
 
   useEffect(() => {
-    setLoading(true);
+    setStatus('PENDING');
     const unsubscribe = onIdTokenChanged(auth, async (user) => {
-      setLoading(true);
-      handleFirebaseUser(user);
+      await handleFirebaseUser(user);
+      setStatus('RESOLVED');
     });
 
     return () => unsubscribe();
   }, [handleFirebaseUser]);
 
-  return {
-    changeDisplayName,
-    changePassword,
-    loading,
-    loginWithEmailAndPassword,
-    signinWithGithub,
-    signinWithGoogle,
-    signout,
-    signupWithEmailAndPassword,
-    user,
-  };
+  const loaded = status === 'RESOLVED';
+
+  return useMemo(
+    () => ({
+      changeDisplayName,
+      changePassword,
+      loaded,
+      loginWithEmailAndPassword,
+      signinWithGithub,
+      signinWithGoogle,
+      signout,
+      signupWithEmailAndPassword,
+      user,
+    }),
+    [
+      changeDisplayName,
+      changePassword,
+      loaded,
+      loginWithEmailAndPassword,
+      signinWithGithub,
+      signinWithGoogle,
+      signout,
+      signupWithEmailAndPassword,
+      user,
+    ]
+  );
 };

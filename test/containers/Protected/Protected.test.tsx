@@ -19,7 +19,7 @@ describe('Testing Protected Container', () => {
     expect(screen.queryByTestId('loader')).not.toBeInTheDocument();
 
     render(<Protected />, {
-      value: { ...mockValue, loading: true },
+      value: { ...mockValue, loaded: false },
     });
     expect(screen.getByTestId('loader')).toBeInTheDocument();
   });
