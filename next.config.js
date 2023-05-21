@@ -7,5 +7,4 @@ module.exports = withBundleAnalyzer({
     domains: ['media.rawg.io'],
     formats: ['image/avif', 'image/webp'],
   },
-  swcMinify: false,
 });
