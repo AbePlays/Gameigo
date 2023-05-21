@@ -15,7 +15,7 @@ exports[`Testing About Page should render about page 1`] = `
           style="opacity: 0; transform: translateY(50px) translateZ(0);"
         >
           <h2
-            class="chakra-heading css-1pi25zo"
+            class="chakra-heading css-65c5cv"
           >
             Small and Crafty
           </h2>
@@ -35,7 +35,7 @@ exports[`Testing About Page should render about page 1`] = `
           style="opacity: 0; transform: translateY(50px) translateZ(0);"
         >
           <h2
-            class="chakra-heading css-1pi25zo"
+            class="chakra-heading css-65c5cv"
           >
             Creator
           </h2>
@@ -55,7 +55,7 @@ exports[`Testing About Page should render about page 1`] = `
           style="opacity: 0; transform: translateY(50px) translateZ(0);"
         >
           <h2
-            class="chakra-heading css-1pi25zo"
+            class="chakra-heading css-65c5cv"
           >
             Contact
           </h2>
@@ -67,20 +67,20 @@ exports[`Testing About Page should render about page 1`] = `
             class="chakra-stack css-1f49ad2"
           >
             <a
-              class="chakra-link css-1xxwiyr"
+              class="chakra-link css-1fl33w"
               href="https://github.com/AbePlays"
               target="_blank"
             >
               Github
             </a>
             <a
-              class="chakra-link css-1xxwiyr"
+              class="chakra-link css-1fl33w"
               href="mailto:abhi.rawat456@gmail.com"
             >
               Mail
             </a>
             <a
-              class="chakra-link css-1xxwiyr"
+              class="chakra-link css-1fl33w"
               href="https://www.linkedin.com/in/abe10/"
               target="_blank"
             >
