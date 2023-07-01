@@ -34,7 +34,7 @@
     "swr": "^2.1.5"
   },
   "devDependencies": {
-    "@next/bundle-analyzer": "^13.4.3",
+    "@next/bundle-analyzer": "^13.4.7",
     "@next/eslint-plugin-next": "^13.4.3",
     "@testing-library/cypress": "^9.0.0",
     "@testing-library/dom": "^9.3.0",
