@@ -1,5 +1,4 @@
 import { extendTheme, ThemeConfig } from '@chakra-ui/react';
-import { mode } from '@chakra-ui/theme-tools';
 
 const config: ThemeConfig = {
   initialColorMode: 'light',
@@ -25,8 +24,8 @@ const theme = extendTheme({
         textDecoration: 'none !important',
       },
       body: {
-        bg: mode('light-bg-primary', 'dark-bg-primary')(props),
-        color: mode('dark-text', 'light-text')(props),
+        bg: props.colorMode === 'dark' ? 'dark-bg-primary' : 'light-bg-primary',
+        color: props.colorMode === 'dark' ? 'light-text' : 'dark-text',
       },
       h4: {
         fontSize: '24px !important',
@@ -37,7 +36,7 @@ const theme = extendTheme({
         fontWeight: 'bold',
       },
       '.adaptive-glass': {
-        background: mode('hsl(0 0% 100% / 50%)', 'hsl(0 0% 30% / 50%)')(props),
+        background: props.colorMode === 'dark' ? 'hsl(0 0% 30% / 50%)' : 'hsl(0 0% 100% / 50%)',
         backdropFilter: 'blur(30px)',
       },
     }),
