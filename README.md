@@ -5,7 +5,7 @@
     <br />
     <br />
     <br />
-    <a href="https://gameigo.vercel.app/about">View App</a>
+    <a href="https://gameigo.vercel.app/about">View the App</a>
     ·
     <a href="https://github.com/AbePlays/Gameigo-NextJS/issues">Report Bug</a>
     ·
