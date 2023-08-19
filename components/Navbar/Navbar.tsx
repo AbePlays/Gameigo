@@ -47,14 +47,9 @@ export default function Navbar() {
             GAMEIGO
           </Link>
         </NextLink>
-        <Stack isInline spacing={['8', '8', '12']} display={['none', 'block']}>
+        <Stack direction="row" spacing={['8', '8', '12']} display={['none', 'flex']}>
           <NextLink href="/search" legacyBehavior passHref>
-            <Link
-              fontWeight="medium"
-              _hover={{
-                opacity: 0.5,
-              }}
-            >
+            <Link fontWeight="medium" _hover={{ opacity: 0.5 }}>
               Search
             </Link>
           </NextLink>
@@ -63,9 +58,7 @@ export default function Navbar() {
               cursor={user ? 'pointer' : 'not-allowed'}
               fontWeight="medium"
               opacity={user ? 1 : 0.5}
-              _hover={{
-                opacity: 0.5,
-              }}
+              _hover={{ opacity: 0.5 }}
             >
               <Tooltip label="Please login first" isDisabled={!!user}>
                 Favorites
@@ -73,17 +66,12 @@ export default function Navbar() {
             </Link>
           </NextLink>
           <NextLink href="/about" legacyBehavior passHref>
-            <Link
-              fontWeight="medium"
-              _hover={{
-                opacity: 0.5,
-              }}
-            >
+            <Link fontWeight="medium" _hover={{ opacity: 0.5 }}>
               About
             </Link>
           </NextLink>
         </Stack>
-        <Stack isInline spacing="3">
+        <Stack direction="row" spacing="3">
           <Button
             aria-label={isDarkMode ? 'Light Mode' : 'Dark Mode'}
             w="4"

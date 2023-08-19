@@ -67,7 +67,7 @@ export default function Profile() {
               )}
             </Formik>
           </Stack>
-          <Stack isInline justify="flex-end" mt="4" spacing="4">
+          <Stack direction="row" justify="flex-end" mt="4" spacing="4">
             <Button colorScheme="red" onClick={signout}>
               Log Out
             </Button>

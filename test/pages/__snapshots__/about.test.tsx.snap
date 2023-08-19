@@ -8,7 +8,7 @@ exports[`Testing About Page should render about page 1`] = `
   >
     <main>
       <div
-        class="chakra-stack css-1cuod9q"
+        class="chakra-stack css-x30n6d"
       >
         <div
           class="css-0"
@@ -64,7 +64,7 @@ exports[`Testing About Page should render about page 1`] = `
             class="css-1asknlk"
           />
           <div
-            class="chakra-stack css-1f49ad2"
+            class="chakra-stack css-16chtdx"
           >
             <a
               class="chakra-link css-1fl33w"

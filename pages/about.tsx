@@ -1,6 +1,5 @@
-import { FunctionComponent } from 'react';
+import { Link, Stack, Text, useColorMode } from '@chakra-ui/react';
 import NextLink from 'next/link';
-import { useColorMode, Link, Stack, Text } from '@chakra-ui/react';
 
 import AboutCard from '@components/AboutCard';
 import Page from '@containers/Page';
@@ -8,7 +7,7 @@ import { FadeUpAnimation } from '@utils/animations';
 import { MotionStack } from '@utils/MotionElements';
 import { Descriptions } from 'seo';
 
-const About: FunctionComponent = () => {
+export default function About() {
   const { colorMode } = useColorMode();
   const isDarkMode = colorMode === 'dark';
 
@@ -52,7 +51,7 @@ const About: FunctionComponent = () => {
           </Text>
         </AboutCard>
         <AboutCard heading="Contact">
-          <Stack isInline spacing="2" justifyContent="center">
+          <Stack direction="row" spacing="2" justifyContent="center">
             <NextLink href="https://github.com/AbePlays" legacyBehavior passHref>
               <Link
                 bg={isDarkMode ? 'light-bg-primary' : 'dark-bg-primary'}
@@ -61,9 +60,7 @@ const About: FunctionComponent = () => {
                 py="2"
                 rounded="md"
                 target="_blank"
-                _hover={{
-                  transform: 'translateY(-2px)',
-                }}
+                _hover={{ transform: 'translateY(-2px)' }}
               >
                 Github
               </Link>
@@ -75,9 +72,7 @@ const About: FunctionComponent = () => {
                 px="4"
                 py="2"
                 rounded="md"
-                _hover={{
-                  transform: 'translateY(-2px)',
-                }}
+                _hover={{ transform: 'translateY(-2px)' }}
               >
                 Mail
               </Link>
@@ -90,9 +85,7 @@ const About: FunctionComponent = () => {
                 py="2"
                 rounded="md"
                 target="_blank"
-                _hover={{
-                  transform: 'translateY(-2px)',
-                }}
+                _hover={{ transform: 'translateY(-2px)' }}
               >
                 LinkedIn
               </Link>
@@ -102,6 +95,4 @@ const About: FunctionComponent = () => {
       </MotionStack>
     </Page>
   );
-};
-
-export default About;
+}

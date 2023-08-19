@@ -123,6 +123,7 @@ export default function GameDetail({ game, screenshots }: Props) {
   }, [router]);
 
   useEffect(() => {
+    window.scrollTo({ top: 0 });
     if (user) {
       checkGame(user.uid, game.id).then((res) => setIsFav(res));
     }

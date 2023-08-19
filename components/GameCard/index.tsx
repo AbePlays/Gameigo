@@ -56,7 +56,7 @@ export default function GameCard({ game, query = '' }: Props) {
       shadow="lg"
       whileHover={{ scale: 1.01 }}
     >
-      <NextLink href={`/game/${game.slug}${queryParam}`} legacyBehavior passHref>
+      <NextLink href={`/game/${game.slug}${queryParam}`} legacyBehavior passHref scroll={false}>
         <Link aria-label={game.name}>
           <Box h="56" overflow="hidden" position="relative">
             <BlurImage alt="game background" fill showBg src={game?.background_image || placeholder} />

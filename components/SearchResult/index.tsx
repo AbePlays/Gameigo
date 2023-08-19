@@ -61,7 +61,7 @@ export default function SearchResult({ onNext, onPrevious, page, query }: Props)
               <GameCard game={game} key={game.id} query={query} />
             ))}
           </Box>
-          <Stack isInline alignItems="center" justifyContent="center" mt="8" spacing="8">
+          <Stack direction="row" alignItems="center" justifyContent="center" mt="8" spacing="8">
             <ButtonWithIcon isDisabled={data.previous === null} title="Previous" width="100px" onClick={onPrevious} />
             <Text as="span" fontSize="lg">
               {page}

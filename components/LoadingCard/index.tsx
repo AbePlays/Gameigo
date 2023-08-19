@@ -1,11 +1,10 @@
-import { FunctionComponent } from 'react';
-import { useColorMode, Box, Skeleton, Stack } from '@chakra-ui/react';
+import { Box, Skeleton, Stack, useColorMode } from '@chakra-ui/react';
 
 interface Props {
   count?: number;
 }
 
-const LoadingCard: FunctionComponent<Props> = ({ count = 1 }) => {
+export default function LoadingCard({ count = 1 }: Props) {
   const { colorMode } = useColorMode();
   const isDarkMode = colorMode === 'dark';
 
@@ -27,7 +26,7 @@ const LoadingCard: FunctionComponent<Props> = ({ count = 1 }) => {
               <Skeleton startColor="gray.300" endColor="gray.500" h="56" />
               <Stack p="4" spacing="4">
                 <Skeleton startColor="gray.300" endColor="gray.500" h="8" />
-                <Stack isInline spacing="4">
+                <Stack direction="row" spacing="4">
                   <Skeleton startColor="gray.300" endColor="gray.500" h="8" w="20" />
                   <Skeleton startColor="gray.300" endColor="gray.500" h="8" w="20" />
                 </Stack>
@@ -39,6 +38,4 @@ const LoadingCard: FunctionComponent<Props> = ({ count = 1 }) => {
         })}
     </>
   );
-};
-
-export default LoadingCard;
+}
