@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import '@testing-library/jest-dom/extend-expect';
+import '@testing-library/jest-dom';
 import dotenv from 'dotenv';
 import 'whatwg-fetch';
 
