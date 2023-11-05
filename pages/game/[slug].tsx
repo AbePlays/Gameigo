@@ -2,7 +2,6 @@ import { FunctionComponent } from 'react';
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next';
 
 import GameDetail from '@containers/GameDetail';
-import { convertToGameInfo } from '@utils/game';
 import { Endpoints } from 'endpoints';
 
 interface Props {
@@ -39,10 +38,7 @@ export const getStaticProps: GetStaticProps = async (context: GetStaticPropsCont
 
   const [gameDetails, screenshots] = await Promise.all([gameDetailsReq, screenshotsReq]);
 
-  const data = {
-    game: convertToGameInfo(gameDetails),
-    screenshots,
-  };
+  const data = { game: gameDetails, screenshots };
 
   return { props: { data } };
 };
