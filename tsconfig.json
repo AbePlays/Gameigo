@@ -28,9 +28,9 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "jest.config.js",
-    "test/__mocks__/fileMock.js",
-    "./jest.setup.js"
+    "vitest.config.ts",
+    "test/setup.tsx",
+    "test/__mocks__/fileMock.js"
   ],
   "exclude": ["cypress", "node_modules", "cypress.config.ts"]
 }

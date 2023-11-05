@@ -1,17 +1,19 @@
+import { afterEach, describe, expect, it, vi } from 'vitest';
+
 import ProfilePage from '../../pages/profile';
 import { mockPassword, mockTitle } from '../mockData';
 import { fireEvent, mockUser, mockValue, render, screen, waitFor } from '../test-utils';
 
-const mockPush = jest.fn();
-jest.mock('next/router', () => ({
-  useRouter: jest.fn().mockImplementation(() => ({
+const mockPush = vi.fn();
+vi.mock('next/router', () => ({
+  useRouter: vi.fn().mockImplementation(() => ({
     push: mockPush,
   })),
 }));
 
 describe('Testing Profile Page', () => {
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('should redirect to auth page if user is not logged in', () => {

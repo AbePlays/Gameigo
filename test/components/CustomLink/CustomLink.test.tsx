@@ -1,3 +1,5 @@
+import { describe, expect, it } from 'vitest';
+
 import CustomLink from '@components/CustomLink';
 import { mockLink, mockTitle } from '../../mockData';
 import { render, screen } from '../../test-utils';

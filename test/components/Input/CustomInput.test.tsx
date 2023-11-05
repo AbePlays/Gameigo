@@ -1,5 +1,6 @@
 import { Form, Formik } from 'formik';
 import { Button } from '@chakra-ui/react';
+import { describe, expect, it, vi } from 'vitest';
 
 import { CustomInput } from '@components/Input';
 import { render, screen, fireEvent, waitFor } from '../../test-utils';
@@ -7,8 +8,8 @@ import { render, screen, fireEvent, waitFor } from '../../test-utils';
 const placeholder = 'placeholder';
 const type = 'text';
 const invalidEmail = 'abc';
-const mockValidate = jest.fn();
-const mockOnSubmit = jest.fn();
+const mockValidate = vi.fn();
+const mockOnSubmit = vi.fn();
 
 const renderForm = (validate = mockValidate) => {
   return render(
@@ -42,7 +43,7 @@ describe('Testing CustomInput Component', () => {
   });
 
   it('should check error text below form input', async () => {
-    const validate = jest.fn().mockImplementation(() => {
+    const validate = vi.fn().mockImplementation(() => {
       return 'Invalid Email';
     });
     renderForm(validate);

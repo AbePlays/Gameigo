@@ -1,11 +1,13 @@
+import { afterEach, describe, expect, it, vi } from 'vitest';
+
 import Home from '../../pages/index';
 import { Routes } from '../../routes';
-import { fireEvent, mockValue, mockUser, render, screen } from '../test-utils';
+import { fireEvent, mockUser, mockValue, render, screen } from '../test-utils';
 
-const mockPush = jest.fn();
-const mockReplace = jest.fn();
-jest.mock('next/router', () => ({
-  useRouter: jest.fn().mockImplementation(() => ({
+const mockPush = vi.fn();
+const mockReplace = vi.fn();
+vi.mock('next/router', () => ({
+  useRouter: vi.fn().mockImplementation(() => ({
     push: mockPush,
     replace: mockReplace,
   })),
@@ -13,7 +15,7 @@ jest.mock('next/router', () => ({
 
 describe('Testing Home Component', () => {
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('should check CTA', async () => {

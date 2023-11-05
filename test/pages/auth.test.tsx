@@ -1,8 +1,10 @@
+import { describe, expect, it, vi } from 'vitest';
+
 import Auth from '../../pages/auth';
 import { fireEvent, mockUser, mockValue, render, screen } from '../test-utils';
 
-const mockReplace = jest.fn();
-jest.mock('next/router', () => ({
+const mockReplace = vi.fn();
+vi.mock('next/router', () => ({
   useRouter: () => ({
     replace: mockReplace,
   }),

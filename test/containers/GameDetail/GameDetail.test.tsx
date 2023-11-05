@@ -1,24 +1,26 @@
+import { afterAll, afterEach, beforeAll, describe, expect, it, vi } from 'vitest';
+
 import GameDetail from '@containers/GameDetail';
 import { addGame, checkGame } from '@lib/db';
 import { mockGameInfo, mockScreenshots } from '../../mockData';
 import { fireEvent, mockUser, mockValue, render, screen, waitFor } from '../../test-utils';
 
-const mockBack = jest.fn();
-jest.mock('next/router', () => ({
-  useRouter: jest.fn().mockImplementation(() => ({
+const mockBack = vi.fn();
+vi.mock('next/router', () => ({
+  useRouter: vi.fn().mockImplementation(() => ({
     back: mockBack,
-    beforePopState: jest.fn(),
+    beforePopState: vi.fn(),
   })),
 }));
 
-jest.mock('@lib/db', () => ({
-  addGame: jest.fn(),
-  checkGame: jest.fn().mockResolvedValue(false),
-  deleteGame: jest.fn(),
+vi.mock('@lib/db', () => ({
+  addGame: vi.fn(),
+  checkGame: vi.fn().mockResolvedValue(false),
+  deleteGame: vi.fn(),
 }));
 
 const originalClipboard = global.navigator.clipboard;
-const mockCopyToClipboard = jest.fn();
+const mockCopyToClipboard = vi.fn();
 
 describe('Testing GameDetail Container', () => {
   beforeAll(() => {
@@ -30,7 +32,7 @@ describe('Testing GameDetail Container', () => {
   });
 
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('should check game title', () => {

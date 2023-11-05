@@ -1,7 +1,7 @@
 import { ChakraProvider } from '@chakra-ui/react';
 import { User } from '@lib/types';
-import '@testing-library/jest-dom';
 import { render, RenderResult } from '@testing-library/react';
+import { vi } from 'vitest';
 
 import { AuthContext } from '../lib/auth';
 
@@ -14,14 +14,14 @@ export const mockUser: User = {
 };
 
 export const mockValue = {
-  changeDisplayName: jest.fn(),
-  changePassword: jest.fn(),
+  changeDisplayName: vi.fn(),
+  changePassword: vi.fn(),
   loaded: true,
-  loginWithEmailAndPassword: jest.fn(),
-  signinWithGithub: jest.fn(),
-  signinWithGoogle: jest.fn(),
-  signout: jest.fn(),
-  signupWithEmailAndPassword: jest.fn(),
+  loginWithEmailAndPassword: vi.fn(),
+  signinWithGithub: vi.fn(),
+  signinWithGoogle: vi.fn(),
+  signout: vi.fn(),
+  signupWithEmailAndPassword: vi.fn(),
   user: null,
 };
 

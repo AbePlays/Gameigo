@@ -1,6 +1,8 @@
+import { describe, expect, it } from 'vitest';
+
 import HomePage, { getStaticProps } from 'pages/home';
-import { render, screen } from '../test-utils';
 import { mockGame } from '../mockData';
+import { render, screen } from '../test-utils';
 
 describe('Testing Home Page', () => {
   it('should display the correct title', () => {

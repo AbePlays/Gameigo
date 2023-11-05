@@ -1,3 +1,5 @@
+import { describe, expect, it } from 'vitest';
+
 import LoadingCard from '@components/LoadingCard';
 import { render, screen } from '../../test-utils';
 

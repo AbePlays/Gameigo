@@ -1,3 +1,5 @@
+import { describe, expect, it } from 'vitest';
+
 import SearchResult from '@components/SearchResult';
 import { render, screen, waitFor } from '../../test-utils';
 

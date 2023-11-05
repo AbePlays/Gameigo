@@ -1,4 +1,6 @@
 import AboutCard from '@components/AboutCard';
+import { describe, expect, it } from 'vitest';
+
 import { mockHeading, mockTitle } from '../../mockData';
 import { render, screen } from '../../test-utils';
 

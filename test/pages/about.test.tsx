@@ -1,3 +1,5 @@
+import { describe, expect, it } from 'vitest';
+
 import AboutPage from 'pages/about';
 import { render } from '../test-utils';
 

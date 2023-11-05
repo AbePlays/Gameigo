@@ -16,7 +16,7 @@ const BlurImage: FunctionComponent<ImageProps & { showBg?: boolean }> = ({
     <Image
       alt={alt}
       className={className}
-      onLoadingComplete={() => setLoading(false)}
+      onLoad={() => setLoading(false)}
       placeholder={shouldBlur ? 'blur' : 'empty'}
       src={src}
       style={{
