@@ -1,10 +1,12 @@
+import { afterEach, describe, expect, it, vi } from 'vitest';
+
 import { Login } from '@containers/Auth';
 import { mockEmail, mockPassword } from '../../mockData';
 import { fireEvent, mockValue, render, screen, waitFor } from '../../test-utils';
 
 describe('Testing Login Container', () => {
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('should check login heading', () => {

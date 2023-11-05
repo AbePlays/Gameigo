@@ -1,10 +1,12 @@
+import { describe, expect, it, vi } from 'vitest';
+
 import FavoritesPage from 'pages/favorites';
 import { mockUser, mockValue, render, screen, waitFor } from '../test-utils';
 
 // TODO: Improve this test
 
-const mockPush = jest.fn();
-jest.mock('next/router', () => ({
+const mockPush = vi.fn();
+vi.mock('next/router', () => ({
   useRouter: () => ({
     push: mockPush,
   }),

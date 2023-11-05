@@ -1,3 +1,5 @@
+import { describe, expect, it } from 'vitest';
+
 import GameContent from '@components/GameContent';
 import { mockText, mockTitle } from '../../mockData';
 import { render, screen } from '../../test-utils';

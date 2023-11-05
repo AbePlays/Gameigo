@@ -1,3 +1,5 @@
+import { describe, expect, it } from 'vitest';
+
 import Navbar from '@components/Navbar';
 import { fireEvent, render, screen } from '../../test-utils';
 

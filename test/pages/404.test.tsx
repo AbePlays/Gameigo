@@ -1,8 +1,10 @@
+import { describe, expect, it, vi } from 'vitest';
+
 import ErrorPage from 'pages/404';
 import { fireEvent, render, screen } from '../test-utils';
 
-const mockReplace = jest.fn();
-jest.mock('next/router', () => ({
+const mockReplace = vi.fn();
+vi.mock('next/router', () => ({
   useRouter: () => ({
     replace: mockReplace,
   }),

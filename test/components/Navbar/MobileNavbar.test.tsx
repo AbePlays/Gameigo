@@ -1,9 +1,11 @@
+import { describe, expect, it, vi } from 'vitest';
+
 import MobileNavbar from '@components/Navbar/MobileNavbar';
 import { fireEvent, render, screen } from '../../test-utils';
 
-const mockPush = jest.fn();
-jest.mock('next/router', () => ({
-  useRouter: jest.fn().mockImplementation(() => ({
+const mockPush = vi.fn();
+vi.mock('next/router', () => ({
+  useRouter: vi.fn().mockImplementation(() => ({
     push: mockPush,
   })),
 }));
@@ -16,7 +18,7 @@ describe('Testing MobileNavbar Component', () => {
   });
 
   it('should check onClick prop', () => {
-    const mockOnClick = jest.fn();
+    const mockOnClick = vi.fn();
     render(<MobileNavbar onClick={mockOnClick} />);
     const linkEl = screen.getByRole('link', { name: /Search/i });
     fireEvent.click(linkEl);

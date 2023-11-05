@@ -1,17 +1,19 @@
+import { afterEach, describe, expect, it, vi } from 'vitest';
+
 import Protected from '@containers/Protected';
 import { Routes } from 'routes';
 import { mockUser, mockValue, render, screen } from '../../test-utils';
 
-const mockPush = jest.fn();
-jest.mock('next/router', () => ({
-  useRouter: jest.fn().mockImplementation(() => ({
+const mockPush = vi.fn();
+vi.mock('next/router', () => ({
+  useRouter: vi.fn().mockImplementation(() => ({
     push: mockPush,
   })),
 }));
 
 describe('Testing Protected Container', () => {
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('should show loader if loading is true inside context', () => {

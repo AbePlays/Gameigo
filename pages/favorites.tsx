@@ -1,4 +1,5 @@
 import { Box, Heading, useColorMode, useToast } from '@chakra-ui/react';
+import { useEffect } from 'react';
 import useSWR from 'swr';
 
 import GameCard from '@components/GameCard';
@@ -20,16 +21,18 @@ export default function Favorites() {
 
   const { data, error } = useSWR<Game[]>(['/api/favorites', token], fetcher);
 
-  if (error) {
-    toast({
-      duration: 2000,
-      isClosable: true,
-      position: 'top-right',
-      status: 'error',
-      title: 'Search Failed.',
-      variant: isDarkMode ? 'solid' : 'subtle',
-    });
-  }
+  useEffect(() => {
+    if (error) {
+      toast({
+        duration: 2000,
+        isClosable: true,
+        position: 'top-right',
+        status: 'error',
+        title: 'Search Failed.',
+        variant: isDarkMode ? 'solid' : 'subtle',
+      });
+    }
+  }, [error]);
 
   return (
     <ProtectedRoute>

@@ -1,3 +1,5 @@
+import { describe, expect, it } from 'vitest';
+
 import NoData from '@components/NoData';
 import { mockTitle } from '../../mockData';
 import { render, screen } from '../../test-utils';

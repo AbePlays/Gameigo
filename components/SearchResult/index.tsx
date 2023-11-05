@@ -29,16 +29,20 @@ export default function SearchResult({ onNext, onPrevious, page, query }: Props)
     window.scrollTo({ behavior: 'smooth', top: 0 });
   }, [page]);
 
-  if (error) {
-    toast({
-      duration: 2000,
-      isClosable: true,
-      position: 'top-right',
-      status: 'error',
-      title: 'Search Failed.',
-      variant: isDarkMode ? 'solid' : 'subtle',
-    });
+  useEffect(() => {
+    if (error) {
+      toast({
+        duration: 2000,
+        isClosable: true,
+        position: 'top-right',
+        status: 'error',
+        title: 'Search Failed.',
+        variant: isDarkMode ? 'solid' : 'subtle',
+      });
+    }
+  }, [error]);
 
+  if (error) {
     return null;
   }
 

@@ -1,4 +1,6 @@
 import BoxWithDivider from '@components/BoxWithDivider';
+import { describe, expect, it } from 'vitest';
+
 import { mockTitle } from '../../mockData';
 import { render, screen } from '../../test-utils';
 

@@ -1,3 +1,5 @@
+import { describe, expect, it } from 'vitest';
+
 import Store from '@components/Store';
 import { mockTitle, mockLink } from 'test/mockData';
 import { render, screen } from '../../test-utils';

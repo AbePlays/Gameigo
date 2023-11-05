@@ -1,8 +1,10 @@
+import { describe, expect, it, vi } from 'vitest';
+
 import { BrandButton } from '@components/Buttons';
 import { mockTitle } from '../../mockData';
 import { fireEvent, render, screen } from '../../test-utils';
 
-const mockOnClick = jest.fn();
+const mockOnClick = vi.fn();
 
 const renderButton = (icon = null) => {
   return render(<BrandButton icon={icon} title={mockTitle} onClick={mockOnClick} />);
