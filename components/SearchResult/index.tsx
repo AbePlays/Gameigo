@@ -40,7 +40,7 @@ export default function SearchResult({ onNext, onPrevious, page, query }: Props)
         variant: isDarkMode ? 'solid' : 'subtle',
       });
     }
-  }, [error]);
+  }, [error, isDarkMode, toast]);
 
   if (error) {
     return null;

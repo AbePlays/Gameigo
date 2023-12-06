@@ -1,7 +1,7 @@
-import { afterAll, afterEach, beforeAll, vi } from 'vitest';
-import { cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom/vitest';
+import { cleanup } from '@testing-library/react';
 import dotenv from 'dotenv';
+import { afterAll, afterEach, beforeAll } from 'vitest';
 import 'whatwg-fetch';
 
 import { server } from './server/server';
