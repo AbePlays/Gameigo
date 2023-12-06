@@ -24,13 +24,6 @@
     "typeRoots": ["node_modules/@types", "types"],
     "incremental": true
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "vitest.config.ts",
-    "test/setup.tsx",
-    "test/__mocks__/fileMock.js"
-  ],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["cypress", "node_modules", "cypress.config.ts"]
 }
