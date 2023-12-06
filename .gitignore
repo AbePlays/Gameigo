@@ -38,3 +38,5 @@ yarn-error.log*
 
 .eslintcache
 tsconfig.tsbuildinfo
+# Sentry Config File
+.sentryclirc

@@ -1,17 +1,18 @@
 import { useColorMode, useToast } from '@chakra-ui/react';
+import * as Sentry from '@sentry/nextjs';
 import {
-  createUserWithEmailAndPassword,
+  User as FirebaseUser,
   GithubAuthProvider,
   GoogleAuthProvider,
+  createUserWithEmailAndPassword,
   onIdTokenChanged,
   signInWithEmailAndPassword,
   signInWithPopup,
   updatePassword,
   updateProfile,
-  User as FirebaseUser,
 } from 'firebase/auth';
 import { useRouter } from 'next/router';
-import { createContext, FunctionComponent, useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import { FunctionComponent, createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { preload } from 'swr';
 
 import fetcher from '@utils/fetcher';
@@ -67,8 +68,12 @@ const useProvideAuth = () => {
       sessionTimeout = setTimeout(() => auth.signOut(), millisecondsUntilExpiration);
       setUser(userData);
       preload(['/api/favorites', token], fetcher);
+      Sentry.setUser({ id: userData.uid, email: userData.email });
+      Sentry.setContext('userData', userData);
       router.replace(Routes.HOME_SCREEN);
     } else {
+      Sentry.setUser(null);
+      Sentry.setContext('userData', null);
       setUser(null);
       sessionTimeout && clearTimeout(sessionTimeout);
       sessionTimeout = null;
