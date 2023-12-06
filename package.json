@@ -53,19 +53,12 @@
     "eslint-import-resolver-alias": "^1.1.2",
     "eslint-plugin-cypress": "^2.15.1",
     "eslint-plugin-react": "^7.33.2",
-    "identity-obj-proxy": "^3.0.0",
     "jsdom": "^22.1.0",
     "msw": "^2.0.3",
-    "node-modules-regexp": "^1.0.0",
     "prettier": "^3.0.3",
     "typescript": "^5.2.2",
     "vite-tsconfig-paths": "^4.2.1",
     "vitest": "^0.34.6",
     "whatwg-fetch": "^3.6.19"
-  },
-  "babel": {
-    "presets": [
-      "next/babel"
-    ]
   }
 }

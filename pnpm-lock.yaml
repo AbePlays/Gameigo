@@ -100,18 +100,12 @@ devDependencies:
   eslint-plugin-react:
     specifier: ^7.33.2
     version: 7.33.2(eslint@8.53.0)
-  identity-obj-proxy:
-    specifier: ^3.0.0
-    version: 3.0.0
   jsdom:
     specifier: ^22.1.0
     version: 22.1.0
   msw:
     specifier: ^2.0.3
     version: 2.0.3(typescript@5.2.2)
-  node-modules-regexp:
-    specifier: ^1.0.0
-    version: 1.0.0
   prettier:
     specifier: ^3.0.3
     version: 3.0.3
@@ -5413,10 +5407,6 @@ packages:
       duplexer: 0.1.2
     dev: true
 
-  /harmony-reflect@1.6.2:
-    resolution: {integrity: sha512-HIp/n38R9kQjDEziXyDTuW3vvoxxyxjxFzXLrBr18uB47GnSt+G9D29fqrpM5ZkspMcPICud3XsBJQ4Y2URg8g==}
-    dev: true
-
   /has-bigints@1.0.2:
     resolution: {integrity: sha512-tSvCKtBr9lkF0Ex0aQiP9N+OpV4zi2r/Nee5VkRDbaqv35RLYMzbwQfFSZZH0kR+Rd6302UJZ2p/bJCEoR3VoQ==}
     dev: true
@@ -5539,13 +5529,6 @@ packages:
   /idb@7.1.1:
     resolution: {integrity: sha512-gchesWBzyvGHRO9W8tzUWFDycow5gwjvFKfyV9FF32Y7F50yZMp7mP+T2mJIWFx49zicqyC4uefHM17o6xKIVQ==}
     dev: false
-
-  /identity-obj-proxy@3.0.0:
-    resolution: {integrity: sha512-00n6YnVHKrinT9t0d9+5yZC6UBNJANpYEQvL2LlX6Ab9lnmxzIRcEmTPuyGScvl1+jKuCICX1Z0Ab1pPKKdikA==}
-    engines: {node: '>=4'}
-    dependencies:
-      harmony-reflect: 1.6.2
-    dev: true
 
   /ieee754@1.2.1:
     resolution: {integrity: sha512-dcyqhDvX1C46lXZcVqCpK+FtMRQVdIMN6/Df5js2zouUsqG7I6sFxitIC+7KYK29KdXOLHdu9zL4sFnoVQnqaA==}
@@ -6583,11 +6566,6 @@ packages:
     resolution: {integrity: sha512-dPEtOeMvF9VMcYV/1Wb8CPoVAXtp6MKMlcbAt4ddqmGqUJ6fQZFXkNZNkNlfevtNkGtaSoXf/vNNNSvgrdXwtA==}
     engines: {node: '>= 6.13.0'}
     dev: false
-
-  /node-modules-regexp@1.0.0:
-    resolution: {integrity: sha512-JMaRS9L4wSRIR+6PTVEikTrq/lMGEZR43a48ETeilY0Q0iMwVnccMFrUM1k+tNzmYuIU0Vh710bCUqHX+/+ctQ==}
-    engines: {node: '>=0.10.0'}
-    dev: true
 
   /node-releases@2.0.13:
     resolution: {integrity: sha512-uYr7J37ae/ORWdZeQ1xxMJe3NtdmqMC/JZK+geofDrkLUApKRHPd18/TxtBOJ4A0/+uUIliorNrfYV6s1b02eQ==}
