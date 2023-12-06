@@ -4,7 +4,6 @@ import { mockGame, mockGameInfo, mockScreenshots } from '../mockData';
 
 const handlers = [
   http.get('/api/search', () => {
-    console.log('YOOOOOOOOOOOOOOOOOO');
     return HttpResponse.json({
       count: 123,
       next: 'some_url',

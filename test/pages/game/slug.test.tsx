@@ -10,7 +10,7 @@ vi.mock('next/router', () => ({
   })),
 }));
 
-describe.skip('Testing Game Details Page', () => {
+describe('Testing Game Details Page', () => {
   it('should check game title', () => {
     render(<GameDetailContainer data={{ game: mockGameInfo, screenshots: mockScreenshots }} />);
 

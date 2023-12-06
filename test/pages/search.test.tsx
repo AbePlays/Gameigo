@@ -11,7 +11,7 @@ vi.mock('next/router', () => ({
   })),
 }));
 
-describe.skip('Testing Search Page', () => {
+describe('Testing Search Page', () => {
   it('should check search input', async () => {
     render(<SearchPage />);
     const searchInput = screen.getByPlaceholderText(/search games/i);
