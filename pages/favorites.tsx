@@ -32,7 +32,7 @@ export default function Favorites() {
         variant: isDarkMode ? 'solid' : 'subtle',
       });
     }
-  }, [error]);
+  }, [error, isDarkMode, toast]);
 
   return (
     <ProtectedRoute>
