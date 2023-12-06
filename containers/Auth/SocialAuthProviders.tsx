@@ -1,5 +1,6 @@
-import { FunctionComponent, ReactNode } from 'react';
 import { useColorMode, useToast } from '@chakra-ui/react';
+import * as Sentry from '@sentry/nextjs';
+import { FunctionComponent, ReactNode } from 'react';
 
 import { BrandButton } from '@components/Buttons';
 import { IconGithub, IconGoogle } from '@icons';
@@ -34,6 +35,12 @@ const SocialAuthProviders: FunctionComponent = () => {
         title: 'Signin Failed.',
         variant: isDarkMode ? 'solid' : 'subtle',
       });
+      Sentry.captureException(e, {
+        level: 'error',
+        extra: {
+          message: 'Error while signing in with Google',
+        },
+      });
       console.log(`Error while signing in with Google ${e}`);
     }
   };
@@ -57,6 +64,12 @@ const SocialAuthProviders: FunctionComponent = () => {
         status: 'error',
         title: 'Signin Failed.',
         variant: isDarkMode ? 'solid' : 'subtle',
+      });
+      Sentry.captureException(e, {
+        level: 'error',
+        extra: {
+          message: 'Error while signing in with Github',
+        },
       });
       console.log(`Error while signing in with Github ${e}`);
     }
