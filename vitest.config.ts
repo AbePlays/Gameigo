@@ -5,6 +5,10 @@ import { defineConfig } from 'vitest/config';
 export default defineConfig({
   plugins: [react(), tsconfigPaths()],
   test: {
+    coverage: {
+      enabled: true,
+      provider: 'v8',
+    },
     environment: 'jsdom',
     setupFiles: './test/setup',
   },
