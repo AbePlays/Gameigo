@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
-import AboutPage from 'pages/about';
-import { render } from '../test-utils';
+import { render } from 'test/test-utils';
+import AboutPage from '../page';
 
 describe('Testing About Page', () => {
   it('should render about page', () => {
