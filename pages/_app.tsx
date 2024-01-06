@@ -4,7 +4,7 @@ import { AnimatePresence } from 'framer-motion';
 import { ChakraProvider } from '@chakra-ui/react';
 
 import Layout from '@components/Layout';
-import Navbar from '@components/Navbar';
+import { Navbar } from '@components/Navbar';
 import { AuthProvider } from '@lib/auth';
 import 'styles/global.css';
 import theme from 'styles/theme';

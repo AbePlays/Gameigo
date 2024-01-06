@@ -62,7 +62,7 @@ export default function SearchResult({ onNext, onPrevious, page, query }: Props)
         <>
           <Box className="grid" maxWidth="1120px" mt="0" mx="auto" px="4">
             {results.map((game) => (
-              <GameCard game={game} key={game.id} query={query} />
+              <GameCard game={game} key={game.id} />
             ))}
           </Box>
           <Stack direction="row" alignItems="center" justifyContent="center" mt="8" spacing="8">

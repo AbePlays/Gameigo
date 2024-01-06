@@ -1,79 +1,47 @@
-import { Box, Divider, Flex, Heading, Link, Stack, Text, useColorMode } from '@chakra-ui/react';
-import NextLink from 'next/link';
+import { Flex, Heading, Text } from '@radix-ui/themes';
 
 import BlurImage from '@components/BlurImage';
 import { formatDate } from '@utils/date';
-import { MotionBox } from '@utils/MotionElements';
 import placeholder from 'public/images/placeholder.jpeg';
-import Label from '../Label';
 
 interface Props {
   game: Game;
-  query?: string;
 }
 
-export default function GameCard({ game, query = '' }: Props) {
-  const { colorMode } = useColorMode();
+export default function GameCard({ game }: Props) {
+  // const { colorMode } = useColorMode();
+  const colorMode: string = 'light';
 
   const isDarkMode = colorMode === 'dark';
 
-  const renderPlatforms = () => {
-    return game?.parent_platforms?.map((item) => <Label title={item.platform.name} key={item.platform.id} />);
-  };
-
-  const renderReleasedDate = () => {
-    return (
-      <Text fontWeight="semibold">
-        Release Date:
-        <Text as="span" fontWeight="normal" ml="2">
-          {game?.released ? <time dateTime={game.released}>{formatDate(game.released)}</time> : 'TBA'}
-        </Text>
-      </Text>
-    );
-  };
-
-  const renderGenres = () => {
-    return (
-      <Text fontWeight="semibold">
-        Genres:
-        <Text as="span" fontWeight="normal" ml="2">
-          {game?.genres?.map((genre) => genre.name).join(', ') || 'N/A'}
-        </Text>
-      </Text>
-    );
-  };
-
-  const queryParam = query.length > 0 ? `?searchTerm=${query}` : '';
-
   return (
-    <MotionBox
-      as="article"
-      bg={isDarkMode ? 'dark-bg-secondary' : 'light-bg-secondary'}
-      cursor="pointer"
-      h="full"
-      overflow="hidden"
-      rounded="lg"
-      shadow="lg"
-      whileHover={{ scale: 1.01 }}
-    >
-      <NextLink href={`/game/${game.slug}${queryParam}`} legacyBehavior passHref scroll={false}>
-        <Link aria-label={game.name}>
-          <Box h="56" overflow="hidden" position="relative">
-            <BlurImage alt="game background" fill showBg src={game?.background_image || placeholder} />
-          </Box>
-          <Box p="4">
-            <Heading fontSize="2xl" mb="1">
-              {game.name}
-            </Heading>
-            <Flex wrap="wrap">{renderPlatforms()}</Flex>
-            <Stack mt="5">
-              {renderReleasedDate()}
-              <Divider />
-              {renderGenres()}
-            </Stack>
-          </Box>
-        </Link>
-      </NextLink>
-    </MotionBox>
+    <div className={`${isDarkMode ? 'dark-bg-secondary' : 'light-bg-secondary'} shadow-lg rounded-lg overflow-hidden`}>
+      <div className="relative h-56">
+        <BlurImage alt="game background" fill showBg src={game?.background_image || placeholder} />
+      </div>
+      <div className="p-4">
+        <Heading mb="1">{game.name}</Heading>
+
+        <Flex wrap="wrap">
+          {game?.parent_platforms?.map((item) => <Text key={item.platform.id}>{item.platform.name}</Text>)}
+        </Flex>
+
+        <div className="mt-5">
+          <div>
+            <Text className="font-semibold">Release Date:</Text>
+            <Text ml="2">
+              {game?.released ? <time dateTime={game.released}>{formatDate(game.released)}</time> : 'TBA'}
+            </Text>
+          </div>
+
+          <hr className="my-2" />
+
+          <div>
+            <Text className="font-semibold">Genres:</Text>
+            <Text ml="2">{game?.genres?.map((genre) => genre.name).join(', ') || 'N/A'}</Text>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }

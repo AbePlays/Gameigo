@@ -1,94 +1,75 @@
-import { Avatar, Box, Button, Flex, Icon, Link, Stack, Tooltip, useColorMode } from '@chakra-ui/react';
 import { Cross1Icon, HamburgerMenuIcon, MoonIcon, SunIcon } from '@radix-ui/react-icons';
-import { AnimatePresence } from 'framer-motion';
+import { Avatar, Flex, IconButton, Link, Tooltip } from '@radix-ui/themes';
 import NextLink from 'next/link';
-import { useState } from 'react';
 
-import { useAuth } from '@lib/auth';
-import MobileNavbar from './MobileNavbar';
+function Navbar() {
+  // const { user } = useAuth();
+  const user = null;
+  // const { colorMode, toggleColorMode } = useColorMode();
+  const colorMode: string = 'light';
 
-const iconSize = 4;
-
-export default function Navbar() {
-  const { user } = useAuth();
-  const { colorMode, toggleColorMode } = useColorMode();
-  const [showMobileNav, setShowMobileNav] = useState(false);
+  // const [showMobileNav, setShowMobileNav] = useState(false);
+  const showMobileNav = false;
 
   const isDarkMode = colorMode === 'dark';
 
-  const toggleNav = () => setShowMobileNav((prev) => !prev);
+  // const toggleNav = () => setShowMobileNav((prev) => !prev);
 
   return (
-    <Box className="adaptive-glass" position="sticky" shadow="sm" top="0" zIndex="999">
-      <Flex alignItems="center" justifyContent="space-between" maxW="container.xl" minH="14" mx="auto" p="4">
-        <Box
+    <div className="adaptive-glass sticky shadow-sm top-0 z-10">
+      <Flex align="center" justify="between" mx="auto" p="4">
+        <IconButton
           aria-label="Menu"
           aria-expanded={showMobileNav ? 'true' : 'false'}
-          as="button"
-          display={['flex', 'none']}
-          onClick={toggleNav}
+          className="flex !sm:hidden"
+          // onClick={toggleNav}
         >
-          {showMobileNav ? (
-            <Icon as={Cross1Icon} w={iconSize} h={iconSize} />
-          ) : (
-            <Icon as={HamburgerMenuIcon} w={iconSize} h={iconSize} />
-          )}
-        </Box>
-        <NextLink href="/home" legacyBehavior passHref>
-          <Link
-            fontWeight="semibold"
-            letterSpacing="widest"
-            textDecoration="none"
-            position={['absolute', 'relative']}
-            right={['50%', '0']}
-            top={['5', '0']}
-            transform={['translate(50%, 0)', 'none']}
-          >
-            GAMEIGO
+          {showMobileNav ? <Cross1Icon /> : <HamburgerMenuIcon />}
+        </IconButton>
+
+        <Link asChild className="font-semibold tracking-widest">
+          <NextLink href="/home">GAMEIGO</NextLink>
+        </Link>
+
+        <div className="hidden sm:flex sm:flex-row gap-8 sm:gap-12">
+          <Link asChild className="font-medium hover:opacity-50">
+            <NextLink href="/search">Search</NextLink>
           </Link>
-        </NextLink>
-        <Stack direction="row" spacing={['8', '8', '12']} display={['none', 'flex']}>
-          <NextLink href="/search" legacyBehavior passHref>
-            <Link fontWeight="medium" _hover={{ opacity: 0.5 }}>
-              Search
-            </Link>
-          </NextLink>
-          <NextLink href={user ? '/favorites' : '#'} legacyBehavior passHref>
+
+          <Tooltip content="Please login first" disableHoverableContent={user}>
             <Link
-              cursor={user ? 'pointer' : 'not-allowed'}
-              fontWeight="medium"
-              opacity={user ? 1 : 0.5}
-              _hover={{ opacity: 0.5 }}
+              asChild
+              className={`${
+                user ? 'cursor-pointer opacity-100' : 'cursor-not-allowed opacity-50'
+              } font-medium hover:opacity-50`}
             >
-              <Tooltip label="Please login first" isDisabled={!!user}>
-                Favorites
-              </Tooltip>
+              <NextLink href={user ? '/favorites' : '#'}>Favorites</NextLink>
             </Link>
-          </NextLink>
-          <NextLink href="/about" legacyBehavior passHref>
-            <Link fontWeight="medium" _hover={{ opacity: 0.5 }}>
-              About
-            </Link>
-          </NextLink>
-        </Stack>
-        <Stack direction="row" spacing="3">
-          <Button
+          </Tooltip>
+
+          <Link asChild className="font-medium hover:opacity-50">
+            <NextLink href="/about">About</NextLink>
+          </Link>
+        </div>
+
+        <Flex gap="3">
+          <IconButton
             aria-label={isDarkMode ? 'Light Mode' : 'Dark Mode'}
-            w="4"
-            h="8"
-            onClick={toggleColorMode}
-            variant="outline"
+            // onClick={toggleColorMode}
           >
-            <Icon as={isDarkMode ? SunIcon : MoonIcon} />
-          </Button>
-          <NextLink href={user ? '/profile' : '/auth'} legacyBehavior passHref>
-            <Link aria-label="Profile" rounded="full">
-              <Avatar size="sm" src={user?.photoUrl} />
-            </Link>
-          </NextLink>
-        </Stack>
+            {isDarkMode ? <SunIcon /> : <MoonIcon />}
+          </IconButton>
+
+          <Link asChild>
+            <NextLink href={user ? '/profile' : '/auth'}>
+              <Avatar fallback="U" radius="full" size="2" src={user?.photoUrl} />
+            </NextLink>
+          </Link>
+        </Flex>
       </Flex>
-      <AnimatePresence mode="wait">{showMobileNav ? <MobileNavbar onClick={toggleNav} /> : null}</AnimatePresence>
-    </Box>
+      {/* <AnimatePresence mode="wait">{showMobileNav ? <MobileNavbar onClick={toggleNav} /> : null}</AnimatePresence> */}
+    </div>
   );
 }
+
+export { Navbar };
