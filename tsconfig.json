@@ -22,8 +22,10 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "typeRoots": ["node_modules/@types", "types"],
-    "incremental": true
+    "incremental": true,
+    "plugins": [{ "name": "next" }],
+    "strictNullChecks": false
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "postcss.config.js"],
   "exclude": ["cypress", "node_modules", "cypress.config.ts"]
 }
