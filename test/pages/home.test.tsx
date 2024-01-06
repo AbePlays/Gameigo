@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import HomePage, { getStaticProps } from 'pages/home';
+import HomePage, { getStaticProps } from 'app/home/page';
 import { mockGame } from '../mockData';
 import { render, screen } from '../test-utils';
 
