@@ -23,10 +23,9 @@ const BlurImage: FunctionComponent<ImageProps & { showBg?: boolean }> = ({
       src={src}
       style={{
         backgroundColor: showBg ? '#9ca3af' : 'transparent',
-        filter: loading ? 'blur(15px) grayscale(100%)' : 'blur(0) grayscale(0)',
+        filter: loading ? 'blur(10px) grayscale(100%)' : 'blur(0) grayscale(0)',
         objectFit: 'cover',
         objectPosition: 'center',
-        scale: loading ? 1.1 : 1,
         transition: 'all 0.7s ease-in-out',
         ...style,
       }}

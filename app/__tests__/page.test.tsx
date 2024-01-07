@@ -1,8 +1,8 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
-import Home from '../../pages/index';
+import Home from '../page';
 import { Routes } from '../../routes';
-import { fireEvent, mockUser, mockValue, render, screen } from '../test-utils';
+import { fireEvent, mockUser, mockValue, render, screen } from 'test/test-utils';
 
 const mockPush = vi.fn();
 const mockReplace = vi.fn();
