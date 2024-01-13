@@ -1,11 +1,12 @@
-import { Box, Skeleton, Stack, useColorMode } from '@chakra-ui/react';
+import { Flex, Skeleton } from '@radix-ui/themes';
 
 interface Props {
   count?: number;
 }
 
 export default function LoadingCard({ count = 1 }: Props) {
-  const { colorMode } = useColorMode();
+  // const { colorMode } = useColorMode();
+  const colorMode: string = 'light';
   const isDarkMode = colorMode === 'dark';
 
   return (
@@ -14,26 +15,25 @@ export default function LoadingCard({ count = 1 }: Props) {
         .fill(0)
         .map((_, index) => {
           return (
-            <Box
+            <div
               aria-hidden="true"
-              bg={isDarkMode ? 'dark-bg-secondary' : 'light-bg-secondary'}
+              className={`${
+                isDarkMode ? 'dark-bg-secondary' : 'light-bg-secondary'
+              } overflow-hidden rounded-lg shadow-lg`}
               data-testid="loading-card"
               key={index}
-              overflow="hidden"
-              rounded="lg"
-              shadow="lg"
             >
-              <Skeleton startColor="gray.300" endColor="gray.500" h="56" />
-              <Stack p="4" spacing="4">
-                <Skeleton startColor="gray.300" endColor="gray.500" h="8" />
-                <Stack direction="row" spacing="4">
-                  <Skeleton startColor="gray.300" endColor="gray.500" h="8" w="20" />
-                  <Skeleton startColor="gray.300" endColor="gray.500" h="8" w="20" />
-                </Stack>
-                <Skeleton startColor="gray.300" endColor="gray.500" h="6" />
-                <Skeleton startColor="gray.300" endColor="gray.500" h="6" />
-              </Stack>
-            </Box>
+              <Skeleton className="h-56" />
+              <div className="p-4 space-y-4">
+                <Skeleton className="h-8" />
+                <Flex gap="4">
+                  <Skeleton className="h-8 w-20" />
+                  <Skeleton className="h-8 w-20" />
+                </Flex>
+                <Skeleton className="h-6" />
+                <Skeleton className="h-6" />
+              </div>
+            </div>
           );
         })}
     </>
