@@ -3,6 +3,7 @@ import { Flex, Heading, Text } from '@radix-ui/themes';
 import BlurImage from '@components/BlurImage';
 import { formatDate } from '@utils/date';
 import placeholder from 'public/images/placeholder.jpeg';
+import { Game } from 'schemas/game';
 
 interface Props {
   game: Game;
@@ -15,7 +16,11 @@ export default function GameCard({ game }: Props) {
   const isDarkMode = colorMode === 'dark';
 
   return (
-    <div className={`${isDarkMode ? 'dark-bg-secondary' : 'light-bg-secondary'} shadow-lg rounded-lg overflow-hidden`}>
+    <div
+      className={`${
+        isDarkMode ? 'dark-bg-secondary' : 'light-bg-secondary'
+      } shadow-lg h-full rounded-lg overflow-hidden`}
+    >
       <div className="relative h-56">
         <BlurImage alt="game background" fill showBg src={game?.background_image || placeholder} />
       </div>

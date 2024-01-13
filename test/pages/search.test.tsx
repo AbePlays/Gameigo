@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
 
-import SearchPage from '../../pages/search';
+import SearchPage from '../../app/search/page';
 import { mockGame, mockText } from '../mockData';
 import { fireEvent, render, screen, waitFor } from '../test-utils';
 
