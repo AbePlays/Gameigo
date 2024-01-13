@@ -15,6 +15,13 @@ export const GameSchema = object({
   tba: boolean(),
 });
 
+export const GameDetailSchema = object({
+  ...GameSchema.entries,
+  description: string(),
+  publishers: nullish(array(object({ id: number(), name: string() }))),
+  website: string(),
+});
+
 export const GameSearchSchema = object({
   count: number(),
   next: nullish(string()),
@@ -22,5 +29,12 @@ export const GameSearchSchema = object({
   results: array(GameSchema),
 });
 
+export const GameScreenshotSchema = object({
+  count: number(),
+  results: array(object({ id: number(), image: string() })),
+});
+
 export type Game = Input<typeof GameSchema>;
+export type GameDetail = Input<typeof GameDetailSchema>;
 export type GameSearchResult = Input<typeof GameSearchSchema>;
+export type GameScreenshot = Input<typeof GameScreenshotSchema>;
