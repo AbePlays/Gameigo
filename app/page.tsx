@@ -3,7 +3,7 @@ import { Button, Container, Heading, Text } from '@radix-ui/themes';
 import { Metadata } from 'next';
 
 import BlurImage from '@components/BlurImage';
-import Loader from '@components/Loader';
+import { Loader } from '@components/Loader';
 import easy from 'public/images/easy.png';
 import free from 'public/images/free.png';
 import hero from 'public/images/hero.png';
