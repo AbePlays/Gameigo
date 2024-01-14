@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
-import SocialAuthProviders from '@containers/Auth/SocialAuthProviders';
+import { SocialAuthProviders } from 'app/auth/social-auth-providers';
 import { fireEvent, mockValue, render, screen, waitFor } from '../../test-utils';
 
 describe('Testing SocialAuthProviders Container', () => {

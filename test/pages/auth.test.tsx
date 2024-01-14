@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
 
-import Auth from '../../pages/auth';
+import Auth from '../../app/auth/page';
 import { fireEvent, mockUser, mockValue, render, screen } from '../test-utils';
 
 const mockReplace = vi.fn();
