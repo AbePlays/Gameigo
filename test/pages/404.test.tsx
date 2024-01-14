@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
 
-import ErrorPage from 'pages/404';
+import ErrorPage from 'app/not-found';
 import { fireEvent, render, screen } from '../test-utils';
 
 const mockReplace = vi.fn();
