@@ -3,7 +3,7 @@ import { User } from '@lib/types';
 import { render, RenderResult } from '@testing-library/react';
 import { vi } from 'vitest';
 
-import { AuthContext } from '../lib/auth';
+import { AuthContext } from '../libs/auth';
 
 export const mockUser: User = {
   uid: 'some uid',

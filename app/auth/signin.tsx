@@ -2,19 +2,19 @@
 
 import { ChevronRightIcon } from '@radix-ui/react-icons';
 import { Box, Button, Grid, Heading, Text, TextFieldInput } from '@radix-ui/themes';
-
 import { useFormState, useFormStatus } from 'react-dom';
-import { signupUser } from './actions';
-import { INITIAL_SIGNUP_STATE } from './constant';
+
+import { signinUser } from './actions';
+import { INITIAL_SIGNIN_STATE } from './constant';
 import { SocialAuthProviders } from './social-auth-providers';
 
-function Signup() {
-  const [state, formAction] = useFormState(signupUser, INITIAL_SIGNUP_STATE);
+function Signin() {
+  const [state, formAction] = useFormState(signinUser, INITIAL_SIGNIN_STATE);
 
   return (
     <Box className="text-center">
       <Heading className="font-extrabold" size="8">
-        Create Your Account
+        Signin to Your Account
       </Heading>
       <Text as="p" className="text-xl font-medium max-w-xl" mt="8" mx="auto">
         Choose from 30,000+ games around the world with new addition every few weeks
@@ -24,16 +24,7 @@ function Signup() {
         <form action={formAction}>
           <Grid gap="4">
             <Grid gap="2">
-              <TextFieldInput name="name" placeholder="Enter your full name" type="text" />
-              {state.errors.name && (
-                <Text align="left" color="red" size="2">
-                  {state.errors.name}
-                </Text>
-              )}
-            </Grid>
-
-            <Grid gap="2">
-              <TextFieldInput name="email" placeholder="Enter your email" type="email" />
+              <TextFieldInput name="email" type="email" placeholder="Enter your email" />
               {state.errors.email && (
                 <Text align="left" color="red" size="2">
                   {state.errors.email}
@@ -42,19 +33,13 @@ function Signup() {
             </Grid>
 
             <Grid gap="2">
-              <TextFieldInput name="password" placeholder="Enter your password" type="password" />
+              <TextFieldInput name="password" type="password" placeholder="Enter your password" />
               {state.errors.password && (
                 <Text align="left" color="red" size="2">
                   {state.errors.password}
                 </Text>
               )}
             </Grid>
-
-            {state.errors.form && (
-              <Text align="left" color="red" size="2">
-                {state.errors.form}
-              </Text>
-            )}
 
             <Submit />
           </Grid>
@@ -72,9 +57,10 @@ function Submit() {
 
   return (
     <Button disabled={pending} type="submit">
-      {pending ? 'Creating your account...' : 'Create Your Account'} <ChevronRightIcon />
+      {pending ? 'Signing in...' : 'Signin to Your Account'}
+      <ChevronRightIcon />
     </Button>
   );
 }
 
-export { Signup };
+export { Signin };
