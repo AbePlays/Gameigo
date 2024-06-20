@@ -4,12 +4,13 @@ import { ChevronRightIcon } from '@radix-ui/react-icons';
 import { Box, Button, Grid, Heading, Text, TextFieldInput } from '@radix-ui/themes';
 
 import { useFormState, useFormStatus } from 'react-dom';
-import { signupUser } from './actions';
+import { signinUsingProvider, signupUser } from './actions';
 import { INITIAL_SIGNUP_STATE } from './constant';
 import { SocialAuthProviders } from './social-auth-providers';
 
 function Signup() {
   const [state, formAction] = useFormState(signupUser, INITIAL_SIGNUP_STATE);
+  const [, providerAction] = useFormState(signinUsingProvider, null);
 
   return (
     <Box className="text-center">
@@ -59,8 +60,11 @@ function Signup() {
             <Submit />
           </Grid>
         </form>
-        <Grid className="content-start" gap="4">
-          <SocialAuthProviders />
+
+        <Grid asChild className="content-start" gap="4">
+          <form action={providerAction}>
+            <SocialAuthProviders />
+          </form>
         </Grid>
       </Grid>
     </Box>

@@ -1,4 +1,4 @@
-import { email, minLength, object, string } from 'valibot';
+import { email, minLength, object, picklist, string } from 'valibot';
 
 export const SignupSchema = object({
   email: string([email()]),
@@ -9,4 +9,8 @@ export const SignupSchema = object({
 export const SigninSchema = object({
   email: string([email()]),
   password: string([minLength(6, 'The password is too short.')]),
+});
+
+export const ProviderSchema = object({
+  provider: picklist(['google', 'github']),
 });
