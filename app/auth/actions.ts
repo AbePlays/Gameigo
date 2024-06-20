@@ -5,7 +5,7 @@ import { redirect } from 'next/navigation';
 import { ValiError, flatten, parse, string } from 'valibot';
 
 import { createClient } from '@libs/supabase/server';
-import { SigninSchema, SignupSchema } from '@schemas/auth';
+import { ProviderSchema, SigninSchema, SignupSchema } from '@schemas/auth';
 import { INITIAL_SIGNIN_STATE, INITIAL_SIGNUP_STATE } from './constant';
 
 function transformErrorMessages(errors: { [key: string]: string[] }): Record<string, string> {
@@ -58,6 +58,48 @@ export async function signinUser(
   }
 }
 
+export async function signinUsingProvider(_, formData: FormData) {
+  const cookieStore = cookies();
+  const supabase = createClient(cookieStore);
+
+  const fields = Object.fromEntries(formData.entries());
+  const result = parse(ProviderSchema, fields);
+
+  const redirectTo = `${
+    process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://gameigo.vercel.app'
+  }/auth/callback`;
+
+  if (result.provider === 'google') {
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: { redirectTo },
+    });
+
+    if (error) {
+      console.log(error);
+      return { errors: { form: error.message } };
+    }
+
+    if (data.url) {
+      redirect(data.url);
+    }
+  } else if (result.provider === 'github') {
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: 'github',
+      options: { redirectTo },
+    });
+
+    if (error) {
+      console.log(error);
+      return { errors: { form: error.message } };
+    }
+
+    if (data.url) {
+      redirect(data.url);
+    }
+  }
+}
+
 export async function signupUser(
   _: typeof INITIAL_SIGNUP_STATE,
   formData: FormData
@@ -96,4 +138,11 @@ export async function signupUser(
 
     return { errors: { ...INITIAL_SIGNUP_STATE.errors, form: 'Something went wrong' }, fields };
   }
+}
+
+export async function signout() {
+  const cookieStore = cookies();
+  const supabase = createClient(cookieStore);
+  await supabase.auth.signOut();
+  redirect('/home');
 }

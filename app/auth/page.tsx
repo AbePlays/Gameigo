@@ -1,12 +1,12 @@
-import { Container, Link, Text } from '@radix-ui/themes';
+import { Button, Container, Link, Text } from '@radix-ui/themes';
 import { type Metadata } from 'next';
 import { cookies } from 'next/headers';
 import NextLink from 'next/link';
-import { redirect } from 'next/navigation';
 
-import { createClient } from 'libs/supabase/server';
 import { Signin } from 'app/auth/signin';
 import { Signup } from 'app/auth/signup';
+import { createClient } from 'libs/supabase/server';
+import { signout } from './actions';
 
 export const metadata: Metadata = {
   title: 'Gameigo | Auth',
@@ -20,7 +20,11 @@ export default async function AuthPage({ searchParams }: { searchParams: Record<
   const { data } = await supabase.auth.getUser();
 
   if (data.user) {
-    redirect('/home');
+    return (
+      <form action={signout}>
+        <Button type="submit">Logout</Button>
+      </form>
+    );
   }
 
   const { type = '' } = searchParams;
