@@ -1,9 +1,12 @@
 import { ArrowLeftIcon, Share1Icon } from '@radix-ui/react-icons';
 import { Button, Container, Flex, Heading, Link, Text } from '@radix-ui/themes';
+import { cookies } from 'next/headers';
 import { parse } from 'valibot';
 
 import BlurImage from '@components/BlurImage';
+import { createClient } from '@libs/supabase/server';
 import { GameDetail, GameDetailSchema, GameScreenshot, GameScreenshotSchema } from 'schemas/game';
+import Favorite from './favorite';
 
 export default async function GameDetailPage({ params }: { params: Record<string, string> }) {
   const { slug } = params;
@@ -28,15 +31,32 @@ export default async function GameDetailPage({ params }: { params: Record<string
     console.error(JSON.stringify(e));
   }
 
+  const cookieStore = cookies();
+  const supabase = createClient(cookieStore);
+  const { data } = await supabase.auth.getUser();
+  let isFavorite = false;
+
+  if (data.user) {
+    const { data: dbData } = await supabase.from('user_data').select('favorites').eq('user_id', data.user.id).single();
+
+    if (dbData) {
+      isFavorite = dbData.favorites.includes(gameDetails.id);
+    }
+  }
+
   return (
     <Container>
       <Flex align="center" justify="between">
         <Button aria-label="Back" title="Back">
           <ArrowLeftIcon />
         </Button>
-        <Button aria-label="Share" title="Share">
-          <Share1Icon />
-        </Button>
+
+        <Flex gap="4">
+          {data.user ? <Favorite gameDetails={gameDetails} isFavorite={isFavorite} userId={data.user.id} /> : null}
+          <Button aria-label="Share" title="Share">
+            <Share1Icon />
+          </Button>
+        </Flex>
       </Flex>
 
       <div className="mt-16 text-center">
