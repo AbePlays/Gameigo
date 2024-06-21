@@ -1,7 +1,7 @@
 'use client';
 
 import { ChevronRightIcon } from '@radix-ui/react-icons';
-import { Box, Button, Grid, Heading, Text, TextFieldInput } from '@radix-ui/themes';
+import { Box, Button, Grid, Heading, Text, TextField } from '@radix-ui/themes';
 
 import { useFormState, useFormStatus } from 'react-dom';
 import { signinUsingProvider, signupUser } from './actions';
@@ -25,7 +25,7 @@ function Signup() {
         <form action={formAction}>
           <Grid gap="4">
             <Grid gap="2">
-              <TextFieldInput name="name" placeholder="Enter your full name" type="text" />
+              <TextField.Root name="name" placeholder="Enter your full name" type="text" />
               {state.errors.name && (
                 <Text align="left" color="red" size="2">
                   {state.errors.name}
@@ -34,7 +34,7 @@ function Signup() {
             </Grid>
 
             <Grid gap="2">
-              <TextFieldInput name="email" placeholder="Enter your email" type="email" />
+              <TextField.Root name="email" placeholder="Enter your email" type="email" />
               {state.errors.email && (
                 <Text align="left" color="red" size="2">
                   {state.errors.email}
@@ -43,7 +43,7 @@ function Signup() {
             </Grid>
 
             <Grid gap="2">
-              <TextFieldInput name="password" placeholder="Enter your password" type="password" />
+              <TextField.Root name="password" placeholder="Enter your password" type="password" />
               {state.errors.password && (
                 <Text align="left" color="red" size="2">
                   {state.errors.password}

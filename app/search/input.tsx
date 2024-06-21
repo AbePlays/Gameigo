@@ -1,7 +1,7 @@
 'use client';
 
 import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
-import { TextFieldInput, TextFieldRoot, TextFieldSlot } from '@radix-ui/themes';
+import { TextField } from '@radix-ui/themes';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 function Input() {
@@ -23,17 +23,17 @@ function Input() {
 
   return (
     <form onSubmit={handleSearch}>
-      <TextFieldRoot size="3">
-        <TextFieldSlot>
+      <TextField.Root
+        size="3"
+        defaultValue={searchParams.get('query')?.toString()}
+        name="query"
+        placeholder="Search Games"
+        type="search"
+      >
+        <TextField.Slot>
           <MagnifyingGlassIcon color="gray" height={20} width={20} />
-        </TextFieldSlot>
-        <TextFieldInput
-          defaultValue={searchParams.get('query')?.toString()}
-          name="query"
-          placeholder="Search Games"
-          type="search"
-        />
-      </TextFieldRoot>
+        </TextField.Slot>
+      </TextField.Root>
     </form>
   );
 }
