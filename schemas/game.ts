@@ -1,4 +1,4 @@
-import { Input, array, boolean, nullish, number, object, string } from 'valibot';
+import { InferInput, array, boolean, nullish, number, object, string } from 'valibot';
 
 export const GameSchema = object({
   background_image: nullish(string()),
@@ -34,7 +34,7 @@ export const GameScreenshotSchema = object({
   results: array(object({ id: number(), image: string() })),
 });
 
-export type Game = Input<typeof GameSchema>;
-export type GameDetail = Input<typeof GameDetailSchema>;
-export type GameSearchResult = Input<typeof GameSearchSchema>;
-export type GameScreenshot = Input<typeof GameScreenshotSchema>;
+export type Game = InferInput<typeof GameSchema>;
+export type GameDetail = InferInput<typeof GameDetailSchema>;
+export type GameSearchResult = InferInput<typeof GameSearchSchema>;
+export type GameScreenshot = InferInput<typeof GameScreenshotSchema>;

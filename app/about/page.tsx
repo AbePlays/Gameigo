@@ -1,7 +1,8 @@
-import { Container, Flex, Link, Text } from '@radix-ui/themes';
+import { ArrowTopRightIcon } from '@radix-ui/react-icons';
+import { Container, Flex, Grid, Link, Text } from '@radix-ui/themes';
 import { type Metadata } from 'next';
 
-import { AboutCard } from 'app/about/about-card';
+import { AboutCard } from './about-card';
 
 export const metadata: Metadata = {
   title: 'About | Gameigo',
@@ -11,8 +12,8 @@ export const metadata: Metadata = {
 
 export default function About() {
   return (
-    <Container size="2">
-      <div className="grid gap-12">
+    <Container py="8" px="4" size="2">
+      <Grid gap="8">
         <AboutCard heading="Small and Crafty">
           <Text as="p" className="!leading-relaxed text-justify" style={{ textAlignLast: 'center' }}>
             Gameigo is a video game discovery platform where you can keep all your games in one unified profile and
@@ -30,13 +31,27 @@ export default function About() {
         </AboutCard>
 
         <AboutCard heading="Contact">
-          <Flex gap="2" justify="center">
-            <Link href="https://github.com/AbePlays">Github</Link>
-            <Link href="mailto:abhi.rawat456@gmail.com">Mail</Link>
-            <Link href="https://www.linkedin.com/in/abe10">LinkedIn</Link>
+          <Flex gap="8" justify="center">
+            <Flex align="center" asChild gap="1">
+              <Link color="gray" href="https://github.com/AbePlays" size="4">
+                Github <ArrowTopRightIcon />
+              </Link>
+            </Flex>
+
+            <Flex align="center" asChild gap="1">
+              <Link color="gray" href="mailto:abhi.rawat456@gmail.com" size="4">
+                Mail <ArrowTopRightIcon />
+              </Link>
+            </Flex>
+
+            <Flex align="center" asChild gap="1">
+              <Link color="gray" href="https://www.linkedin.com/in/abe10" size="4">
+                LinkedIn <ArrowTopRightIcon />
+              </Link>
+            </Flex>
           </Flex>
         </AboutCard>
-      </div>
+      </Grid>
     </Container>
   );
 }

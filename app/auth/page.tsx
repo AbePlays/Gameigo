@@ -1,7 +1,7 @@
-import { Button, Container, Link, Text } from '@radix-ui/themes';
+import { Button, Container, Text } from '@radix-ui/themes';
 import { type Metadata } from 'next';
 import { cookies } from 'next/headers';
-import NextLink from 'next/link';
+import Link from 'next/link';
 
 import { Signin } from 'app/auth/signin';
 import { Signup } from 'app/auth/signup';
@@ -36,14 +36,15 @@ export default async function AuthPage({ searchParams }: { searchParams: Record<
   };
 
   return (
-    <Container className="text-center">
+    <Container p={{ initial: '4', sm: '8' }}>
       {isLogin ? <Signin /> : <Signup />}
 
-      <Text className="mt-10 font-medium">
+      <Text align="center" as="p" mt="9">
         {footer.head}
-        <Link asChild>
-          <NextLink href={`/auth?type=${isLogin ? 'signup' : 'signin'}`}>{footer.tail}</NextLink>
-        </Link>
+        <Link className="font-bold" href={`/auth?type=${isLogin ? 'signup' : 'signin'}`}>
+          {footer.tail}
+        </Link>{' '}
+        instead
       </Text>
     </Container>
   );

@@ -1,22 +1,24 @@
-import { Cross1Icon, HamburgerMenuIcon, MoonIcon, SunIcon } from '@radix-ui/react-icons';
-import { Avatar, Flex, IconButton, Link, Tooltip } from '@radix-ui/themes';
-import NextLink from 'next/link';
+import { createClient } from '@libs/supabase/server';
+import { Cross1Icon, HamburgerMenuIcon } from '@radix-ui/react-icons';
+import { Avatar, Container, Flex, IconButton, Text, Tooltip } from '@radix-ui/themes';
+import { cookies } from 'next/headers';
+import Link from 'next/link';
 
-function Navbar() {
-  // const { user } = useAuth();
-  const user = null;
-  // const { colorMode, toggleColorMode } = useColorMode();
-  const colorMode: string = 'light';
+import { ThemeSwitcher } from './ThemeSwitcher';
+
+async function Navbar() {
+  const cookieStore = cookies();
+  const supabase = createClient(cookieStore);
+  const { data } = await supabase.auth.getUser();
+  const { user } = data;
 
   // const [showMobileNav, setShowMobileNav] = useState(false);
   const showMobileNav = false;
 
-  const isDarkMode = colorMode === 'dark';
-
   // const toggleNav = () => setShowMobileNav((prev) => !prev);
 
   return (
-    <div className="adaptive-glass sticky shadow-sm top-0 z-10">
+    <Container className="shadow z-10 bg-[--color-background]" maxWidth="100rem" position="sticky" top="0">
       <Flex align="center" justify="between" mx="auto" p="4">
         <IconButton
           aria-label="Menu"
@@ -27,48 +29,39 @@ function Navbar() {
           {showMobileNav ? <Cross1Icon /> : <HamburgerMenuIcon />}
         </IconButton>
 
-        <Link asChild className="font-semibold tracking-widest">
-          <NextLink href="/home">GAMEIGO</NextLink>
+        <Link className="font-semibold tracking-widest" href="/home">
+          GAMEIGO
         </Link>
 
         <div className="hidden sm:flex sm:flex-row gap-8 sm:gap-12">
-          <Link asChild className="font-medium hover:opacity-50">
-            <NextLink href="/search">Search</NextLink>
+          <Link className="font-medium hover:opacity-50" href="/search">
+            Search
           </Link>
 
-          <Tooltip content="Please login first" disableHoverableContent={user}>
-            <Link
-              asChild
-              className={`${
-                user ? 'cursor-pointer opacity-100' : 'cursor-not-allowed opacity-50'
-              } font-medium hover:opacity-50`}
-            >
-              <NextLink href={user ? '/favorites' : '#'}>Favorites</NextLink>
+          {user ? (
+            <Link className="cursor-pointer opacity-100 font-medium hover:opacity-50" href="/favorites">
+              Favorites
             </Link>
-          </Tooltip>
+          ) : (
+            <Tooltip content="Please login first">
+              <Text className="opacity-50 font-medium hover:opacity-50">Favorites</Text>
+            </Tooltip>
+          )}
 
-          <Link asChild className="font-medium hover:opacity-50">
-            <NextLink href="/about">About</NextLink>
+          <Link className="font-medium hover:opacity-50" href="/about">
+            About
           </Link>
         </div>
 
         <Flex gap="3">
-          <IconButton
-            aria-label={isDarkMode ? 'Light Mode' : 'Dark Mode'}
-            // onClick={toggleColorMode}
-          >
-            {isDarkMode ? <SunIcon /> : <MoonIcon />}
-          </IconButton>
-
-          <Link asChild>
-            <NextLink href={user ? '/profile' : '/auth'}>
-              <Avatar fallback="U" radius="full" size="2" src={user?.photoUrl} />
-            </NextLink>
+          <ThemeSwitcher />
+          <Link href={user ? '/auth' : '/auth'}>
+            <Avatar fallback={user ? user.user_metadata.name[0] : 'U'} radius="full" size="2" />
           </Link>
         </Flex>
       </Flex>
       {/* <AnimatePresence mode="wait">{showMobileNav ? <MobileNavbar onClick={toggleNav} /> : null}</AnimatePresence> */}
-    </div>
+    </Container>
   );
 }
 

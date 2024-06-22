@@ -45,7 +45,7 @@ export default async function GameDetailPage({ params }: { params: Record<string
   }
 
   return (
-    <Container>
+    <Container p={{ initial: '4', sm: '8' }}>
       <Flex align="center" justify="between">
         <Button aria-label="Back" title="Back">
           <ArrowLeftIcon />

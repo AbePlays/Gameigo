@@ -1,7 +1,7 @@
 'use client';
 
 import { ChevronRightIcon } from '@radix-ui/react-icons';
-import { Box, Button, Grid, Heading, Text, TextField } from '@radix-ui/themes';
+import { Box, Button, Flex, Grid, Heading, Text, TextField } from '@radix-ui/themes';
 import { useFormState, useFormStatus } from 'react-dom';
 
 import { signinUsingProvider, signinUser } from './actions';
@@ -13,19 +13,19 @@ function Signin() {
   const [, providerAction] = useFormState(signinUsingProvider, null);
 
   return (
-    <Box className="text-center">
-      <Heading className="font-extrabold" size="8">
+    <Box>
+      <Heading align="center" size="9" weight="bold">
         Signin to Your Account
       </Heading>
-      <Text as="p" className="text-xl font-medium max-w-xl" mt="8" mx="auto">
+      <Text align="center" as="p" className="max-w-xl" mt="9" mx="auto" size="5">
         Choose from 30,000+ games around the world with new addition every few weeks
       </Text>
 
-      <Grid columns="2" gap="4">
+      <Grid columns={{ initial: '1', sm: '2' }} gap="4" mt="9" mx="auto" maxWidth="50rem">
         <form action={formAction}>
           <Grid gap="4">
             <Grid gap="2">
-              <TextField.Root name="email" type="email" placeholder="Enter your email" />
+              <TextField.Root name="email" type="email" placeholder="Enter your email" size="3" />
               {state.errors.email && (
                 <Text align="left" color="red" size="2">
                   {state.errors.email}
@@ -34,7 +34,7 @@ function Signin() {
             </Grid>
 
             <Grid gap="2">
-              <TextField.Root name="password" type="password" placeholder="Enter your password" />
+              <TextField.Root name="password" type="password" placeholder="Enter your password" size="3" />
               {state.errors.password && (
                 <Text align="left" color="red" size="2">
                   {state.errors.password}
@@ -46,7 +46,7 @@ function Signin() {
           </Grid>
         </form>
 
-        <Grid asChild className="content-start" gap="4">
+        <Grid asChild className="content-start" gap="4" mt={{ initial: '9', sm: '0' }}>
           <form action={providerAction}>
             <SocialAuthProviders />
           </form>
@@ -60,10 +60,12 @@ function Submit() {
   const { pending } = useFormStatus();
 
   return (
-    <Button disabled={pending} type="submit">
-      {pending ? 'Signing in...' : 'Signin to Your Account'}
-      <ChevronRightIcon />
-    </Button>
+    <Flex asChild justify="between">
+      <Button disabled={pending} type="submit" size="3">
+        {pending ? 'Signing in...' : 'Signin to Your Account'}
+        <ChevronRightIcon />
+      </Button>
+    </Flex>
   );
 }
 

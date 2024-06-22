@@ -1,4 +1,4 @@
-import { Flex, Heading, Text } from '@radix-ui/themes';
+import { Badge, Box, Flex, Grid, Text } from '@radix-ui/themes';
 
 import BlurImage from '@components/BlurImage';
 import { formatDate } from '@utils/date';
@@ -16,37 +16,47 @@ export default function GameCard({ game }: Props) {
   const isDarkMode = colorMode === 'dark';
 
   return (
-    <div
-      className={`${
-        isDarkMode ? 'dark-bg-secondary' : 'light-bg-secondary'
-      } shadow-lg h-full rounded-lg overflow-hidden`}
+    <Box
+      className={`${isDarkMode ? 'dark-bg-secondary' : 'light-bg-secondary'} shadow-lg rounded-lg group`}
+      overflow="hidden"
+      height="100%"
     >
-      <div className="relative h-56">
-        <BlurImage alt="game background" fill showBg src={game?.background_image || placeholder} />
-      </div>
-      <div className="p-4">
-        <Heading mb="1">{game.name}</Heading>
+      <Box height="14rem" overflow="hidden" position="relative">
+        <BlurImage
+          alt="game background"
+          className="group-hover:scale-105"
+          fill
+          showBg
+          src={game?.background_image || placeholder}
+        />
+      </Box>
+      <Box p="4">
+        <Text size="6" weight="bold">
+          {game.name}
+        </Text>
 
-        <Flex wrap="wrap">
-          {game?.parent_platforms?.map((item) => <Text key={item.platform.id}>{item.platform.name}</Text>)}
+        <Flex wrap="wrap" gap="2" mt="2">
+          {game.parent_platforms.map((item) => (
+            <Badge color="gray" highContrast key={item.platform.id} size="3" variant="solid">
+              {item.platform.name}
+            </Badge>
+          ))}
         </Flex>
 
-        <div className="mt-5">
-          <div>
-            <Text className="font-semibold">Release Date:</Text>
-            <Text ml="2">
-              {game?.released ? <time dateTime={game.released}>{formatDate(game.released)}</time> : 'TBA'}
-            </Text>
-          </div>
+        <Grid mt="4" gap="2">
+          <Flex gap="2">
+            <Text weight="medium">Release Date:</Text>
+            <Text weight="light">{formatDate(game.released)}</Text>
+          </Flex>
 
-          <hr className="my-2" />
+          <hr />
 
-          <div>
-            <Text className="font-semibold">Genres:</Text>
-            <Text ml="2">{game?.genres?.map((genre) => genre.name).join(', ') || 'N/A'}</Text>
-          </div>
-        </div>
-      </div>
-    </div>
+          <Flex gap="2">
+            <Text weight="medium">Genres:</Text>
+            <Text weight="light">{game.genres?.map((genre) => genre.name).join(', ') || 'N/A'}</Text>
+          </Flex>
+        </Grid>
+      </Box>
+    </Box>
   );
 }

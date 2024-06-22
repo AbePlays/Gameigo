@@ -1,4 +1,4 @@
-import { Container, Heading, Text } from '@radix-ui/themes';
+import { Box, Container, Heading, Text } from '@radix-ui/themes';
 import { Metadata } from 'next';
 import { Suspense } from 'react';
 
@@ -18,24 +18,24 @@ export default function SearchPage({ searchParams }: { searchParams: Record<stri
   const { page = '', query = '' } = searchParams;
 
   return (
-    <div className="relative">
+    <Box position="relative">
       {/* Background Image */}
-      <div className="overflow-hidden relative h-[200px] sm:h-[300px]">
+      <Box height={{ initial: '200px', sm: '300px' }} overflow="hidden" position="relative">
         <BlurImage alt="" fill style={{ objectPosition: 'top' }} showBg src={heroBg} />
-      </div>
+      </Box>
 
       {/* Intro Text */}
-      <div className="light-text text-white text-center px-4 absolute w-full left-0 top-8 sm:top-16">
-        <Heading as="h1" size="8">
+      <Box className="text-white" left="0" position="absolute" px="4" top={{ initial: '6', sm: '9' }} width="100%">
+        <Heading align="center" as="h1" size="8">
           Search Gameigo
         </Heading>
-        <Text as="p" className="!mt-1 !sm:mt-4 font-medium sm:text-lg">
+        <Text align="center" as="p" mt={{ initial: '1', sm: '4' }} size={{ initial: '3', sm: '4' }} weight="medium">
           Choose from 30,000+ games with new addition every few weeks.
         </Text>
-      </div>
+      </Box>
 
       {/* Search Input */}
-      <Container className="-translate-y-5 px-4 mx-auto" size="2">
+      <Container className="-translate-y-6 px-4 mx-auto" size="2">
         <Input />
       </Container>
 
@@ -47,6 +47,6 @@ export default function SearchPage({ searchParams }: { searchParams: Record<stri
           </Suspense>
         </Container>
       ) : null}
-    </div>
+    </Box>
   );
 }

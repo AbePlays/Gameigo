@@ -1,8 +1,8 @@
-import { Container, Heading, Link, Text } from '@radix-ui/themes';
+import { Container, Grid, Heading, Text } from '@radix-ui/themes';
 import { cookies } from 'next/headers';
+import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { parse } from 'valibot';
-import NextLink from 'next/link';
 
 import GameCard from '@components/GameCard';
 import { createClient } from '@libs/supabase/server';
@@ -34,20 +34,22 @@ export default async function Favorites() {
   }
 
   return (
-    <Container>
-      <Heading as="h1">Favorites</Heading>
+    <Container p={{ initial: '4', sm: '8' }}>
+      <Heading as="h1" size="9">
+        Favorites
+      </Heading>
       {favorites.length > 0 ? (
-        <ul className="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-8 mt-8">
-          {favorites.map((game) => (
-            <li key={game.id}>
-              <Link asChild aria-label={game.name} key={game.id}>
-                <NextLink href={`/game/${game.slug}`}>
+        <Grid asChild columns="repeat(auto-fill,minmax(300px,1fr))" gap="6" mt="6">
+          <ul>
+            {favorites.map((game) => (
+              <li key={game.id}>
+                <Link aria-label={game.name} href={`/game/${game.slug}`}>
                   <GameCard game={game} />
-                </NextLink>
-              </Link>
-            </li>
-          ))}
-        </ul>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </Grid>
       ) : (
         <Text>There are no games in your favorites list.</Text>
       )}
