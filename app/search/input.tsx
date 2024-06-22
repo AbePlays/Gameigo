@@ -24,10 +24,11 @@ function Input() {
   return (
     <form onSubmit={handleSearch}>
       <TextField.Root
-        size="3"
+        className="!bg-[--color-background] !h-12"
         defaultValue={searchParams.get('query')?.toString()}
         name="query"
         placeholder="Search Games"
+        size="3"
         type="search"
       >
         <TextField.Slot>

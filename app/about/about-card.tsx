@@ -1,4 +1,4 @@
-import { Heading } from '@radix-ui/themes';
+import { Box, Heading } from '@radix-ui/themes';
 
 interface Props {
   children?: React.ReactNode;
@@ -7,13 +7,13 @@ interface Props {
 
 function AboutCard({ children, heading }: Props) {
   return (
-    <div>
-      <Heading as="h2" className="text-center uppercase !tracking-widest">
+    <Box>
+      <Heading align="center" as="h2" className="uppercase !tracking-widest">
         {heading}
       </Heading>
-      <div className="h-2 mx-auto my-4 w-7 bg-black -rotate-10 -skew-10" />
+      <Box className="h-2 mx-auto my-4 w-7 bg-black -rotate-10 -skew-10" />
       {children}
-    </div>
+    </Box>
   );
 }
 

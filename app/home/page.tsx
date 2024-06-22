@@ -1,6 +1,6 @@
-import { Container, Heading, Link, Text } from '@radix-ui/themes';
+import { Container, Grid, Heading, Text } from '@radix-ui/themes';
 import { type Metadata } from 'next';
-import NextLink from 'next/link';
+import Link from 'next/link';
 import { parse } from 'valibot';
 
 import GameCard from '@components/GameCard';
@@ -28,18 +28,24 @@ export default async function Home() {
   }
 
   return (
-    <Container>
-      <Heading size="8">New and trending</Heading>
-      <Text>Based on player counts and release date</Text>
-      <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-8 mt-8">
-        {games.map((game) => (
-          <Link asChild aria-label={game.name} key={game.id}>
-            <NextLink href={`/game/${game.slug}`}>
-              <GameCard game={game} />
-            </NextLink>
-          </Link>
-        ))}
-      </div>
+    <Container p={{ initial: '4', sm: '8' }}>
+      <Heading as="h1" size="9">
+        New and trending
+      </Heading>
+      <Text as="p" mt="2" size="5" weight="light">
+        Based on player counts and release date
+      </Text>
+      <Grid asChild columns="repeat(auto-fill,minmax(300px,1fr))" gap="6" mt="6">
+        <ul>
+          {games.map((game) => (
+            <li key={game.id}>
+              <Link aria-label={game.name} href={`/game/${game.slug}`}>
+                <GameCard game={game} />
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </Grid>
     </Container>
   );
 }
