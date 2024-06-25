@@ -7,7 +7,7 @@ import { render, screen, waitFor } from '../../test-utils';
 
 describe('Testing SearchResult Component', () => {
   it('should check loader presence', async () => {
-    render(<SearchResult onNext={null} onPrevious={null} page={1} query="God of war" />);
+    render(<SearchResult page={1} query="God of War" />);
 
     expect(screen.getAllByTestId('loading-card').length).toBeGreaterThan(0);
     await waitFor(() => expect(screen.queryAllByTestId('loading-card').length).toBe(0));

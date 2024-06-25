@@ -1,17 +1,7 @@
-import { ChakraProvider } from '@chakra-ui/react';
-import { User } from '@lib/types';
+import { Theme } from '@radix-ui/themes';
 import { render, RenderResult } from '@testing-library/react';
+import { ThemeProvider } from 'next-themes';
 import { vi } from 'vitest';
-
-import { AuthContext } from '../libs/auth';
-
-export const mockUser: User = {
-  uid: 'some uid',
-  email: 'michaelscott@dundermifflin.com',
-  name: 'Michael Scott',
-  provider: 'Dunder Mifflin',
-  photoUrl: 'some url',
-};
 
 export const mockValue = {
   changeDisplayName: vi.fn(),
@@ -25,16 +15,16 @@ export const mockValue = {
   user: null,
 };
 
-const Providers = ({ children, value }) => {
+const Providers = ({ children }) => {
   return (
-    <ChakraProvider>
-      <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
-    </ChakraProvider>
+    <ThemeProvider attribute="class">
+      <Theme>{children}</Theme>
+    </ThemeProvider>
   );
 };
 
 const customRender = (ui: JSX.Element, { value = mockValue, ...options } = {}): RenderResult => {
-  return render(<Providers value={value}>{ui}</Providers>, options);
+  return render(<Providers>{ui}</Providers>, options);
 };
 
 // re-export everything

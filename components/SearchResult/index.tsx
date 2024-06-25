@@ -20,12 +20,6 @@ export default async function SearchResult(props: { page: number; query: string 
     console.error(JSON.stringify(e));
   }
 
-  // const { colorMode } = useColorMode();
-  // const colorMode: string = '';
-  // const toast = useToast();
-
-  // const isDarkMode = colorMode === 'dark';
-
   return (
     <>
       <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-8">

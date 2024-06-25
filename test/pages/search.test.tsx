@@ -13,7 +13,7 @@ vi.mock('next/router', () => ({
 
 describe('Testing Search Page', () => {
   it('should check search input', async () => {
-    render(<SearchPage />);
+    render(<SearchPage searchParams={{}} />);
     const searchInput = screen.getByPlaceholderText(/search games/i);
     expect(searchInput).toBeInTheDocument();
 
@@ -27,7 +27,7 @@ describe('Testing Search Page', () => {
   });
 
   it('should check pagination', async () => {
-    render(<SearchPage />);
+    render(<SearchPage searchParams={{}} />);
     const searchInput = screen.getByPlaceholderText(/search games/i);
     expect(searchInput).toBeInTheDocument();
 

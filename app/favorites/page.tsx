@@ -5,6 +5,7 @@ import { redirect } from 'next/navigation';
 import { parse } from 'valibot';
 
 import GameCard from '@components/GameCard';
+import { NoData } from '@components/NoData';
 import { createClient } from '@libs/supabase/server';
 import { Game, GameSchema } from '@schemas/game';
 
@@ -51,7 +52,11 @@ export default async function Favorites() {
           </ul>
         </Grid>
       ) : (
-        <Text>There are no games in your favorites list.</Text>
+        <NoData>
+          <Text align="center" as="p" mt="4">
+            Please add games to your collection.
+          </Text>
+        </NoData>
       )}
     </Container>
   );

@@ -1,8 +1,8 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
-import Home from '../page';
+import { fireEvent, mockValue, render, screen } from 'test/test-utils';
 import { Routes } from '../../routes';
-import { fireEvent, mockUser, mockValue, render, screen } from 'test/test-utils';
+import Home from '../page';
 
 const mockPush = vi.fn();
 const mockReplace = vi.fn();
@@ -36,7 +36,7 @@ describe('Testing Home Component', () => {
   });
 
   it('should redirect to home route if user is logged in', () => {
-    render(<Home />, { value: { ...mockValue, user: mockUser } });
+    render(<Home />, { value: { ...mockValue } });
     expect(mockReplace).toHaveBeenCalled();
     expect(mockReplace).toHaveBeenCalledTimes(1);
     expect(mockReplace).toHaveBeenCalledWith(Routes.HOME_SCREEN);
