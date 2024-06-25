@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
 
-import FavoritesPage from 'pages/favorites';
-import { mockUser, mockValue, render, screen, waitFor } from '../test-utils';
+import FavoritesPage from '../../app/favorites/page';
+import { mockValue, render, screen, waitFor } from '../test-utils';
 
 // TODO: Improve this test
 
@@ -23,7 +23,7 @@ describe('Testing Favorites Page', () => {
   });
 
   it('should render page', async () => {
-    render(<FavoritesPage />, { value: { ...mockValue, user: mockUser } });
+    render(<FavoritesPage />, { value: { ...mockValue } });
     await waitFor(() => {
       expect(screen.getByText('Favorites')).toBeInTheDocument();
     });

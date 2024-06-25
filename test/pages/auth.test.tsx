@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
 
 import Auth from '../../app/auth/page';
-import { fireEvent, mockUser, mockValue, render, screen } from '../test-utils';
+import { fireEvent, mockValue, render, screen } from '../test-utils';
 
 const mockReplace = vi.fn();
 vi.mock('next/router', () => ({
@@ -12,7 +12,7 @@ vi.mock('next/router', () => ({
 
 describe('Testing Auth Component', () => {
   it('should check for CTA', () => {
-    render(<Auth />);
+    render(<Auth searchParams={{}} />);
     let button = screen.getByRole('button', { name: /sign up/i });
     expect(button).toBeInTheDocument();
 
@@ -22,7 +22,7 @@ describe('Testing Auth Component', () => {
   });
 
   it('should redirect to home screen if user is logged in', () => {
-    render(<Auth />, { value: { ...mockValue, user: mockUser } });
+    render(<Auth searchParams={{}} />, { value: { ...mockValue } });
 
     expect(mockReplace).toHaveBeenCalled();
     expect(mockReplace).toHaveBeenCalledTimes(1);
