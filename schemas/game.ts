@@ -11,7 +11,7 @@ export const GameSchema = object({
   playtime: number(),
   released: nullish(string()),
   slug: string(),
-  stores: nullish(array(object({ store: object({ id: number(), name: string() }) }))),
+  stores: nullish(array(object({ store: object({ id: number(), domain: nullish(string()), name: string() }) }))),
   tba: boolean(),
 });
 

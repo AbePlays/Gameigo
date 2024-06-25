@@ -41,7 +41,7 @@ export default async function AuthPage({ searchParams }: { searchParams: Record<
 
       <Text align="center" as="p" mt="9">
         {footer.head}
-        <Link className="font-bold" href={`/auth?type=${isLogin ? 'signup' : 'signin'}`}>
+        <Link className="font-bold hover:underline" href={`/auth?type=${isLogin ? 'signup' : 'signin'}`}>
           {footer.tail}
         </Link>{' '}
         instead

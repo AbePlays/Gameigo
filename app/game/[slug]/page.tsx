@@ -1,10 +1,11 @@
-import { ArrowLeftIcon, Share1Icon } from '@radix-ui/react-icons';
-import { Button, Container, Flex, Heading, Link, Text } from '@radix-ui/themes';
+import { ArrowTopRightIcon, Share1Icon } from '@radix-ui/react-icons';
+import { Box, Button, Container, Flex, Heading, IconButton, Link, Text } from '@radix-ui/themes';
 import { cookies } from 'next/headers';
 import { parse } from 'valibot';
 
 import BlurImage from '@components/BlurImage';
 import { createClient } from '@libs/supabase/server';
+import { formatDate } from '@utils/date';
 import { GameDetail, GameDetailSchema, GameScreenshot, GameScreenshotSchema } from 'schemas/game';
 import Favorite from './favorite';
 
@@ -46,101 +47,141 @@ export default async function GameDetailPage({ params }: { params: Record<string
 
   return (
     <Container p={{ initial: '4', sm: '8' }}>
-      <Flex align="center" justify="between">
-        <Button aria-label="Back" title="Back">
-          <ArrowLeftIcon />
-        </Button>
-
-        <Flex gap="4">
-          {data.user ? <Favorite gameDetails={gameDetails} isFavorite={isFavorite} userId={data.user.id} /> : null}
-          <Button aria-label="Share" title="Share">
-            <Share1Icon />
-          </Button>
-        </Flex>
+      <Flex gap="4" justify="end">
+        {data.user ? <Favorite gameDetails={gameDetails} isFavorite={isFavorite} userId={data.user.id} /> : null}
+        <IconButton aria-label="Share" title="Share" variant="surface">
+          <Share1Icon />
+        </IconButton>
       </Flex>
 
-      <div className="mt-16 text-center">
-        <Text weight="medium">
+      <Box mt="9">
+        <Text align="center" className="block" weight="medium">
           Day of Release -{' '}
-          {gameDetails.released ? <time dateTime={gameDetails.released}>{gameDetails.released}</time> : 'TBA'}
+          {gameDetails.released ? (
+            <time dateTime={gameDetails.released}>{formatDate(gameDetails.released)}</time>
+          ) : (
+            'TBA'
+          )}
         </Text>
-        <Heading mt="8" size="9">
+        <Heading align="center" mt="8" size="9">
           {gameDetails.name}
         </Heading>
-      </div>
+      </Box>
 
-      <div className="mt-8 p-8 rounded-2xl">
-        <div className="relative rounded-xl overflow-hidden w-full aspect-video">
-          <BlurImage fill showBg src={gameDetails.background_image} alt="game background" />
-        </div>
-      </div>
+      <Box className="rounded-xl aspect-video shadow-lg" mt="6" overflow="hidden" position="relative" width="100%">
+        <BlurImage fill showBg src={gameDetails.background_image} alt="game background" />
+      </Box>
 
-      <div className="md:flex py-4 text-center">
-        <div className="w-full">
-          <Heading as="h2">Platforms</Heading>
-          {gameDetails.parent_platforms.map((item) => (
-            <Text key={item.platform.id}>{item.platform.name}</Text>
-          ))}
-        </div>
-        <div className="w-full">
-          <Heading as="h2">Metacritic Score</Heading>
-          <Text mt="2">{gameDetails.metacritic || '-'}</Text>
-        </div>
-        <div className="w-full">
-          <Heading as="h2">Genres</Heading>
+      <Flex direction={{ initial: 'column', sm: 'row' }} gap="6" my="8">
+        <Box width="100%">
+          <Heading align="center" as="h2">
+            Platforms
+          </Heading>
 
-          {gameDetails.genres.map((item) => (
-            <Text key={item.id}>{item.name}</Text>
-          ))}
-        </div>
-      </div>
+          <Flex className="divide-x-2 divide-[--gray-12]" justify="center" mt="2">
+            {gameDetails.parent_platforms.map((item) => (
+              <Text align="center" className="block px-2 !leading-none" key={item.platform.id}>
+                {item.platform.name}
+              </Text>
+            ))}
+          </Flex>
+        </Box>
+
+        <Box className="!hidden !md:block bg-[--gray-12] self-center rounded-full" width="0.75rem" height="2.5rem" />
+
+        <Box width="100%">
+          <Heading align="center" as="h2">
+            Metacritic Score
+          </Heading>
+          <Text align="center" className="block" mt="2">
+            {gameDetails.metacritic || '-'}
+          </Text>
+        </Box>
+
+        <Box className="!hidden !md:block bg-[--gray-12] self-center rounded-full" width="0.75rem" height="2.5rem" />
+
+        <Box width="100%">
+          <Heading align="center" as="h2">
+            Genres
+          </Heading>
+
+          <Flex className="divide-x-2 divide-[--gray-12]" justify="center" mt="2">
+            {gameDetails.genres.map((item) => (
+              <Text align="center" className="block px-2 !leading-none" key={item.id}>
+                {item.name}
+              </Text>
+            ))}
+          </Flex>
+        </Box>
+      </Flex>
 
       {gameDetails.description && (
         <>
           <Heading as="h2">About</Heading>
-          <div dangerouslySetInnerHTML={{ __html: gameDetails.description }} />
+          <Box dangerouslySetInnerHTML={{ __html: gameDetails.description }} mt="2" />
         </>
       )}
 
       {gameDetails.publishers.length > 0 && (
         <>
-          <Heading as="h2">Publishers</Heading>
-          {gameDetails.publishers.map((item) => (
-            <Text key={item.id}>{item.name}</Text>
-          ))}
+          <Heading as="h2" mt="4">
+            Publishers
+          </Heading>
+
+          <Text as="p" mt="2">
+            {new Intl.ListFormat('en-US').format(gameDetails.publishers.map((item) => item.name))}
+          </Text>
         </>
       )}
 
       {gameDetails.website && (
         <>
-          <Heading as="h2">Website</Heading>
-          <Link href={gameDetails.website} target="_blank" rel="noreferrer">
-            {gameDetails.name}
-          </Link>
+          <Heading as="h2" mt="4">
+            Website
+          </Heading>
+          <Flex align="center" asChild gap="1" mt="2" width="fit-content">
+            <Link href={gameDetails.website} target="_blank" rel="noreferrer">
+              {gameDetails.name}
+              <ArrowTopRightIcon />
+            </Link>
+          </Flex>
         </>
       )}
 
       {gameDetails.stores.length > 0 && (
         <>
-          <Heading as="h2">Where to buy</Heading>
-          {gameDetails.stores.map((item) => (
-            <Text key={item.store.id}>{item.store.name}</Text>
-          ))}
+          <Heading as="h2" mt="4">
+            Where to buy
+          </Heading>
+
+          <Flex gap="2" mt="2">
+            {gameDetails.stores.map((item) => (
+              <Button asChild key={item.store.id} variant="soft">
+                <Link href={`https://${item.store.domain}`} rel="noreferrer" target="_blank" underline="none">
+                  {item.store.name}
+                  <ArrowTopRightIcon />
+                </Link>
+              </Button>
+            ))}
+          </Flex>
         </>
       )}
 
       {gameScreenshots.length > 0 && (
         <>
-          <Heading as="h2">Screenshots</Heading>
-          <ul className="flex gap-4">
+          <Heading as="h2" mt="4">
+            Screenshots
+          </Heading>
+
+          <Flex gap="4" mt="4">
             {gameScreenshots.map((item) => {
               return (
-                <li className="relative rounded-xl overflow-hidden w-full aspect-video" key={item.id}>
+                <li className="relative rounded overflow-hidden w-full aspect-video" key={item.id}>
                   <BlurImage alt={`game-screenshot-${item.id}`} fill showBg src={item.image} />
                 </li>
               );
             })}
-          </ul>
+          </Flex>
           <ul></ul>
         </>
       )}

@@ -1,55 +1,50 @@
-import { FunctionComponent } from 'react';
-
-import CustomLink from '@components/CustomLink';
-import { useAuth } from '@lib/auth';
-import { MoveDownAnimation, NavbarItemAnimation, NavbarListAnimation } from '@utils/animations';
-import { MotionFlex, MotionListItem, MotionUnorderedList } from '@utils/MotionElements';
+import { HamburgerMenuIcon } from '@radix-ui/react-icons';
+import { DropdownMenu, IconButton, Link, Separator } from '@radix-ui/themes';
+import { type User } from '@supabase/supabase-js';
+import NextLink from 'next/link';
 
 interface Props {
-  onClick: () => void;
+  user: User;
 }
 
-const MobileNavbar: FunctionComponent<Props> = ({ onClick }) => {
-  const { user } = useAuth();
-
+function MobileNavbar({ user }: Props) {
   return (
-    <MotionFlex
-      variants={MoveDownAnimation}
-      initial="hidden"
-      animate="show"
-      exit="exit"
-      alignItems="center"
-      justifyContent="center"
-      px="2"
-    >
-      <MotionUnorderedList
-        display="flex"
-        justifyContent="space-evenly"
-        mx="0"
-        styleType="none"
-        textAlign="center"
-        variants={NavbarListAnimation}
-        w="full"
-      >
-        <MotionListItem variants={NavbarItemAnimation}>
-          <CustomLink isExt={false} link="/search" onClick={onClick} title="Search"></CustomLink>
-        </MotionListItem>
-        <MotionListItem variants={NavbarItemAnimation}>
-          <CustomLink
-            cursor={user ? 'pointer' : 'not-allowed'}
-            isExt={false}
-            link={user ? '/favorites' : '#'}
-            onClick={user ? onClick : null}
-            opacity={user ? 1 : 0.5}
-            title="Favorites"
-          ></CustomLink>
-        </MotionListItem>
-        <MotionListItem variants={NavbarItemAnimation}>
-          <CustomLink isExt={false} link="/about" onClick={onClick} title="About"></CustomLink>
-        </MotionListItem>
-      </MotionUnorderedList>
-    </MotionFlex>
-  );
-};
+    <DropdownMenu.Root>
+      <DropdownMenu.Trigger>
+        <IconButton className="!sm:hidden" variant="soft">
+          <HamburgerMenuIcon />
+        </IconButton>
+      </DropdownMenu.Trigger>
 
-export default MobileNavbar;
+      <DropdownMenu.Content color="gray" className="p-2">
+        <DropdownMenu.Item asChild>
+          <Link asChild>
+            <NextLink href="/search">Search</NextLink>
+          </Link>
+        </DropdownMenu.Item>
+
+        <Separator my="2" size="4" />
+
+        {user ? (
+          <>
+            <DropdownMenu.Item asChild>
+              <Link asChild>
+                <NextLink href="/favorites">Favorites</NextLink>
+              </Link>
+            </DropdownMenu.Item>
+
+            <Separator my="2" size="4" />
+          </>
+        ) : null}
+
+        <DropdownMenu.Item asChild>
+          <Link asChild>
+            <NextLink href="/about">About</NextLink>
+          </Link>
+        </DropdownMenu.Item>
+      </DropdownMenu.Content>
+    </DropdownMenu.Root>
+  );
+}
+
+export { MobileNavbar };

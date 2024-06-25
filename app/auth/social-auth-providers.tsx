@@ -18,7 +18,15 @@ function SocialAuthProviders() {
     }
 
     return (
-      <Button name="provider" key={provider.id} size="3" value={provider.providerId} type="submit">
+      <Button
+        color="gray"
+        name="provider"
+        key={provider.id}
+        size="3"
+        value={provider.providerId}
+        variant="outline"
+        type="submit"
+      >
         {Icon} {provider.title}
       </Button>
     );
