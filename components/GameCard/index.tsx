@@ -1,4 +1,4 @@
-import { Badge, Box, Flex, Grid, Text } from '@radix-ui/themes';
+import { Badge, Box, Card, Flex, Grid, Inset, Text } from '@radix-ui/themes';
 
 import BlurImage from '@components/BlurImage';
 import { formatDate } from '@utils/date';
@@ -10,28 +10,21 @@ interface Props {
 }
 
 export default function GameCard({ game }: Props) {
-  // const { colorMode } = useColorMode();
-  const colorMode: string = 'light';
-
-  const isDarkMode = colorMode === 'dark';
-
   return (
-    <Box
-      className={`${isDarkMode ? 'dark-bg-secondary' : 'light-bg-secondary'} shadow-lg rounded-lg group`}
-      overflow="hidden"
-      height="100%"
-    >
-      <Box height="14rem" overflow="hidden" position="relative">
-        <BlurImage
-          alt="game background"
-          className="group-hover:scale-105"
-          fill
-          showBg
-          src={game?.background_image || placeholder}
-        />
-      </Box>
-      <Box p="4">
-        <Text size="6" weight="bold">
+    <Card className="h-full shadow-lg rounded-lg group">
+      <Inset side="top">
+        <Box height="14rem" overflow="hidden" position="relative">
+          <BlurImage
+            alt="game background"
+            className="group-hover:scale-105"
+            fill
+            showBg
+            src={game?.background_image || placeholder}
+          />
+        </Box>
+      </Inset>
+      <Box p="2">
+        <Text className="block" mt="2" size="6" weight="bold">
           {game.name}
         </Text>
 
@@ -49,7 +42,7 @@ export default function GameCard({ game }: Props) {
             <Text weight="light">{formatDate(game.released)}</Text>
           </Flex>
 
-          <hr />
+          <hr className="opacity-50 dark:opacity-20" />
 
           <Flex gap="2">
             <Text weight="medium">Genres:</Text>
@@ -57,6 +50,6 @@ export default function GameCard({ game }: Props) {
           </Flex>
         </Grid>
       </Box>
-    </Box>
+    </Card>
   );
 }

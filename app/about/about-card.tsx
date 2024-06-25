@@ -11,7 +11,7 @@ function AboutCard({ children, heading }: Props) {
       <Heading align="center" as="h2" className="uppercase !tracking-widest">
         {heading}
       </Heading>
-      <Box className="h-2 mx-auto my-4 w-7 bg-black -rotate-10 -skew-10" />
+      <Box className="h-2 mx-auto my-4 w-7 bg-[--gray-12] -rotate-10 -skew-10" />
       {children}
     </Box>
   );
