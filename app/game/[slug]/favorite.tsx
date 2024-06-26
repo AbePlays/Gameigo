@@ -3,6 +3,8 @@
 import { BookmarkFilledIcon, BookmarkIcon } from '@radix-ui/react-icons';
 import { IconButton } from '@radix-ui/themes';
 import { useFormState } from 'react-dom';
+import { useEffect } from 'react';
+import { toast } from 'react-hot-toast';
 
 import { GameDetail } from '@schemas/game';
 import { toggleFavorite } from './actions';
@@ -15,7 +17,17 @@ export type FavoriteProps = {
 
 export default function Favorite(props: FavoriteProps) {
   const { isFavorite, gameDetails, userId } = props;
-  const [, formAction] = useFormState(toggleFavorite, null);
+  const [state, formAction] = useFormState(toggleFavorite, { message: '', ok: true });
+
+  useEffect(() => {
+    if (state.message) {
+      if (state.ok) {
+        toast.success(state.message);
+      } else {
+        toast.error(state.message);
+      }
+    }
+  }, [state]);
 
   return (
     <form action={formAction}>
