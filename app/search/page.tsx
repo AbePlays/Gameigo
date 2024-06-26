@@ -41,7 +41,7 @@ export default function SearchPage({ searchParams }: { searchParams: Record<stri
 
       {/* Search Results */}
       {query ? (
-        <Container mt="6">
+        <Container mt="6" px="4">
           <Suspense fallback={<Loading />} key={query + page}>
             <SearchResult page={Number(page || 1)} query={query} />
           </Suspense>

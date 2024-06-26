@@ -5,7 +5,7 @@ import { type Metadata } from 'next';
 import { AboutCard } from './about-card';
 
 export const metadata: Metadata = {
-  title: 'About | Gameigo',
+  title: 'Gameigo | About',
   description:
     'Gameigo is a video game discovery platform where you can keep all your games in one unified profile and create your exclusive collection. The application is powered by a public API provided by RAWG which houses more than 350,000 games across half a hundred platforms.',
 };

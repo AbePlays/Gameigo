@@ -1,23 +1,26 @@
+'use client';
+
 import { Button, Container, Grid, Heading, Text } from '@radix-ui/themes';
-import NextLink from 'next/link';
 
 import BlurImage from '@components/BlurImage';
-import error from 'public/images/error.png';
+import errorImg from 'public/images/error.png';
 
-export default function NotFoundPage() {
+export default function Error({ error, reset }: { error: Error & { digest?: string }; reset: () => void }) {
+  console.error(error);
+
   return (
     <Container p={{ initial: '4', sm: '8' }}>
       <Grid gap="4" maxWidth="30rem" mx="auto">
         <BlurImage
           alt="A pilot watching the sky while sitting in front of his crashed plane"
           height="300"
-          src={error}
+          src={errorImg}
           width="500"
         />
-        <Heading>Oh Snap!</Heading>
-        <Text>The page you&apos;re looking for was moved, removed, renamed or might have never existed.</Text>
-        <Button asChild size="3">
-          <NextLink href="/home">Return to Home</NextLink>
+        <Heading>Oops, something went wrong</Heading>
+        <Text>Don't worry, we're fixing this. We will be back for you soon!</Text>
+        <Button onClick={reset} size="3">
+          Try again
         </Button>
       </Grid>
     </Container>

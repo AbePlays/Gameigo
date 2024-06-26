@@ -1,4 +1,4 @@
-import { Badge, Box, Card, Flex, Grid, Inset, Text } from '@radix-ui/themes';
+import { Badge, Box, Card, Flex, Grid, Inset, Separator, Text } from '@radix-ui/themes';
 
 import BlurImage from '@components/BlurImage';
 import { formatDate } from '@utils/date';
@@ -28,13 +28,15 @@ export default function GameCard({ game }: Props) {
           {game.name}
         </Text>
 
-        <Flex wrap="wrap" gap="2" mt="2">
-          {game.parent_platforms.map((item) => (
-            <Badge color="gray" highContrast key={item.platform.id} size="3" variant="solid">
-              {item.platform.name}
-            </Badge>
-          ))}
-        </Flex>
+        {game.parent_platforms.length > 0 ? (
+          <Flex wrap="wrap" gap="2" mt="2">
+            {game.parent_platforms.map((item) => (
+              <Badge color="gray" highContrast key={item.platform.id} size="3" variant="solid">
+                {item.platform.name}
+              </Badge>
+            ))}
+          </Flex>
+        ) : null}
 
         <Grid mt="4" gap="2">
           <Flex gap="2">
@@ -42,7 +44,7 @@ export default function GameCard({ game }: Props) {
             <Text weight="light">{formatDate(game.released)}</Text>
           </Flex>
 
-          <hr className="opacity-50 dark:opacity-20" />
+          <Separator size="4" />
 
           <Flex gap="2">
             <Text weight="medium">Genres:</Text>

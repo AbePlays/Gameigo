@@ -1,6 +1,8 @@
-import { ArrowTopRightIcon, Share1Icon } from '@radix-ui/react-icons';
-import { Box, Button, Container, Flex, Heading, IconButton, Link, Text } from '@radix-ui/themes';
+import { ArrowTopRightIcon } from '@radix-ui/react-icons';
+import { Box, Button, Container, Flex, Heading, Link, Text } from '@radix-ui/themes';
+import { Metadata } from 'next';
 import { cookies } from 'next/headers';
+import { notFound } from 'next/navigation';
 import { parse } from 'valibot';
 
 import BlurImage from '@components/BlurImage';
@@ -8,6 +10,30 @@ import { createClient } from '@libs/supabase/server';
 import { formatDate } from '@utils/date';
 import { GameDetail, GameDetailSchema, GameScreenshot, GameScreenshotSchema } from 'schemas/game';
 import Favorite from './favorite';
+import { Share } from './share';
+
+type Props = {
+  params: { slug: string };
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = params;
+
+  try {
+    const res = await fetch(`https://api.rawg.io/api/games/${slug}?key=${process.env.NEXT_PUBLIC_RAWG_API_KEY}`);
+    const data = await res.json();
+    console.log(data);
+    const { name, description_raw } = parse(GameDetailSchema, data);
+
+    return {
+      title: `Gameigo | ${name}`,
+      description: description_raw,
+    };
+  } catch (e) {
+    console.error(JSON.stringify(e));
+    return;
+  }
+}
 
 export default async function GameDetailPage({ params }: { params: Record<string, string> }) {
   const { slug } = params;
@@ -32,6 +58,10 @@ export default async function GameDetailPage({ params }: { params: Record<string
     console.error(JSON.stringify(e));
   }
 
+  if (!gameDetails) {
+    notFound();
+  }
+
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
   const { data } = await supabase.auth.getUser();
@@ -49,9 +79,7 @@ export default async function GameDetailPage({ params }: { params: Record<string
     <Container p={{ initial: '4', sm: '8' }}>
       <Flex gap="4" justify="end">
         {data.user ? <Favorite gameDetails={gameDetails} isFavorite={isFavorite} userId={data.user.id} /> : null}
-        <IconButton aria-label="Share" title="Share" variant="surface">
-          <Share1Icon />
-        </IconButton>
+        <Share />
       </Flex>
 
       <Box mt="9">
