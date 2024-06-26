@@ -22,7 +22,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   try {
     const res = await fetch(`https://api.rawg.io/api/games/${slug}?key=${process.env.NEXT_PUBLIC_RAWG_API_KEY}`);
     const data = await res.json();
-    console.log(data);
     const { name, description_raw } = parse(GameDetailSchema, data);
 
     return {
