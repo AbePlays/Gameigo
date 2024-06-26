@@ -6,7 +6,7 @@ export const GameSchema = object({
   id: number(),
   metacritic: nullish(number()),
   name: string(),
-  parent_platforms: nullish(array(object({ platform: object({ id: number(), name: string() }) }))),
+  parent_platforms: nullish(array(object({ platform: object({ id: number(), name: string() }) })), []),
   platforms: nullish(array(object({ platform: object({ id: number(), name: string() }) }))),
   playtime: number(),
   released: nullish(string()),
@@ -18,6 +18,7 @@ export const GameSchema = object({
 export const GameDetailSchema = object({
   ...GameSchema.entries,
   description: string(),
+  description_raw: string(),
   publishers: nullish(array(object({ id: number(), name: string() }))),
   website: string(),
 });

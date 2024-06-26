@@ -1,39 +1,30 @@
-import { Flex, Skeleton } from '@radix-ui/themes';
+import { Card, Flex, Grid, Inset, Skeleton } from '@radix-ui/themes';
 
 interface Props {
   count?: number;
 }
 
 export default function LoadingCard({ count = 1 }: Props) {
-  // const { colorMode } = useColorMode();
-  const colorMode: string = 'light';
-  const isDarkMode = colorMode === 'dark';
-
   return (
     <>
       {Array(count)
         .fill(0)
         .map((_, index) => {
           return (
-            <div
-              aria-hidden="true"
-              className={`${
-                isDarkMode ? 'dark-bg-secondary' : 'light-bg-secondary'
-              } overflow-hidden rounded-lg shadow-lg`}
-              data-testid="loading-card"
-              key={index}
-            >
-              <Skeleton className="h-56" />
-              <div className="p-4 space-y-4">
-                <Skeleton className="h-8" />
+            <Card className="h-full shadow-lg rounded-lg group" key={index}>
+              <Inset side="top">
+                <Skeleton height="14rem" />
+              </Inset>
+              <Grid gap="4" p="4">
+                <Skeleton height="2rem" />
                 <Flex gap="4">
-                  <Skeleton className="h-8 w-20" />
-                  <Skeleton className="h-8 w-20" />
+                  <Skeleton height="2rem" width="5rem" />
+                  <Skeleton height="2rem" width="5rem" />
                 </Flex>
-                <Skeleton className="h-6" />
-                <Skeleton className="h-6" />
-              </div>
-            </div>
+                <Skeleton height="1.5rem" />
+                <Skeleton height="1.5rem" />
+              </Grid>
+            </Card>
           );
         })}
     </>
