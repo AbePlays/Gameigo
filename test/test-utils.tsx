@@ -12,10 +12,10 @@ export const mockValue = {
   signinWithGoogle: vi.fn(),
   signout: vi.fn(),
   signupWithEmailAndPassword: vi.fn(),
-  user: null,
+  user: '',
 };
 
-const Providers = ({ children }) => {
+const Providers = ({ children }: { children: React.ReactNode }) => {
   return (
     <ThemeProvider attribute="class">
       <Theme>{children}</Theme>

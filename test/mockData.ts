@@ -130,8 +130,8 @@ const mockGameInfo = {
 
 const mockScreenshots = {
   count: 6,
-  next: null,
-  previous: null,
+  next: '',
+  previous: '',
   results: [
     {
       id: 2934405,

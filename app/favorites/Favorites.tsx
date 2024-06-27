@@ -1,20 +1,12 @@
 import { Container, Grid, Heading, Text } from '@radix-ui/themes';
-import { Metadata } from 'next';
 import { cookies } from 'next/headers';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { parse } from 'valibot';
-
 import GameCard from '@components/GameCard';
 import { NoData } from '@components/NoData';
 import { createClient } from '@libs/supabase/server';
 import { Game, GameSchema } from '@schemas/game';
-
-export const metadata: Metadata = {
-  title: 'Gameigo | Favorites',
-  description:
-    'Stop jumping from game to game, and stop having to search for games. Manage your collections, discover new games, and share your collections with friends.',
-};
 
 export default async function Favorites() {
   const cookieStore = cookies();

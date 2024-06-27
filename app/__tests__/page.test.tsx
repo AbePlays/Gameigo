@@ -25,8 +25,9 @@ describe('Testing Home Component', () => {
     });
     expect(buttonEls.length).toBe(2);
 
+    // @ts-ignore
     fireEvent.click(buttonEls[0]);
-    expect(mockPush).toHaveBeenCalledWith(Routes.HOME_SCREEN);
+    expect(mockPush).toHaveBeenCalledWith('/home');
     expect(mockPush).toHaveBeenCalledTimes(1);
   });
 
@@ -39,6 +40,6 @@ describe('Testing Home Component', () => {
     render(<Home />, { value: { ...mockValue } });
     expect(mockReplace).toHaveBeenCalled();
     expect(mockReplace).toHaveBeenCalledTimes(1);
-    expect(mockReplace).toHaveBeenCalledWith(Routes.HOME_SCREEN);
+    expect(mockReplace).toHaveBeenCalledWith('/home');
   });
 });

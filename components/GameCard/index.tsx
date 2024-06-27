@@ -28,7 +28,7 @@ export default function GameCard({ game }: Props) {
           {game.name}
         </Text>
 
-        {game.parent_platforms.length > 0 ? (
+        {Array.isArray(game.parent_platforms) && game.parent_platforms.length > 0 ? (
           <Flex wrap="wrap" gap="2" mt="2">
             {game.parent_platforms.map((item) => (
               <Badge color="gray" highContrast key={item.platform.id} size="3" variant="solid">
@@ -41,7 +41,7 @@ export default function GameCard({ game }: Props) {
         <Grid mt="4" gap="2">
           <Flex gap="2">
             <Text weight="medium">Release Date:</Text>
-            <Text weight="light">{formatDate(game.released)}</Text>
+            <Text weight="light">{game.released ? formatDate(game.released) : 'TBA'}</Text>
           </Flex>
 
           <Separator size="4" />

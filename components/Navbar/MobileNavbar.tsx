@@ -4,7 +4,7 @@ import { type User } from '@supabase/supabase-js';
 import NextLink from 'next/link';
 
 interface Props {
-  user: User;
+  user: User | null;
 }
 
 function MobileNavbar({ user }: Props) {
