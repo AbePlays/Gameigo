@@ -30,13 +30,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
   } catch (e) {
     console.error(JSON.stringify(e));
-    return;
+    return {};
   }
 }
 
 export default async function GameDetailPage({ params }: { params: Record<string, string> }) {
   const { slug } = params;
-  let gameDetails: GameDetail = null;
+  let gameDetails: GameDetail | null = null;
   let gameScreenshots: GameScreenshot['results'] = [];
 
   try {
@@ -96,7 +96,7 @@ export default async function GameDetailPage({ params }: { params: Record<string
       </Box>
 
       <Box className="rounded-xl aspect-video shadow-lg" mt="6" overflow="hidden" position="relative" width="100%">
-        <BlurImage fill showBg src={gameDetails.background_image} alt="game background" />
+        <BlurImage fill showBg src={gameDetails.background_image || ''} alt="game background" />
       </Box>
 
       <Flex direction={{ initial: 'column', sm: 'row' }} gap="6" my="8">
@@ -106,11 +106,17 @@ export default async function GameDetailPage({ params }: { params: Record<string
           </Heading>
 
           <Flex className="divide-x-2 divide-[--gray-12]" justify="center" mt="2">
-            {gameDetails.parent_platforms.map((item) => (
-              <Text align="center" className="block px-2 !leading-none" key={item.platform.id}>
-                {item.platform.name}
-              </Text>
-            ))}
+            {Array.isArray(gameDetails.parent_platforms) && gameDetails.parent_platforms.length > 0 ? (
+              <>
+                {gameDetails.parent_platforms.map((item) => (
+                  <Text align="center" className="block px-2 !leading-none" key={item.platform.id}>
+                    {item.platform.name}
+                  </Text>
+                ))}
+              </>
+            ) : (
+              <Text align="center">-</Text>
+            )}
           </Flex>
         </Box>
 
@@ -133,11 +139,17 @@ export default async function GameDetailPage({ params }: { params: Record<string
           </Heading>
 
           <Flex className="divide-x-2 divide-[--gray-12]" justify="center" mt="2">
-            {gameDetails.genres.map((item) => (
-              <Text align="center" className="block px-2 !leading-none" key={item.id}>
-                {item.name}
-              </Text>
-            ))}
+            {Array.isArray(gameDetails.genres) && gameDetails.genres.length > 0 ? (
+              <>
+                {gameDetails.genres.map((item) => (
+                  <Text align="center" className="block px-2 !leading-none" key={item.id}>
+                    {item.name}
+                  </Text>
+                ))}
+              </>
+            ) : (
+              <Text>-</Text>
+            )}
           </Flex>
         </Box>
       </Flex>
@@ -149,7 +161,7 @@ export default async function GameDetailPage({ params }: { params: Record<string
         </>
       )}
 
-      {gameDetails.publishers.length > 0 && (
+      {Array.isArray(gameDetails.publishers) && gameDetails.publishers.length > 0 && (
         <>
           <Heading as="h2" mt="4">
             Publishers
@@ -175,7 +187,7 @@ export default async function GameDetailPage({ params }: { params: Record<string
         </>
       )}
 
-      {gameDetails.stores.length > 0 && (
+      {Array.isArray(gameDetails.stores) && gameDetails.stores.length > 0 && (
         <>
           <Heading as="h2" mt="4">
             Where to buy

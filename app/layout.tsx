@@ -1,10 +1,20 @@
 import { Theme } from '@radix-ui/themes';
 import '@radix-ui/themes/styles.css';
+import { Metadata } from 'next';
 import { ThemeProvider } from 'next-themes';
 import { Toaster } from 'react-hot-toast';
 
 import { Navbar } from '@components/Navbar';
 import './globals.css';
+
+export const metadata: Metadata = {
+  icons: {
+    icon: ['/favicons/favicon.ico'],
+    apple: ['/favicons/apple-touch-icon.png'],
+    shortcut: ['/favicons/apple-touch-icon.png'],
+  },
+  manifest: '/favicons/site.webmanifest',
+};
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

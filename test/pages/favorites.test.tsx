@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
 
-import FavoritesPage from '../../app/favorites/page';
+import FavoritesPage from 'app/favorites/Favorites';
 import { mockValue, render, screen, waitFor } from '../test-utils';
 
 // TODO: Improve this test

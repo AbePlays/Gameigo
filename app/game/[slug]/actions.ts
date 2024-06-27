@@ -7,7 +7,7 @@ import { parse } from 'valibot';
 import { createClient } from '@libs/supabase/server';
 import { FavoriteSchema } from '@schemas/favorite';
 
-export async function toggleFavorite(_, formData: FormData) {
+export async function toggleFavorite(_: unknown, formData: FormData) {
   try {
     const fields = Object.fromEntries(formData.entries());
     const { gameId, slug, userId } = parse(FavoriteSchema, fields);
@@ -23,7 +23,7 @@ export async function toggleFavorite(_, formData: FormData) {
     } else {
       const { favorites } = data;
       const updatedFavorites = favorites.includes(gameId)
-        ? favorites.filter((id) => id !== gameId)
+        ? favorites.filter((id: number) => id !== gameId)
         : [...favorites, gameId];
       await supabase.from('user_data').update({ favorites: updatedFavorites }).eq('user_id', userId);
       message = updatedFavorites.includes(gameId)

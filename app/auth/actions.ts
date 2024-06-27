@@ -8,12 +8,15 @@ import { createClient } from '@libs/supabase/server';
 import { ProviderSchema, SigninSchema, SignupSchema } from '@schemas/auth';
 import { INITIAL_SIGNIN_STATE, INITIAL_SIGNUP_STATE } from './constant';
 
-function transformErrorMessages(errors: { [key: string]: string[] }): Record<string, string> {
+function transformErrorMessages(
+  errors: { readonly [x: string]: [string, ...string[]] | undefined } | undefined
+): Record<string, string> {
   const transformedErrors: Record<string, string> = {};
 
   for (const key in errors) {
     if (errors[key]) {
-      transformedErrors[key] = errors[key][0];
+      // @ts-ignore
+      transformedErrors[key] = errors[key]?.[0];
     }
   }
 
@@ -58,7 +61,7 @@ export async function signinUser(
   }
 }
 
-export async function signinUsingProvider(_, formData: FormData) {
+export async function signinUsingProvider(_: unknown, formData: FormData) {
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
 

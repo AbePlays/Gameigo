@@ -4,11 +4,12 @@ import Link from 'next/link';
 import { parse } from 'valibot';
 
 import GameCard from '@components/GameCard';
+import { NoData } from '@components/NoData';
 import { GameSearchResult, GameSearchSchema } from 'schemas/game';
 
 export default async function SearchResult(props: { page: number; query: string }) {
   const { page, query } = props;
-  let searchResult: GameSearchResult = null;
+  let searchResult: GameSearchResult | null = null;
 
   try {
     const response = await fetch(
@@ -18,6 +19,16 @@ export default async function SearchResult(props: { page: number; query: string 
     searchResult = data;
   } catch (e) {
     console.error(JSON.stringify(e));
+  }
+
+  if (!searchResult) {
+    return (
+      <NoData>
+        <Text align="center" as="p" mt="4">
+          No games found for "{query}"
+        </Text>
+      </NoData>
+    );
   }
 
   return (
