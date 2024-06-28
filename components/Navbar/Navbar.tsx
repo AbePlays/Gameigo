@@ -55,8 +55,12 @@ async function Navbar() {
           <ThemeSwitcher />
 
           <Link asChild underline="none">
-            <NextLink href={user ? '/auth' : '/auth'}>
-              <Avatar fallback={user ? user.user_metadata.name[0] : 'U'} size="2" />
+            <NextLink href={user ? '/profile' : '/auth'}>
+              <Avatar
+                fallback={user ? user.user_metadata.name[0] : 'U'}
+                size="2"
+                src={user ? user.user_metadata.avatar_url : null}
+              />
             </NextLink>
           </Link>
         </Flex>

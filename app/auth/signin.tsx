@@ -42,6 +42,12 @@ function Signin() {
               )}
             </Grid>
 
+            {state.errors.form && (
+              <Text align="left" color="red" size="2">
+                {state.errors.form}
+              </Text>
+            )}
+
             <Submit />
           </Grid>
         </form>

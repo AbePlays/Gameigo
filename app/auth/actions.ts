@@ -28,11 +28,11 @@ export async function signinUser(
   formData: FormData
 ): Promise<typeof INITIAL_SIGNIN_STATE> {
   try {
-    const cookieStore = cookies();
-    const supabase = createClient(cookieStore);
-
     const fields = Object.fromEntries(formData.entries());
     const result = parse(SigninSchema, fields);
+
+    const cookieStore = cookies();
+    const supabase = createClient(cookieStore);
 
     const { error } = await supabase.auth.signInWithPassword({
       email: result.email,
@@ -141,11 +141,4 @@ export async function signupUser(
 
     return { errors: { ...INITIAL_SIGNUP_STATE.errors, form: 'Something went wrong' }, fields };
   }
-}
-
-export async function signout() {
-  const cookieStore = cookies();
-  const supabase = createClient(cookieStore);
-  await supabase.auth.signOut();
-  redirect('/home');
 }
