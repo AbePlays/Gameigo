@@ -1,13 +1,21 @@
 'use client'
 
 import { Button, Flex, IconButton, Spinner, Strong, Text, TextField } from '@radix-ui/themes'
+import { useEffect } from 'react'
 import { useFormState, useFormStatus } from 'react-dom'
+import { toast } from 'react-hot-toast'
 
 import { changeName } from './actions'
 import { INITIAL_CHANGE_NAME_STATE } from './constant'
 
 function ChangeName() {
   const [state, formAction] = useFormState(changeName, INITIAL_CHANGE_NAME_STATE)
+
+  useEffect(() => {
+    if (state.saved) {
+      toast.success('Display name updated.')
+    }
+  }, [state])
 
   return (
     <form className="mt-4" action={formAction}>
