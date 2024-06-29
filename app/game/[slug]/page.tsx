@@ -1,76 +1,76 @@
-import { ArrowTopRightIcon } from '@radix-ui/react-icons';
-import { Box, Button, Container, Flex, Heading, Link, Text } from '@radix-ui/themes';
-import { Metadata } from 'next';
-import { cookies } from 'next/headers';
-import { notFound } from 'next/navigation';
-import { parse } from 'valibot';
+import { ArrowTopRightIcon } from '@radix-ui/react-icons'
+import { Box, Button, Container, Flex, Heading, Link, Text } from '@radix-ui/themes'
+import { Metadata } from 'next'
+import { cookies } from 'next/headers'
+import { notFound } from 'next/navigation'
+import { parse } from 'valibot'
 
-import BlurImage from '@components/BlurImage';
-import { createClient } from '@libs/supabase/server';
-import { formatDate } from '@utils/date';
-import { GameDetail, GameDetailSchema, GameScreenshot, GameScreenshotSchema } from 'schemas/game';
-import Favorite from './favorite';
-import { Share } from './share';
+import BlurImage from '@components/BlurImage'
+import { createClient } from '@libs/supabase/server'
+import { formatDate } from '@utils/date'
+import { GameDetail, GameDetailSchema, GameScreenshot, GameScreenshotSchema } from 'schemas/game'
+import Favorite from './favorite'
+import { Share } from './share'
 
 type Props = {
-  params: { slug: string };
-};
+  params: { slug: string }
+}
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = params;
+  const { slug } = params
 
   try {
-    const res = await fetch(`https://api.rawg.io/api/games/${slug}?key=${process.env.NEXT_PUBLIC_RAWG_API_KEY}`);
-    const data = await res.json();
-    const { name, description_raw } = parse(GameDetailSchema, data);
+    const res = await fetch(`https://api.rawg.io/api/games/${slug}?key=${process.env.NEXT_PUBLIC_RAWG_API_KEY}`)
+    const data = await res.json()
+    const { name, description_raw } = parse(GameDetailSchema, data)
 
     return {
       title: `Gameigo | ${name}`,
       description: description_raw,
-    };
+    }
   } catch (e) {
-    console.error(JSON.stringify(e));
-    return {};
+    console.error(JSON.stringify(e))
+    return {}
   }
 }
 
 export default async function GameDetailPage({ params }: { params: Record<string, string> }) {
-  const { slug } = params;
-  let gameDetails: GameDetail | null = null;
-  let gameScreenshots: GameScreenshot['results'] = [];
+  const { slug } = params
+  let gameDetails: GameDetail | null = null
+  let gameScreenshots: GameScreenshot['results'] = []
 
   try {
     const detailsPromise = fetch(`https://api.rawg.io/api/games/${slug}?key=${process.env.NEXT_PUBLIC_RAWG_API_KEY}`)
       .then((res) => res.json())
-      .then((res) => parse(GameDetailSchema, res));
+      .then((res) => parse(GameDetailSchema, res))
 
     const screenshotsPromise = fetch(
       `https://api.rawg.io/api/games/${slug}/screenshots?key=${process.env.NEXT_PUBLIC_RAWG_API_KEY}`
     )
       .then((res) => res.json())
-      .then((res) => parse(GameScreenshotSchema, res));
+      .then((res) => parse(GameScreenshotSchema, res))
 
-    const [details, screenshots] = await Promise.all([detailsPromise, screenshotsPromise]);
-    gameDetails = details;
-    gameScreenshots = screenshots.results;
+    const [details, screenshots] = await Promise.all([detailsPromise, screenshotsPromise])
+    gameDetails = details
+    gameScreenshots = screenshots.results
   } catch (e) {
-    console.error(JSON.stringify(e));
+    console.error(JSON.stringify(e))
   }
 
   if (!gameDetails) {
-    notFound();
+    notFound()
   }
 
-  const cookieStore = cookies();
-  const supabase = createClient(cookieStore);
-  const { data } = await supabase.auth.getUser();
-  let isFavorite = false;
+  const cookieStore = cookies()
+  const supabase = createClient(cookieStore)
+  const { data } = await supabase.auth.getUser()
+  let isFavorite = false
 
   if (data.user) {
-    const { data: dbData } = await supabase.from('user_data').select('favorites').eq('user_id', data.user.id).single();
+    const { data: dbData } = await supabase.from('user_data').select('favorites').eq('user_id', data.user.id).single()
 
     if (dbData) {
-      isFavorite = dbData.favorites.includes(gameDetails.id);
+      isFavorite = dbData.favorites.includes(gameDetails.id)
     }
   }
 
@@ -218,12 +218,12 @@ export default async function GameDetailPage({ params }: { params: Record<string
                 <li className="relative rounded overflow-hidden w-full aspect-video" key={item.id}>
                   <BlurImage alt={`game-screenshot-${item.id}`} fill showBg src={item.image} />
                 </li>
-              );
+              )
             })}
           </Flex>
           <ul></ul>
         </>
       )}
     </Container>
-  );
+  )
 }

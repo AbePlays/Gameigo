@@ -1,12 +1,12 @@
-import { Badge, Box, Card, Flex, Grid, Inset, Separator, Text } from '@radix-ui/themes';
+import { Badge, Box, Card, Flex, Grid, Inset, Separator, Text } from '@radix-ui/themes'
 
-import BlurImage from '@components/BlurImage';
-import { formatDate } from '@utils/date';
-import placeholder from 'public/images/placeholder.jpeg';
-import { Game } from 'schemas/game';
+import BlurImage from '@components/BlurImage'
+import { formatDate } from '@utils/date'
+import placeholder from 'public/images/placeholder.jpeg'
+import { Game } from 'schemas/game'
 
 interface Props {
-  game: Game;
+  game: Game
 }
 
 export default function GameCard({ game }: Props) {
@@ -53,5 +53,5 @@ export default function GameCard({ game }: Props) {
         </Grid>
       </Box>
     </Card>
-  );
+  )
 }

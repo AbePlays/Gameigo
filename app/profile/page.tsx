@@ -1,25 +1,25 @@
-import { Avatar, Button, Container, Flex, Heading, Text } from '@radix-ui/themes';
-import { Metadata } from 'next';
-import { cookies } from 'next/headers';
-import { redirect } from 'next/navigation';
+import { Avatar, Button, Container, Flex, Heading, Text } from '@radix-ui/themes'
+import { Metadata } from 'next'
+import { cookies } from 'next/headers'
+import { redirect } from 'next/navigation'
 
-import { createClient } from '@libs/supabase/server';
-import { signout } from './actions';
-import { ChangeName } from './change-name';
-import { ChangePassword } from './change-password';
+import { createClient } from '@libs/supabase/server'
+import { signout } from './actions'
+import { ChangeName } from './change-name'
+import { ChangePassword } from './change-password'
 
 export const metadata: Metadata = {
   title: 'Gameigo | Profile',
   description: 'Manage your profile, change your password and access many other settings on this page.',
-};
+}
 
 export default async function Profile() {
-  const cookieStore = cookies();
-  const supabase = createClient(cookieStore);
-  const { data } = await supabase.auth.getUser();
+  const cookieStore = cookies()
+  const supabase = createClient(cookieStore)
+  const { data } = await supabase.auth.getUser()
 
   if (!data.user) {
-    redirect('/auth');
+    redirect('/auth')
   }
 
   return (
@@ -49,5 +49,5 @@ export default async function Profile() {
         </Button>
       </form>
     </Container>
-  );
+  )
 }

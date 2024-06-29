@@ -1,16 +1,16 @@
-import { createClient } from '@libs/supabase/server';
-import { Avatar, Container, Flex, Link, Text, Tooltip } from '@radix-ui/themes';
-import { cookies } from 'next/headers';
-import NextLink from 'next/link';
+import { createClient } from '@libs/supabase/server'
+import { Avatar, Container, Flex, Link, Text, Tooltip } from '@radix-ui/themes'
+import { cookies } from 'next/headers'
+import NextLink from 'next/link'
 
-import { MobileNavbar } from './MobileNavbar';
-import { ThemeSwitcher } from './ThemeSwitcher';
+import { MobileNavbar } from './MobileNavbar'
+import { ThemeSwitcher } from './ThemeSwitcher'
 
 async function Navbar() {
-  const cookieStore = cookies();
-  const supabase = createClient(cookieStore);
-  const { data } = await supabase.auth.getUser();
-  const { user } = data;
+  const cookieStore = cookies()
+  const supabase = createClient(cookieStore)
+  const { data } = await supabase.auth.getUser()
+  const { user } = data
 
   return (
     <Container className="shadow z-10 bg-[--color-background]" maxWidth="80rem" position="sticky" top="0">
@@ -66,7 +66,7 @@ async function Navbar() {
         </Flex>
       </Flex>
     </Container>
-  );
+  )
 }
 
-export { Navbar };
+export { Navbar }

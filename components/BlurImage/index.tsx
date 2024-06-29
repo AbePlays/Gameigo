@@ -1,7 +1,7 @@
-'use client';
+'use client'
 
-import Image, { ImageProps } from 'next/image';
-import { FunctionComponent, useState } from 'react';
+import Image, { ImageProps } from 'next/image'
+import { FunctionComponent, useState } from 'react'
 
 const BlurImage: FunctionComponent<ImageProps & { showBg?: boolean }> = ({
   alt = '',
@@ -11,8 +11,8 @@ const BlurImage: FunctionComponent<ImageProps & { showBg?: boolean }> = ({
   style = {},
   ...props
 }) => {
-  const [loading, setLoading] = useState(true);
-  const shouldBlur = typeof src === 'object' && loading;
+  const [loading, setLoading] = useState(true)
+  const shouldBlur = typeof src === 'object' && loading
 
   return (
     <Image
@@ -31,7 +31,7 @@ const BlurImage: FunctionComponent<ImageProps & { showBg?: boolean }> = ({
       }}
       {...props}
     />
-  );
-};
+  )
+}
 
-export default BlurImage;
+export default BlurImage

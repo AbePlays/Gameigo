@@ -1,13 +1,13 @@
-'use client';
+'use client'
 
-import { Button, Flex, IconButton, Spinner, Strong, Text, TextField } from '@radix-ui/themes';
-import { useFormState, useFormStatus } from 'react-dom';
+import { Button, Flex, IconButton, Spinner, Strong, Text, TextField } from '@radix-ui/themes'
+import { useFormState, useFormStatus } from 'react-dom'
 
-import { changeName } from './actions';
-import { INITIAL_CHANGE_NAME_STATE } from './constant';
+import { changeName } from './actions'
+import { INITIAL_CHANGE_NAME_STATE } from './constant'
 
 function ChangeName() {
-  const [state, formAction] = useFormState(changeName, INITIAL_CHANGE_NAME_STATE);
+  const [state, formAction] = useFormState(changeName, INITIAL_CHANGE_NAME_STATE)
 
   return (
     <form className="mt-4" action={formAction}>
@@ -24,24 +24,24 @@ function ChangeName() {
         </Text>
       )}
     </form>
-  );
+  )
 }
 
 function Submit() {
-  const { pending } = useFormStatus();
+  const { pending } = useFormStatus()
 
   if (pending) {
     return (
       <IconButton size="3">
         <Spinner />
       </IconButton>
-    );
+    )
   }
   return (
     <Button size="3" type="submit">
       Save
     </Button>
-  );
+  )
 }
 
-export { ChangeName };
+export { ChangeName }

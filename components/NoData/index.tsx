@@ -1,6 +1,6 @@
-import BlurImage from '@components/BlurImage';
-import { Box, Heading } from '@radix-ui/themes';
-import notFound from 'public/images/notfound.png';
+import BlurImage from '@components/BlurImage'
+import { Box, Heading } from '@radix-ui/themes'
+import notFound from 'public/images/notfound.png'
 
 function NoData({ children }: { children?: React.ReactNode }) {
   return (
@@ -11,7 +11,7 @@ function NoData({ children }: { children?: React.ReactNode }) {
       <Heading align="center">No Data Found!</Heading>
       {children}
     </Box>
-  );
+  )
 }
 
-export { NoData };
+export { NoData }

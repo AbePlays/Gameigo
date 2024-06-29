@@ -1,16 +1,16 @@
-'use client';
+'use client'
 
-import { ChevronRightIcon } from '@radix-ui/react-icons';
-import { Box, Button, Flex, Grid, Heading, Text, TextField } from '@radix-ui/themes';
+import { ChevronRightIcon } from '@radix-ui/react-icons'
+import { Box, Button, Flex, Grid, Heading, Text, TextField } from '@radix-ui/themes'
 
-import { useFormState, useFormStatus } from 'react-dom';
-import { signinUsingProvider, signupUser } from './actions';
-import { INITIAL_SIGNUP_STATE } from './constant';
-import { SocialAuthProviders } from './social-auth-providers';
+import { useFormState, useFormStatus } from 'react-dom'
+import { signinUsingProvider, signupUser } from './actions'
+import { INITIAL_SIGNUP_STATE } from './constant'
+import { SocialAuthProviders } from './social-auth-providers'
 
 function Signup() {
-  const [state, formAction] = useFormState(signupUser, INITIAL_SIGNUP_STATE);
-  const [, providerAction] = useFormState(signinUsingProvider, null);
+  const [state, formAction] = useFormState(signupUser, INITIAL_SIGNUP_STATE)
+  const [, providerAction] = useFormState(signinUsingProvider, null)
 
   return (
     <Box>
@@ -68,11 +68,11 @@ function Signup() {
         </Grid>
       </Grid>
     </Box>
-  );
+  )
 }
 
 function Submit() {
-  const { pending } = useFormStatus();
+  const { pending } = useFormStatus()
 
   return (
     <Flex asChild justify="between">
@@ -80,7 +80,7 @@ function Submit() {
         {pending ? 'Creating your account...' : 'Create Your Account'} <ChevronRightIcon />
       </Button>
     </Flex>
-  );
+  )
 }
 
-export { Signup };
+export { Signup }

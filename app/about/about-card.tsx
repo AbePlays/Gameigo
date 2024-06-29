@@ -1,8 +1,8 @@
-import { Box, Heading } from '@radix-ui/themes';
+import { Box, Heading } from '@radix-ui/themes'
 
 interface Props {
-  children?: React.ReactNode;
-  heading: string;
+  children?: React.ReactNode
+  heading: string
 }
 
 function AboutCard({ children, heading }: Props) {
@@ -14,7 +14,7 @@ function AboutCard({ children, heading }: Props) {
       <Box className="h-2 mx-auto my-4 w-7 bg-[--gray-12] -rotate-10 -skew-10" />
       {children}
     </Box>
-  );
+  )
 }
 
-export { AboutCard };
+export { AboutCard }

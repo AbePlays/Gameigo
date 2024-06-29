@@ -1,20 +1,20 @@
-import { IconGithub, IconGoogle } from '@icons';
-import { Button } from '@radix-ui/themes';
+import { IconGithub, IconGoogle } from '@icons'
+import { Button } from '@radix-ui/themes'
 
-import { SOCIALAUTHPROVIDERS } from './constant';
+import { SOCIALAUTHPROVIDERS } from './constant'
 
 function SocialAuthProviders() {
   return SOCIALAUTHPROVIDERS.map((provider) => {
-    let Icon: React.ReactNode;
+    let Icon: React.ReactNode
     switch (provider.providerId) {
       case 'google':
-        Icon = <IconGoogle />;
-        break;
+        Icon = <IconGoogle />
+        break
       case 'github':
-        Icon = <IconGithub />;
-        break;
+        Icon = <IconGithub />
+        break
       default:
-        throw new Error(`Invalid provider`);
+        throw new Error(`Invalid provider`)
     }
 
     return (
@@ -29,8 +29,8 @@ function SocialAuthProviders() {
       >
         {Icon} {provider.title}
       </Button>
-    );
-  });
+    )
+  })
 }
 
-export { SocialAuthProviders };
+export { SocialAuthProviders }
