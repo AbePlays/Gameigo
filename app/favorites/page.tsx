@@ -48,9 +48,9 @@ export default async function Favorites() {
       </Heading>
       {favorites.length > 0 ? (
         <Grid asChild columns="repeat(auto-fill,minmax(300px,1fr))" gap="6" mt="6">
-          <ul>
-            {favorites.map((game) => (
-              <li key={game.id}>
+          <ul className="stagger-cards">
+            {favorites.map((game, index) => (
+              <li key={game.id} style={{ '--i': index } as React.CSSProperties}>
                 <Link aria-label={game.name} href={`/game/${game.slug}`}>
                   <GameCard game={game} />
                 </Link>

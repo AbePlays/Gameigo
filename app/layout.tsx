@@ -2,10 +2,17 @@ import { Theme } from '@radix-ui/themes'
 import '@radix-ui/themes/styles.css'
 import { Metadata } from 'next'
 import { ThemeProvider } from 'next-themes'
+import { Rethink_Sans } from 'next/font/google'
 import { Toaster } from 'react-hot-toast'
 
 import { Navbar } from '@components/Navbar'
 import './globals.css'
+
+const rethink = Rethink_Sans({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-rethink',
+})
 
 export const metadata: Metadata = {
   icons: {
@@ -18,7 +25,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html className={rethink.className} lang="en">
       <body>
         <ThemeProvider attribute="class">
           <Theme accentColor="lime">
