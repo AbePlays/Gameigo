@@ -41,11 +41,12 @@ export async function changeName(
       return {
         fields: result,
         errors: { ...INITIAL_CHANGE_NAME_STATE.errors, name: error.message },
+        saved: false,
       }
     }
 
     revalidatePath('/profile')
-    return { errors: INITIAL_CHANGE_NAME_STATE.errors, fields: result }
+    return { errors: INITIAL_CHANGE_NAME_STATE.errors, fields: result, saved: true }
   } catch (e) {
     const fields = {
       name: parse(string(), formData.get('name') || ''),
@@ -56,10 +57,11 @@ export async function changeName(
       return {
         errors: { ...INITIAL_CHANGE_NAME_STATE.errors, ...errors },
         fields,
+        saved: false,
       }
     }
 
-    return { errors: { ...INITIAL_CHANGE_NAME_STATE.errors, form: 'Something went wrong' }, fields }
+    return { errors: { ...INITIAL_CHANGE_NAME_STATE.errors, form: 'Something went wrong' }, fields, saved: false }
   }
 }
 
@@ -80,11 +82,12 @@ export async function changePassword(
       return {
         fields: result,
         errors: { ...INITIAL_CHANGE_PASSWORD_STATE.errors, password: error.message },
+        saved: false,
       }
     }
 
     revalidatePath('/profile')
-    return { errors: INITIAL_CHANGE_PASSWORD_STATE.errors, fields: result }
+    return { errors: INITIAL_CHANGE_PASSWORD_STATE.errors, fields: result, saved: true }
   } catch (e) {
     const fields = {
       password: parse(string(), formData.get('password') || ''),
@@ -95,10 +98,11 @@ export async function changePassword(
       return {
         errors: { ...INITIAL_CHANGE_PASSWORD_STATE.errors, ...errors },
         fields,
+        saved: false,
       }
     }
 
-    return { errors: { ...INITIAL_CHANGE_PASSWORD_STATE.errors, form: 'Something went wrong' }, fields }
+    return { errors: { ...INITIAL_CHANGE_PASSWORD_STATE.errors, form: 'Something went wrong' }, fields, saved: false }
   }
 }
 
