@@ -1,7 +1,7 @@
-import { Card, Flex, Grid, Inset, Skeleton } from '@radix-ui/themes';
+import { Card, Flex, Grid, Inset, Skeleton } from '@radix-ui/themes'
 
 interface Props {
-  count?: number;
+  count?: number
 }
 
 export default function LoadingCard({ count = 1 }: Props) {
@@ -25,8 +25,8 @@ export default function LoadingCard({ count = 1 }: Props) {
                 <Skeleton height="1.5rem" />
               </Grid>
             </Card>
-          );
+          )
         })}
     </>
-  );
+  )
 }

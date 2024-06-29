@@ -1,13 +1,13 @@
-'use client';
+'use client'
 
-import { Button, Flex, IconButton, Spinner, Strong, Text, TextField } from '@radix-ui/themes';
-import { useFormState, useFormStatus } from 'react-dom';
+import { Button, Flex, IconButton, Spinner, Strong, Text, TextField } from '@radix-ui/themes'
+import { useFormState, useFormStatus } from 'react-dom'
 
-import { changePassword } from './actions';
-import { INITIAL_CHANGE_PASSWORD_STATE } from './constant';
+import { changePassword } from './actions'
+import { INITIAL_CHANGE_PASSWORD_STATE } from './constant'
 
 function ChangePassword() {
-  const [state, formAction] = useFormState(changePassword, INITIAL_CHANGE_PASSWORD_STATE);
+  const [state, formAction] = useFormState(changePassword, INITIAL_CHANGE_PASSWORD_STATE)
 
   return (
     <form className="mt-4" action={formAction}>
@@ -24,24 +24,24 @@ function ChangePassword() {
         </Text>
       )}
     </form>
-  );
+  )
 }
 
 function Submit() {
-  const { pending } = useFormStatus();
+  const { pending } = useFormStatus()
 
   if (pending) {
     return (
       <IconButton size="3">
         <Spinner />
       </IconButton>
-    );
+    )
   }
   return (
     <Button size="3" type="submit">
       Save
     </Button>
-  );
+  )
 }
 
-export { ChangePassword };
+export { ChangePassword }

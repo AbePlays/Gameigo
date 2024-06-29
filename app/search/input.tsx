@@ -1,24 +1,24 @@
-'use client';
+'use client'
 
-import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
-import { TextField } from '@radix-ui/themes';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { MagnifyingGlassIcon } from '@radix-ui/react-icons'
+import { TextField } from '@radix-ui/themes'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 
 function Input() {
-  const pathname = usePathname();
-  const router = useRouter();
-  const searchParams = useSearchParams();
+  const pathname = usePathname()
+  const router = useRouter()
+  const searchParams = useSearchParams()
 
   function handleSearch(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    const params = new URLSearchParams(searchParams);
-    const query = new FormData(e.currentTarget).get('query') as string;
+    e.preventDefault()
+    const params = new URLSearchParams(searchParams)
+    const query = new FormData(e.currentTarget).get('query') as string
     if (query) {
-      params.set('query', query);
+      params.set('query', query)
     } else {
-      params.delete('query');
+      params.delete('query')
     }
-    router.replace(`${pathname}?${params.toString()}`);
+    router.replace(`${pathname}?${params.toString()}`)
   }
 
   return (
@@ -36,7 +36,7 @@ function Input() {
         </TextField.Slot>
       </TextField.Root>
     </form>
-  );
+  )
 }
 
-export { Input };
+export { Input }

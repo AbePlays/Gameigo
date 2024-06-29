@@ -1,4 +1,4 @@
-import { InferInput, array, boolean, nullish, number, object, string } from 'valibot';
+import { InferInput, array, boolean, nullish, number, object, string } from 'valibot'
 
 export const GameSchema = object({
   background_image: nullish(string()),
@@ -13,7 +13,7 @@ export const GameSchema = object({
   slug: string(),
   stores: nullish(array(object({ store: object({ id: number(), domain: nullish(string()), name: string() }) }))),
   tba: boolean(),
-});
+})
 
 export const GameDetailSchema = object({
   ...GameSchema.entries,
@@ -21,21 +21,21 @@ export const GameDetailSchema = object({
   description_raw: string(),
   publishers: nullish(array(object({ id: number(), name: string() }))),
   website: string(),
-});
+})
 
 export const GameSearchSchema = object({
   count: number(),
   next: nullish(string()),
   previous: nullish(string()),
   results: array(GameSchema),
-});
+})
 
 export const GameScreenshotSchema = object({
   count: number(),
   results: array(object({ id: number(), image: string() })),
-});
+})
 
-export type Game = InferInput<typeof GameSchema>;
-export type GameDetail = InferInput<typeof GameDetailSchema>;
-export type GameSearchResult = InferInput<typeof GameSearchSchema>;
-export type GameScreenshot = InferInput<typeof GameScreenshotSchema>;
+export type Game = InferInput<typeof GameSchema>
+export type GameDetail = InferInput<typeof GameDetailSchema>
+export type GameSearchResult = InferInput<typeof GameSearchSchema>
+export type GameScreenshot = InferInput<typeof GameScreenshotSchema>

@@ -1,21 +1,21 @@
-import { Box, Container, Heading, Text } from '@radix-ui/themes';
-import { Metadata } from 'next';
-import { Suspense } from 'react';
+import { Box, Container, Heading, Text } from '@radix-ui/themes'
+import { Metadata } from 'next'
+import { Suspense } from 'react'
 
-import BlurImage from '@components/BlurImage';
-import SearchResult from '@components/SearchResult';
-import heroBg from 'public/images/search_hero.jpeg';
-import { Input } from './input';
-import { Loading } from './skeleton';
+import BlurImage from '@components/BlurImage'
+import SearchResult from '@components/SearchResult'
+import heroBg from 'public/images/search_hero.jpeg'
+import { Input } from './input'
+import { Loading } from './skeleton'
 
 export const metadata: Metadata = {
   title: 'Gameigo | Search',
   description:
     'Gameigo is a free and open source application backed by a huge database of video games provided by ROG. Explore and search for games and everything you need in one place.',
-};
+}
 
 export default function SearchPage({ searchParams }: { searchParams: Record<string, string> }) {
-  const { page = '', query = '' } = searchParams;
+  const { page = '', query = '' } = searchParams
 
   return (
     <Box position="relative">
@@ -48,5 +48,5 @@ export default function SearchPage({ searchParams }: { searchParams: Record<stri
         </Container>
       ) : null}
     </Box>
-  );
+  )
 }

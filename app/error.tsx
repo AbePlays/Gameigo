@@ -1,12 +1,12 @@
-'use client';
+'use client'
 
-import { Button, Container, Grid, Heading, Text } from '@radix-ui/themes';
+import { Button, Container, Grid, Heading, Text } from '@radix-ui/themes'
 
-import BlurImage from '@components/BlurImage';
-import errorImg from 'public/images/error.png';
+import BlurImage from '@components/BlurImage'
+import errorImg from 'public/images/error.png'
 
 export default function Error({ error, reset }: { error: Error & { digest?: string }; reset: () => void }) {
-  console.error(error);
+  console.error(error)
 
   return (
     <Container p={{ initial: '4', sm: '8' }}>
@@ -18,11 +18,11 @@ export default function Error({ error, reset }: { error: Error & { digest?: stri
           width="500"
         />
         <Heading>Oops, something went wrong</Heading>
-        <Text>Don't worry, we're fixing this. We will be back for you soon!</Text>
+        <Text>Don&apos;t worry, we&apos;re fixing this. We will be back for you soon!</Text>
         <Button onClick={reset} size="3">
           Try again
         </Button>
       </Grid>
     </Container>
-  );
+  )
 }

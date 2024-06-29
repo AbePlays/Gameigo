@@ -1,8 +1,8 @@
-import { Button, Container, Grid, Heading, Text } from '@radix-ui/themes';
-import NextLink from 'next/link';
+import { Button, Container, Grid, Heading, Text } from '@radix-ui/themes'
+import NextLink from 'next/link'
 
-import BlurImage from '@components/BlurImage';
-import error from 'public/images/error.png';
+import BlurImage from '@components/BlurImage'
+import error from 'public/images/error.png'
 
 export default function NotFoundPage() {
   return (
@@ -21,5 +21,5 @@ export default function NotFoundPage() {
         </Button>
       </Grid>
     </Container>
-  );
+  )
 }

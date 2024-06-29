@@ -1,34 +1,34 @@
-import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons';
-import { Flex, Text } from '@radix-ui/themes';
-import Link from 'next/link';
-import { parse } from 'valibot';
+import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons'
+import { Flex, Text } from '@radix-ui/themes'
+import Link from 'next/link'
+import { parse } from 'valibot'
 
-import GameCard from '@components/GameCard';
-import { NoData } from '@components/NoData';
-import { GameSearchResult, GameSearchSchema } from 'schemas/game';
+import GameCard from '@components/GameCard'
+import { NoData } from '@components/NoData'
+import { GameSearchResult, GameSearchSchema } from 'schemas/game'
 
 export default async function SearchResult(props: { page: number; query: string }) {
-  const { page, query } = props;
-  let searchResult: GameSearchResult | null = null;
+  const { page, query } = props
+  let searchResult: GameSearchResult | null = null
 
   try {
     const response = await fetch(
       `https://api.rawg.io/api/games?key=${process.env.NEXT_PUBLIC_RAWG_API_KEY}&search=${query}&page=${page}&page_size=12`
-    );
-    const data = parse(GameSearchSchema, await response.json());
-    searchResult = data;
+    )
+    const data = parse(GameSearchSchema, await response.json())
+    searchResult = data
   } catch (e) {
-    console.error(JSON.stringify(e));
+    console.error(JSON.stringify(e))
   }
 
-  if (!searchResult) {
+  if (!searchResult || !searchResult.results.length) {
     return (
       <NoData>
         <Text align="center" as="p" mt="4">
-          No games found for "{query}"
+          No games found for &quot;{query}&quot;
         </Text>
       </NoData>
-    );
+    )
   }
 
   return (
@@ -64,5 +64,5 @@ export default async function SearchResult(props: { page: number; query: string 
         </Link>
       </Flex>
     </>
-  );
+  )
 }

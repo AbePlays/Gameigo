@@ -1,32 +1,32 @@
-import { ChevronRightIcon } from '@radix-ui/react-icons';
-import { Button, Container, Grid, Heading, Text } from '@radix-ui/themes';
-import { Metadata } from 'next';
-import { cookies } from 'next/headers';
-import Link from 'next/link';
-import { redirect } from 'next/navigation';
+import { ChevronRightIcon } from '@radix-ui/react-icons'
+import { Button, Container, Grid, Heading, Text } from '@radix-ui/themes'
+import { Metadata } from 'next'
+import { cookies } from 'next/headers'
+import Link from 'next/link'
+import { redirect } from 'next/navigation'
 
-import BlurImage from '@components/BlurImage';
-import { createClient } from '@libs/supabase/server';
-import easy from 'public/images/easy.png';
-import free from 'public/images/free.png';
-import hero from 'public/images/hero.png';
-import homeDark from 'public/images/home.png';
-import vision from 'public/images/vision.png';
-import { ProductInfo } from './product-info';
+import BlurImage from '@components/BlurImage'
+import { createClient } from '@libs/supabase/server'
+import easy from 'public/images/easy.png'
+import free from 'public/images/free.png'
+import hero from 'public/images/hero.png'
+import homeDark from 'public/images/home.png'
+import vision from 'public/images/vision.png'
+import { ProductInfo } from './product-info'
 
 export const metadata: Metadata = {
   title: 'Gameigo | Welcome',
   description:
     'Gameigo is a video game discovery platform where users can explore and create a personalized collection of video games from around the world.',
-};
+}
 
 export default async function Home() {
-  const cookieStore = cookies();
-  const supabase = createClient(cookieStore);
-  const { data } = await supabase.auth.getUser();
+  const cookieStore = cookies()
+  const supabase = createClient(cookieStore)
+  const { data } = await supabase.auth.getUser()
 
   if (data.user) {
-    redirect('/home');
+    redirect('/home')
   }
 
   return (
@@ -117,5 +117,5 @@ export default async function Home() {
         </Button>
       </Grid>
     </Container>
-  );
+  )
 }

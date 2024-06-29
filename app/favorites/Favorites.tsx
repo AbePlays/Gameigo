@@ -1,36 +1,36 @@
-import { Container, Grid, Heading, Text } from '@radix-ui/themes';
-import { cookies } from 'next/headers';
-import Link from 'next/link';
-import { redirect } from 'next/navigation';
-import { parse } from 'valibot';
-import GameCard from '@components/GameCard';
-import { NoData } from '@components/NoData';
-import { createClient } from '@libs/supabase/server';
-import { Game, GameSchema } from '@schemas/game';
+import { Container, Grid, Heading, Text } from '@radix-ui/themes'
+import { cookies } from 'next/headers'
+import Link from 'next/link'
+import { redirect } from 'next/navigation'
+import { parse } from 'valibot'
+import GameCard from '@components/GameCard'
+import { NoData } from '@components/NoData'
+import { createClient } from '@libs/supabase/server'
+import { Game, GameSchema } from '@schemas/game'
 
 export default async function Favorites() {
-  const cookieStore = cookies();
-  const supabase = createClient(cookieStore);
-  const { data } = await supabase.auth.getUser();
+  const cookieStore = cookies()
+  const supabase = createClient(cookieStore)
+  const { data } = await supabase.auth.getUser()
 
   if (!data.user) {
-    redirect('/auth');
+    redirect('/auth')
   }
 
-  const favorites: Game[] = [];
-  const { data: dbData } = await supabase.from('user_data').select('*').eq('user_id', data.user.id).single();
+  const favorites: Game[] = []
+  const { data: dbData } = await supabase.from('user_data').select('*').eq('user_id', data.user.id).single()
   if (dbData) {
-    const detailsPromise: Promise<number>[] = [];
+    const detailsPromise: Promise<number>[] = []
     dbData.favorites.map((id: number) => {
       detailsPromise.push(
         fetch(`https://api.rawg.io/api/games/${id}?key=${process.env.NEXT_PUBLIC_RAWG_API_KEY}`)
           .then((res) => res.json())
           .then((res) => parse(GameSchema, res))
           .then((res) => favorites.push(res))
-      );
-    });
+      )
+    })
 
-    await Promise.all(detailsPromise);
+    await Promise.all(detailsPromise)
   }
 
   return (
@@ -58,5 +58,5 @@ export default async function Favorites() {
         </NoData>
       )}
     </Container>
-  );
+  )
 }

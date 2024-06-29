@@ -1,12 +1,12 @@
-import { Grid, Heading, Text } from '@radix-ui/themes';
-import { StaticImageData } from 'next/image';
+import { Grid, Heading, Text } from '@radix-ui/themes'
+import { StaticImageData } from 'next/image'
 
-import BlurImage from '@components/BlurImage';
+import BlurImage from '@components/BlurImage'
 
 interface Props {
-  content: string;
-  src: StaticImageData;
-  title: string;
+  content: string
+  src: StaticImageData
+  title: string
 }
 
 function ProductInfo({ content, src, title }: Props) {
@@ -20,7 +20,7 @@ function ProductInfo({ content, src, title }: Props) {
         {content}
       </Text>
     </Grid>
-  );
+  )
 }
 
-export { ProductInfo };
+export { ProductInfo }

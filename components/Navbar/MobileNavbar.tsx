@@ -1,10 +1,10 @@
-import { HamburgerMenuIcon } from '@radix-ui/react-icons';
-import { DropdownMenu, IconButton, Link, Separator } from '@radix-ui/themes';
-import { type User } from '@supabase/supabase-js';
-import NextLink from 'next/link';
+import { HamburgerMenuIcon } from '@radix-ui/react-icons'
+import { DropdownMenu, IconButton, Link, Separator } from '@radix-ui/themes'
+import { type User } from '@supabase/supabase-js'
+import NextLink from 'next/link'
 
 interface Props {
-  user: User | null;
+  user: User | null
 }
 
 function MobileNavbar({ user }: Props) {
@@ -44,7 +44,7 @@ function MobileNavbar({ user }: Props) {
         </DropdownMenu.Item>
       </DropdownMenu.Content>
     </DropdownMenu.Root>
-  );
+  )
 }
 
-export { MobileNavbar };
+export { MobileNavbar }

@@ -1,4 +1,4 @@
-import { object, pipe, string, transform } from 'valibot';
+import { object, pipe, string, transform } from 'valibot'
 
 export const FavoriteSchema = object({
   gameId: pipe(
@@ -7,4 +7,4 @@ export const FavoriteSchema = object({
   ),
   slug: string(),
   userId: string(),
-});
+})
