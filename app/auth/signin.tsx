@@ -14,7 +14,7 @@ function Signin() {
 
   return (
     <Box>
-      <Heading align="center" size="9" weight="bold">
+      <Heading align="center" size={{ initial: '8', sm: '9' }}>
         Signin to Your Account
       </Heading>
       <Text align="center" as="p" className="max-w-xl" mt="9" mx="auto" size="5">

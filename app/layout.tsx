@@ -25,7 +25,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html className={rethink.className} lang="en">
+    <html className={rethink.className} lang="en" suppressHydrationWarning>
       <body>
         <ThemeProvider attribute="class">
           <Theme accentColor="lime">

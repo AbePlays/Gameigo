@@ -23,8 +23,8 @@ export default async function Profile() {
   }
 
   return (
-    <Container p={{ initial: '4', sm: '8' }} size="2">
-      <Heading as="h1" size="9">
+    <Container px={{ initial: '4', sm: '8' }} py="8" size="2">
+      <Heading as="h1" size={{ initial: '8', sm: '9' }}>
         Profile
       </Heading>
       <Flex align="center" gap="4" mt="6">

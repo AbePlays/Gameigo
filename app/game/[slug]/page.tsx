@@ -90,7 +90,7 @@ export default async function GameDetailPage({ params }: { params: Record<string
             'TBA'
           )}
         </Text>
-        <Heading align="center" mt="8" size="9">
+        <Heading align="center" mt="8" size={{ initial: '8', sm: '9' }}>
           {gameDetails.name}
         </Heading>
       </Box>

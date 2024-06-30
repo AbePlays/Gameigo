@@ -3,9 +3,9 @@ import { Metadata } from 'next'
 import { Suspense } from 'react'
 
 import BlurImage from '@components/BlurImage'
-import SearchResult from '@components/SearchResult'
 import heroBg from 'public/images/search_hero.jpeg'
 import { Input } from './input'
+import SearchResult from './search-result'
 import { Loading } from './skeleton'
 
 export const metadata: Metadata = {
@@ -41,7 +41,7 @@ export default function SearchPage({ searchParams }: { searchParams: Record<stri
 
       {/* Search Results */}
       {query ? (
-        <Container mt="6" px="4">
+        <Container my="6" mx="4">
           <Suspense fallback={<Loading />} key={query + page}>
             <SearchResult page={Number(page || 1)} query={query} />
           </Suspense>

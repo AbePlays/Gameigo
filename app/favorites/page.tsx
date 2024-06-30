@@ -1,7 +1,7 @@
-import { Container, Grid, Heading, Text } from '@radix-ui/themes'
+import { Container, Grid, Heading, Link, Text } from '@radix-ui/themes'
 import { Metadata } from 'next'
 import { cookies } from 'next/headers'
-import Link from 'next/link'
+import NextLink from 'next/link'
 import { redirect } from 'next/navigation'
 import { parse } from 'valibot'
 
@@ -42,17 +42,19 @@ export default async function Favorites() {
   }
 
   return (
-    <Container p={{ initial: '4', sm: '8' }}>
-      <Heading as="h1" size="9">
+    <Container px={{ initial: '4', sm: '8' }} py="8">
+      <Heading as="h1" size={{ initial: '8', sm: '9' }}>
         Favorites
       </Heading>
       {favorites.length > 0 ? (
-        <Grid asChild columns="repeat(auto-fill,minmax(300px,1fr))" gap="6" mt="6">
+        <Grid asChild columns="repeat(auto-fill,minmax(300px,1fr))" gap="4" mt="6">
           <ul className="stagger-cards">
             {favorites.map((game, index) => (
               <li key={game.id} style={{ '--i': index } as React.CSSProperties}>
-                <Link aria-label={game.name} href={`/game/${game.slug}`}>
-                  <GameCard game={game} />
+                <Link asChild className="!text-[--gray-12]" underline="none">
+                  <NextLink aria-label={game.name} href={`/game/${game.slug}`}>
+                    <GameCard game={game} />
+                  </NextLink>
                 </Link>
               </li>
             ))}
