@@ -18,7 +18,10 @@ async function Navbar() {
         <MobileNavbar user={user} />
 
         <Link asChild underline="none">
-          <NextLink className="!font-semibold !text-[--gray-12] !tracking-widest" href="/home">
+          <NextLink
+            className="!font-semibold !text-[--gray-12] !tracking-widest !absolute !right-1/2 !translate-x-1/2 sm:!static"
+            href="/home"
+          >
             GAMEIGO
           </NextLink>
         </Link>

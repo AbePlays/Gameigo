@@ -1,7 +1,7 @@
-import { Container, Text } from '@radix-ui/themes'
+import { Container, Link, Text } from '@radix-ui/themes'
 import { type Metadata } from 'next'
 import { cookies } from 'next/headers'
-import Link from 'next/link'
+import NextLink from 'next/link'
 import { redirect } from 'next/navigation'
 
 import { createClient } from '@libs/supabase/server'
@@ -25,20 +25,20 @@ export default async function AuthPage({ searchParams }: { searchParams: Record<
 
   const { type = '' } = searchParams
 
-  const isLogin = type === 'signin'
+  const isSignup = type === 'signup'
   const footer = {
-    head: isLogin ? "Don't have an account? " : 'Already have an account? ',
-    tail: isLogin ? 'Sign up' : 'Sign in',
+    head: isSignup ? 'Already have an account?' : "Don't have an account?",
+    tail: isSignup ? 'Sign in' : 'Sign up',
   }
 
   return (
-    <Container p={{ initial: '4', sm: '8' }}>
-      {isLogin ? <Signin /> : <Signup />}
+    <Container px={{ initial: '4', sm: '8' }} py="8">
+      {isSignup ? <Signup /> : <Signin />}
 
       <Text align="center" as="p" mt="9">
-        {footer.head}
-        <Link className="font-bold hover:underline" href={`/auth?type=${isLogin ? 'signup' : 'signin'}`}>
-          {footer.tail}
+        {footer.head}{' '}
+        <Link asChild className="!text-[--accent-11]" weight="bold">
+          <NextLink href={`/auth?type=${isSignup ? 'signin' : 'signup'}`}>{footer.tail}</NextLink>
         </Link>{' '}
         instead
       </Text>

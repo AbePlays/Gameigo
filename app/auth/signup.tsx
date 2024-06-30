@@ -14,7 +14,7 @@ function Signup() {
 
   return (
     <Box>
-      <Heading align="center" className="font-extrabold" size="9">
+      <Heading align="center" size={{ initial: '8', sm: '9' }}>
         Create Your Account
       </Heading>
       <Text align="center" as="p" className="max-w-xl" mt="9" mx="auto" size="5">

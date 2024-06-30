@@ -1,6 +1,6 @@
-import { Container, Grid, Heading, Text } from '@radix-ui/themes'
+import { Container, Grid, Heading, Link, Text } from '@radix-ui/themes'
 import { type Metadata } from 'next'
-import Link from 'next/link'
+import NextLink from 'next/link'
 import { parse } from 'valibot'
 
 import GameCard from '@components/GameCard'
@@ -28,19 +28,21 @@ export default async function Home() {
   }
 
   return (
-    <Container p={{ initial: '4', sm: '8' }}>
-      <Heading as="h1" size="9">
+    <Container px={{ initial: '4', sm: '8' }} py="8">
+      <Heading as="h1" size={{ initial: '8', sm: '9' }}>
         New and trending
       </Heading>
       <Text as="p" mt="2" size="5" weight="light">
         Based on player counts and release date
       </Text>
-      <Grid asChild columns="repeat(auto-fill,minmax(300px,1fr))" gap="6" mt="6">
+      <Grid asChild columns="repeat(auto-fill,minmax(300px,1fr))" gap="4" mt="6">
         <ul className="stagger-cards">
           {games.map((game, index) => (
             <li key={game.id} style={{ '--i': index } as React.CSSProperties}>
-              <Link aria-label={game.name} href={`/game/${game.slug}`}>
-                <GameCard game={game} />
+              <Link asChild className="!text-[--gray-12]" underline="none">
+                <NextLink aria-label={game.name} href={`/game/${game.slug}`}>
+                  <GameCard game={game} />
+                </NextLink>
               </Link>
             </li>
           ))}
