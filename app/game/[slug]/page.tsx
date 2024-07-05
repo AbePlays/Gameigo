@@ -212,16 +212,20 @@ export default async function GameDetailPage({ params }: { params: Record<string
             Screenshots
           </Heading>
 
-          <Flex gap="4" mt="4">
-            {gameScreenshots.map((item) => {
-              return (
-                <li className="relative rounded overflow-hidden w-full aspect-video" key={item.id}>
-                  <BlurImage alt={`game-screenshot-${item.id}`} fill showBg src={item.image} />
-                </li>
-              )
-            })}
+          <Flex asChild gap="4" mt="4">
+            <ul className="overflow-scroll">
+              {gameScreenshots.map((item) => {
+                return (
+                  <li
+                    className="relative rounded overflow-hidden shrink-0 h-42 aspect-ratio-video object-cover"
+                    key={item.id}
+                  >
+                    <BlurImage alt={`game-screenshot-${item.id}`} fill showBg src={item.image} />
+                  </li>
+                )
+              })}
+            </ul>
           </Flex>
-          <ul></ul>
         </>
       )}
     </Container>

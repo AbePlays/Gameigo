@@ -32,7 +32,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <Navbar />
             <main>{children}</main>
             <Toaster
-              position="bottom-right"
               toastOptions={{
                 error: {
                   className: '!bg-red-50 border border-red-300 !text-red-700',
