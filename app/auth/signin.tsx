@@ -15,7 +15,7 @@ function Signin() {
   return (
     <Box>
       <Heading align="center" size={{ initial: '8', sm: '9' }}>
-        Signin to Your Account
+        Sign in to Your Account
       </Heading>
       <Text align="center" as="p" className="max-w-xl" mt="9" mx="auto" size="5">
         Choose from 30,000+ games around the world with new addition every few weeks
@@ -68,7 +68,7 @@ function Submit() {
   return (
     <Flex asChild justify="between">
       <Button disabled={pending} type="submit" size="3">
-        {pending ? 'Signing in...' : 'Signin to Your Account'}
+        {pending ? 'Signing in...' : 'Sign in to Your Account'}
         <ChevronRightIcon />
       </Button>
     </Flex>
