@@ -36,7 +36,7 @@ export default async function SearchResult(props: { page: number; query: string 
       <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-8">
         {searchResult.results.map((game) => (
           <Link asChild className="!text-[--gray-12]" key={game.id} underline="none">
-            <NextLink href={`/game/${game.slug}`}>
+            <NextLink aria-label={game.name} href={`/game/${game.slug}`} prefetch>
               <GameCard game={game} />
             </NextLink>
           </Link>
@@ -50,6 +50,7 @@ export default async function SearchResult(props: { page: number; query: string 
             aria-disabled={searchResult.previous ? undefined : 'true'}
             className={`!flex !gap-2 !items-center ${searchResult.previous ? '' : '!pointer-events-none !opacity-50'}`}
             href={searchResult.previous ? `/search?query=${query}&page=${page - 1}` : '#'}
+            prefetch={!!searchResult.previous}
             tabIndex={searchResult.previous ? 0 : -1}
           >
             <ChevronLeftIcon /> Previous
@@ -63,6 +64,7 @@ export default async function SearchResult(props: { page: number; query: string 
             aria-disabled={searchResult.next ? undefined : 'true'}
             className={`!flex !gap-2 !items-center ${searchResult.next ? '' : '!pointer-events-none !opacity-50'}`}
             href={searchResult.next ? `/search?query=${query}&page=${page + 1}` : '#'}
+            prefetch={!!searchResult.next}
             tabIndex={searchResult.next ? 0 : -1}
           >
             Next <ChevronRightIcon />
