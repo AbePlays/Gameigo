@@ -52,7 +52,7 @@ export default async function Favorites() {
             {favorites.map((game, index) => (
               <li key={game.id} style={{ '--i': index } as React.CSSProperties}>
                 <Link asChild className="!text-[--gray-12]" underline="none">
-                  <NextLink aria-label={game.name} href={`/game/${game.slug}`}>
+                  <NextLink aria-label={game.name} href={`/game/${game.slug}`} prefetch>
                     <GameCard game={game} />
                   </NextLink>
                 </Link>
