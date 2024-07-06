@@ -33,10 +33,10 @@ export default async function Home() {
     <Container p={{ initial: '4', sm: '8' }}>
       <Grid
         align="center"
-        className="h-[calc(100vh-64px-3rem)]"
         columns={{ initial: '1', sm: '2' }}
         maxWidth="60rem"
         mx="auto"
+        height="calc(100vh - 64px - 3rem)"
       >
         <Grid className="text-center md:text-left" gap={{ initial: '6', sm: '8' }} height="max-content">
           <Heading as="h1" className="!leading-[1.15]" size={{ initial: '8', sm: '9' }}>
