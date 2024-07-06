@@ -19,7 +19,12 @@ export default async function Home() {
     const res = await fetch(
       `https://api.rawg.io/api/games?key=${
         process.env.NEXT_PUBLIC_RAWG_API_KEY
-      }&dates=${getSixMonthsAgoDate()},${getTodaysDate()}&ordering=-added`
+      }&dates=${getSixMonthsAgoDate()},${getTodaysDate()}&ordering=-added`,
+      {
+        next: {
+          revalidate: 12 * 60 * 60, // 12 hours
+        },
+      }
     )
     const data = parse(GameSearchSchema, await res.json())
     games = data.results

@@ -2,10 +2,10 @@ import { ArrowTopRightIcon } from '@radix-ui/react-icons'
 import { Box, Button, Container, Flex, Heading, Link, Text } from '@radix-ui/themes'
 import { Metadata } from 'next'
 import { cookies } from 'next/headers'
+import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { parse } from 'valibot'
 
-import BlurImage from '@components/BlurImage'
 import { createClient } from '@libs/supabase/server'
 import { formatDate } from '@utils/date'
 import { GameDetail, GameDetailSchema, GameScreenshot, GameScreenshotSchema } from 'schemas/game'
@@ -95,8 +95,14 @@ export default async function GameDetailPage({ params }: { params: Record<string
         </Heading>
       </Box>
 
-      <Box className="rounded-xl aspect-video shadow-lg" mt="6" overflow="hidden" position="relative" width="100%">
-        <BlurImage fill showBg src={gameDetails.background_image || ''} alt="game background" />
+      <Box
+        className="bg-[--gray-10] rounded-xl aspect-video shadow-lg"
+        mt="6"
+        overflow="hidden"
+        position="relative"
+        width="100%"
+      >
+        <Image fill src={gameDetails.background_image || ''} alt="game background" />
       </Box>
 
       <Flex direction={{ initial: 'column', sm: 'row' }} gap="6" my="8">
@@ -217,10 +223,10 @@ export default async function GameDetailPage({ params }: { params: Record<string
               {gameScreenshots.map((item) => {
                 return (
                   <li
-                    className="relative rounded overflow-hidden shrink-0 h-42 aspect-ratio-video object-cover"
+                    className="bg-[--gray-10] relative rounded overflow-hidden shrink-0 h-42 aspect-ratio-video object-cover"
                     key={item.id}
                   >
-                    <BlurImage alt={`game-screenshot-${item.id}`} fill showBg src={item.image} />
+                    <Image alt={`game-screenshot-${item.id}`} fill src={item.image} />
                   </li>
                 )
               })}
