@@ -40,8 +40,8 @@ async function Navbar() {
               </NextLink>
             </Link>
           ) : (
-            <Tooltip content="Please login first">
-              <Text className="opacity-50" weight="medium">
+            <Tooltip content="Please sign in first">
+              <Text className="opacity-70" weight="medium">
                 Favorites
               </Text>
             </Tooltip>
