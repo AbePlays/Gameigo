@@ -2,16 +2,16 @@ import { ChevronRightIcon } from '@radix-ui/react-icons'
 import { Button, Container, Grid, Heading, Text } from '@radix-ui/themes'
 import { Metadata } from 'next'
 import { cookies } from 'next/headers'
+import Image from 'next/image'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 
-import BlurImage from '@components/BlurImage'
 import { createClient } from '@libs/supabase/server'
-import easy from 'public/images/easy.png'
-import free from 'public/images/free.png'
+import easy from 'public/images/easy.svg'
+import free from 'public/images/free.svg'
 import hero from 'public/images/hero.png'
-import homeDark from 'public/images/home.png'
-import vision from 'public/images/vision.png'
+import homeDark from 'public/images/home.jpg'
+import vision from 'public/images/vision.svg'
 import { ProductInfo } from './product-info'
 
 export const metadata: Metadata = {
@@ -65,21 +65,14 @@ export default async function Home() {
           </Button>
         </Grid>
 
-        <BlurImage alt="" className="h-fit mx-auto order-first md:order-last" src={hero} height="400" width="500" />
+        <Image alt="" className="h-fit mx-auto order-first md:order-last" src={hero} height="400" width="500" />
       </Grid>
 
       <Heading align="center" as="h2" className="underline" mt="9" size="8">
         Why Choose Gameigo?
       </Heading>
 
-      <BlurImage
-        alt="Gameigo home page"
-        className="shadow-lg rounded mx-auto mt-8"
-        showBg
-        src={homeDark}
-        height="575"
-        width="920"
-      />
+      <Image alt="Gameigo home page" className="shadow-lg rounded mx-auto mt-8" src={homeDark} />
 
       <ul className="py-8 list-none text-center">
         <li>

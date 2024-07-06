@@ -1,9 +1,9 @@
 'use client'
 
 import { Button, Container, Grid, Heading, Text } from '@radix-ui/themes'
+import Image from 'next/image'
 
-import BlurImage from '@components/BlurImage'
-import errorImg from 'public/images/error.png'
+import errorImg from 'public/images/error.svg'
 
 export default function Error({ error, reset }: { error: Error & { digest?: string }; reset: () => void }) {
   console.error(error)
@@ -11,12 +11,7 @@ export default function Error({ error, reset }: { error: Error & { digest?: stri
   return (
     <Container p={{ initial: '4', sm: '8' }}>
       <Grid gap="4" maxWidth="30rem" mx="auto">
-        <BlurImage
-          alt="A pilot watching the sky while sitting in front of his crashed plane"
-          height="300"
-          src={errorImg}
-          width="500"
-        />
+        <Image alt="A pilot watching the sky while sitting in front of his crashed plane" src={errorImg} />
         <Heading>Oops, something went wrong</Heading>
         <Text>Don&apos;t worry, we&apos;re fixing this. We will be back for you soon!</Text>
         <Button onClick={reset} size="3">

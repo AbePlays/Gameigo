@@ -1,7 +1,7 @@
 'use client'
 
 import { DesktopIcon, MoonIcon, SunIcon } from '@radix-ui/react-icons'
-import { IconButton } from '@radix-ui/themes'
+import { Box, IconButton } from '@radix-ui/themes'
 import { useTheme } from 'next-themes'
 
 import { useIsClient } from '@hooks/useIsClient'
@@ -11,7 +11,7 @@ function ThemeSwitcher() {
   const { theme, setTheme } = useTheme()
 
   if (!isClient) {
-    return null
+    return <Box height="2rem" width="2rem" />
   }
 
   const isDarkMode = theme === 'dark'

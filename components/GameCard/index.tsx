@@ -1,7 +1,7 @@
 import { Badge, Box, Card, Flex, Grid, Inset, Separator, Text } from '@radix-ui/themes'
 
-import BlurImage from '@components/BlurImage'
 import { formatDate } from '@utils/date'
+import Image from 'next/image'
 import placeholder from 'public/images/placeholder.jpeg'
 import { Game } from 'schemas/game'
 
@@ -13,12 +13,11 @@ export default function GameCard({ game }: Props) {
   return (
     <Card className="h-full shadow-lg rounded-lg group">
       <Inset side="top">
-        <Box height="14rem" overflow="hidden" position="relative">
-          <BlurImage
+        <Box className="bg-[--gray-10]" height="14rem" overflow="hidden" position="relative">
+          <Image
             alt="game background"
-            className="group-hover:scale-105"
+            className="group-hover:scale-105 object-cover transition-transform duration-700"
             fill
-            showBg
             src={game?.background_image || placeholder}
           />
         </Box>
