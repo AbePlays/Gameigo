@@ -4,8 +4,15 @@ import { DesktopIcon, MoonIcon, SunIcon } from '@radix-ui/react-icons'
 import { IconButton } from '@radix-ui/themes'
 import { useTheme } from 'next-themes'
 
+import { useIsClient } from '@hooks/useIsClient'
+
 function ThemeSwitcher() {
+  const isClient = useIsClient()
   const { theme, setTheme } = useTheme()
+
+  if (!isClient) {
+    return null
+  }
 
   const isDarkMode = theme === 'dark'
   const isLightMode = theme === 'light'
@@ -30,6 +37,7 @@ function ThemeSwitcher() {
       setTheme('light')
     }
   }
+
   return (
     <IconButton aria-label={ariaLabel} variant="soft" onClick={toggleTheme} title={ariaLabel}>
       {isDarkMode ? <MoonIcon /> : null}
