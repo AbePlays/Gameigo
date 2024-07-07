@@ -14,6 +14,17 @@ export const metadata: Metadata = {
   title: 'Gameigo | Favorites',
   description:
     'Stop jumping from game to game, and stop having to search for games. Manage your collections, discover new games, and share your collections with friends.',
+  openGraph: {
+    title: 'Gameigo | Favorites',
+    description:
+      'Stop jumping from game to game, and stop having to search for games. Manage your collections, discover new games, and share your collections with friends.',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Gameigo | Favorites',
+    description:
+      'Stop jumping from game to game, and stop having to search for games. Manage your collections, discover new games, and share your collections with friends.',
+  },
 }
 
 export default async function Favorites() {

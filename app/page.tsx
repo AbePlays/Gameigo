@@ -18,6 +18,17 @@ export const metadata: Metadata = {
   title: 'Gameigo | Welcome',
   description:
     'Gameigo is a video game discovery platform where users can explore and create a personalized collection of video games from around the world.',
+  openGraph: {
+    title: 'Gameigo | Welcome',
+    description:
+      'Gameigo is a video game discovery platform where users can explore and create a personalized collection of video games from around the world.',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Gameigo | Welcome',
+    description:
+      'Gameigo is a video game discovery platform where users can explore and create a personalized collection of video games from around the world.',
+  },
 }
 
 export default async function Home() {

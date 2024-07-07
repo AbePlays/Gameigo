@@ -11,6 +11,15 @@ import { ChangePassword } from './change-password'
 export const metadata: Metadata = {
   title: 'Gameigo | Profile',
   description: 'Manage your profile, change your password and access many other settings on this page.',
+  openGraph: {
+    title: 'Gameigo | Profile',
+    description: 'Manage your profile, change your password and access many other settings on this page.',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Gameigo | Profile',
+    description: 'Manage your profile, change your password and access many other settings on this page.',
+  },
 }
 
 export default async function Profile() {

@@ -11,6 +11,17 @@ export const metadata: Metadata = {
   title: 'Gameigo | Home',
   description:
     'Gameigo provides a simple user interface and a simple user experience. Explore and take a look at what games are trending at the moment.',
+  openGraph: {
+    title: 'Gameigo | Home',
+    description:
+      'Gameigo provides a simple user interface and a simple user experience. Explore and take a look at what games are trending at the moment.',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Gameigo | Home',
+    description:
+      'Gameigo provides a simple user interface and a simple user experience. Explore and take a look at what games are trending at the moment.',
+  },
 }
 
 export default async function Home() {
