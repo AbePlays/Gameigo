@@ -22,11 +22,22 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   try {
     const res = await fetch(`https://api.rawg.io/api/games/${slug}?key=${process.env.NEXT_PUBLIC_RAWG_API_KEY}`)
     const data = await res.json()
-    const { name, description_raw } = parse(GameDetailSchema, data)
+    const parsedData = parse(GameDetailSchema, data)
 
     return {
-      title: `Gameigo | ${name}`,
-      description: description_raw,
+      title: `Gameigo | ${parsedData.name}`,
+      description: parsedData.description_raw,
+      openGraph: {
+        title: `Gameigo | ${parsedData.name}`,
+        description: parsedData.description_raw,
+        images: [parsedData.background_image ? parsedData.background_image : ''],
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: `Gameigo | ${parsedData.name}`,
+        description: parsedData.description_raw,
+        images: [parsedData.background_image ? parsedData.background_image : ''],
+      },
     }
   } catch (e) {
     console.error(JSON.stringify(e))

@@ -11,7 +11,18 @@ import { Loading } from './skeleton'
 export const metadata: Metadata = {
   title: 'Gameigo | Search',
   description:
-    'Gameigo is a free and open source application backed by a huge database of video games provided by ROG. Explore and search for games and everything you need in one place.',
+    'Gameigo is a free and open source application backed by a huge database of video games provided by RAWG. Explore and search for games and everything you need in one place.',
+  openGraph: {
+    title: 'Gameigo | Search',
+    description:
+      'Gameigo is a free and open source application backed by a huge database of video games provided by RAWG. Explore and search for games and everything you need in one place.',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Gameigo | Search',
+    description:
+      'Gameigo is a free and open source application backed by a huge database of video games provided by RAWG. Explore and search for games and everything you need in one place.',
+  },
 }
 
 export default function SearchPage({ searchParams }: { searchParams: Record<string, string> }) {

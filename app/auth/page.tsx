@@ -12,6 +12,17 @@ export const metadata: Metadata = {
   title: 'Gameigo | Auth',
   description:
     'Sign In or Create your Account to start creating your own collection of video games from around the world.',
+  openGraph: {
+    title: 'Gameigo | Auth',
+    description:
+      'Sign In or Create your Account to start creating your own collection of video games from around the world.',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Gameigo | Auth',
+    description:
+      'Sign In or Create your Account to start creating your own collection of video games from around the world.',
+  },
 }
 
 export default async function AuthPage({ searchParams }: { searchParams: Record<string, string> }) {
