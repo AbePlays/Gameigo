@@ -4,12 +4,14 @@ import { Metadata } from 'next'
 import { cookies } from 'next/headers'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
+import 'react-photo-view/dist/react-photo-view.css'
 import { parse } from 'valibot'
 
 import { createClient } from '@libs/supabase/server'
 import { formatDate } from '@utils/date'
 import { GameDetail, GameDetailSchema, GameScreenshot, GameScreenshotSchema } from 'schemas/game'
 import Favorite from './favorite'
+import { PhotoViewer } from './photo-viewer'
 import { Share } from './share'
 
 type Props = {
@@ -229,20 +231,7 @@ export default async function GameDetailPage({ params }: { params: Record<string
             Screenshots
           </Heading>
 
-          <Flex asChild gap="4" mt="4">
-            <ul className="overflow-scroll">
-              {gameScreenshots.map((item) => {
-                return (
-                  <li
-                    className="bg-[--gray-10] relative rounded overflow-hidden shrink-0 h-42 aspect-ratio-video object-cover"
-                    key={item.id}
-                  >
-                    <Image alt={`game-screenshot-${item.id}`} fill src={item.image} />
-                  </li>
-                )
-              })}
-            </ul>
-          </Flex>
+          <PhotoViewer screenshots={gameScreenshots} />
         </>
       )}
     </Container>
