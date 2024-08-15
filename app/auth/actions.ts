@@ -1,6 +1,6 @@
 'use server'
 
-import { cookies } from 'next/headers'
+import { headers } from 'next/headers'
 import { redirect } from 'next/navigation'
 import { ValiError, flatten, parse, string } from 'valibot'
 
@@ -31,8 +31,7 @@ export async function signinUser(
     const fields = Object.fromEntries(formData.entries())
     const result = parse(SigninSchema, fields)
 
-    const cookieStore = cookies()
-    const supabase = createClient(cookieStore)
+    const supabase = createClient()
 
     const { error } = await supabase.auth.signInWithPassword({
       email: result.email,
@@ -62,15 +61,13 @@ export async function signinUser(
 }
 
 export async function signinUsingProvider(_: unknown, formData: FormData) {
-  const cookieStore = cookies()
-  const supabase = createClient(cookieStore)
+  const supabase = createClient()
 
   const fields = Object.fromEntries(formData.entries())
   const result = parse(ProviderSchema, fields)
 
-  const redirectTo = `${
-    process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://gameigo.vercel.app'
-  }/auth/callback`
+  const origin = headers().get('origin')
+  const redirectTo = `${origin}/auth/callback`
 
   if (result.provider === 'google') {
     const { data, error } = await supabase.auth.signInWithOAuth({
@@ -108,8 +105,7 @@ export async function signupUser(
   formData: FormData
 ): Promise<typeof INITIAL_SIGNUP_STATE> {
   try {
-    const cookieStore = cookies()
-    const supabase = createClient(cookieStore)
+    const supabase = createClient()
 
     const fields = Object.fromEntries(formData.entries())
     const result = parse(SignupSchema, fields)

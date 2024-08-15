@@ -1,7 +1,6 @@
 import { ChevronRightIcon } from '@radix-ui/react-icons'
 import { Button, Container, Grid, Heading, Text } from '@radix-ui/themes'
 import { Metadata } from 'next'
-import { cookies } from 'next/headers'
 import Image from 'next/image'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
@@ -32,8 +31,7 @@ export const metadata: Metadata = {
 }
 
 export default async function Home() {
-  const cookieStore = cookies()
-  const supabase = createClient(cookieStore)
+  const supabase = createClient()
   const { data } = await supabase.auth.getUser()
 
   if (data.user) {

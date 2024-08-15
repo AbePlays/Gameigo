@@ -1,14 +1,12 @@
 import { createClient } from '@libs/supabase/server'
 import { Avatar, Container, Flex, Link, Text, Tooltip } from '@radix-ui/themes'
-import { cookies } from 'next/headers'
 import NextLink from 'next/link'
 
 import { MobileNavbar } from './MobileNavbar'
 import { ThemeSwitcher } from './ThemeSwitcher'
 
 async function Navbar() {
-  const cookieStore = cookies()
-  const supabase = createClient(cookieStore)
+  const supabase = createClient()
   const { data } = await supabase.auth.getUser()
   const { user } = data
 

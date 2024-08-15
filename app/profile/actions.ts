@@ -1,13 +1,12 @@
 'use server'
 
 import { revalidatePath } from 'next/cache'
-import { cookies } from 'next/headers'
 import { ValiError, flatten, parse, string } from 'valibot'
 
 import { createClient } from '@libs/supabase/server'
 import { NameSchema, PasswordSchema } from '@schemas/auth'
-import { INITIAL_CHANGE_NAME_STATE, INITIAL_CHANGE_PASSWORD_STATE } from './constant'
 import { redirect } from 'next/navigation'
+import { INITIAL_CHANGE_NAME_STATE, INITIAL_CHANGE_PASSWORD_STATE } from './constant'
 
 function transformErrorMessages(
   errors: { readonly [x: string]: [string, ...string[]] | undefined } | undefined
@@ -32,8 +31,7 @@ export async function changeName(
     const fields = Object.fromEntries(formData.entries())
     const result = parse(NameSchema, fields)
 
-    const cookieStore = cookies()
-    const supabase = createClient(cookieStore)
+    const supabase = createClient()
 
     const { error } = await supabase.auth.updateUser({ data: { name: result.name } })
 
@@ -73,8 +71,7 @@ export async function changePassword(
     const fields = Object.fromEntries(formData.entries())
     const result = parse(PasswordSchema, fields)
 
-    const cookieStore = cookies()
-    const supabase = createClient(cookieStore)
+    const supabase = createClient()
 
     const { error } = await supabase.auth.updateUser({ password: result.password })
 
@@ -107,8 +104,7 @@ export async function changePassword(
 }
 
 export async function signout() {
-  const cookieStore = cookies()
-  const supabase = createClient(cookieStore)
+  const supabase = createClient()
   await supabase.auth.signOut()
   redirect('/home')
 }

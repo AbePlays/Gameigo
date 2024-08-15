@@ -1,7 +1,6 @@
 import { ArrowTopRightIcon } from '@radix-ui/react-icons'
 import { Box, Button, Container, Flex, Heading, Link, Text } from '@radix-ui/themes'
 import { Metadata } from 'next'
-import { cookies } from 'next/headers'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import 'react-photo-view/dist/react-photo-view.css'
@@ -74,8 +73,7 @@ export default async function GameDetailPage({ params }: { params: Record<string
     notFound()
   }
 
-  const cookieStore = cookies()
-  const supabase = createClient(cookieStore)
+  const supabase = createClient()
   const { data } = await supabase.auth.getUser()
   let isFavorite = false
 
