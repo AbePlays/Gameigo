@@ -1,9 +1,9 @@
 'use client'
 
 import { BookmarkFilledIcon, BookmarkIcon } from '@radix-ui/react-icons'
-import { IconButton } from '@radix-ui/themes'
-import { useFormState } from 'react-dom'
+import { IconButton, Spinner } from '@radix-ui/themes'
 import { useEffect } from 'react'
+import { useFormState, useFormStatus } from 'react-dom'
 import { toast } from 'react-hot-toast'
 
 import { GameDetail } from '@schemas/game'
@@ -13,6 +13,16 @@ export type FavoriteProps = {
   isFavorite: boolean
   gameDetails: GameDetail
   userId: string
+}
+
+function Submit({ isFavorite }: { isFavorite: boolean }) {
+  const { pending } = useFormStatus()
+
+  return (
+    <IconButton aria-label="Favorite" title="Favorite" type="submit" variant="surface">
+      {pending ? <Spinner /> : isFavorite ? <BookmarkFilledIcon /> : <BookmarkIcon />}
+    </IconButton>
+  )
 }
 
 export default function Favorite(props: FavoriteProps) {
@@ -34,9 +44,7 @@ export default function Favorite(props: FavoriteProps) {
       <input type="hidden" name="userId" value={userId} readOnly={true} />
       <input type="hidden" name="gameId" value={gameDetails.id} readOnly={true} />
       <input type="hidden" name="slug" value={gameDetails.slug} readOnly={true} />
-      <IconButton aria-label="Favorite" title="Favorite" type="submit" variant="surface">
-        {isFavorite ? <BookmarkFilledIcon /> : <BookmarkIcon />}
-      </IconButton>
+      <Submit isFavorite={isFavorite} />
     </form>
   )
 }
