@@ -1,7 +1,6 @@
 'use server'
 
 import { revalidatePath } from 'next/cache'
-import { cookies } from 'next/headers'
 import { parse } from 'valibot'
 
 import { createClient } from '@libs/supabase/server'
@@ -12,8 +11,7 @@ export async function toggleFavorite(_: unknown, formData: FormData) {
     const fields = Object.fromEntries(formData.entries())
     const { gameId, slug, userId } = parse(FavoriteSchema, fields)
 
-    const cookieStore = cookies()
-    const supabase = createClient(cookieStore)
+    const supabase = createClient()
     let message = ''
 
     const { data } = await supabase.from('user_data').select('*').eq('user_id', userId).single()

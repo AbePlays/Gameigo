@@ -1,6 +1,5 @@
 import { Avatar, Button, Container, Flex, Heading, Text } from '@radix-ui/themes'
 import { Metadata } from 'next'
-import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 
 import { createClient } from '@libs/supabase/server'
@@ -23,8 +22,7 @@ export const metadata: Metadata = {
 }
 
 export default async function Profile() {
-  const cookieStore = cookies()
-  const supabase = createClient(cookieStore)
+  const supabase = createClient()
   const { data } = await supabase.auth.getUser()
 
   if (!data.user) {

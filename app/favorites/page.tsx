@@ -1,6 +1,5 @@
 import { Container, Grid, Heading, Link, Text } from '@radix-ui/themes'
 import { Metadata } from 'next'
-import { cookies } from 'next/headers'
 import NextLink from 'next/link'
 import { redirect } from 'next/navigation'
 import { parse } from 'valibot'
@@ -28,8 +27,7 @@ export const metadata: Metadata = {
 }
 
 export default async function Favorites() {
-  const cookieStore = cookies()
-  const supabase = createClient(cookieStore)
+  const supabase = createClient()
   const { data } = await supabase.auth.getUser()
 
   if (!data.user) {

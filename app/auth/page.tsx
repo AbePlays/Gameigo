@@ -1,6 +1,5 @@
 import { Container, Link, Text } from '@radix-ui/themes'
 import { type Metadata } from 'next'
-import { cookies } from 'next/headers'
 import NextLink from 'next/link'
 import { redirect } from 'next/navigation'
 
@@ -26,8 +25,7 @@ export const metadata: Metadata = {
 }
 
 export default async function AuthPage({ searchParams }: { searchParams: Record<string, string> }) {
-  const cookieStore = cookies()
-  const supabase = createClient(cookieStore)
+  const supabase = createClient()
   const { data } = await supabase.auth.getUser()
 
   if (data.user) {
