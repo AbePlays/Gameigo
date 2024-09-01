@@ -29,7 +29,7 @@
     "valibot": "^0.37.0"
   },
   "devDependencies": {
-    "@next/bundle-analyzer": "^14.2.5",
+    "@next/bundle-analyzer": "^14.2.7",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@unocss/postcss": "^0.62.1",
