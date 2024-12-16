@@ -14,11 +14,11 @@ import { PhotoViewer } from './photo-viewer'
 import { Share } from './share'
 
 type Props = {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = params
+  const { slug } = await params
 
   try {
     const res = await fetch(`https://api.rawg.io/api/games/${slug}?key=${process.env.NEXT_PUBLIC_RAWG_API_KEY}`)
@@ -46,8 +46,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
-export default async function GameDetailPage({ params }: { params: Record<string, string> }) {
-  const { slug } = params
+export default async function GameDetailPage({ params }: { params: Promise<Record<string, string>> }) {
+  const { slug } = await params
   let gameDetails: GameDetail | null = null
   let gameScreenshots: GameScreenshot['results'] = []
 
@@ -73,7 +73,7 @@ export default async function GameDetailPage({ params }: { params: Record<string
     notFound()
   }
 
-  const supabase = createClient()
+  const supabase = await createClient()
   const { data } = await supabase.auth.getUser()
   let isFavorite = false
 

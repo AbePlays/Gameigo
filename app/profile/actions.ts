@@ -31,7 +31,7 @@ export async function changeName(
     const fields = Object.fromEntries(formData.entries())
     const result = parse(NameSchema, fields)
 
-    const supabase = createClient()
+    const supabase = await createClient()
 
     const { error } = await supabase.auth.updateUser({ data: { name: result.name } })
 
@@ -71,7 +71,7 @@ export async function changePassword(
     const fields = Object.fromEntries(formData.entries())
     const result = parse(PasswordSchema, fields)
 
-    const supabase = createClient()
+    const supabase = await createClient()
 
     const { error } = await supabase.auth.updateUser({ password: result.password })
 
@@ -104,7 +104,7 @@ export async function changePassword(
 }
 
 export async function signout() {
-  const supabase = createClient()
+  const supabase = await createClient()
   await supabase.auth.signOut()
   redirect('/home')
 }

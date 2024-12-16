@@ -24,15 +24,15 @@ export const metadata: Metadata = {
   },
 }
 
-export default async function AuthPage({ searchParams }: { searchParams: Record<string, string> }) {
-  const supabase = createClient()
+export default async function AuthPage({ searchParams }: { searchParams: Promise<Record<string, string>> }) {
+  const supabase = await createClient()
   const { data } = await supabase.auth.getUser()
 
   if (data.user) {
     redirect('/home')
   }
 
-  const { type = '' } = searchParams
+  const { type = '' } = await searchParams
 
   const isSignup = type === 'signup'
   const footer = {
