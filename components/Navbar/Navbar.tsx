@@ -6,7 +6,7 @@ import { MobileNavbar } from './MobileNavbar'
 import { ThemeSwitcher } from './ThemeSwitcher'
 
 async function Navbar() {
-  const supabase = createClient()
+  const supabase = await createClient()
   const { data } = await supabase.auth.getUser()
   const { user } = data
 

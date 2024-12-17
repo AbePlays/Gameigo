@@ -31,7 +31,7 @@ export async function signinUser(
     const fields = Object.fromEntries(formData.entries())
     const result = parse(SigninSchema, fields)
 
-    const supabase = createClient()
+    const supabase = await createClient()
 
     const { error } = await supabase.auth.signInWithPassword({
       email: result.email,
@@ -61,12 +61,12 @@ export async function signinUser(
 }
 
 export async function signinUsingProvider(_: unknown, formData: FormData) {
-  const supabase = createClient()
+  const supabase = await createClient()
 
   const fields = Object.fromEntries(formData.entries())
   const result = parse(ProviderSchema, fields)
 
-  const origin = headers().get('origin')
+  const origin = (await headers()).get('origin')
   const redirectTo = `${origin}/auth/callback`
 
   if (result.provider === 'google') {
@@ -105,7 +105,7 @@ export async function signupUser(
   formData: FormData
 ): Promise<typeof INITIAL_SIGNUP_STATE> {
   try {
-    const supabase = createClient()
+    const supabase = await createClient()
 
     const fields = Object.fromEntries(formData.entries())
     const result = parse(SignupSchema, fields)

@@ -11,7 +11,7 @@ export async function toggleFavorite(_: unknown, formData: FormData) {
     const fields = Object.fromEntries(formData.entries())
     const { gameId, slug, userId } = parse(FavoriteSchema, fields)
 
-    const supabase = createClient()
+    const supabase = await createClient()
     let message = ''
 
     const { data } = await supabase.from('user_data').select('*').eq('user_id', userId).single()

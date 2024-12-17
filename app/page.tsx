@@ -31,7 +31,7 @@ export const metadata: Metadata = {
 }
 
 export default async function Home() {
-  const supabase = createClient()
+  const supabase = await createClient()
   const { data } = await supabase.auth.getUser()
 
   if (data.user) {

@@ -25,8 +25,8 @@ export const metadata: Metadata = {
   },
 }
 
-export default function SearchPage({ searchParams }: { searchParams: Record<string, string> }) {
-  const { page = '', query = '' } = searchParams
+export default async function SearchPage({ searchParams }: { searchParams: Promise<Record<string, string>> }) {
+  const { page = '', query = '' } = await searchParams
 
   return (
     <Box position="relative">
