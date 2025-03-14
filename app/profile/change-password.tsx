@@ -1,15 +1,15 @@
 'use client'
 
 import { Button, Flex, IconButton, Spinner, Strong, Text, TextField } from '@radix-ui/themes'
-import { useEffect } from 'react'
-import { useFormState, useFormStatus } from 'react-dom'
+import { useActionState, useEffect } from 'react'
+import { useFormStatus } from 'react-dom'
 import { toast } from 'react-hot-toast'
 
 import { changePassword } from './actions'
 import { INITIAL_CHANGE_PASSWORD_STATE } from './constant'
 
 function ChangePassword() {
-  const [state, formAction] = useFormState(changePassword, INITIAL_CHANGE_PASSWORD_STATE)
+  const [state, formAction] = useActionState(changePassword, INITIAL_CHANGE_PASSWORD_STATE)
 
   useEffect(() => {
     if (state.saved) {

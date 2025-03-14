@@ -1,15 +1,15 @@
 'use client'
 
 import { Button, Flex, IconButton, Spinner, Strong, Text, TextField } from '@radix-ui/themes'
-import { useEffect } from 'react'
-import { useFormState, useFormStatus } from 'react-dom'
+import { useActionState, useEffect } from 'react'
+import { useFormStatus } from 'react-dom'
 import { toast } from 'react-hot-toast'
 
 import { changeName } from './actions'
 import { INITIAL_CHANGE_NAME_STATE } from './constant'
 
 function ChangeName() {
-  const [state, formAction] = useFormState(changeName, INITIAL_CHANGE_NAME_STATE)
+  const [state, formAction] = useActionState(changeName, INITIAL_CHANGE_NAME_STATE)
 
   useEffect(() => {
     if (state.saved) {

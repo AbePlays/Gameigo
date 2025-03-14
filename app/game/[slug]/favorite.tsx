@@ -2,8 +2,8 @@
 
 import { BookmarkFilledIcon, BookmarkIcon } from '@radix-ui/react-icons'
 import { IconButton, Spinner } from '@radix-ui/themes'
-import { useEffect } from 'react'
-import { useFormState, useFormStatus } from 'react-dom'
+import { useActionState, useEffect } from 'react'
+import { useFormStatus } from 'react-dom'
 import { toast } from 'react-hot-toast'
 
 import { GameDetail } from '@schemas/game'
@@ -27,7 +27,7 @@ function Submit({ isFavorite }: { isFavorite: boolean }) {
 
 export default function Favorite(props: FavoriteProps) {
   const { isFavorite, gameDetails, userId } = props
-  const [state, formAction] = useFormState(toggleFavorite, { message: '', ok: true })
+  const [state, formAction] = useActionState(toggleFavorite, { message: '', ok: true })
 
   useEffect(() => {
     if (state.message) {

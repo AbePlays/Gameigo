@@ -2,15 +2,16 @@
 
 import { ChevronRightIcon } from '@radix-ui/react-icons'
 import { Box, Button, Flex, Grid, Heading, Text, TextField } from '@radix-ui/themes'
-import { useFormState, useFormStatus } from 'react-dom'
+import { useActionState } from 'react'
+import { useFormStatus } from 'react-dom'
 
-import { signinUsingProvider, signinUser } from './actions'
+import { signinUser, signinUsingProvider } from './actions'
 import { INITIAL_SIGNIN_STATE } from './constant'
 import { SocialAuthProviders } from './social-auth-providers'
 
 function Signin() {
-  const [state, formAction] = useFormState(signinUser, INITIAL_SIGNIN_STATE)
-  const [, providerAction] = useFormState(signinUsingProvider, null)
+  const [state, formAction] = useActionState(signinUser, INITIAL_SIGNIN_STATE)
+  const [, providerAction] = useActionState(signinUsingProvider, null)
 
   return (
     <Box>
