@@ -1,31 +1,31 @@
-@import '@unocss/reset/tailwind.css';
+/*@import "@unocss/reset/tailwind.css";*/
 @unocss all;
 
 .radix-themes {
-  --default-font-family: var(--font-rethink) !important;
+	--default-font-family: var(--font-rethink) !important;
 }
 
 .stagger-cards li {
-  animation-name: animateIn;
-  animation-duration: 500ms;
-  animation-delay: calc(var(--i) * 300ms);
-  animation-fill-mode: both;
-  animation-timing-function: ease-in-out;
+	animation-name: animateIn;
+	animation-duration: 500ms;
+	animation-delay: calc(var(--i) * 300ms);
+	animation-fill-mode: both;
+	animation-timing-function: ease-in-out;
 }
 
 @keyframes animateIn {
-  0% {
-    opacity: 0;
-    transform: translateY(5rem);
-  }
+	0% {
+		opacity: 0;
+		transform: translateY(5rem);
+	}
 
-  100% {
-    opacity: 1;
-  }
+	100% {
+		opacity: 1;
+	}
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .stagger-cards li {
-    animation-name: none;
-  }
+	.stagger-cards li {
+		animation-name: none;
+	}
 }

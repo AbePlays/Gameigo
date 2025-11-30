@@ -4,7 +4,7 @@ import { Flex } from '@radix-ui/themes'
 import Image from 'next/image'
 import { PhotoProvider, PhotoView } from 'react-photo-view'
 
-import { GameScreenshot } from '@schemas/game'
+import type { GameScreenshot } from '@/schemas/game'
 
 export type PhotoViewerProps = {
   screenshots: GameScreenshot['results']

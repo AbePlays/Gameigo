@@ -1,13 +1,13 @@
 import { Container, Grid, Heading, Link, Text } from '@radix-ui/themes'
-import { Metadata } from 'next'
+import type { Metadata } from 'next'
 import NextLink from 'next/link'
 import { redirect } from 'next/navigation'
 import { parse } from 'valibot'
 
-import GameCard from '@components/GameCard'
-import { NoData } from '@components/NoData'
-import { createClient } from '@libs/supabase/server'
-import { Game, GameSchema } from '@schemas/game'
+import GameCard from '@/components/GameCard'
+import { NoData } from '@/components/NoData'
+import { createClient } from '@/libs/supabase/server'
+import { type Game, GameSchema } from '@/schemas/game'
 
 export const metadata: Metadata = {
   title: 'Gameigo | Favorites',
@@ -38,7 +38,7 @@ export default async function Favorites() {
   const { data: dbData } = await supabase.from('user_data').select('*').eq('user_id', data.user.id).single()
   if (dbData) {
     const detailsPromise: Promise<number>[] = []
-    dbData.favorites.map((id: number) => {
+    dbData.favorites.forEach((id: number) => {
       detailsPromise.push(
         fetch(`https://api.rawg.io/api/games/${id}?key=${process.env.NEXT_PUBLIC_RAWG_API_KEY}`)
           .then((res) => res.json())

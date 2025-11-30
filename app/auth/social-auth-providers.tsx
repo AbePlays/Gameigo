@@ -1,6 +1,6 @@
-import { IconGithub, IconGoogle } from '@icons'
 import { Button } from '@radix-ui/themes'
 
+import { IconGithub, IconGoogle } from '@/icons'
 import { SOCIALAUTHPROVIDERS } from './constant'
 
 function SocialAuthProviders() {

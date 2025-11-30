@@ -4,7 +4,7 @@ import { DesktopIcon, MoonIcon, SunIcon } from '@radix-ui/react-icons'
 import { Box, IconButton } from '@radix-ui/themes'
 import { useTheme } from 'next-themes'
 
-import { useIsClient } from '@hooks/useIsClient'
+import { useIsClient } from '@/hooks/useIsClient'
 
 function ThemeSwitcher() {
   const isClient = useIsClient()

@@ -1,16 +1,16 @@
 import { ChevronRightIcon } from '@radix-ui/react-icons'
 import { Button, Container, Grid, Heading, Text } from '@radix-ui/themes'
-import { Metadata } from 'next'
+import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 
-import { createClient } from '@libs/supabase/server'
 import easy from 'public/images/easy.svg'
 import free from 'public/images/free.svg'
 import hero from 'public/images/hero.png'
 import homeDark from 'public/images/home.jpg'
 import vision from 'public/images/vision.svg'
+import { createClient } from '@/libs/supabase/server'
 import { ProductInfo } from './product-info'
 
 export const metadata: Metadata = {

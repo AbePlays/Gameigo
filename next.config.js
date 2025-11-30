@@ -4,8 +4,18 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 
 module.exports = withBundleAnalyzer({
   images: {
-    domains: ['media.rawg.io'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'media.rawg.io',
+        port: '',
+        pathname: '/**',
+      },
+    ],
     formats: ['image/avif', 'image/webp'],
     unoptimized: true,
+  },
+  turbopack: {
+    root: __dirname,
   },
 })

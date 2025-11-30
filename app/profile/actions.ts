@@ -1,11 +1,11 @@
 'use server'
 
 import { revalidatePath } from 'next/cache'
-import { ValiError, flatten, parse, string } from 'valibot'
-
-import { createClient } from '@libs/supabase/server'
-import { NameSchema, PasswordSchema } from '@schemas/auth'
 import { redirect } from 'next/navigation'
+import { flatten, parse, string, ValiError } from 'valibot'
+
+import { createClient } from '@/libs/supabase/server'
+import { NameSchema, PasswordSchema } from '@/schemas/auth'
 import { INITIAL_CHANGE_NAME_STATE, INITIAL_CHANGE_PASSWORD_STATE } from './constant'
 
 function transformErrorMessages(
@@ -15,7 +15,6 @@ function transformErrorMessages(
 
   for (const key in errors) {
     if (errors[key]) {
-      // @ts-ignore
       transformedErrors[key] = errors[key]?.[0]
     }
   }
@@ -33,7 +32,9 @@ export async function changeName(
 
     const supabase = await createClient()
 
-    const { error } = await supabase.auth.updateUser({ data: { name: result.name } })
+    const { error } = await supabase.auth.updateUser({
+      data: { name: result.name },
+    })
 
     if (error) {
       return {
@@ -44,7 +45,11 @@ export async function changeName(
     }
 
     revalidatePath('/profile')
-    return { errors: INITIAL_CHANGE_NAME_STATE.errors, fields: result, saved: true }
+    return {
+      errors: INITIAL_CHANGE_NAME_STATE.errors,
+      fields: result,
+      saved: true,
+    }
   } catch (e) {
     const fields = {
       name: parse(string(), formData.get('name') || ''),
@@ -59,7 +64,14 @@ export async function changeName(
       }
     }
 
-    return { errors: { ...INITIAL_CHANGE_NAME_STATE.errors, form: 'Something went wrong' }, fields, saved: false }
+    return {
+      errors: {
+        ...INITIAL_CHANGE_NAME_STATE.errors,
+        form: 'Something went wrong',
+      },
+      fields,
+      saved: false,
+    }
   }
 }
 
@@ -73,18 +85,27 @@ export async function changePassword(
 
     const supabase = await createClient()
 
-    const { error } = await supabase.auth.updateUser({ password: result.password })
+    const { error } = await supabase.auth.updateUser({
+      password: result.password,
+    })
 
     if (error) {
       return {
         fields: result,
-        errors: { ...INITIAL_CHANGE_PASSWORD_STATE.errors, password: error.message },
+        errors: {
+          ...INITIAL_CHANGE_PASSWORD_STATE.errors,
+          password: error.message,
+        },
         saved: false,
       }
     }
 
     revalidatePath('/profile')
-    return { errors: INITIAL_CHANGE_PASSWORD_STATE.errors, fields: result, saved: true }
+    return {
+      errors: INITIAL_CHANGE_PASSWORD_STATE.errors,
+      fields: result,
+      saved: true,
+    }
   } catch (e) {
     const fields = {
       password: parse(string(), formData.get('password') || ''),
@@ -99,7 +120,14 @@ export async function changePassword(
       }
     }
 
-    return { errors: { ...INITIAL_CHANGE_PASSWORD_STATE.errors, form: 'Something went wrong' }, fields, saved: false }
+    return {
+      errors: {
+        ...INITIAL_CHANGE_PASSWORD_STATE.errors,
+        form: 'Something went wrong',
+      },
+      fields,
+      saved: false,
+    }
   }
 }
 

@@ -1,6 +1,6 @@
 import { HamburgerMenuIcon } from '@radix-ui/react-icons'
 import { DropdownMenu, IconButton, Link, Separator } from '@radix-ui/themes'
-import { type User } from '@supabase/supabase-js'
+import type { User } from '@supabase/supabase-js'
 import NextLink from 'next/link'
 
 interface Props {

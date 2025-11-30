@@ -1,11 +1,11 @@
 import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons'
 import { Flex, Link, Text } from '@radix-ui/themes'
 import NextLink from 'next/link'
+import { type GameSearchResult, GameSearchSchema } from 'schemas/game'
 import { parse } from 'valibot'
 
-import GameCard from '@components/GameCard'
-import { NoData } from '@components/NoData'
-import { GameSearchResult, GameSearchSchema } from 'schemas/game'
+import GameCard from '@/components/GameCard'
+import { NoData } from '@/components/NoData'
 
 export default async function SearchResult(props: { page: number; query: string }) {
   const { page, query } = props

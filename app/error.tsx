@@ -5,7 +5,7 @@ import Image from 'next/image'
 
 import errorImg from 'public/images/error.svg'
 
-export default function Error({ error, reset }: { error: Error & { digest?: string }; reset: () => void }) {
+export default function ErrorPage({ error, reset }: { error: Error & { digest?: string }; reset: () => void }) {
   console.error(error)
 
   return (

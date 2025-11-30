@@ -1,5 +1,5 @@
 import { Box, Grid, Heading, Text } from '@radix-ui/themes'
-import Image, { StaticImageData } from 'next/image'
+import Image, { type StaticImageData } from 'next/image'
 
 interface Props {
   content: string

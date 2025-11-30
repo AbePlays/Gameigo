@@ -1,7 +1,7 @@
-import { createClient } from '@libs/supabase/server'
 import { Avatar, Container, Flex, Link, Text, Tooltip } from '@radix-ui/themes'
 import NextLink from 'next/link'
 
+import { createClient } from '@/libs/supabase/server'
 import { MobileNavbar } from './MobileNavbar'
 import { ThemeSwitcher } from './ThemeSwitcher'
 

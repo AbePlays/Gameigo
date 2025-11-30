@@ -1,6 +1,6 @@
 import { ArrowTopRightIcon } from '@radix-ui/react-icons'
 import { Container, Flex, Grid, Link, Text } from '@radix-ui/themes'
-import { type Metadata } from 'next'
+import type { Metadata } from 'next'
 
 import { AboutCard } from './about-card'
 

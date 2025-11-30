@@ -1,9 +1,9 @@
 import { Badge, Box, Card, Flex, Grid, Inset, Separator, Text } from '@radix-ui/themes'
-
-import { formatDate } from '@utils/date'
 import Image from 'next/image'
+
 import placeholder from 'public/images/placeholder.jpeg'
-import { Game } from 'schemas/game'
+import type { Game } from '@/schemas/game'
+import { formatDate } from '@/utils/date'
 
 interface Props {
   game: Game

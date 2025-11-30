@@ -1,14 +1,14 @@
 import { ArrowTopRightIcon } from '@radix-ui/react-icons'
 import { Box, Button, Container, Flex, Heading, Link, Text } from '@radix-ui/themes'
-import { Metadata } from 'next'
+import type { Metadata } from 'next'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import 'react-photo-view/dist/react-photo-view.css'
 import { parse } from 'valibot'
 
-import { createClient } from '@libs/supabase/server'
-import { formatDate } from '@utils/date'
-import { GameDetail, GameDetailSchema, GameScreenshot, GameScreenshotSchema } from 'schemas/game'
+import { createClient } from '@/libs/supabase/server'
+import { type GameDetail, GameDetailSchema, type GameScreenshot, GameScreenshotSchema } from '@/schemas/game'
+import { formatDate } from '@/utils/date'
 import Favorite from './favorite'
 import { PhotoViewer } from './photo-viewer'
 import { Share } from './share'
@@ -124,13 +124,11 @@ export default async function GameDetailPage({ params }: { params: Promise<Recor
 
           <Flex className="divide-x-2 divide-[--gray-12]" justify="center" mt="2">
             {Array.isArray(gameDetails.parent_platforms) && gameDetails.parent_platforms.length > 0 ? (
-              <>
-                {gameDetails.parent_platforms.map((item) => (
-                  <Text align="center" className="block px-2 !leading-none" key={item.platform.id}>
-                    {item.platform.name}
-                  </Text>
-                ))}
-              </>
+              gameDetails.parent_platforms.map((item) => (
+                <Text align="center" className="block px-2 !leading-none" key={item.platform.id}>
+                  {item.platform.name}
+                </Text>
+              ))
             ) : (
               <Text align="center">-</Text>
             )}
@@ -157,13 +155,11 @@ export default async function GameDetailPage({ params }: { params: Promise<Recor
 
           <Flex className="divide-x-2 divide-[--gray-12]" justify="center" mt="2">
             {Array.isArray(gameDetails.genres) && gameDetails.genres.length > 0 ? (
-              <>
-                {gameDetails.genres.map((item) => (
-                  <Text align="center" className="block px-2 !leading-none" key={item.id}>
-                    {item.name}
-                  </Text>
-                ))}
-              </>
+              gameDetails.genres.map((item) => (
+                <Text align="center" className="block px-2 !leading-none" key={item.id}>
+                  {item.name}
+                </Text>
+              ))
             ) : (
               <Text>-</Text>
             )}
@@ -174,7 +170,11 @@ export default async function GameDetailPage({ params }: { params: Promise<Recor
       {gameDetails.description && (
         <>
           <Heading as="h2">About</Heading>
-          <Box dangerouslySetInnerHTML={{ __html: gameDetails.description }} mt="2" />
+          <Box
+            // biome-ignore lint/security/noDangerouslySetInnerHtml: its alright
+            dangerouslySetInnerHTML={{ __html: gameDetails.description }}
+            mt="2"
+          />
         </>
       )}
 

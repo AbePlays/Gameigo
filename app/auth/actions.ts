@@ -2,10 +2,10 @@
 
 import { headers } from 'next/headers'
 import { redirect } from 'next/navigation'
-import { ValiError, flatten, parse, string } from 'valibot'
+import { flatten, parse, string, ValiError } from 'valibot'
 
-import { createClient } from '@libs/supabase/server'
-import { ProviderSchema, SigninSchema, SignupSchema } from '@schemas/auth'
+import { createClient } from '@/libs/supabase/server'
+import { ProviderSchema, SigninSchema, SignupSchema } from '@/schemas/auth'
 import { INITIAL_SIGNIN_STATE, INITIAL_SIGNUP_STATE } from './constant'
 
 function transformErrorMessages(
@@ -15,7 +15,6 @@ function transformErrorMessages(
 
   for (const key in errors) {
     if (errors[key]) {
-      // @ts-ignore
       transformedErrors[key] = errors[key]?.[0]
     }
   }
@@ -39,7 +38,10 @@ export async function signinUser(
     })
 
     if (error) {
-      return { fields: result, errors: { ...INITIAL_SIGNIN_STATE.errors, form: error.message } }
+      return {
+        fields: result,
+        errors: { ...INITIAL_SIGNIN_STATE.errors, form: error.message },
+      }
     }
     redirect('/home')
   } catch (e) {
@@ -56,7 +58,10 @@ export async function signinUser(
       }
     }
 
-    return { errors: { ...INITIAL_SIGNIN_STATE.errors, form: 'Something went wrong' }, fields }
+    return {
+      errors: { ...INITIAL_SIGNIN_STATE.errors, form: 'Something went wrong' },
+      fields,
+    }
   }
 }
 
@@ -117,7 +122,10 @@ export async function signupUser(
     })
 
     if (error) {
-      return { fields: result, errors: { ...INITIAL_SIGNUP_STATE.errors, form: error.message } }
+      return {
+        fields: result,
+        errors: { ...INITIAL_SIGNUP_STATE.errors, form: error.message },
+      }
     }
     redirect('/home')
   } catch (e) {
@@ -135,6 +143,9 @@ export async function signupUser(
       }
     }
 
-    return { errors: { ...INITIAL_SIGNUP_STATE.errors, form: 'Something went wrong' }, fields }
+    return {
+      errors: { ...INITIAL_SIGNUP_STATE.errors, form: 'Something went wrong' },
+      fields,
+    }
   }
 }

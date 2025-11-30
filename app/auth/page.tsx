@@ -1,9 +1,9 @@
 import { Container, Link, Text } from '@radix-ui/themes'
-import { type Metadata } from 'next'
+import type { Metadata } from 'next'
 import NextLink from 'next/link'
 import { redirect } from 'next/navigation'
 
-import { createClient } from '@libs/supabase/server'
+import { createClient } from '@/libs/supabase/server'
 import { Signin } from './signin'
 import { Signup } from './signup'
 
@@ -46,7 +46,7 @@ export default async function AuthPage({ searchParams }: { searchParams: Promise
 
       <Text align="center" as="p" mt="9">
         {footer.head}{' '}
-        <Link asChild className="!text-[--accent-11]" weight="bold">
+        <Link asChild className="!text-[--accent-11]!" weight="bold">
           <NextLink href={`/auth?type=${isSignup ? 'signin' : 'signup'}`}>{footer.tail}</NextLink>
         </Link>{' '}
         instead

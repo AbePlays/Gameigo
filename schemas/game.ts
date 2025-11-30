@@ -1,4 +1,4 @@
-import { InferInput, array, boolean, nullish, number, object, string } from 'valibot'
+import { array, boolean, type InferInput, nullish, number, object, string } from 'valibot'
 
 export const GameSchema = object({
   background_image: nullish(string()),
@@ -11,7 +11,17 @@ export const GameSchema = object({
   playtime: number(),
   released: nullish(string()),
   slug: string(),
-  stores: nullish(array(object({ store: object({ id: number(), domain: nullish(string()), name: string() }) }))),
+  stores: nullish(
+    array(
+      object({
+        store: object({
+          id: number(),
+          domain: nullish(string()),
+          name: string(),
+        }),
+      })
+    )
+  ),
   tba: boolean(),
 })
 

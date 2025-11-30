@@ -1,8 +1,8 @@
 import { Avatar, Button, Container, Flex, Heading, Text } from '@radix-ui/themes'
-import { Metadata } from 'next'
+import type { Metadata } from 'next'
 import { redirect } from 'next/navigation'
 
-import { createClient } from '@libs/supabase/server'
+import { createClient } from '@/libs/supabase/server'
 import { signout } from './actions'
 import { ChangeName } from './change-name'
 import { ChangePassword } from './change-password'

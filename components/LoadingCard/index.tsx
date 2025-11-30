@@ -11,6 +11,7 @@ export default function LoadingCard({ count = 1 }: Props) {
         .fill(0)
         .map((_, index) => {
           return (
+            // biome-ignore lint/suspicious/noArrayIndexKey: its alright
             <Card className="h-full shadow-lg rounded-lg group" key={index}>
               <Inset side="top">
                 <Skeleton height="14rem" />

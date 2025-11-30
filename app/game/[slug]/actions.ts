@@ -3,8 +3,8 @@
 import { revalidatePath } from 'next/cache'
 import { parse } from 'valibot'
 
-import { createClient } from '@libs/supabase/server'
-import { FavoriteSchema } from '@schemas/favorite'
+import { createClient } from '@/libs/supabase/server'
+import { FavoriteSchema } from '@/schemas/favorite'
 
 export async function toggleFavorite(_: unknown, formData: FormData) {
   try {
@@ -31,7 +31,7 @@ export async function toggleFavorite(_: unknown, formData: FormData) {
 
     revalidatePath(`/game/${slug}`)
     return { message, ok: true }
-  } catch (e) {
+  } catch (_) {
     return { message: 'Something went wrong', ok: false }
   }
 }

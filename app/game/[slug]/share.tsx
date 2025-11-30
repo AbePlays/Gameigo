@@ -1,9 +1,10 @@
 'use client'
 
-import { useCopyToClipboard } from '@hooks/useCopyToClipboard'
 import { Link2Icon } from '@radix-ui/react-icons'
 import { IconButton } from '@radix-ui/themes'
 import { toast } from 'react-hot-toast'
+
+import { useCopyToClipboard } from '@/hooks/useCopyToClipboard'
 
 function Share() {
   const [_, copy] = useCopyToClipboard()

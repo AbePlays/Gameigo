@@ -6,7 +6,7 @@ import { useActionState, useEffect } from 'react'
 import { useFormStatus } from 'react-dom'
 import { toast } from 'react-hot-toast'
 
-import { GameDetail } from '@schemas/game'
+import type { GameDetail } from '@/schemas/game'
 import { toggleFavorite } from './actions'
 
 export type FavoriteProps = {
@@ -27,7 +27,10 @@ function Submit({ isFavorite }: { isFavorite: boolean }) {
 
 export default function Favorite(props: FavoriteProps) {
   const { isFavorite, gameDetails, userId } = props
-  const [state, formAction] = useActionState(toggleFavorite, { message: '', ok: true })
+  const [state, formAction] = useActionState(toggleFavorite, {
+    message: '',
+    ok: true,
+  })
 
   useEffect(() => {
     if (state.message) {

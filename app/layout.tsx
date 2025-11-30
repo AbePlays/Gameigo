@@ -1,11 +1,11 @@
 import { Theme } from '@radix-ui/themes'
 import '@radix-ui/themes/styles.css'
-import { Metadata } from 'next'
-import { ThemeProvider } from 'next-themes'
+import type { Metadata } from 'next'
 import { Rethink_Sans } from 'next/font/google'
+import { ThemeProvider } from 'next-themes'
 import { Toaster } from 'react-hot-toast'
 
-import { Navbar } from '@components/Navbar'
+import { Navbar } from '@/components/Navbar'
 import './globals.css'
 
 const rethink = Rethink_Sans({

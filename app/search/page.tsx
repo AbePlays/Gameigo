@@ -1,9 +1,9 @@
 import { Box, Container, Heading, Text } from '@radix-ui/themes'
-import { Metadata } from 'next'
+import type { Metadata } from 'next'
 import Image from 'next/image'
+import heroBg from 'public/images/search_hero.jpeg'
 import { Suspense } from 'react'
 
-import heroBg from 'public/images/search_hero.jpeg'
 import { Input } from './input'
 import SearchResult from './search-result'
 import { Loading } from './skeleton'
@@ -32,7 +32,7 @@ export default async function SearchPage({ searchParams }: { searchParams: Promi
     <Box position="relative">
       {/* Background Image */}
       <Box className="bg-[--gray-10]" height={{ initial: '200px', sm: '300px' }} overflow="hidden">
-        <Image alt="" className="object-top brightness-70 object-cover" src={heroBg} />
+        <Image alt="" className="object-top brightness-70 object-cover h-full w-full" src={heroBg} />
       </Box>
 
       {/* Intro Text */}

@@ -1,11 +1,11 @@
 import { Container, Grid, Heading, Link, Text } from '@radix-ui/themes'
-import { type Metadata } from 'next'
+import type { Metadata } from 'next'
 import NextLink from 'next/link'
+import { type Game, GameSearchSchema } from 'schemas/game'
 import { parse } from 'valibot'
 
-import GameCard from '@components/GameCard'
-import { getSixMonthsAgoDate, getTodaysDate } from '@utils/date'
-import { Game, GameSearchSchema } from 'schemas/game'
+import GameCard from '@/components/GameCard'
+import { getSixMonthsAgoDate, getTodaysDate } from '@/utils/date'
 
 export const metadata: Metadata = {
   title: 'Gameigo | Home',
@@ -52,9 +52,9 @@ export default async function Home() {
         Based on player counts and release date
       </Text>
       <Grid asChild columns="repeat(auto-fill,minmax(300px,1fr))" gap="4" mt="6">
-        <ul className="stagger-cards">
+        <ul className="stagger-cards p-0">
           {games.map((game, index) => (
-            <li key={game.id} style={{ '--i': index } as React.CSSProperties}>
+            <li className="list-none" key={game.id} style={{ '--i': index } as React.CSSProperties}>
               <Link asChild className="!text-[--gray-12]" underline="none">
                 <NextLink aria-label={game.name} href={`/game/${game.slug}`} prefetch>
                   <GameCard game={game} />
